@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Фруктовая история</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+    <script type="application/javascript" src="js/story-app.js"></script>
+    <link href="css/story.css" rel="stylesheet">
+
+
+</head>
+<body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
+<section id="header"><h1>Фруктовая история</h1></section>
+<section id="first">
+    <div class="container">
+        <div data-ng-repeat="phrase in story" class="box">
+            <div data-ng-style="{backgroundColor:colorize(phrase.set)}" class="box-top btn">
+                {{phrase.set}}
+            </div>
+            <div class="box-img">
+
+            </div>
+            <div class="box-text">
+                <h3>{{phrase.head}}</h3>
+                <p>{{phrase.text}}</p>
+            </div>
+            <div class="box-bottom">
+                <div data-ng-style="{backgroundColor:colorize(next.set)}" class="box-preview" data-ng-repeat="next in phrase.next">
+                    {{next.set}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="test">
+
+</section>
+</body>
+</html>
