@@ -11,10 +11,11 @@ controllers.story = function ($scope) {
             set:'B',
             head:'Личность',
             text:'— свод данных, характеризующих конкретное лицо или вымышленного персонажа',
+            img:'img/persona.svg',
             next:[
                 {
                     set:'A',
-                    head:'Личность, свод данных',
+                    head:'Личность: свод данных',
                     text:'* любые авторские произведения,' +
                         '* ник,' +
                         '* ФИО,' +
@@ -29,6 +30,7 @@ controllers.story = function ($scope) {
             set:'E',
             head:'Лицо',
             text:'— человек, подтвердивший свою личность',
+            img:'img/face.svg',
             next:[
                 {
                     set:'Y',
@@ -48,12 +50,14 @@ controllers.story = function ($scope) {
             set:'A',
             head:'Штука',
             text:'— материальная сущность',
+            img:'img/thing.svg',
             next:[]
         },
         {
             set:'X',
             head:'Задача',
             text:'– описание результативного действия с приложением всей необходимой для его совершения информации',
+            img:'img/task.svg',
             next:[
                 {
                     set:'A',
@@ -80,12 +84,14 @@ controllers.story = function ($scope) {
             set:'H',
             head:'Затея',
             text:'— план реализации общественно-значимых инфраструктурных объектов или событий',
+            img:'img/design.svg',
             next:[]
         },
         {
             set:'C',
             head:'Событие',
             text:'— ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками',
+            img:'img/event.svg',
             next:[]
         },
         {
@@ -128,30 +134,35 @@ controllers.story = function ($scope) {
             set:'HA',
             head:'Навык',
             text:'— умение реализовывать известные задачи или получать творческие результаты с применением соответствующего инструмента по назначению, а также руководство по овладению им',
+            img:'img/skill.svg',
             next:[]
         },
         {
             set:'BO',
             head:'Лексическая форма',
             text:'— форма применения слова в контексте языка',
+            img:'https://pp.vk.me/c7010/c613422/v613422319/3551/fDrFXWvoBqo.jpg',
             next:[]
         },
         {
             set:'BC',
             head:'Высказывание',
             text:'— любая информативная фраза, содержащая упоминание ее автора, а также хотя бы одного адресата или предмета этой фразы',
+            img:'https://pp.vk.me/c412618/v412618086/8333/6JOVMpyHTN0.jpg',
             next:[]
         },
         {
             set:'AP',
             head:'Дар',
             text:'— любая ценность, принятая фондом развития и направленная на реализацию его затей, а также информация о ней',
+            img:'img/donation.svg',
             next:[]
         }
     ];
 
     $scope.preset = preset;
     $scope.colorize = colorize;
+    $scope.selected = 'A';
 
     function colorize (set) {
         var numOfSteps, step;
@@ -162,7 +173,7 @@ controllers.story = function ($scope) {
     };
 
     function preset (bit){
-        var baseLetters = ['A', 'B', 'C', 'E', 'H', 'K', 'M', 'O', 'P', 'T', 'X', 'Y'];
+        var baseLetters = ['Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M', 'K'];
         var current, count, result = baseLetters.concat(), order;
         if (typeof bit == "number" && bit>0 && bit<=12) {count=bit-1};
         for (var b = 0; b < count; b++) {

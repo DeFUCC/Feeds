@@ -16,21 +16,23 @@
 <section id="header"><h1>Фруктовая история</h1></section>
 <section id="first">
     <div class="container">
-        <div data-ng-repeat="phrase in story" class="box">
-            <div data-ng-style="{backgroundColor:colorize(phrase.set)}" class="box-top btn">
-                {{phrase.set}}
+        <div data-ng-style="{flexGrow:1+phrase.next.length}" data-ng-class="{selected:selected==phrase.set}" data-ng-repeat="phrase in story" class="box">
+            <div data-ng-style="{backgroundColor:colorize(phrase.set)}" class="box-top">
+              <span class="btn">{{phrase.set}}</span>
             </div>
-            <div class="box-img">
+            <div data-ng-click="$parent.selected=phrase.set"  data-ng-style="{backgroundColor:colorize(phrase.set), backgroundImage:'url('+phrase.img+')'}" class="box-img">
 
-            </div>
-            <div class="box-text">
                 <h3>{{phrase.head}}</h3>
+            </div>
+
+            <div class="box-text">
+
                 <p>{{phrase.text}}</p>
-            </div>
-            <div class="box-bottom">
-                <div data-ng-style="{backgroundColor:colorize(next.set)}" class="box-preview" data-ng-repeat="next in phrase.next">
-                    {{next.set}}</div>
-            </div>
+
+            <div data-ng-if="phrase.next" class="box-bottom">
+                <div  data-ng-style="{backgroundColor:colorize(next.set),flexGrow:next.head.length}" class="box-preview" data-ng-repeat="next in phrase.next">
+                    |{{next.set}}| {{next.head}}</div>
+            </div></div>
         </div>
     </div>
 </section>
