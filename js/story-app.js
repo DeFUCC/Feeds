@@ -1,7 +1,7 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',[]);
+var fruitStory = angular.module('fruitStory',['hc.marked']);
 var controllers = {};
 fruitStory.controller(controllers);
 
@@ -16,12 +16,12 @@ controllers.story = function ($scope) {
                 {
                     set:'A',
                     head:'Личность: свод данных',
-                    text:'* любые авторские произведения,' +
-                        '* ник,' +
-                        '* ФИО,' +
-                        '* телефон' +
-                        '* email' +
-                        '* аккаунты в социальных сетях',
+                    text:'- любые авторские произведения, \n' +
+                        '- ник,\n' +
+                        '- ФИО,\n' +
+                        '- телефон\n' +
+                        '- email\n' +
+                        '- аккаунты в социальных сетях\n',
                     next:[]
                 }
             ]
@@ -141,7 +141,7 @@ controllers.story = function ($scope) {
             set:'BO',
             head:'Лексическая форма',
             text:'— форма применения слова в контексте языка',
-            img:'https://pp.vk.me/c7010/c613422/v613422319/3551/fDrFXWvoBqo.jpg',
+            img:'https://pp.vk.me/c406717/v406717088/4d27/nlPXEooE0fI.jpg',
             next:[]
         },
         {
@@ -159,9 +159,9 @@ controllers.story = function ($scope) {
             next:[]
         }
     ];
-
-    $scope.preset = preset;
-    $scope.colorize = colorize;
+    $scope.mtd = {}; //an object for universal methods
+    $scope.mtd.preset = preset;
+    $scope.mtd.colorize = colorize;
     $scope.selected = 'A';
 
     function colorize (set) {
@@ -211,3 +211,29 @@ controllers.story = function ($scope) {
         return (c);
     }
 };
+
+fruitStory.directive("card", function($compile) {
+    return {
+        restrict: "E",
+        templateUrl: 'card.html',
+        scope: {
+            nxt: '=',
+            mtd: '='
+        },
+        controller: function ($scope){
+            $scope.over={};
+        },
+        compile: function(tElement, tAttr) {
+            var contents = tElement.contents().remove();
+            var compiledContents;
+            return function(scope, iElement, iAttr) {
+                if(!compiledContents) {
+                    compiledContents = $compile(contents);
+                }
+                compiledContents(scope, function(clone, scope) {
+                    iElement.append(clone);
+                });
+            };
+        }
+    };
+});

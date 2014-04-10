@@ -7,6 +7,10 @@ body {
     font-family: "Helvetica Neue Cyr", Helvetica, Arial, sans-serif;
     font-size: 1em;
 }
+ul {
+    padding-left:20px;
+    margin: 0;
+}
 #header {
     background: #fff;
     padding: 50px;
@@ -21,29 +25,53 @@ body {
     justify-content:center;
     padding:20px;;
 }
-.box {
+.box-holder {
     flex: 1 1 320px;
+    position: relative;
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:center;
+    align-content: stretch;
+    align-items: stretch;
+}
+.box-flex {
+    margin:10px;
+
+}
+.box {
+    flex:1 1 auto;
     display:flex;
     flex-flow:row wrap;
     justify-content:flex-start;
     align-content: stretch;
     align-items: stretch;
-    margin:8px;
+
     max-width: 640px;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #eee;
     position: relative;
     border-radius: 8px;
     transition: all 100ms linear;
 
 }
-.selected {box-shadow: 0px 8px 14px rgba(0, 0, 30, 0.4);
-    transform:translateY(-8px) scale(1.1,1.1);
-    -webkit-transform:translateY(-8px)  scale(1.03,1.03);}
-.box:hover {
-    box-shadow: 0px 3px 6px rgba(0, 0, 30, 0.4);
-    transform:translateY(-3px);
-    -webkit-transform:translateY(-3px)  scale(1.01,1.01);
+.selected {
+    background-color: #fff;
+    box-shadow: 0px 8px 14px rgba(0, 0, 30, 0.4);
+    transform: scale(1.02,1.02);
+    -webkit-transform:  scale(1.02,1.02);}
+.lower {
+    opacity: 0.75;
+}
+.box:hover {background-color: #fff}
+
+.second-card {
+    z-index: 1000;
+    position: absolute;
+    top:40px;
+    left:10px;
+    width:95%;
+    margin:0 0 0 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
 }
 .box-wide {
     flex:1 1 100%;
@@ -62,7 +90,7 @@ body {
     flex-flow:row wrap;
     justify-content:flex-start;
     align-content:center;
-    max-width: 200px;
+    max-width: 50%;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     text-align: center;
@@ -91,7 +119,8 @@ body {
     flex-flow:row wrap;
     justify-content:flex-start;
     align-content:space-between;
-    padding: 0 10px;
+    margin: 0 10px;
+    overflow-y:scroll;
 }
 .box-bottom {
     flex:1 1 auto;
@@ -124,5 +153,5 @@ body {
     font-size: 0.6em;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6);
     text-align: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 255, 0.4);;
+    box-shadow: 0px 0px 4px rgba(0, 0, 255, 0.4);
 }
