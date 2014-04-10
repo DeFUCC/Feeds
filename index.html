@@ -18,7 +18,7 @@
 <section id="header"><h1>Фруктовая история</h1></section>
 <section id="first">
     <div class="container">
-        <div data-ng-style="{flexGrow:1+phrase.next.length*5}"
+        <div data-ng-style="{flexGrow:1+phrase.next.length*10}"
              class="box-holder"
              data-ng-repeat="phrase in story">
 
@@ -56,19 +56,19 @@
 <script type="text/ng-template" id="card.html">
 <div class="second-card" >
     <card nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
-    <div class="box" data-ng-class="{lower:over.next}">
+    <div class="box" data-ng-class="{sel:selected, lower:over.next}">
 
         <div data-ng-style="{backgroundColor:mtd.colorize(nxt.set)}" class="box-top">
             <span class="btn">{{nxt.set}}</span>
         </div>
-        <div data-ng-click="over.next=''"
+        <div data-ng-click="over.next='';selected=!selected"
              data-ng-style="{backgroundColor:mtd.colorize(nxt.set), backgroundImage:'url('+nxt.img+')'}"
              class="box-img">
 
             <h3 data-ng-if="nxt.head">{{nxt.head}}</h3>
         </div>
 
-        <div class="box-text">
+        <div data-ng-if="nxt.text" class="box-text">
 
             <p marked="nxt.text"</p>
 

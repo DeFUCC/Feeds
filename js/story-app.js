@@ -159,6 +159,7 @@ controllers.story = function ($scope) {
             next:[]
         }
     ];
+    
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
     $scope.mtd.colorize = colorize;
@@ -222,6 +223,7 @@ fruitStory.directive("card", function($compile) {
         },
         controller: function ($scope){
             $scope.over={};
+            $scope.selected=false;
         },
         compile: function(tElement, tAttr) {
             var contents = tElement.contents().remove();
