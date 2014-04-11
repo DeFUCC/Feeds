@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="js/angular.min.js"></script>
     <script type="application/javascript" src="js/marked.js"></script>
     <script type="application/javascript" src="js/angular-marked.js"></script>
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
@@ -22,10 +22,10 @@
              class="box-holder"
              data-ng-repeat="phrase in story">
 
-            <card nxt="nxt" mtd="mtd" data-ng-if="nxt"></card>
+            <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
             <div class="box box-flex" data-ng-class="{selected:selected==phrase.set, lower:nxt}">
-                <div data-ng-style="{backgroundColor:mtd.colorize(phrase.set)}" class="box-top">
-                    <span class="btn">{{phrase.set}}</span>
+                <div  class="box-top">
+                    <span data-ng-style="{backgroundColor:mtd.colorize(phrase.set)}" class="btn">{{phrase.set}}</span>
                 </div>
                 <div data-ng-click="$parent.selected=phrase.set; nxt=''"
                      data-ng-style="{backgroundColor:mtd.colorize(phrase.set), backgroundImage:'url('+phrase.img+')'}"
@@ -55,9 +55,11 @@
 </section>
 <script type="text/ng-template" id="card.html">
 <div class="second-card" >
-    <card nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
-    <div class="box" data-ng-class="{sel:selected, lower:over.next}">
-
+    <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
+    <div data-ng-if="nxt" class="box" data-ng-class="{sel:selected, lower:over.next}">
+        <div data-ng-show="selected" class="box-top-x">
+            <span data-ng-click="close()" data-ng-style="{backgroundColor:mtd.colorize(nxt.set)}" class="btn round">&times;</span>
+        </div>
         <div data-ng-style="{backgroundColor:mtd.colorize(nxt.set)}" class="box-top">
             <span class="btn">{{nxt.set}}</span>
         </div>

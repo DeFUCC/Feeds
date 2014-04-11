@@ -7,9 +7,21 @@ body{
     font-family:"Helvetica Neue Cyr", Helvetica, Arial, sans-serif;
     font-size:1em;
 }
-ul{
-    padding-left:20px;
+ul {
+    list-style: none;
+    padding:0;
     margin:0;
+}
+
+li {
+    padding-left: 1em;
+    text-indent: -.7em;
+}
+
+li:before {
+    content: "•";
+    padding-right:4px;
+    color: #555;
 }
 #header{
     background:#fff;
@@ -58,7 +70,7 @@ ul{
 .selected{
     background-color:#fff;
     box-shadow:0px 8px 12px rgba(0, 0, 30, 0.3);
-    transform:scale(1.02,1.02);
+    transform:scale(1.05,1.05);
 }
 .lower{
     opacity:0.75;
@@ -75,7 +87,7 @@ ul{
     margin:0;
 }
 .second-card .box {
-    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.7);
+    box-shadow:0px 4px 8px 4px rgba(0, 0, 0, 0.3);
 }
 .sel {
     transform:scale(1.02,1.02);
@@ -89,6 +101,13 @@ ul{
 .box-top{
     position:absolute;
     left:10px;
+    top:10px;
+    color:#fff;
+    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
+}
+.box-top-x{
+    position:absolute;
+    right:10px;
     top:10px;
     color:#fff;
     text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
@@ -107,11 +126,12 @@ ul{
     background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
-    opacity: 0.9;
+    opacity: 0.75;
 }
 .selected .box-img {
     opacity: 1;
 }
+
 .box-img img{
     flex:1 1 100%;
     margin:0 auto;
@@ -134,7 +154,14 @@ ul{
     justify-content:flex-start;
     align-content:space-between;
     margin:0 10px;
-    overflow-y:scroll;
+    overflow:scroll;
+    opacity: 0.9;
+}
+.box:hover .box-text {
+    opacity: 1;
+}
+.selected .box-text {
+    opacity: 1;
 }
 .box-bottom{
     flex:1 1 auto;
@@ -166,11 +193,23 @@ ul{
 .btn{
     display:inline-block;
     padding:4px;
-
+    cursor: pointer;
     border-radius:4px;
     color:#fff;
+    min-width: 8px;
     font-size:0.6em;
     text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
     text-align:center;
-    box-shadow:0px 0px 4px rgba(0, 0, 255, 0.4);
+    box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
+}
+.btn:hover {
+    box-shadow:0px 1px 4px rgba(0, 0, 40, 0.6);
+    transform:translateY(-1px);
+}
+.btn:active {
+    box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
+    transform:translateY(1px);
+}
+.round {
+    border-radius: 8px;
 }

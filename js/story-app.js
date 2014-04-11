@@ -159,7 +159,39 @@ controllers.story = function ($scope) {
             next:[]
         }
     ];
-    
+
+    $scope.sayings=[{
+        set:'T|E',
+        head: 'Творческая информация',
+        text: '— информация о гармонии, структуре, порядке, способах реализации, созидательном опыте'
+    }];
+
+    function checkStory (story, saying) {
+        var splittedSet = saying.split('|');
+        var checker=0;
+        for (var i=0;i<story.length;i++) {
+            if (story[i].set==splittedSet[0]) {
+                if (splittedSet.length==1) {
+                    return 'false'
+                } else {
+
+                }
+            }
+        }
+    }
+
+    function said (story, sayings) { //функция для разбора массива высказываний и собирания иерархического объекта истории
+        var splittedSet;
+        for (var i= 0; i<sayings.length; i++) { //перебираем все высказывания
+            splittedSet=sayings[i].set.split('|'); //разбираем набор букв высказывания
+            if (angular.isArray(splittedSet)) { //ЕСЛИ получился массив,
+                for (var j= 0;j<splittedSet;j++) { //перебираем по уровням
+
+                }
+            }
+        }
+    }
+
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
     $scope.mtd.colorize = colorize;
@@ -219,7 +251,8 @@ fruitStory.directive("card", function($compile) {
         templateUrl: 'card.html',
         scope: {
             nxt: '=',
-            mtd: '='
+            mtd: '=',
+            close: '&'
         },
         controller: function ($scope){
             $scope.over={};
