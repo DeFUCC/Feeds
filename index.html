@@ -58,7 +58,7 @@
     <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
     <div data-ng-if="nxt" class="box" data-ng-class="{sel:selected, lower:over.next}">
         <div data-ng-show="selected" class="box-top-x">
-            <span data-ng-click="close()" data-ng-style="{backgroundColor:mtd.colorize(nxt.set)}" class="btn round">&times;</span>
+            <span data-ng-click="close()"  class="btn close round">&times;</span>
         </div>
         <div data-ng-style="{backgroundColor:mtd.colorize(nxt.set)}" class="box-top">
             <span class="btn">{{nxt.set}}</span>
