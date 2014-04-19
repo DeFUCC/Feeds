@@ -6,201 +6,250 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 controllers.story = function ($scope) {
+    $scope.phrase = {
+        letters:'AA',
+        head: 'Система подтверждения личностей',
+        text: 'Личность - Лицо - Лицо затеи',
+        img:'img/thing.svg'
+    };
     $scope.story = [
         {
-            set:'B',
+            letters:'B',
             head:'Личность',
             text:'— свод данных, характеризующих конкретное лицо или вымышленного персонажа',
-            img:'img/persona.svg',
-            next:[
-                {
-                    set:'A',
-                    head:'Личность: свод данных',
-                    text:'- любые авторские произведения, \n' +
-                        '- ник,\n' +
-                        '- ФИО,\n' +
-                        '- телефон\n' +
-                        '- email\n' +
-                        '- аккаунты в социальных сетях\n',
-                    next:[]
-                }
-            ]
+            img:'img/persona.svg'
         },
         {
-            set:'E',
+            letters:'B|A',
+            head:'Личность: свод данных',
+            text:'- любые авторские произведения, \n' +
+                '- ник,\n' +
+                '- ФИО,\n' +
+                '- телефон\n' +
+                '- email\n' +
+                '- аккаунты в социальных сетях\n'
+        },
+        {
+            letters:'E',
             head:'Лицо',
             text:'— человек, подтвердивший свою личность',
-            img:'img/face.svg',
-            next:[
-                {
-                    set:'Y',
-                    head:'',
-                    text:'Лицом может стать любое физическое лицо, способное подтвердить свою личность',
-                    next:[]
-                },
-                {
-                    set:'P',
-                    head:'Лицо затеи',
-                    text:'— конечный адресат всех вопросов, связанных с этой затеей. Глаза, уши, нос и рот затеи.',
-                    next:[]
-                }
-            ]
+            img:'img/face.svg'     
         },
         {
-            set:'A',
+            letters:'E|Y',
+            head:'',
+            text:'Лицом может стать любое физическое лицо, способное подтвердить свою личность'
+            
+        },
+        {
+            letters:'E|P',
+            head:'Лицо затеи',
+            text:'— конечный адресат всех вопросов, связанных с этой затеей. Глаза, уши, нос и рот затеи.'
+            
+        },
+        {
+            letters:'A',
             head:'Штука',
             text:'— материальная сущность',
-            img:'img/thing.svg',
-            next:[]
+            img:'img/thing.svg'
+            
         },
         {
-            set:'X',
+            letters:'X',
             head:'Задача',
             text:'– описание результативного действия с приложением всей необходимой для его совершения информации',
-            img:'img/task.svg',
-            next:[
-                {
-                    set:'A',
-                    head:'Полная задача',
-                    text:'подразумевает наличие инвентаря и необходимых материалов',
-                    next:[
-                        {
-                            set:'M',
-                            head:'Всегда есть несколько способов наполнения задачи для ее выполнения',
-                            text:'',
-                            next:[]
-                        }
-                    ]
-                },
-                {
-                    set:'O',
-                    head:'Выполнение задачи возмездно',
-                    text:'в зависимости от количества шагов, их сложности, а также от статуса собственности материалов и результатов выполнения задачи',
-                    next:[]
-                }
-            ]
+            img:'img/task.svg'
+
         },
         {
-            set:'H',
+            letters:'X|A',
+            head:'Полная задача',
+            text:'подразумевает наличие инвентаря и необходимых материалов'
+
+        },
+        {
+            letters:'X|O',
+            head:'Выполнение задачи возмездно',
+            text:'в зависимости от количества шагов, их сложности, а также от статуса собственности материалов и результатов выполнения задачи'
+
+        },
+        {
+            letters:'X|A|M',
+            head:'Всегда есть несколько способов наполнения задачи для ее выполнения',
+            text:''
+
+        },
+        {
+            letters:'H',
             head:'Затея',
             text:'— план реализации общественно-значимых инфраструктурных объектов или событий',
-            img:'img/design.svg',
-            next:[]
+            img:'img/design.svg'
+            
         },
         {
-            set:'C',
+            letters:'C',
             head:'Событие',
             text:'— ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками',
-            img:'img/event.svg',
-            next:[]
+            img:'img/event.svg'
+            
         },
         {
-            set:'P',
+            letters:'P',
             head:'Фонд развития',
-            text:'— открытый экономический интерфейс',
-            next:[]
+            text:'— открытый экономический интерфейс'
+            
         },
         {
-            set:'O',
+            letters:'O',
             head:'ФРУКТ',
-            text:'— это Фонд Развития Универсализации, Кооперации, Творчества',
-            next:[]
+            text:'— это Фонд Развития Универсализации, Кооперации, Творчества'
+            
         },
         {
-            set:'M',
+            letters:'M',
             head:'Миссия ФРУКТа',
-            text:'Всестороннее разнонаправленное развитие творческого потенциала каждого человека в коллективной реализации затей',
-            next:[]
+            text:'Всестороннее разнонаправленное развитие творческого потенциала каждого человека в коллективной реализации затей'
+            
         },
         {
-            set:'Y',
+            letters:'Y',
             head:'Универсализация',
-            text:'— реализация стремления каждого элемента системы овладеть практическим опытом многостороннего изучения всей системы',
-            next:[]
+            text:'— реализация стремления каждого элемента системы овладеть практическим опытом многостороннего изучения всей системы'
+            
         },
         {
-            set:'K',
+            letters:'K',
             head:'Кооперация',
-            text:'— сложение всех возможных усилий для выполнения задач, невыполнимых индивидуально',
-            next:[]
+            text:'— сложение всех возможных усилий для выполнения задач, невыполнимых индивидуально'
+            
         },
         {
-            set:'T',
+            letters:'T',
             head:'Творчество',
-            text:'— процесс осознанного приложения свободно определяемого усилия с целью увеличения меры совершенства окружающего мира',
-            next:[]
+            text:'— процесс осознанного приложения свободно определяемого усилия с целью увеличения меры совершенства окружающего мира'
+            
         },
         {
-            set:'HA',
+            letters:'HA',
             head:'Навык',
             text:'— умение реализовывать известные задачи или получать творческие результаты с применением соответствующего инструмента по назначению, а также руководство по овладению им',
-            img:'img/skill.svg',
-            next:[]
+            img:'img/skill.svg'
+            
         },
         {
-            set:'BO',
+            letters:'BO',
             head:'Лексическая форма',
             text:'— форма применения слова в контексте языка',
-            img:'https://pp.vk.me/c406717/v406717088/4d27/nlPXEooE0fI.jpg',
-            next:[]
+            img:'https://pp.vk.me/c406717/v406717088/4d27/nlPXEooE0fI.jpg'
+            
         },
         {
-            set:'BC',
+            letters:'BC',
             head:'Высказывание',
             text:'— любая информативная фраза, содержащая упоминание ее автора, а также хотя бы одного адресата или предмета этой фразы',
-            img:'https://pp.vk.me/c412618/v412618086/8333/6JOVMpyHTN0.jpg',
-            next:[]
+            img:'https://pp.vk.me/c412618/v412618086/8333/6JOVMpyHTN0.jpg'
+            
         },
         {
-            set:'AP',
+            letters:'AP',
             head:'Дар',
             text:'— любая ценность, принятая фондом развития и направленная на реализацию его затей, а также информация о ней',
-            img:'img/donation.svg',
-            next:[]
+            img:'img/donation.svg'
+            
+        },
+        {
+            letters:'BC|T',
+            head:'Личные высказывания',
+            text:'предназначены для получения только их адресатами',
+            img:'https://pp.vk.me/c413728/v413728319/64ae/O5rpxOupIAY.jpg'
+        },
+        {
+            letters:'X|O|P',
+            head:'Шаг задачи',
+            text:'— ограниченное по времени и направлению приложения усилия **выполнимое** действие одного человека.',
+            img:''
+        },
+        {
+            letters:'P|A',
+            head:'Развитие',
+            text:'— движение системы к сместившейся точке равновесия',
+            img:''
+        },
+        {
+            letters:'P|Y',
+            head:'Фонд, юридически',
+            text:'— некоммерческая организация, все ресурсы которой направляются только на выполнение ее миссии.',
+            img:''
         }
     ];
 
-    $scope.sayings=[{
-        set:'T|E',
-        head: 'Творческая информация',
-        text: '— информация о гармонии, структуре, порядке, способах реализации, созидательном опыте'
-    }];
+    function convertStory (story) {
+        var tree = {};
 
-    function checkStory (story, saying) {
-        var splittedSet = saying.split('|');
-        var checker=0;
-        for (var i=0;i<story.length;i++) {
-            if (story[i].set==splittedSet[0]) {
-                if (splittedSet.length==1) {
-                    return 'false'
-                } else {
+        for(var i = 0; i < story.length; i++) {
+            var saying = story[i];
+            var letters = saying.letters.split('|');
 
+            var search = tree;
+            for(var j = 0; j < letters.length; j++) {
+                var letter = letters[j];
+
+                var obj = letter in search ? search[letter] : search[letter] = {};
+
+                // Endpoint, assign letter and values to obj
+                if(j == letters.length - 1) {
+                    obj.letter = letter;
+                    for(key in saying) {
+                        obj[key] = saying[key];
+                    }
+                } else { // Create nested object and update search object
+                    search = 'next' in obj ? obj.next : obj.next = {};
                 }
             }
         }
+        return tree;
     }
 
-    function said (story, sayings) { //функция для разбора массива высказываний и собирания иерархического объекта истории
-        var splittedSet;
-        for (var i= 0; i<sayings.length; i++) { //перебираем все высказывания
-            splittedSet=sayings[i].set.split('|'); //разбираем набор букв высказывания
-            if (angular.isArray(splittedSet)) { //ЕСЛИ получился массив,
-                for (var j= 0;j<splittedSet;j++) { //перебираем по уровням
-
-                }
-            }
-        }
-    }
 
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
     $scope.mtd.colorize = colorize;
-    $scope.selected = 'A';
+    $scope.mtd.parents = parents;
+    $scope.tree=convertStory($scope.story);
+    $scope.selected = 'B';
 
-    function colorize (set) {
-        var numOfSteps, step;
-        numOfSteps=Math.pow(12,set.length);
-        step=preset(set.length).indexOf(set.toUpperCase());
+    $scope.mtd.updateStory = function (saying) {
+        var said = angular.copy(saying);
+        $scope.story.push(said);
+        $scope.tree=convertStory($scope.story);
+    };
+
+    $scope.mtd.select = function (letters, select) {
+
+        if (letters==select) {
+            select=false;
+            return false;
+        } else {
+            select=letters;
+            return letters;
+        };
+    }
+
+
+    function parents (lttrs) {
+        var letters;
+        letters=lttrs.split('|');
+        letters.pop();
+        return letters;
+    }
+
+    function colorize (lttrs) {
+        var numOfSteps, step, letters,letter;
+        letters=lttrs.lastIndexOf('|');
+        letter=lttrs.slice(letters+1);
+        letter=letter.slice(0,4);
+        numOfSteps=Math.pow(12,letter.length);
+        step=preset(letter.length).indexOf(letter.toUpperCase());
         if (!~step) {step=Math.round(Math.random()*numOfSteps)} //if not set is not valid make random
         return rainbow(numOfSteps,step+1);
     };
@@ -271,4 +320,42 @@ fruitStory.directive("card", function($compile) {
             };
         }
     };
+});
+
+fruitStory.directive("cards", function($compile) {
+    return {
+        restrict: "E",
+        templateUrl: 'cards.html',
+        scope: {
+            next: '=',
+            mtd: '=',
+            selected: '='
+        },
+        controller: function ($scope){
+            $scope.over={};
+            $scope.selected=false;
+        },
+        compile: function(tElement, tAttr) {
+            var contents = tElement.contents().remove();
+            var compiledContents;
+            return function(scope, iElement, iAttr) {
+                if(!compiledContents) {
+                    compiledContents = $compile(contents);
+                }
+                compiledContents(scope, function(clone, scope) {
+                    iElement.append(clone);
+                });
+            };
+        }
+    };
+});
+
+fruitStory.filter('objectAsArray', function() {
+    return function(object) {
+        var array = [];
+        for (item in object) {
+            array.push(object[item]);
+        }
+        return array;
+    }
 });

@@ -26,7 +26,7 @@ li:before {
 }
 #header{
     background:#fff;
-    padding:50px;
+    padding:100px;
 }
 #first{
     background:#444;
@@ -35,12 +35,65 @@ li:before {
     color:#eee;
     background-color:#555;
 }
+#add {
+    background-color: #ddd;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:20px;
+}
+.texter {height: 120px}
+.add-form {
+    flex:1 1 50%;
+    min-width: 300px;
+}
+.say-button {
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+    margin: 5px;
+    padding: 10px;
+    color:#ccc;
+    text-shadow:1px 1px 0px #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.8;
+    border: none;
+}
+.say-button:hover {
+    opacity: 1;
+}
+.preview-box{
+    flex:1 1 50%;
+    min-width: 300px;
+}
 .container{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
     padding:20px;
+}
+.box-roll {
+    background:#444;
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-left: solid 8px;
+    border-right:solid 8px;
+    border-bottom: solid 8px;
+    position: relative;
+}
+.roll-back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background-attachment: fixed;
+    opacity: 0.2;
+    border-radius: 4px;
 }
 .box-holder{
     flex:1 1 320px;
@@ -50,6 +103,36 @@ li:before {
     justify-content:center;
     align-content:stretch;
     align-items:stretch;
+    transition:all 200ms linear;
+}
+.box-wide {
+    flex:1 1 100%;
+    position:relative;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:stretch;
+    align-items:stretch;
+    transition:all 200ms linear;
+}
+.box-wider {
+    transition:all 200ms linear;
+}
+.box-wider > .box-text {
+    flex: 1 1 100%;
+}
+.box-wider > .box-img {
+    max-width: 100%;
+    min-height: 150px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0;
+    background-attachment: fixed;
+    opacity: 1;
+
+}
+.box-wider> .imgHigh {min-height: 450px}
+.box-wider > .box-img h3 {
+    font-size: 180%;
 }
 .box-flex{
     margin:12px;
@@ -96,11 +179,9 @@ li:before {
 .sel .box-img{
     opacity: 1;
 }
-.box-wide{
-    flex:1 1 100%;
-}
 .box-top{
     position:absolute;
+    z-index: 300;
     left:10px;
     top:10px;
     color:#fff;
@@ -114,13 +195,14 @@ li:before {
     text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
 }
 .box-img{
-    cursor:pointer;
-    flex:1 1 auto;
+    position: relative;
+    flex:1 1 50%;
+    max-width: 50%;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
     align-content:center;
-
+    transition:all 100ms linear;
     border-top-left-radius:8px;
     border-bottom-left-radius:8px;
     text-align:center;
@@ -129,6 +211,11 @@ li:before {
     background-position:center;
     opacity: 0.75;
 }
+.box:hover > .box-img {
+    opacity: 1;
+    transition:all 100ms linear;
+}
+
 .selected .box-img {
     opacity: 1;
 }
@@ -148,6 +235,13 @@ li:before {
     font-weight:normal;
     text-shadow:0px 2px 4px rgba(0, 0, 60, 0.5);
 }
+.parent {
+    flex:1 1 10px;
+    max-width: 25px;
+    cursor:pointer;
+    border-top-left-radius:8px;
+    border-bottom-left-radius:8px;
+}
 .box-text{
     flex:1 1 100px;
     display:flex;
@@ -155,6 +249,8 @@ li:before {
     justify-content:flex-start;
     align-content:space-between;
     margin:0 10px;
+    padding: 5px;
+    max-height: 500px;
     overflow:scroll;
     opacity: 0.9;
 }
