@@ -232,7 +232,7 @@ controllers.story = function ($scope) {
         } else {
             select=letters;
             return letters;
-        };
+        }
     }
 
 
