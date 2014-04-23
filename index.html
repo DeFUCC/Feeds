@@ -73,7 +73,7 @@
                     <div data-field-span="1">
                         <label>Набор букв</label>
                         <input  data-ng-model="phrase.letters"
-                                data-ng-model-instant  type="text">
+                                data-ng-model-instant pattern="[ABCEHKMOPTXY]*|*"  type="text">
                     </div>
                 </div>
 
@@ -110,7 +110,7 @@
 </section>
 
 <section id="test">
-
+    <textarea class="output" data-ng-model="JSON"></textarea>
 </section>
 
 <script type="text/ng-template" id="cards.html">
@@ -142,7 +142,7 @@
                     <div data-ng-click="$parent.$parent.nxt=next"
                          data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
                          class="box-preview" data-ng-repeat="next in phrase.next">
-                        |{{next.letter}}|
+                        {{next.letter}}
                     </div>
                 </div>
 
@@ -174,7 +174,7 @@
             <h3 data-ng-if="nxt.head">{{nxt.head}}</h3>
         </div>
 
-        <div data-ng-if="nxt.text" class="box-text">
+        <div  class="box-text">
 
             <p marked="nxt.text"</p>
 
@@ -182,7 +182,7 @@
                 <div data-ng-click="over.next=next"
                      data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
                      class="box-preview" data-ng-repeat="next in nxt.next">
-                    |{{next.letter}}|</div>
+                    {{next.letter}}</div>
             </div>
         </div>
     </div>

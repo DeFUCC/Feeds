@@ -20,7 +20,7 @@
 .grid-form [data-row-span] [data-field-span]:last-child { border-right: none; }
 .grid-form [data-row-span] [data-field-span].focus { background: #555; }
 .grid-form [data-row-span] [data-field-span].focus label { color: #444; }
-.grid-form [data-row-span] [data-field-span]:hover { background: #aaa;  }
+.grid-form [data-row-span] [data-field-span]:hover { background: #fff;  }
 .grid-form [data-row-span="1"] > [data-field-span="1"] { width: 100%; }
 .grid-form [data-row-span="2"] > [data-field-span="1"] { width: 50%; }
 .grid-form [data-row-span="2"] > [data-field-span="2"] { width: 100%; }
