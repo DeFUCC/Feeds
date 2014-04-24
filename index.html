@@ -133,7 +133,11 @@
 
                 <h3 data-ng-if="phrase.head">{{phrase.head}}</h3>
             </div>
-
+            <div class="box-rate">
+                <div class="plus" data-ng-class="{'active':rating>0}" data-ng-click="rating=1"> </div>
+                <div class="zero" data-ng-class="{'active':rating==0}" data-ng-click="rating=0"> </div>
+                <div class="minus" data-ng-class="{'active':rating<0}" data-ng-click="rating=-1"> </div>
+            </div>
             <div  class="box-text">
 
                 <div  data-ng-if="phrase.text" marked="phrase.text"></div>
