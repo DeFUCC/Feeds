@@ -19,6 +19,16 @@
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1></section>
 
+<nav id="filters">
+    <ul>
+        <li>Дерево</li>
+        <li>Лента</li>
+        <li>Плюсы</li>
+        <li>Нули</li>
+        <li>Минусы</li>
+    </ul>
+</nav>
+
 <section id="first">
 
     <cards mtd="mtd" next="tree" selected="selected" class="container"></cards>
@@ -73,7 +83,10 @@
                     <div data-field-span="1">
                         <label>Набор букв</label>
                         <input  data-ng-model="phrase.letters"
-                                data-ng-model-instant pattern="[ABCEHKMOPTXY]*|*"  type="text">
+                                data-ng-model-instant
+                                pattern="[ABCEHKMOPTXY]*|*"
+                                type="text"
+                                placeholder="A|B|C|E|H|K|M|O|P|T|X|Y">
                     </div>
                 </div>
 
@@ -127,17 +140,18 @@
                  data-ng-class="{imgHigh:phrase.img}"
                  class="box-img">
                 <div data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"  class="box-top">
-                    <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn">{{phrase.letters}}</span>
+                    <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn shadow">{{phrase.letters}}</span>
+                </div>
+                <div class="box-rate">
+                    <div class="plus btn" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase.letters)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
+                    <div class="zero btn" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase.letters)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
+                    <div class="minus btn" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase.letters)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
                 </div>
 
 
                 <h3 data-ng-if="phrase.head">{{phrase.head}}</h3>
             </div>
-            <div class="box-rate">
-                <div class="plus" data-ng-class="{'active':rating>0}" data-ng-click="rating=1"> </div>
-                <div class="zero" data-ng-class="{'active':rating==0}" data-ng-click="rating=0"> </div>
-                <div class="minus" data-ng-class="{'active':rating<0}" data-ng-click="rating=-1"> </div>
-            </div>
+
             <div  class="box-text">
 
                 <div  data-ng-if="phrase.text" marked="phrase.text"></div>
@@ -157,7 +171,9 @@
                 <cards mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
 
             </div>
+
         </div>
+
     </div>
 </script>
 

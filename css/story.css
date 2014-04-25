@@ -51,6 +51,34 @@ li:before {
     justify-content:center;
     padding:20px;
 }
+#filters {
+    display: none;
+    background-color: #eee;
+    padding: 10px;
+}
+#filters ul {
+    list-style: none outside none;
+    display: flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+}
+#filters li {
+    border-radius: 8px;
+    list-style: none outside none;
+    text-indent: 0;
+    text-align: center;
+    background-color: #888;
+    color: #fff;
+    margin: 5px;
+    padding: 8px;
+    display: block;
+    flex:1 1 10px;
+}
+#filters li:before {
+    content:none;
+}
 .texter {height: 120px}
 .add-form {
     flex:1 1 50%;
@@ -225,12 +253,13 @@ li:before {
     transition:all 100ms linear;
 }
 .box-rate {
-    flex:1 1 6px;
-    max-width: 6px;
-    text-align:center;
-    background: #ccc;
-    display:flex;
-    flex-direction:column;     flex-wrap:nowrap;
+    position:absolute;
+    z-index: 300;
+    left:10px;
+    bottom:10px;
+    color:#fff;
+    display:none;
+    flex-direction:row;     flex-wrap:nowrap;
     justify-content:center;
     align-content:center;
 }
@@ -238,10 +267,11 @@ li:before {
     flex:1 1 auto;
     text-align: center;
     opacity: 0.3;
+    margin: 2px;
     transition:all 100ms linear;
 }
 .box-rate .active {
-    opacity: 1;
+    opacity: 0.75;
 }
 .box-rate div:hover {
     cursor: pointer;
@@ -249,6 +279,7 @@ li:before {
 }
 .box-rate .plus {
     background-color: #fff;
+    color:#333;
 }
 .box-rate .zero {
     background-color: #888;
@@ -343,10 +374,13 @@ li:before {
     min-width: 8px;
     font-size:0.7em;
     font-weight:bold ;
-    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px #333;
+
     text-align:center;
     box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
     transition:all 100ms linear;
+}
+.btn .shadow {
+    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px #333;
 }
 .close {
     color:#333!important;

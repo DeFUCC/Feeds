@@ -679,8 +679,274 @@ controllers.story = function ($scope) {
             "head": "Фонд затей",
             "text": "Собрание затей, объединенных целями и идеями этого фонда.",
             "img": ""
+        },
+        {
+            "letters": "H|X",
+            "head": "Порядок",
+            "text": "Буквенный порядок в каталоге затей.",
+            "img": ""
+        },
+        {
+            "letters": "H|A",
+            "head": "Названия",
+            "text": "Названия затеи на разных языках.",
+            "img": ""
+        },
+        {
+            "letters": "H|P",
+            "head": "Идея",
+            "text": "Мысль, предлагаемая к реализации.",
+            "img": ""
+        },
+        {
+            "letters": "H|K",
+            "head": "Цели",
+            "text": "Особенности предполагаемых результатов реализации затеи.",
+            "img": ""
+        },
+        {
+            "letters": "H|H",
+            "head": "Суть",
+            "text": "Схема действий, необходимых для реализации затеи, а также описание достаточного количества и качества материалов.",
+            "img": ""
+        },
+        {
+            "letters": "H|H|Y",
+            "head": "Графиколексические упоминания",
+            "text": "Суть затеи содержит упоминания всех настоящих **ступеней**, **задач**, **поставок**, **событий** в наглядной графиколексической форме.",
+            "img": ""
+        },
+        {
+            "letters": "H|M",
+            "head": "Места",
+            "text": "Возможно точное описание расположения точек реализации затеи и точек поставок и задач.",
+            "img": ""
+        },
+        {
+            "letters": "H|E",
+            "head": "Сроки",
+            "text": "Возможно точные даты и длительности ступеней реализации затеи.",
+            "img": ""
+        },
+        {
+            "letters": "H|T",
+            "head": "Информация о лицах и участниках",
+            "text": "Вся доступная публичная информация о **лицах** затеи и ее участниках.",
+            "img": ""
+        },
+        {
+            "letters": "H|KO",
+            "head": "Контакты представительств",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|CT",
+            "head": "Статусное состояние",
+            "text": "Собрание всех настоящих статусов всех ступеней затеи.",
+            "img": ""
+        },
+        {
+            "letters": "H|TE",
+            "head": "Теория затеи",
+            "text": "Обоснование затеи и теоретический дискурс.",
+            "img": ""
+        },
+        {
+            "letters": "H|OT",
+            "head": "Ответы на частые вопросы",
+            "text": "**Лица** обязаны отвечать на любые вопросы, связанные с реализуемой затеей, ответы собираются и группируются.",
+            "img": ""
+        },
+        {
+            "letters": "H|YK",
+            "head": "Оценка УКТ",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|OA",
+            "head": "План поставок",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|EO",
+            "head": "План задач",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|OA|P",
+            "head": "Архив поставок",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|EO|P",
+            "head": "Архив задач",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "H|PE",
+            "head": "Обзор результатов",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "O|O|X",
+            "head": "Личное—Публичное",
+            "text": "Система доставки **личных** и издания **публичных** высказываний.",
+            "img": ""
+        },
+        {
+            "letters": "BC|E",
+            "head": "Публичные высказывания",
+            "text": "Высказывания, содержащие упоминания хотя бы одного предмета дискурса.",
+            "img": ""
+        },
+        {
+            "letters": "O|X",
+            "head": "Фруктовый дискурс",
+            "text": "Включает **дары**, а также все элементы затей, в том числе и самого **ФРУКТ**а.",
+            "img": ""
+        },
+        {
+            "letters": "O|H",
+            "head": "ФРУКТ — это такая ежегодная затея.",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "BC|Y",
+            "head": "Ленты высказываний",
+            "text": "Последовательности связанных высказываний.",
+            "img": ""
+        },
+        {
+            "letters": "BC|Y|E",
+            "head": "Ленты привязаны",
+            "text": "Ленты высказываний привязаны к упоминаемым этими высказываниями **личностям** или иным **предметам дискурса**.",
+            "img": ""
+        },
+        {
+            "letters": "BC|T|A",
+            "head": "Личные ленты",
+            "text": "Связывают адресатов.",
+            "img": ""
+        },
+        {
+            "letters": "BC|E|M",
+            "head": "Публичные ленты",
+            "text": "Привязаны к предметам дискурса.",
+            "img": ""
+        },
+        {
+            "letters": "AP|O",
+            "head": "",
+            "text": "Дар обязательно содержит свой уникальный порядок и **определение его ценности**.",
+            "img": ""
+        },
+        {
+            "letters": "AP|A",
+            "head": "Определение ценности",
+            "text": "Состоит из **качественного** и **количественного** описаний.",
+            "img": ""
+        },
+        {
+            "letters": "AP|A|A",
+            "head": "Качественное описание не бывает короче двух слов.",
+            "text": "",
+            "img": ""
+        },
+        {
+            "letters": "AP|A|O",
+            "head": "Количественное описание",
+            "text": "Свод значимых результатов измерения в стандартных единицах.",
+            "img": ""
+        },
+        {
+            "letters": "C|Y",
+            "head": "Создание события",
+            "text": "События создаются первым упоминанием их **порядка**, **названия**, возможно точной **даты** и **времени (длительности)**, а также **места** и возможного количества участников и свидетелей в одном высказывании.",
+            "img": ""
+        },
+        {
+            "letters": "C|Y|A",
+            "head": "Деятель",
+            "text": "Автор такого первого высказывания становится **автором** и **участником** события — его **деятелем**.",
+            "img": ""
+        },
+        {
+            "letters": "C|E",
+            "head": "Деятель может",
+            "text": "Деятель события может предоставить личностям право тоже стать деятелем, либо отдельно автором или участником или свидетелем этого события в рамках возможного их количества.",
+            "img": ""
+        },
+        {
+            "letters": "C|Y|E",
+            "head": "",
+            "text": "Для изменения начальных условий нужно согласие более, чем половины ее деятелей.",
+            "img": ""
         }
     ];
+
+    $scope.mtd = {}; //an object for universal methods
+    $scope.mtd.preset = preset;
+    $scope.mtd.colorize = colorize;
+    $scope.mtd.parents = parents;
+    $scope.tree=convertStory($scope.story);
+    $scope.JSON=JSON.stringify($scope.story, '',4);
+    $scope.selected = 'B';
+    $scope.mtd.updateStory = function (saying) {
+        var said = angular.copy(saying);
+        $scope.story.push(said);
+        $scope.JSON=JSON.stringify($scope.story, '',4);
+        $scope.tree=convertStory($scope.story);
+    };
+    $scope.mtd.select = function (letters, select) {
+        if (letters==select) {
+            select=false;
+            return false;
+        } else {
+            select=letters;
+            return letters;
+        }
+    };
+    $scope.rating={};
+    $scope.mtd.rate={};
+    $scope.mtd.rate.rating = $scope.rating;
+    $scope.mtd.rate.plus=function (letters) {
+        $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+        $scope.rating[letters].pluses++;
+    };
+    $scope.mtd.rate.minus=function (letters) {
+        $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+        $scope.rating[letters].minuses++;
+    };
+    $scope.mtd.rate.zero=function (letters) {
+        $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+        $scope.rating[letters].zeros++;
+    };
+    $scope.mtd.rate.getPluses=function (letters) {
+        if ($scope.rating[letters] && $scope.rating[letters].pluses>$scope.rating[letters].minuses) {
+            return $scope.rating[letters].pluses - $scope.rating[letters].minuses
+        } else return '';
+    };
+    $scope.mtd.rate.getMinuses=function (letters) {
+        if ($scope.rating[letters] && $scope.rating[letters].pluses<$scope.rating[letters].minuses) {
+            return $scope.rating[letters].minuses - $scope.rating[letters].pluses
+        }
+        else return '';
+    };    $scope.mtd.rate.getZeros=function (letters) {
+        if ($scope.rating[letters]) {return $scope.rating[letters].zeros+$scope.rating[letters].pluses+$scope.rating[letters].minuses}
+        else return '';
+    };
+    $scope.mtd.rate.getRating = function (letters) {
+        if($scope.rating[letters]) {return $scope.rating[letters].pluses-$scope.rating[letters].minuses}
+        return 0;
+    };
 
     function convertStory (story) {
         var tree = {};
@@ -708,34 +974,6 @@ controllers.story = function ($scope) {
         }
         return tree;
     }
-
-
-    $scope.mtd = {}; //an object for universal methods
-    $scope.mtd.preset = preset;
-    $scope.mtd.colorize = colorize;
-    $scope.mtd.parents = parents;
-    $scope.tree=convertStory($scope.story);
-    $scope.JSON=JSON.stringify($scope.story, '',4);
-    $scope.selected = 'B';
-
-    $scope.mtd.updateStory = function (saying) {
-        var said = angular.copy(saying);
-        $scope.story.push(said);
-        $scope.JSON=JSON.stringify($scope.story, '',4);
-        $scope.tree=convertStory($scope.story);
-    };
-
-    $scope.mtd.select = function (letters, select) {
-
-        if (letters==select) {
-            select=false;
-            return false;
-        } else {
-            select=letters;
-            return letters;
-        }
-    }
-
 
     function parents (lttrs) {
         var letters;
@@ -835,6 +1073,9 @@ fruitStory.directive("cards", function($compile) {
         controller: function ($scope){
             $scope.over={};
             $scope.selected=false;
+            $scope.pluses=0;
+            $scope.minuses=0;
+            $scope.zeros=0;
         },
         compile: function(tElement, tAttr) {
             var contents = tElement.contents().remove();
