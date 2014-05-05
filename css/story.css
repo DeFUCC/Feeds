@@ -40,12 +40,13 @@ li:before {
     background:#444;
 }
 #test{
+    display: none;
     color:#eee;
     background-color:#555;
 }
 #add {
     background-color: #ddd;
-    display:flex;
+    display:none;
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
@@ -247,6 +248,9 @@ li:before {
     background-position:center;
     opacity: 0.75;
 }
+.fuller {
+    max-width: 100%;
+}
 
 .box:hover > .box-img {
     opacity: 1;
@@ -346,6 +350,7 @@ li:before {
     align-content:center;
 }
 .box-preview{
+    word-wrap: normal;
     cursor:pointer;
     flex:1 1 8px;
     float:right;
@@ -379,8 +384,9 @@ li:before {
     box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
     transition:all 100ms linear;
 }
-.btn .shadow {
-    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px #333;
+.shadow {
+    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
+
 }
 .close {
     color:#333!important;

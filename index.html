@@ -71,6 +71,7 @@
 
             </div>
         </div>
+
     </div>
 
     <div class="add-form">
@@ -126,6 +127,8 @@
     <textarea class="output" data-ng-model="JSON"></textarea>
 </section>
 
+
+
 <script type="text/ng-template" id="cards.html">
     <div data-ng-style="{flexGrow:1+phrase.next.length*10}"
          data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
@@ -137,7 +140,7 @@
 
             <div data-ng-click=" nxt=''"
                  data-ng-style="{backgroundColor:mtd.colorize(phrase.letters), backgroundImage:'url('+phrase.img+')'}"
-                 data-ng-class="{imgHigh:phrase.img}"
+                 data-ng-class="{imgHigh:phrase.img,fuller:!phrase.text}"
                  class="box-img">
                 <div data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"  class="box-top">
                     <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn shadow">{{phrase.letters}}</span>
