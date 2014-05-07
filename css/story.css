@@ -53,7 +53,7 @@ li:before {
     padding:20px;
 }
 #filters {
-    display: none;
+    display: block;
     background-color: #eee;
     padding: 10px;
 }
@@ -73,12 +73,30 @@ li:before {
     background-color: #888;
     color: #fff;
     margin: 5px;
-    padding: 8px;
+    padding: 12px;
     display: block;
     flex:1 1 10px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+#filters li.active {
+    opacity: 1;
+    background-color: #444444;
+}
+#filters li:hover {
+    opacity: 1;
 }
 #filters li:before {
     content:none;
+}
+#filters input[type=text] {
+    flex:1 1 10px;
+    max-width: 40px;
+    border:0;
+    border-radius: 8px;
+    padding:12px;
+    margin: 4px;
+    font-size: 14px;
 }
 .texter {height: 120px}
 .add-form {
@@ -262,7 +280,7 @@ li:before {
     left:10px;
     bottom:10px;
     color:#fff;
-    display:none;
+    display:flex;
     flex-direction:row;     flex-wrap:nowrap;
     justify-content:center;
     align-content:center;

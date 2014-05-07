@@ -17,21 +17,23 @@
 
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
-<section id="header"><h1>Фруктовый дискурс</h1></section>
+<section id="header"><h1>Фруктовый дискурс</h1>
+</section>
 
 <nav id="filters">
     <ul>
-        <li>Дерево</li>
-        <li>Лента</li>
-        <li>Плюсы</li>
-        <li>Нули</li>
-        <li>Минусы</li>
+        <input placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
+        <li data-ng-click="source=tree" data-ng-class="{active:source==tree}">Дерево</li>
+        <li data-ng-click="source=story" data-ng-class="{active:source==story}">Лента</li>
+        <li data-ng-click="source=my.pluses" data-ng-class="{active:source==my.pluses}">Плюсы</li>
+        <li data-ng-click="source=my.zeros" data-ng-class="{active:source==my.zeros}">Нули</li>
+        <li data-ng-click="source=my.minuses" data-ng-class="{active:source==my.minuses}">Минусы</li>
     </ul>
 </nav>
 
 <section id="first">
 
-    <cards mtd="mtd" next="tree" selected="selected" class="container"></cards>
+    <cards fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
 
 </section>
 <section id="add">
@@ -132,7 +134,7 @@
 <script type="text/ng-template" id="cards.html">
     <div data-ng-style="{flexGrow:1+phrase.next.length*10}"
          data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
-         data-ng-repeat="phrase in next | objectAsArray">
+         data-ng-repeat="phrase in next | objectAsArray | filter: {letters: mtd.convertLetters(fltr)}">
 
         <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
         <div class="box box-flex" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
@@ -146,9 +148,9 @@
                     <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn shadow">{{phrase.letters}}</span>
                 </div>
                 <div class="box-rate">
-                    <div class="plus btn" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase.letters)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
-                    <div class="zero btn" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase.letters)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
-                    <div class="minus btn" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase.letters)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
+                    <div class="plus btn" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase.letters);mtd.my.pluses.push(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
+                    <div class="zero btn" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase.letters);mtd.my.zeros.push(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
+                    <div class="minus btn" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase.letters);mtd.my.minuses.push(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
                 </div>
 
 

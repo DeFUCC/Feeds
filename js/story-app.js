@@ -986,7 +986,15 @@ controllers.story = function ($scope) {
     $scope.mtd.preset = preset;
     $scope.mtd.colorize = colorize;
     $scope.mtd.parents = parents;
+    $scope.mtd.convertLetters = convertLetters;
+    $scope.mtd.convertStory=convertStory;
+    $scope.my={};
+    $scope.my.pluses=[];
+    $scope.my.zeros=[];
+    $scope.my.minuses=[];
+    $scope.mtd.my=$scope.my;
     $scope.tree=convertStory($scope.story);
+    $scope.source=$scope.tree;
     $scope.JSON=JSON.stringify($scope.story, '',4);
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
@@ -1011,6 +1019,7 @@ controllers.story = function ($scope) {
     $scope.mtd.rate.plus=function (letters) {
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].pluses++;
+        console.log($scope.rating);
     };
     $scope.mtd.rate.minus=function (letters) {
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
@@ -1125,6 +1134,26 @@ controllers.story = function ($scope) {
     }
 };
 
+    function convertLetters (letters) {
+        if (!letters) {return ''}
+        letters=letters.toUpperCase();
+        letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
+        letters=letters.replace('А','A');
+        letters=letters.replace('В','B');
+        letters=letters.replace('С','C');
+        letters=letters.replace('Е','E');
+        letters=letters.replace('Н','H');
+        letters=letters.replace('К','K');
+        letters=letters.replace('М','M');
+        letters=letters.replace('О','O');
+        letters=letters.replace('Р','P');
+        letters=letters.replace('Т','T');
+        letters=letters.replace('Х','X');
+        letters=letters.replace('У','Y');
+
+        return letters;
+    }
+
 fruitStory.directive("card", function($compile) {
     return {
         restrict: "E",
@@ -1160,7 +1189,8 @@ fruitStory.directive("cards", function($compile) {
         scope: {
             next: '=',
             mtd: '=',
-            selected: '='
+            selected: '=',
+            fltr:'='
         },
         controller: function ($scope){
             $scope.over={};
