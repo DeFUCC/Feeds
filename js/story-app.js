@@ -1147,6 +1147,7 @@ controllers.story = function ($scope) {
 
     function colorize (lttrs) {
         var numOfSteps, step, letters,letter;
+        if (lttrs=='') {return ''}
         letters=lttrs.lastIndexOf('|');
         letter=lttrs.slice(letters+1);
         letter=letter.slice(0,4);

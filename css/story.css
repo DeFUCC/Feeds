@@ -102,13 +102,15 @@ li:before {
     content:none;
 }
 #filters input[type=text] {
-    flex:1 1 10px;
-    max-width: 60px;
+    flex:1 1 auto;
     border:0;
     border-radius: 8px;
     padding:12px;
     margin: 4px;
     font-size: 14px;
+}
+#filter {
+    max-width: 60px;
 }
 #filters li.plus {
     max-width: 60px;
