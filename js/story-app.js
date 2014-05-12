@@ -988,10 +988,6 @@ controllers.story = function ($scope) {
     $scope.mtd.parents = parents;
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
-    $scope.my={};
-    $scope.my.pluses=[];
-    $scope.my.zeros=[];
-    $scope.my.minuses=[];
     $scope.mtd.my=$scope.my;
     $scope.tree=convertStory($scope.story);
     $scope.source=$scope.tree;
@@ -999,7 +995,6 @@ controllers.story = function ($scope) {
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
         var said = angular.copy(saying);
-        //здесь идет конвертация кириллицы в латиницу для хранения.
         $scope.story.push(said);
         $scope.JSON=JSON.stringify($scope.story, '',4);
         $scope.tree=convertStory($scope.story);
@@ -1013,21 +1008,38 @@ controllers.story = function ($scope) {
             return letters;
         }
     };
-    $scope.rating={};
+    $scope.loadLocal = function (where, what) {
+        if (localStorage[where]) {
+            if (what) {what=JSON.parse(localStorage[where])}
+            return JSON.parse(localStorage[where]);
+        }
+
+    };
+    $scope.saveLocal = function (where, what) {
+        localStorage[where] = JSON.stringify(what);
+    };
+
+    $scope.rating=$scope.loadLocal('rating') || {};
+    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:false,zero:false,minus:false};
     $scope.mtd.rate={};
     $scope.mtd.rate.rating = $scope.rating;
     $scope.mtd.rate.plus=function (letters) {
+        if (angular.isObject(letters)) {letters=letters.letters}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].pluses++;
-        console.log($scope.rating);
+        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.minus=function (letters) {
+        if (angular.isObject(letters)) {letters=letters.letters}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].minuses++;
+        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.zero=function (letters) {
+        if (angular.isObject(letters)) {letters=letters.letters}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].zeros++;
+        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.getPluses=function (letters) {
         if ($scope.rating[letters] && $scope.rating[letters].pluses>$scope.rating[letters].minuses) {
@@ -1047,7 +1059,57 @@ controllers.story = function ($scope) {
         if($scope.rating[letters]) {return $scope.rating[letters].pluses-$scope.rating[letters].minuses}
         return 0;
     };
-    $scope.mtd.preset =preset;
+    $scope.mtd.rate.totalRated = function (rate) {
+        var total=0;
+        for (var a in $scope.rating) {
+            if (rate>0 && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
+            if (rate==0 && $scope.rating[a].pluses== $scope.rating[a].minuses) {total++}
+            if (rate<0 && $scope.rating[a].pluses < $scope.rating[a].minuses) {total++}
+        }
+        return total;
+    };
+    $scope.countNew = function () {
+        var total=0;
+        for (var i=0;i<$scope.story.length; i++) {
+            if (!$scope.rating[$scope.story[i].letters]) {total++}
+        }
+        return total;
+    };
+    $scope.mtd.toggleRF = function (rate) {
+        if (rate == 'news') {$scope.ratingMode.news=!$scope.ratingMode.news
+        } else if (rate>0) {
+            $scope.ratingMode.plus=!$scope.ratingMode.plus
+        } else if (rate<0) {
+            $scope.ratingMode.minus=!$scope.ratingMode.minus
+        } else {
+            $scope.ratingMode.zero=!$scope.ratingMode.zero
+        }
+        $scope.saveLocal('ratingMode', $scope.ratingMode);
+    };
+    $scope.ratingFilter = function (phrase) {
+        var result=true;
+        result=result && phrase.letters;
+        if (result && !$scope.rating[phrase.letters] && $scope.ratingMode.news) {return true}
+        return result && $scope.rating[phrase.letters] &&
+            (
+                (($scope.rating[phrase.letters].pluses > $scope.rating[phrase.letters].minuses) && $scope.ratingMode.plus) ||
+                (($scope.rating[phrase.letters].minuses > $scope.rating[phrase.letters].pluses) && $scope.ratingMode.minus) ||
+                (($scope.rating[phrase.letters].pluses == $scope.rating[phrase.letters].minuses) && $scope.ratingMode.zero)
+            );
+    };
+
+
+
+};
+
+
+    function checkAndAdd (add, arr) {
+        for (var a in arr) {
+            if (add==arr[a]) {return false}
+        }
+        arr.push(add);
+        return arr;
+    }
 
     function convertStory (story) {
         var tree = {};
@@ -1132,7 +1194,7 @@ controllers.story = function ($scope) {
         var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
         return (c);
     }
-};
+
 
     function convertLetters (letters) {
         if (!letters) {return ''}
@@ -1190,7 +1252,9 @@ fruitStory.directive("cards", function($compile) {
             next: '=',
             mtd: '=',
             selected: '=',
-            fltr:'='
+            fltr:'=',
+            rf:'=', //for rating filtering
+            search:'='
         },
         controller: function ($scope){
             $scope.over={};

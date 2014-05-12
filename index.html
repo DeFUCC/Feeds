@@ -20,20 +20,27 @@
 <section id="header"><h1>Фруктовый дискурс</h1>
 </section>
 
-<nav id="filters">
-    <ul>
-        <input placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
-        <li data-ng-click="source=tree" data-ng-class="{active:source==tree}">Дерево</li>
-        <li data-ng-click="source=story" data-ng-class="{active:source==story}">Лента</li>
-        <li data-ng-click="source=my.pluses" data-ng-class="{active:source==my.pluses}">Плюсы</li>
-        <li data-ng-click="source=my.zeros" data-ng-class="{active:source==my.zeros}">Нули</li>
-        <li data-ng-click="source=my.minuses" data-ng-class="{active:source==my.minuses}">Минусы</li>
-    </ul>
-</nav>
+<menu id="filters">
+
+    <input placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
+    <input placeholder="Поиск" id="search" type="text" data-ng-model="search">
+    <menu>
+        <li class="tree" data-ng-click="source=tree" data-ng-class="{active:source==tree}">Дерево</li>
+        <li class="story" data-ng-click="source=story" data-ng-class="{active:source==story}">Лента</li>
+    </menu>
+
+    <menu>
+            <li data-ng-click="mtd.toggleRF('news')" data-ng-class="{active:ratingMode.news}">Новые <div class="indy">{{countNew()}}</div></li>
+            <li data-ng-click="mtd.toggleRF(1)" class="plus" data-ng-class="{active:ratingMode.plus}">+<div class="indy">{{mtd.rate.totalRated(1)}}</div></li>
+            <li data-ng-click="mtd.toggleRF(0)" class="zero" data-ng-class="{active:ratingMode.zero}">&bull; <div class="indy">{{mtd.rate.totalRated(0)}}</div></li>
+            <li data-ng-click="mtd.toggleRF(-1)" class="minus" data-ng-class="{active:ratingMode.minus}">- <div class="indy">{{mtd.rate.totalRated(-1)}}</div></li>
+            <li data-ng-click="rating={}" class="reset">Сброс</li>
+    </menu>
+</menu>
 
 <section id="first">
 
-    <cards fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
+    <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
 
 </section>
 <section id="add">
@@ -134,7 +141,7 @@
 <script type="text/ng-template" id="cards.html">
     <div data-ng-style="{flexGrow:1+phrase.next.length*10}"
          data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
-         data-ng-repeat="phrase in next | objectAsArray | filter: {letters: mtd.convertLetters(fltr)}">
+         data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
 
         <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
         <div class="box box-flex" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
@@ -148,9 +155,9 @@
                     <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn shadow">{{phrase.letters}}</span>
                 </div>
                 <div class="box-rate">
-                    <div class="plus btn" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase.letters);mtd.my.pluses.push(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
-                    <div class="zero btn" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase.letters);mtd.my.zeros.push(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
-                    <div class="minus btn" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase.letters);mtd.my.minuses.push(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
+                    <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
+                    <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
+                    <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
                 </div>
 
 
@@ -173,7 +180,7 @@
             <div data-ng-if="phrase.next" data-ng-show="selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
              <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
                 <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters),backgroundImage:'url('+phrase.img+')'}"></div>
-                <cards mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
+                <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
 
             </div>
 
