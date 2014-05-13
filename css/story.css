@@ -53,12 +53,10 @@ li:before {
     padding:20px;
 }
 #filterSection {
-    height:72px;
+    min-height: 72px;
 }
 #filters {
-    width: 100%;
     background-color: rgba(170,170,175,0.5);
-    padding: 10px;
     list-style: none outside none;
     display: flex;
     flex-direction:row;     flex-wrap:wrap;
@@ -66,6 +64,7 @@ li:before {
     align-content:space-around;
     align-items:stretch;
     margin: 0;
+    padding: 15px 0;
     z-index: 600;
 }
 #filters menu {
@@ -75,7 +74,7 @@ li:before {
     justify-content:center;
     align-content:space-around;
     align-items:stretch;
-    margin: 0 30px;
+    margin: 0 20px;
     padding: 0;
 }
 #filters li {
@@ -113,36 +112,52 @@ li:before {
     padding:12px;
     margin: 4px;
     font-size: 14px;
+    opacity: 0.6;
+}
+#filters input[type=text]:hover {
+    opacity: 0.8;
+}
+#filters input[type=text]:focus {
+    opacity: 1;
 }
 #filter {
     max-width: 60px;
 }
 #filters li.plus {
+    min-width: 32px;
     max-width: 60px;
     background-color: #fff;
     color:#555 !important;
+    font-weight: bold;
     margin-right:0;
     border-radius: 8px 0 0 8px;
 }
 #filters li.zero {
+    min-width: 32px;
     max-width: 60px;
     border-radius: 0;
+    font-weight: bold;
     background-color: #888;
     margin-left:0;
     margin-right: 0;
 }
 #filters li.minus {
+    min-width: 32px;
     max-width: 60px;
+    font-weight: bold;
     background-color: #000;
     margin-left:0;
     border-radius: 0 8px 8px 0;
 }
 #filters .news {
+    min-width: 80px;
     flex-basis:100px;
-    max-width: 100px;
 }
 #filters .reset {
     background-color: darkred;
+    min-width: 80px;
+    flex-basis:100px;
+    max-width: 100px;
 }
 #filters .tree {
     margin-right: 0;
@@ -161,10 +176,13 @@ li:before {
     font-size: 10px;
     font-weight: bold;
     border-radius: 4px;
+    border: 1px #333;
     background-color: rgba(150,150,150,0.4);
 }
 .active .indy {
-    background-color: rgba(150,190,150,0.75);
+    background-color: rgb(150,190,150);
+    border: 1px #ccc;
+    box-shadow:0px 0px 4px lawngreen;
 }
 
 .texter {height: 120px}
@@ -433,7 +451,7 @@ li:before {
     margin:0 10px;
     padding: 5px;
     max-height: 500px;
-    overflow:scroll;
+    overflow:hidden;
     opacity: 0.9;
     overflow-wrap:break-word;
     word-wrap: break-word;
@@ -446,7 +464,7 @@ li:before {
 }
 .box-bottom{
     flex:1 1 auto;
-    margin:10px;
+    margin-bottom:10px;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;

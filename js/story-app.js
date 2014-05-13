@@ -52,7 +52,7 @@ controllers.story = function ($scope, StoryService) {
     };
 
     $scope.rating=$scope.loadLocal('rating') || {};
-    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:false,zero:false,minus:false};
+    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.rate={};
     $scope.mtd.rate.rating = $scope.rating;
     $scope.mtd.rate.plus=function (letters) {
