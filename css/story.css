@@ -118,6 +118,7 @@ li:before {
     opacity: 0.8;
 }
 #filters input[type=text]:focus {
+    outline: none;
     opacity: 1;
 }
 #filter {

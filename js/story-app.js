@@ -232,6 +232,7 @@ controllers.story = function ($scope, StoryService) {
     function convertLetters (letters) {
         if (!letters) {return ''}
         letters=letters.toUpperCase();
+        letters=letters.replace(/[.,//]/g,'|');
         letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
         letters=letters.replace('А','A');
         letters=letters.replace('В','B');

@@ -35,6 +35,7 @@ angular.module('sticky', [])
 
 					if ( scrollTop >= stickyLine ){
 						$elem.css('position', 'fixed');
+                        $elem.css('width','100%');  // DeFUCC small fix for navbar
 					} else {
 						$elem.css('position', initialPositionStyle);
 					}
