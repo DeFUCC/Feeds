@@ -83,7 +83,7 @@ li:before {
     margin: 5px;
     padding: 12px;
     display: block;
-    flex:1 1 10px;
+    flex:1 1 auto;
     opacity: 0.6;
     cursor: pointer;
     position: relative;
@@ -132,6 +132,10 @@ li:before {
     margin-left:0;
     border-radius: 0 8px 8px 0;
 }
+#filters .news {
+    flex-basis:100px;
+    max-width: 100px;
+}
 #filters .reset {
     background-color: darkred;
 }
@@ -146,7 +150,7 @@ li:before {
 .indy {
     position:absolute;
     z-index: 300;
-    right:6px;
+    left:6px;
     top:6px;
     padding:2px 4px;
     font-size: 10px;

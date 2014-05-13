@@ -31,7 +31,7 @@
     </menu>
 
     <menu>
-            <li data-ng-click="mtd.toggleRF('news')" data-ng-class="{active:ratingMode.news}">Новые <div class="indy">{{countNew()}}</div></li>
+            <li data-ng-click="mtd.toggleRF('news')" class="news" data-ng-class="{active:ratingMode.news}">Новые <div class="indy">{{countNew()}}</div></li>
             <li data-ng-click="mtd.toggleRF(1)" class="plus" data-ng-class="{active:ratingMode.plus}">+<div class="indy">{{mtd.rate.totalRated(1)}}</div></li>
             <li data-ng-click="mtd.toggleRF(0)" class="zero" data-ng-class="{active:ratingMode.zero}">&bull; <div class="indy">{{mtd.rate.totalRated(0)}}</div></li>
             <li data-ng-click="mtd.toggleRF(-1)" class="minus" data-ng-class="{active:ratingMode.minus}">- <div class="indy">{{mtd.rate.totalRated(-1)}}</div></li>
