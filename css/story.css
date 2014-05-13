@@ -57,7 +57,7 @@ li:before {
 }
 #filters {
     width: 100%;
-    background-color: #eee;
+    background-color: rgba(170,170,175,0.5);
     padding: 10px;
     list-style: none outside none;
     display: flex;
