@@ -1,7 +1,7 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'ngAnimate']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'ngAnimate', 'sticky']);
 var controllers = {};
 fruitStory.controller(controllers);
 
@@ -12,7 +12,7 @@ controllers.story = function ($scope, StoryService) {
         text: '',
         img:''
     };
-    $scope.story =StoryService.story;
+    $scope.story = StoryService.story;
 
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;

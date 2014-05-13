@@ -11,6 +11,7 @@
     <script type="application/javascript" src="js/angular-animate.min.js"></script>
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
     <script type="application/javascript" src="js/story-app.js"></script>
+    <script type="application/javascript" src="js/sticky.js"></script>
     <link href="css/story.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/gridforms.css" rel="stylesheet">
@@ -19,8 +20,8 @@
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 </section>
-
-<menu id="filters">
+<section id="filterSection">
+<menu sticky id="filters">
     <menu>
         <input data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}" placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
         <input placeholder="Поиск" id="search" type="text" data-ng-model="search">
@@ -38,7 +39,7 @@
             <li data-ng-click="rating={}" class="reset">Сброс</li>
     </menu>
 </menu>
-
+</section>
 <section id="first">
 
     <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
@@ -172,7 +173,7 @@
                 <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
                     <div data-ng-click="$parent.$parent.nxt=next"
                          data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
-                         class="box-preview" data-ng-repeat="next in phrase.next">
+                         class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
                         {{next.letter}}
                     </div>
                 </div>
@@ -181,7 +182,7 @@
             <div data-ng-if="phrase.next" data-ng-show="selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
              <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
                 <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters),backgroundImage:'url('+phrase.img+')'}"></div>
-                <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
+                <cards search="search" rf="rf" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
 
             </div>
 

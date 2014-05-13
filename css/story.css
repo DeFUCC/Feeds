@@ -52,7 +52,11 @@ li:before {
     justify-content:center;
     padding:20px;
 }
+#filterSection {
+    height:72px;
+}
 #filters {
+    width: 100%;
     background-color: #eee;
     padding: 10px;
     list-style: none outside none;
@@ -62,6 +66,7 @@ li:before {
     align-content:space-around;
     align-items:stretch;
     margin: 0;
+    z-index: 600;
 }
 #filters menu {
     flex:1 1 auto;
