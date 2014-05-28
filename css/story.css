@@ -301,9 +301,9 @@ li:before {
     width: 100%;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    border-left: solid 8px;
-    border-right:solid 8px;
-    border-bottom: solid 8px;
+    border-left: solid 6px;
+    border-right:solid 6px;
+    border-bottom: solid 6px;
     position: relative;
 }
 .roll-back {
