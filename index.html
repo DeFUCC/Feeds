@@ -20,6 +20,9 @@
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 </section>
+<section data-ng-if="contents" id="contents">
+    <contents class="contents" tree="tree" mtd="mtd"></contents>
+</section>
 <section id="filterSection">
 <menu sticky id="filters">
     <menu>
@@ -138,6 +141,22 @@
     <textarea class="output" data-ng-model="JSON"></textarea>
 </section>
 
+<script type="text/ng-template" id="content.html">
+    <div class="inner-content"
+         data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}"
+         data-ng-repeat="branch in next"><div class="letter">{{branch.letter}}</div><content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content></div>
+</script>
+
+<script type="text/ng-template" id="contents.html">
+    <div class="content"
+         data-ng-repeat="branch in tree"
+         data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}">
+        <div class="letter">{{branch.letters}}</div>
+
+            <content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content>
+
+    </div>
+</script>
 
 
 <script type="text/ng-template" id="cards.html">

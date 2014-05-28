@@ -250,7 +250,39 @@ controllers.story = function ($scope, StoryService) {
         return letters;
     }
 
+fruitStory.directive("contents", function($compile) {
+    return {
+        restrict: "E",
+        templateUrl: 'contents.html',
+        scope: {
+            tree: '=',
+            mtd:'='
+        }
+    };
+});
 
+fruitStory.directive("content", function($compile) {
+    return {
+        restrict: "E",
+        templateUrl: 'content.html',
+        scope: {
+            next: '=',
+            mtd:'='
+        },
+        compile: function(tElement, tAttr) {
+            var contents = tElement.contents().remove();
+            var compiledContents;
+            return function(scope, iElement, iAttr) {
+                if(!compiledContents) {
+                    compiledContents = $compile(contents);
+                }
+                compiledContents(scope, function(clone, scope) {
+                    iElement.append(clone);
+                });
+            };
+        }
+    };
+});
 
 fruitStory.directive("card", function($compile) {
     return {
