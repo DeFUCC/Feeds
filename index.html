@@ -6,12 +6,17 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
     <script src="js/angular.min.js"></script>
+  <!--  <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js"></script>
+   -->
     <script type="application/javascript" src="js/marked.js"></script>
     <script type="application/javascript" src="js/angular-marked.js"></script>
     <script type="application/javascript" src="js/angular-animate.min.js"></script>
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
     <script type="application/javascript" src="js/story-app.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
+
     <link href="css/story.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/gridforms.css" rel="stylesheet">
@@ -20,6 +25,7 @@
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 </section>
+
 <section data-ng-if="contents" id="contents">
     <contents class="contents" tree="tree" mtd="mtd"></contents>
 </section>
@@ -158,6 +164,10 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="letters.html">
+    <span data-ng-repeat="lttr in lttrs track by $index" data-ng-style="{backgroundColor:mtd.colorize(lttr)}" class="letter">{{lttr}}</span>
+</script>
+
 
 <script type="text/ng-template" id="cards.html">
     <div data-ng-style="{flexGrow:1+phrase.next.length*10}"
@@ -173,7 +183,8 @@
                  data-ng-class="{imgHigh:phrase.img,fuller:!phrase.text}"
                  class="box-img">
                 <div data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"  class="box-top">
-                    <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn shadow">{{phrase.letters}}</span>
+                    <letters class="letters shadow" mtd="mtd" letters="phrase.letters"></letters>
+
                 </div>
                 <div class="box-rate">
                     <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>

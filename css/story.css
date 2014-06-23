@@ -46,7 +46,7 @@ li:before {
 }
 #add {
     background-color: #ddd;
-    display:none;
+    display:block;
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
@@ -128,6 +128,25 @@ li:before {
 }
 .inner-content:hover {
     opacity: 1;
+}
+.letter {
+    padding: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px rgba(0,0,0,0.15) solid;
+    height: 100%;
+    cursor: pointer;
+}
+.letter:only-child {
+    border-radius: 6px;
+}
+.letter:first-child {
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.letter:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 #filterSection {
     min-height: 72px;

@@ -6,16 +6,18 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 controllers.story = function ($scope, StoryService) {
+    $scope.story = StoryService.story;
     $scope.phrase = {
         letters:'',
         head: '',
         text: '',
         img:''
     };
-    $scope.story = StoryService.story;
+
 
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
+    $scope.mtd.shuffle = shuffle;
     $scope.mtd.colorize = colorize;
     $scope.mtd.parents = parents;
     $scope.mtd.convertLetters = convertLetters;
@@ -131,9 +133,19 @@ controllers.story = function ($scope, StoryService) {
     };
 
 
-
 };
 
+function shuffle(massive) {
+    arr = massive.concat();
+    for (var i = arr.length - 1; i > 0; i--) {
+        var num = Math.floor(Math.random() * (i + 1));
+        var d = arr[num];
+        arr[num] = arr[i];
+        arr[i] = d;
+    }
+
+    return arr;
+}
 
     function checkAndAdd (add, arr) {
         for (var a in arr) {
@@ -177,20 +189,40 @@ controllers.story = function ($scope, StoryService) {
         return letters;
     }
 
+
+
     function colorize (lttrs) {
-        var numOfSteps, step, letters,letter;
-        if (lttrs=='') {return ''}
-        letters=lttrs.lastIndexOf('|');
-        letter=lttrs.slice(letters+1);
-        letter=letter.slice(0,4);
-        numOfSteps=Math.pow(12,letter.length);
-        step=preset(letter.length).indexOf(letter.toUpperCase());
-        if (!~step) {step=Math.round(Math.random()*numOfSteps)} //if not set is not valid make random
-        return rainbow(numOfSteps,step+1);
-    };
+        var hue, sat, light, alpha, step, numOfSteps;
+        var hsla = function (hue,sat,light,alpha) {
+            return 'hsla('+(hue || '0')+','+(sat || '100')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
+        };
+            var lastLetters=lttrs.lastIndexOf('|');
+            var lettersFull=lttrs.slice(lastLetters+1);
+            var letters=lettersFull.slice(0,2);
+            var residue=lettersFull.slice(2);
+            residue=residue.split('');
+            numOfSteps=Math.pow(12,letters.length);
+            step=preset(letters.length).indexOf(letters.toUpperCase());
+            hue=360*step/numOfSteps;
+        if (residue.length>0) {
+            step=preset(1).indexOf(residue.shift().toUpperCase());
+            light=26+48*(12-step)/12;
+        }
+        if (residue.length>0) {
+            step=preset(1).indexOf(residue.shift().toUpperCase());
+            sat=20+80*(12-step)/12;
+        }
+        if (residue.length>0) {
+            step=preset(1).indexOf(residue.shift().toUpperCase());
+            alpha=0.3+0.7*(12-step)/12;
+        }
+            return hsla(hue,sat,light,alpha);
+
+
+    }
 
     function preset (bit){
-        var baseLetters = ['Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M', 'K'];
+        var baseLetters = ['K', 'Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M'];
         var current, count, result = baseLetters.concat(), order;
         if (typeof bit == "number" && bit>0 && bit<=12) {count=bit-1};
         for (var b = 0; b < count; b++) {
@@ -205,27 +237,6 @@ controllers.story = function ($scope, StoryService) {
             }
         }
         return result;
-    }
-
-    function rainbow (numOfSteps, step) {
-        // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distiguishable vibrant markers in Google Maps and other apps.
-        // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
-        // Adam Cole, 2011-Sept-14
-        var r, g, b;
-        var h = step / numOfSteps;
-        var i = ~~(h * 6);
-        var f = h * 6 - i;
-        var q = 1 - f;
-        switch(i % 6){
-            case 0: r = 1, g = f, b = 0; break;
-            case 1: r = q, g = 1, b = 0; break;
-            case 2: r = 0, g = 1, b = f; break;
-            case 3: r = 0, g = q, b = 1; break;
-            case 4: r = f, g = 0, b = 1; break;
-            case 5: r = 1, g = 0, b = q; break;
-        }
-        var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
-        return (c);
     }
 
 
@@ -280,6 +291,21 @@ fruitStory.directive("content", function($compile) {
                     iElement.append(clone);
                 });
             };
+        }
+    };
+});
+
+fruitStory.directive("letters", function() {
+    return {
+        restrict: "E",
+        templateUrl: 'letters.html',
+        scope: {
+            letters: '=',
+            mtd:'='
+        },
+        controller: function ($scope) {
+            $scope.lttrs=$scope.letters.split('|');
+
         }
     };
 });
