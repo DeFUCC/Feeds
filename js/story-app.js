@@ -14,7 +14,6 @@ controllers.story = function ($scope, StoryService) {
         img:''
     };
 
-
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
@@ -44,7 +43,7 @@ controllers.story = function ($scope, StoryService) {
     };
     $scope.loadLocal = function (where, what) {
         if (localStorage[where]) {
-            if (what) {what=JSON.parse(localStorage[where])}
+            if (what) {what=JSON.parse(localStorage[where]);}
             return JSON.parse(localStorage[where]);
         }
 
@@ -58,26 +57,26 @@ controllers.story = function ($scope, StoryService) {
     $scope.mtd.rate={};
     $scope.mtd.rate.rating = $scope.rating;
     $scope.mtd.rate.plus=function (letters) {
-        if (angular.isObject(letters)) {letters=letters.letters}
+        if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].pluses++;
         $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.minus=function (letters) {
-        if (angular.isObject(letters)) {letters=letters.letters}
+        if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].minuses++;
         $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.zero=function (letters) {
-        if (angular.isObject(letters)) {letters=letters.letters}
+        if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].zeros++;
         $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.getPluses=function (letters) {
         if ($scope.rating[letters] && $scope.rating[letters].pluses>$scope.rating[letters].minuses) {
-            return $scope.rating[letters].pluses - $scope.rating[letters].minuses
+            return $scope.rating[letters].pluses - $scope.rating[letters].minuses;
         } else return '';
     };
     $scope.mtd.rate.getMinuses=function (letters) {
@@ -97,7 +96,7 @@ controllers.story = function ($scope, StoryService) {
         var total=0;
         for (var a in $scope.rating) {
             if (rate>0 && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
-            if (rate==0 && $scope.rating[a].pluses== $scope.rating[a].minuses) {total++}
+            if (rate===0 && $scope.rating[a].pluses== $scope.rating[a].minuses) {total++}
             if (rate<0 && $scope.rating[a].pluses < $scope.rating[a].minuses) {total++}
         }
         return total;
@@ -127,9 +126,9 @@ controllers.story = function ($scope, StoryService) {
         return result && $scope.rating[phrase.letters] &&
             (
                 (($scope.rating[phrase.letters].pluses > $scope.rating[phrase.letters].minuses) && $scope.ratingMode.plus) ||
-                (($scope.rating[phrase.letters].minuses > $scope.rating[phrase.letters].pluses) && $scope.ratingMode.minus) ||
-                (($scope.rating[phrase.letters].pluses == $scope.rating[phrase.letters].minuses) && $scope.ratingMode.zero)
-            );
+                    (($scope.rating[phrase.letters].minuses > $scope.rating[phrase.letters].pluses) && $scope.ratingMode.minus) ||
+                    (($scope.rating[phrase.letters].pluses == $scope.rating[phrase.letters].minuses) && $scope.ratingMode.zero)
+                );
     };
 
 
@@ -147,119 +146,119 @@ function shuffle(massive) {
     return arr;
 }
 
-    function checkAndAdd (add, arr) {
-        for (var a in arr) {
-            if (add==arr[a]) {return false}
-        }
-        arr.push(add);
-        return arr;
+function checkAndAdd (add, arr) {
+    for (var a in arr) {
+        if (add==arr[a]) {return false}
     }
+    arr.push(add);
+    return arr;
+}
 
-    function convertStory (story) {
-        var tree = {};
+function convertStory (story) {
+    var tree = {};
 
-        for(var i = 0; i < story.length; i++) {
-            var saying = story[i];
-            var letters = saying.letters.split('|');
+    for(var i = 0; i < story.length; i++) {
+        var saying = story[i];
+        var letters = saying.letters.split('|');
 
-            var search = tree;
-            for(var j = 0; j < letters.length; j++) {
-                var letter = letters[j];
+        var search = tree;
+        for(var j = 0; j < letters.length; j++) {
+            var letter = letters[j];
 
-                var obj = letter in search ? search[letter] : search[letter] = {};
+            var obj = letter in search ? search[letter] : search[letter] = {};
 
-                // Endpoint, assign letter and values to obj
-                if(j == letters.length - 1) {
-                    obj.letter = letter;
-                    for(key in saying) {
-                        obj[key] = saying[key];
-                    }
-                } else { // Create nested object and update search object
-                    search = 'next' in obj ? obj.next : obj.next = {};
+            // Endpoint, assign letter and values to obj
+            if(j == letters.length - 1) {
+                obj.letter = letter;
+                for(var key in saying) {
+                    obj[key] = saying[key];
                 }
+            } else { // Create nested object and update search object
+                search = 'next' in obj ? obj.next : obj.next = {};
             }
         }
-        return tree;
     }
+    return tree;
+}
 
-    function parents (lttrs) {
-        var letters;
-        letters=lttrs.split('|');
-        letters.pop();
-        return letters;
+function parents (lttrs) {
+    var letters;
+    letters=lttrs.split('|');
+    letters.pop();
+    return letters;
+}
+
+
+
+function colorize (lttrs) {
+    var hue, sat, light, alpha, step, numOfSteps;
+    var hsla = function (hue,sat,light,alpha) {
+        return 'hsla('+(hue || '0')+','+(sat || '100')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
+    };
+    var lastLetters=lttrs.lastIndexOf('|');
+    var lettersFull=lttrs.slice(lastLetters+1);
+    var letters=lettersFull.slice(0,2);
+    var residue=lettersFull.slice(2);
+    residue=residue.split('');
+    numOfSteps=Math.pow(12,letters.length);
+    step=preset(letters.length).indexOf(letters.toUpperCase());
+    hue=360*step/numOfSteps;
+    if (residue.length>0) {
+        step=preset(1).indexOf(residue.shift().toUpperCase());
+        light=26+48*(12-step)/12;
     }
-
-
-
-    function colorize (lttrs) {
-        var hue, sat, light, alpha, step, numOfSteps;
-        var hsla = function (hue,sat,light,alpha) {
-            return 'hsla('+(hue || '0')+','+(sat || '100')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
-        };
-            var lastLetters=lttrs.lastIndexOf('|');
-            var lettersFull=lttrs.slice(lastLetters+1);
-            var letters=lettersFull.slice(0,2);
-            var residue=lettersFull.slice(2);
-            residue=residue.split('');
-            numOfSteps=Math.pow(12,letters.length);
-            step=preset(letters.length).indexOf(letters.toUpperCase());
-            hue=360*step/numOfSteps;
-        if (residue.length>0) {
-            step=preset(1).indexOf(residue.shift().toUpperCase());
-            light=26+48*(12-step)/12;
-        }
-        if (residue.length>0) {
-            step=preset(1).indexOf(residue.shift().toUpperCase());
-            sat=20+80*(12-step)/12;
-        }
-        if (residue.length>0) {
-            step=preset(1).indexOf(residue.shift().toUpperCase());
-            alpha=0.3+0.7*(12-step)/12;
-        }
-            return hsla(hue,sat,light,alpha);
-
-
+    if (residue.length>0) {
+        step=preset(1).indexOf(residue.shift().toUpperCase());
+        sat=20+80*(12-step)/12;
     }
+    if (residue.length>0) {
+        step=preset(1).indexOf(residue.shift().toUpperCase());
+        alpha=0.3+0.7*(12-step)/12;
+    }
+    return hsla(hue,sat,light,alpha);
 
-    function preset (bit){
-        var baseLetters = ['K', 'Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M'];
-        var current, count, result = baseLetters.concat(), order;
-        if (typeof bit == "number" && bit>0 && bit<=12) {count=bit-1};
-        for (var b = 0; b < count; b++) {
-            current = result.slice(0);
-            order = 0;
-            for (var i = 0; i < current.length; i++) {
 
-                for (var j = 0; j < 12; j++) {
+}
 
-                    result[order++] = current[i] + baseLetters[j];
-                }
+function preset (bit){
+    var baseLetters = ['K', 'Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M'];
+    var current, count, result = baseLetters.concat(), order;
+    if (typeof bit == "number" && bit>0 && bit<=12) {count=bit-1};
+    for (var b = 0; b < count; b++) {
+        current = result.slice(0);
+        order = 0;
+        for (var i = 0; i < current.length; i++) {
+
+            for (var j = 0; j < 12; j++) {
+
+                result[order++] = current[i] + baseLetters[j];
             }
         }
-        return result;
     }
+    return result;
+}
 
 
-    function convertLetters (letters) {
-        if (!letters) {return ''}
-        letters=letters.toUpperCase();
-        letters=letters.replace(/[.,//]/g,'|');
-        letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
-        letters=letters.replace('А','A');
-        letters=letters.replace('В','B');
-        letters=letters.replace('С','C');
-        letters=letters.replace('Е','E');
-        letters=letters.replace('Н','H');
-        letters=letters.replace('К','K');
-        letters=letters.replace('М','M');
-        letters=letters.replace('О','O');
-        letters=letters.replace('Р','P');
-        letters=letters.replace('Т','T');
-        letters=letters.replace('Х','X');
-        letters=letters.replace('У','Y');
+function convertLetters (letters) {
+    if (!letters) {return ''}
+    letters=letters.toUpperCase();
+    letters=letters.replace(/[.,//]/g,'|');
+    letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
+    letters=letters.replace('А','A');
+    letters=letters.replace('В','B');
+    letters=letters.replace('С','C');
+    letters=letters.replace('Е','E');
+    letters=letters.replace('Н','H');
+    letters=letters.replace('К','K');
+    letters=letters.replace('М','M');
+    letters=letters.replace('О','O');
+    letters=letters.replace('Р','P');
+    letters=letters.replace('Т','T');
+    letters=letters.replace('Х','X');
+    letters=letters.replace('У','Y');
 
-        return letters;
-    }
+    return letters;
+}
 
 fruitStory.directive("contents", function($compile) {
     return {
@@ -297,14 +296,14 @@ fruitStory.directive("content", function($compile) {
 
 fruitStory.directive("letters", function() {
     return {
-        restrict: "E",
+        restrict: "A",
         templateUrl: 'letters.html',
         scope: {
-            letters: '=',
+            letter: '=',
             mtd:'='
         },
         controller: function ($scope) {
-            $scope.lttrs=$scope.letters.split('|');
+            $scope.lttrs=$scope.letter.split('|');
 
         }
     };
@@ -375,7 +374,7 @@ fruitStory.directive("cards", function($compile) {
 fruitStory.filter('objectAsArray', function() {
     return function(object) {
         var array = [];
-        for (item in object) {
+        for (var item in object) {
             array.push(object[item]);
         }
         return array;
