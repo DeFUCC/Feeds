@@ -153,6 +153,7 @@ li:before {
 #filterSection {
     min-height: 72px;
 }
+
 #filters {
     background-color: rgba(170,170,175,0.5);
     list-style: none outside none;
@@ -373,6 +374,28 @@ li:before {
     opacity: 1;
 }
 
+.box-wider > .box-text .box-img {
+    flex:1 1 250px;
+    overflow: hidden;
+    padding: 10px;
+    max-width: 250px;
+}
+
+.box-wider > .box-text .box-img img {
+    max-width: 280px;
+    max-height: 280px;
+}
+
+.box-wider > .box-text .text-flow {
+    flex:1 1 50%;
+    width: 70%;
+}
+
+.box-wider > .box-head .box-heading {
+    flex:1 1 auto;
+}
+
+
 .box-wider > .box-heading {
     font-size: 180%;
 }
@@ -461,9 +484,9 @@ li:before {
 .box-img{
     flex:1 1 100%;
     align-self:flex-start;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% 50%;
     margin:0;
     color:#fff;
     font-weight:normal;
@@ -471,7 +494,7 @@ li:before {
     word-wrap: break-word;
     max-height: 280px;
     overflow-y: scroll;
-    height: min-content;
+    cursor: url("../img/plus_cursor.png") 25 25, auto;
 }
 
 .box-img img {
@@ -489,6 +512,7 @@ li:before {
     overflow-wrap:break-word;
     word-wrap: break-word;
     cursor: pointer;
+    text-align:center;
 }
 .box-heading h3 {
     margin: 5px 0;
@@ -511,6 +535,7 @@ li:before {
     align-content:center;
     opacity: .7;
     cursor: pointer;
+    margin-left:10px;
 }
 .box-rate:hover {
     opacity: 1;

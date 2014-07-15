@@ -16,6 +16,8 @@
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
     <script type="application/javascript" src="js/story-app.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
+    <script type="application/javascript" src="js/intense.min.js"></script>
+
 
     <link href="css/story.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
@@ -192,11 +194,12 @@
                     <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
                 </div>
 
+            </div>
+            <div class="box-head"
+                 data-ng-click=" nxt=''"
+                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}">
 
 
-                <div class="box-img"  data-ng-if="phrase.img">
-                    <img data-ng-src="{{phrase.img}}">
-                </div>
 
                 <div class="box-heading"
                      data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
@@ -205,11 +208,18 @@
                         {{phrase.head}}
                     </h3>
                 </div>
+
+
+
             </div>
 
 
 
             <div  class="box-text">
+
+                <div class="box-img"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+                    <img data-ng-src="{{phrase.img}}">
+                </div>
 
                 <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
@@ -238,7 +248,7 @@
 <div class="second-card" >
     <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
     <div data-ng-if="nxt" class="box" data-ng-class="{sel:selected, lower:over.next}">
-        <div data-ng-show="selected" class="box-top-x">
+        <div  class="box-top-x">
             <span data-ng-click="close()"  class="btn close round">&times;</span>
         </div>
 

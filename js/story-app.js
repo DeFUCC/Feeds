@@ -14,6 +14,9 @@ controllers.story = function ($scope, StoryService) {
         img:''
     };
 
+
+
+
     $scope.mtd = {}; //an object for universal methods
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
@@ -24,6 +27,7 @@ controllers.story = function ($scope, StoryService) {
     $scope.mtd.my=$scope.my;
     $scope.tree=convertStory($scope.story);
     $scope.source=$scope.tree;
+
     $scope.JSON=JSON.stringify($scope.story, '',4);
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
@@ -355,6 +359,13 @@ fruitStory.directive("cards", function($compile) {
             $scope.pluses=0;
             $scope.minuses=0;
             $scope.zeros=0;
+            $scope.imgClick=function () {
+
+                // Intensify all images with the 'intense' classname.
+                var elements = document.querySelectorAll( '.box-img' );
+                Intense( elements );
+                $scope.imgClick=function(){};
+            };
         },
         compile: function(tElement, tAttr) {
             var contents = tElement.contents().remove();
