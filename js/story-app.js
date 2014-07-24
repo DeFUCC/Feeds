@@ -58,6 +58,10 @@ controllers.story = function ($scope, StoryService) {
         localStorage[where] = JSON.stringify(what);
     };
 
+    $scope.mtd.persona=$scope.loadLocal('persona') || '';
+    $scope.mtd.savePersona = function () {
+        $scope.saveLocal('persona',this.persona);
+    };
     $scope.rating=$scope.loadLocal('rating') || {};
     $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.rate={};
@@ -98,6 +102,7 @@ controllers.story = function ($scope, StoryService) {
         if($scope.rating[letters]) {return $scope.rating[letters].pluses-$scope.rating[letters].minuses}
         return 0;
     };
+
     $scope.mtd.rate.totalRated = function (rate) {
         var total=0;
         for (var a in $scope.rating) {
