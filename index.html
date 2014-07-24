@@ -26,6 +26,8 @@
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
+
+    <input placeholder="Представься" data-ng-model="mtd.persona">
 </section>
 
 <section data-ng-if="contents" id="contents">
@@ -63,11 +65,11 @@
 
 
             <div data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected); nxt=''"
-                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters), backgroundImage:'url('+phrase.img+')'}"
+                 data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters)), backgroundImage:'url('+phrase.img+')'}"
                  data-ng-class="{imgHigh:phrase.img}"
                  class="box-img">
                 <div  class="box-top">
-                    <span data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="btn">{{phrase.letters | uppercase}}</span>
+                    <span data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters))}" class="btn">{{mtd.convertLetters(phrase.letters)}}</span>
                 </div>
 
 
@@ -136,7 +138,7 @@
                 </div>
             </fieldset>
             <button class="say-button"
-                    data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+                    data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters))}"
                     data-ng-click="mtd.updateStory(phrase)">+</button>
         </form>
     </div>
@@ -184,21 +186,27 @@
                  data-ng-class="{fuller:!phrase.text}"
                  class="box-head">
 
-                <div letters
+                <div data-ng-if="mtd.persona"
+                     letters
                      class="letters shadow" mtd="mtd" letter="phrase.letters"
                      class="box-top"> </div>
 
-                <div class="box-rate">
+                <div data-ng-if="mtd.persona" class="box-rate">
                     <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
                     <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
                     <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
                 </div>
 
-            </div>
-            <div class="box-head"
-                 data-ng-click=" nxt=''"
-                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}">
-
+                <div class="box-icon"
+                     data-ng-if="phrase.icon"
+                     data-ng-click="imgClick()"
+                      >
+                    <img class="intense"
+                         data-image="{{phrase.icon}}"
+                         data-title="{{phrase.head}}"
+                         data-caption="{{phrase.text}}"
+                         data-ng-src="{{phrase.icon}}">
+                </div>
 
 
                 <div class="box-heading"
@@ -215,17 +223,17 @@
 
 
 
-            <div  class="box-text">
+            <div  class="box-text" data-ng-if="phrase.text || phrase.next">
 
-                <div class="box-img"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+                <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
                     <img data-ng-src="{{phrase.img}}">
                 </div>
 
                 <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
                 <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
-                    <div data-ng-click="$parent.$parent.nxt=next"
-                         data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
+                    <div data-ng-click="$parent.$parent.$parent.nxt=next"
+                         data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
                          class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
                         {{next.letter}}
                     </div>
@@ -256,7 +264,7 @@
              data-ng-style="{backgroundColor:mtd.colorize(nxt.letters), backgroundImage:'url('+nxt.img+')'}"
              class="box-head">
 
-            <div letters class="letters shadow" mtd="mtd" letter="nxt.letters"
+            <div data-ng-if="mtd.persona" letters class="letters shadow" mtd="mtd" letter="nxt.letters"
                  data-ng-click="over.next='';selected=!selected"
                  class="box-top"></div>
 
@@ -274,7 +282,7 @@
 
         <div  class="box-text">
 
-            <p marked="nxt.text"</p>
+            <div class="text-flow"  data-ng-if="nxt.text" marked="nxt.text"></div>
 
             <div data-ng-if="nxt.next" class="box-bottom">
                 <div data-ng-click="over.next=next"
