@@ -1,7 +1,7 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'ngAnimate', 'sticky']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky']);
 var controllers = {};
 fruitStory.controller(controllers);
 

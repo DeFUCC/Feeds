@@ -12,7 +12,6 @@
    -->
     <script type="application/javascript" src="js/marked.js"></script>
     <script type="application/javascript" src="js/angular-marked.js"></script>
-    <script type="application/javascript" src="js/angular-animate.min.js"></script>
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
     <script type="application/javascript" src="js/story-app.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
@@ -174,7 +173,8 @@
 
 
 <script type="text/ng-template" id="cards.html">
-    <div data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
+    <div class="card"
+         data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
          data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
 
         <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>

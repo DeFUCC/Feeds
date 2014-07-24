@@ -339,6 +339,7 @@ li:before {
     background-attachment: fixed;
     opacity: 0.2;
 }
+
 .box-holder{
     flex:1 1 auto;
     width: min-content;
@@ -348,7 +349,6 @@ li:before {
     justify-content:center;
     align-content:stretch;
     align-items:stretch;
-    transition:all 200ms linear;
 }
 .box-wide {
     flex:1 1 100%;
@@ -358,7 +358,6 @@ li:before {
     justify-content:center;
     align-content:stretch;
     align-items:stretch;
-    transition:all 200ms linear;
 }
 .box-wider {
     transition:all 200ms linear;
