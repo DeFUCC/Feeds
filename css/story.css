@@ -11,7 +11,7 @@ body{
 ul {
     list-style: none;
     padding:0;
-    margin:0;
+    margin:8px 0;
 }
 
 li {
@@ -35,6 +35,19 @@ li:before {
 #header{
     background:#fff;
     padding:30px;
+    display: flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+}
+#header h1 {
+    flex:1 1 100px;
+
+}
+#header input {
+    flex:1 1 100px;
+    font-size: 16px;
 }
 #first{
     background:#444;
@@ -130,26 +143,17 @@ li:before {
     opacity: 1;
 }
 .letters {
+    flex:1 1 auto;
     margin:1px 0 0 0;
     color:#fff;
+    text-align: left;
 }
 .letter {
     padding: 4px;
     font-size: 10px;
     font-weight: bold;
-    border-right: 1px rgba(0,0,0,0.15) solid;
-    border-bottom: 1px rgba(0,0,0,0.15) solid;
 }
-.letter:only-child {
-    border-top-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-.letter:first-child {
-    border-top-left-radius: 4px;
-}
-.letter:last-child {
-    border-bottom-right-radius: 4px;
-}
+
 #filterSection {
     min-height: 72px;
 }
@@ -316,13 +320,11 @@ li:before {
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
-    padding:10px;
+    padding:4px;
 }
 .box-roll {
     background:#444;
     width: 100%;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
     border-left: solid 6px;
     border-right:solid 6px;
     border-bottom: solid 6px;
@@ -336,11 +338,9 @@ li:before {
     left:0;
     background-attachment: fixed;
     opacity: 0.2;
-    border-radius: 4px;
 }
 .box-holder{
     flex:1 1 auto;
-    max-width: 400px;
     width: min-content;
     position:relative;
     display:flex;
@@ -368,8 +368,6 @@ li:before {
 }
 .box-wider > .box-head {
     max-width: 100%;
-    border-top-right-radius: 8px;
-    border-bottom-left-radius: 0;
     background-attachment: fixed;
     opacity: 1;
 }
@@ -391,9 +389,7 @@ li:before {
     width: 70%;
 }
 
-.box-wider > .box-head .box-heading {
-    flex:1 1 auto;
-}
+
 
 
 .box-wider > .box-heading {
@@ -411,12 +407,11 @@ li:before {
     align-content:stretch;
     align-items:stretch;
     padding:0;
-    margin: 5px;
+    margin: 4px;
     background-color:#eee;
     position:relative;
-    border-radius:4px;
     transition:all 100ms linear;
-    box-shadow:0px 2px 4px rgba(0, 0, 30, 0.5);
+
     -webkit-filter: grayscale(50%);
 }
 .selected{
@@ -466,14 +461,13 @@ li:before {
 }
 .box-head {
     position: relative;
+    min-height: 8px;
     flex:1 1 100%;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
-    align-content:space-between;
+    align-content:center;
     transition:all 100ms linear;
-    border-top-left-radius:4px;
-    border-top-right-radius:4px;
     text-align:center;
     background-size:cover;
     background-repeat:no-repeat;
@@ -481,8 +475,16 @@ li:before {
     opacity: 0.75;
 }
 
-.box-img{
+.box-icon {
     flex:1 1 100%;
+
+}
+.intense {
+    cursor: url("../img/plus_cursor.png") 25 25, auto;
+}
+
+.box-img{
+    flex:1 1 auto;
     align-self:flex-start;
     background-size: cover;
     background-repeat: no-repeat;
@@ -493,12 +495,14 @@ li:before {
     overflow-wrap:break-word;
     word-wrap: break-word;
     max-height: 280px;
-    overflow-y: scroll;
-    cursor: url("../img/plus_cursor.png") 25 25, auto;
+    padding: 8px 0 0 0;
+
 }
 
 .box-img img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
 }
 
 .box-heading {
@@ -550,7 +554,6 @@ li:before {
     min-width: 8px;
     font-size:0.7em;
     font-weight:bold ;
-    box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
     transition:all 100ms linear;
 }
 .box-rate .active {
@@ -563,7 +566,6 @@ li:before {
     background-color: #fff;
     color:#555 !important;
     margin-right:0;
-    border-radius: 4px 0 0 4px;
 }
 .box-rate div.zero {
     background-color: #888;
@@ -573,7 +575,6 @@ li:before {
 .box-rate div.minus {
     background-color: #000;
     margin-left:0;
-    border-radius: 0 4px 4px 0;
 }
 .box-wider > .box-rate {
     flex:1 1 100%;
@@ -601,8 +602,8 @@ li:before {
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
     align-content:space-between;
-    margin:0 10px;
-    padding: 5px;
+    margin:0;
+    padding: 0;
     max-height: 500px;
     overflow:hidden;
     opacity: 0.9;
@@ -616,25 +617,23 @@ li:before {
     opacity: 1;
 }
 .text-flow {
-    flex:1 1 100%;
+    flex:1 1 240px;
+    padding:0 8px;
 }
 .box-bottom{
     flex:1 1 auto;
-    margin-bottom:10px;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
-    align-content:center;
+    align-content:stretch;
 }
 .box-preview{
     word-wrap: normal;
     cursor:pointer;
     flex:1 1 8px;
     float:right;
-    border-radius:5px;
     min-width:14px;
     padding:6px;
-    margin:2px;
     font-size:12px;
     font-weight: bold;
     color:#fff;
@@ -667,6 +666,7 @@ li:before {
 }
 .close {
     color:#fff;
+    background-color: rgba(100,100,100,0.8);
     text-shadow: none;
 }
 .btn:hover {
