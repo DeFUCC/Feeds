@@ -32,6 +32,8 @@ controllers.story = function ($scope, StoryService) {
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
         var said = angular.copy(saying);
+        saying={};
+        said.letters=convertLetters(said.letters);
         $scope.story.push(said);
         $scope.JSON=JSON.stringify($scope.story, '',4);
         $scope.tree=convertStory($scope.story);
@@ -246,7 +248,7 @@ function preset (bit){
 function convertLetters (letters) {
     if (!letters) {return ''}
     letters=letters.toUpperCase();
-    letters=letters.replace(/[.,//]/g,'|');
+    letters=letters.replace(/[\s.,//]/g,'|');
     letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
     letters=letters.replace('А','A');
     letters=letters.replace('В','B');
@@ -362,7 +364,7 @@ fruitStory.directive("cards", function($compile) {
             $scope.imgClick=function () {
 
                 // Intensify all images with the 'intense' classname.
-                var elements = document.querySelectorAll( '.box-img' );
+                var elements = document.querySelectorAll( '.intense' );
                 Intense( elements );
                 $scope.imgClick=function(){};
             };
@@ -398,7 +400,7 @@ fruitStory.service('StoryService', function () {
             "letters": "B",
             "head": "Личность",
             "text": "— свод данных, характеризующих конкретное лицо или вымышленного персонажа.",
-            "img": "img/persona.svg"
+            "icon": "icons/persona.svg"
         },
         {
             "letters": "B|A",
@@ -409,7 +411,7 @@ fruitStory.service('StoryService', function () {
             "letters": "E",
             "head": "Лицо",
             "text": "— человек, подтвердивший свою личность.",
-            "img": "img/face.svg"
+            "icon": "icons/face.svg"
         },
         {
             "letters": "E|Y",
@@ -419,20 +421,20 @@ fruitStory.service('StoryService', function () {
         {
             "letters": "E|P",
             "head": "Лицо затеи",
-            "img": "img/design-face-proven.svg",
+            "icon": "icons/design-face-proven.svg",
             "text": "— конечный адресат всех вопросов, связанных с этой затеей. Глаза, уши, нос и рот затеи."
         },
         {
             "letters": "A",
             "head": "Штука",
             "text": "— материальная сущность.",
-            "img": "img/thing.svg"
+            "icon": "icons/thing.svg"
         },
         {
             "letters": "X",
             "head": "Задача",
             "text": "– описание результативного действия с приложением всей необходимой для его совершения информации.",
-            "img": "img/task.svg"
+            "icon": "icons/task.svg"
         },
         {
             "letters": "X|A",
@@ -453,13 +455,13 @@ fruitStory.service('StoryService', function () {
             "letters": "H",
             "head": "Затея",
             "text": "— план реализации общественно-значимых инфраструктурных объектов или событий.",
-            "img": "img/design.svg"
+            "icon": "icons/design.svg"
         },
         {
             "letters": "C",
             "head": "Событие",
             "text": "— ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками.",
-            "img": "img/event.svg"
+            "icon": "icons/event.svg"
         },
         {
             "letters": "P",
@@ -495,7 +497,7 @@ fruitStory.service('StoryService', function () {
             "letters": "HA",
             "head": "Навык",
             "text": "— умение реализовывать известные задачи или получать творческие результаты с применением соответствующего инструмента по назначению, а также руководство по овладению им.",
-            "img": "img/skill.svg"
+            "icon": "icons/skill.svg"
         },
         {
             "letters": "BO",
@@ -513,7 +515,7 @@ fruitStory.service('StoryService', function () {
             "letters": "AP",
             "head": "Дар",
             "text": "— любая ценность, принятая фондом развития и направленная на реализацию его затей, а также информация о ней.",
-            "img": "img/donation.svg"
+            "icon": "icons/donation.svg"
         },
         {
             "letters": "BC|T",
@@ -561,181 +563,181 @@ fruitStory.service('StoryService', function () {
             "letters": "Y|B",
             "head": "Вопросы Универсализации",
             "text": "",
-            "img": "img/question.svg"
+            "icon": "icons/question.svg"
         },
         {
             "letters": "Y|B|H",
             "head": "",
             "text": "Буду ли я делать что-то новое и необычное для меня?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "Y|B|M",
             "head": "",
             "text": "Это непривычная деятельность?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "Y|B|Y",
             "head": "",
             "text": "Научит ли это меня чему-то новому?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "Y|B|P",
             "head": "",
             "text": "Есть ли возможность попробовать себя в новой роли?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "K|B",
             "head": "Вопросы Кооперации",
             "text": "",
-            "img": "img/question.svg"
+            "icon": "icons/question.svg"
         },
         {
             "letters": "K|B|A",
             "head": "",
             "text": "Это невозможно сделать в одиночку?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "K|B|O",
             "head": "",
             "text": "Помощь других будет полезна?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "K|B|C",
             "head": "",
             "text": "Усилия всех участников складываются?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "K|B|H",
             "head": "",
             "text": "Победителей и побежденных быть не может?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "T|B",
             "head": "Вопросы Творчества",
             "text": "",
-            "img": "img/question.svg"
+            "icon": "icons/question.svg"
         },
         {
             "letters": "T|B|O",
             "head": "",
             "text": "Будет ли что-то создано в результате?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "T|B|C",
             "head": "",
             "text": "Свободно ли определение прилагаемого усилия?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "T|B|P",
             "head": "",
             "text": "Осознанно ли приложение усилия?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "T|B|B",
             "head": "",
             "text": "Повышается ли мера совершенства окружающего мира?",
-            "img": "img/question.svg"
+            "img": ""
         },
         {
             "letters": "Y|Y",
             "head": "Утверждения Универсализации",
             "text": "",
-            "img": "img/statement.svg"
+            "icon": "icons/statement.svg"
         },
         {
             "letters": "Y|Y|A",
             "head": "",
             "text": "Никогда не делал ничего подобного.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "Y|Y|M",
             "head": "",
             "text": "Можно научиться что-то делать и что-то сделать.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "Y|Y|O",
             "head": "",
             "text": "Как раз хотел получить навыки из этой сферы знания.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "Y|Y|H",
             "head": "",
             "text": "Это может дать много полезного нового опыта.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "K|Y",
             "head": "Утверждения Кооперации",
             "text": "",
-            "img": "img/statement.svg"
+            "icon": "icons/statement.svg"
         },
         {
             "letters": "K|Y|M",
             "head": "",
             "text": "В одиночку это невозможно.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "K|Y|H",
             "head": "",
             "text": "Я помогу и мне помогут.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "K|Y|K",
             "head": "",
             "text": "Каждый найдет, чем заняться полезным.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "K|Y|B",
             "head": "",
             "text": "Вместе, сложив усилия, мы сделаем это реальным.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "T|Y",
             "head": "Утверждения творчества",
             "text": "",
-            "img": "img/statement.svg"
+            "icon": "icons/statement.svg"
         },
         {
             "letters": "T|Y|M",
             "head": "",
             "text": "В результате получится новая штука.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "T|Y|T",
             "head": "",
             "text": "Это может дать возможность записать на долговечный носитель **творческую информацию** о штуке или событии.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "T|Y|K",
             "head": "",
             "text": "Это сделает мир ближе к совершенству.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "T|Y|P",
             "head": "",
             "text": "Удалось запечатлеть редкую творческую информацию.",
-            "img": "img/statement.svg"
+            "img": ""
         },
         {
             "letters": "T|E",
@@ -759,13 +761,13 @@ fruitStory.service('StoryService', function () {
             "letters": "K|O",
             "head": "",
             "text": "Объединение для разработки и доказательства новых навыков и обмена уже имеющимися — **кооперация**, т.к. задача **универсализации** в рамках общества неразрешима индивидуально.",
-            "img": "img/skill.svg"
+            "icon": "icons/skill.svg"
         },
         {
             "letters": "X|A|H",
             "head": "Наиболее полная задача",
             "text": "предполагает наличие:\n- необходимого и достаточного **инструмента** с описанием его назначения,\n- инструкции ко всем задействованным **навыкам**,\n- весь необходимый **материал** для получения навыков и выполнения задачи,\n- варианты возмещения труда.",
-            "img": "img/task.svg"
+            "icon": "icons/task.svg"
         },
         {
             "letters": "P|E|A",
@@ -801,7 +803,7 @@ fruitStory.service('StoryService', function () {
             "letters": "O|O|B",
             "head": "Песочница",
             "text": "Доступ к системе индивидуальной и коллективной **разработки затей**.",
-            "img": "img/sandbox.svg"
+            "icon": "icons/sandbox.svg"
         },
         {
             "letters": "O|O|P",
@@ -813,19 +815,19 @@ fruitStory.service('StoryService', function () {
             "letters": "O|O|O",
             "head": "Задачи",
             "text": "Доступ к списку **настоящих задач** фруктовых затей с возможностью вписаться на их выполнение.",
-            "img": "img/task.svg"
+            "icon": "icons/task.svg"
         },
         {
             "letters": "O|O|M",
             "head": "Поставки",
             "text": "Доступ к списку необходимых для реализации затей **поставок** с возможностью вписаться на их реализацию.",
-            "img": "img/demand.svg"
+            "icon": "icons/demand.svg"
         },
         {
             "letters": "O|O|A",
             "head": "Вывеска затеи",
             "text": "Доступ к **полной информации** затеи с возможностью добавления информации лицами и участниками данной затеи.",
-            "img": "img/design.svg"
+            "icon": "icons/design.svg"
         },
         {
             "letters": "O|O|C",
@@ -837,13 +839,13 @@ fruitStory.service('StoryService', function () {
             "letters": "O|O|H",
             "head": "Личности",
             "text": "Доступ к списку личностей с возможностью просмотра их **публичной** информации.",
-            "img": "img/persona.svg"
+            "icon": "icons/persona.svg"
         },
         {
             "letters": "O|O|K",
             "head": "ЭКошелек",
             "text": "Доступ к **ЭКошельку** личности с возможностью внесения средств, формирования даров и управления ими, а также отслеживания их совершения.",
-            "img": "img/donation.svg"
+            "icon": "icons/donation.svg"
         },
         {
             "letters": "O|O|Y|E",
@@ -933,25 +935,25 @@ fruitStory.service('StoryService', function () {
             "letters": "O|C|A|H",
             "head": "Песочница",
             "text": "— инкубатор затей.",
-            "img": "img/sandbox.svg"
+            "icon": "icons/sandbox.svg"
         },
         {
             "letters": "O|C|A|B",
             "head": "Каталог затей",
             "text": "",
-            "img": "img/design.svg"
+            "icon": "icons/design.svg"
         },
         {
             "letters": "O|C|A|A",
             "head": "Витрина задач",
             "text": "",
-            "img": "img/task.svg"
+            "icon": "icons/task.svg"
         },
         {
             "letters": "O|C|A|T",
             "head": "Витрина поставок",
             "text": "",
-            "img": "img/demand.svg"
+            "icon": "icons/demand.svg"
         },
         {
             "letters": "O|C|A|P",
