@@ -57,7 +57,7 @@
     <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
 
 </section>
-<section id="add">
+<section data-ng-if="mtd.persona" id="add">
 
     <div class="preview-box">
         <div class="box box-flex" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
@@ -97,7 +97,7 @@
 
     </div>
 
-    <div class="add-form">
+    <div  class="add-form">
         <form class="grid-form">
 
             <fieldset>
@@ -175,7 +175,7 @@
 <script type="text/ng-template" id="cards.html">
     <div class="card"
          data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}"
-         data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
+         data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search | orderBy:mtd.rate.ratingSort">
 
         <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
         <div class="box" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >

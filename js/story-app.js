@@ -102,6 +102,12 @@ controllers.story = function ($scope, StoryService) {
         if($scope.rating[letters]) {return $scope.rating[letters].pluses-$scope.rating[letters].minuses}
         return 0;
     };
+    $scope.mtd.rate.ratingSort = function (phrase) {
+        if($scope.rating[phrase.letters]) {
+            return -$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses
+        };
+        return 0;
+    };
 
     $scope.mtd.rate.totalRated = function (rate) {
         var total=0;
