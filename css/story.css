@@ -362,13 +362,10 @@ li:before {
 }
 .box-wider {
     transition:all 200ms linear;
-    margin:4px -4px -4px -4px !important;
     box-shadow:0px 12px 24px rgba(0, 0, 30, 0.3);
     z-index: 12000;
 }
-.box-wider:first-of-type {
-    margin-top:0px;
-}
+
 .box-wider > .box-text {
     flex: 1 1 100%;
 }
