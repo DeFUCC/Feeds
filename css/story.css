@@ -418,7 +418,7 @@ li:before {
     position:relative;
     transition:all 100ms linear;
 
-    -webkit-filter: grayscale(50%);
+    -webkit-filter: grayscale(80%);
 }
 .selected{
     background-color:#fff;
