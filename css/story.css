@@ -64,6 +64,7 @@ li:before {
     flex-wrap:wrap;
     justify-content:center;
     padding:20px;
+    position: relative;
 }
 #contents {
     background-color: #aaa;
@@ -361,6 +362,12 @@ li:before {
 }
 .box-wider {
     transition:all 200ms linear;
+    margin:4px -4px -4px -4px !important;
+    box-shadow:0px 12px 24px rgba(0, 0, 30, 0.3);
+    z-index: 12000;
+}
+.box-wider:first-of-type {
+    margin-top:0px;
 }
 .box-wider > .box-text {
     flex: 1 1 100%;
@@ -428,8 +435,8 @@ li:before {
 .second-card {
     z-index:1000;
     position:absolute;
-    top:40px;
-    left:20px;
+    top:20px;
+    left:5px;
     width:95%;
     margin:0;
 }
@@ -465,7 +472,8 @@ li:before {
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
-    align-content:center;
+    align-content:space-around;
+    align-items:center;
     transition:all 100ms linear;
     text-align:center;
     background-size:cover;
@@ -474,8 +482,17 @@ li:before {
     opacity: 0.75;
 }
 
-.box-icon {
+.box-bar {
     flex:1 1 100%;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:flex-start;
+    align-content:space-around;
+}
+
+.box-icon {
+    flex:1 1 100px;
+    max-width: 120px;
 
 }
 .intense {
@@ -505,7 +522,7 @@ li:before {
 }
 
 .box-heading {
-    flex:1 1 100%;
+    flex:1 1 auto;
     background:rgba(0,0,0,0.1);
     margin:0;
     padding:10px 10px;

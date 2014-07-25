@@ -6,13 +6,30 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 controllers.story = function ($scope, StoryService) {
-    $scope.story = StoryService.story;
-    $scope.phrase = {
-        letters:'',
-        head: '',
-        text: '',
-        img:''
+    $scope.loadLocal = function (where, what) {
+        if (localStorage[where]) {
+            if (what) {what=JSON.parse(localStorage[where]);}
+            return JSON.parse(localStorage[where]);
+        } else return false;
+
     };
+    $scope.saveLocal = function (where, what) {
+        localStorage[where] = JSON.stringify(what);
+    };
+
+    $scope.story = StoryService.story ;
+    $scope.tree=convertStory($scope.story);
+    $scope.rating=$scope.loadLocal('rating') || {}  && $scope.saveLocal('rating', $scope.rating);
+    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:true,zero:true,minus:false} && $scope.saveLocal('ratingMode', $scope.ratingMode);
+
+    $scope.reset = function () {
+        $scope.story =StoryService.story;
+        $scope.tree=convertStory($scope.story);
+        $scope.rating={};
+        $scope.ratingMode={news:true,plus:true,zero:true,minus:false};
+    };
+
+    $scope.phrase = {letters:''};
 
 
 
@@ -25,7 +42,7 @@ controllers.story = function ($scope, StoryService) {
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
     $scope.mtd.my=$scope.my;
-    $scope.tree=convertStory($scope.story);
+
     $scope.source=$scope.tree;
 
     $scope.JSON=JSON.stringify($scope.story, '',4);
@@ -47,23 +64,13 @@ controllers.story = function ($scope, StoryService) {
             return letters;
         }
     };
-    $scope.loadLocal = function (where, what) {
-        if (localStorage[where]) {
-            if (what) {what=JSON.parse(localStorage[where]);}
-            return JSON.parse(localStorage[where]);
-        }
 
-    };
-    $scope.saveLocal = function (where, what) {
-        localStorage[where] = JSON.stringify(what);
-    };
 
     $scope.mtd.persona=$scope.loadLocal('persona') || '';
     $scope.mtd.savePersona = function () {
         $scope.saveLocal('persona',this.persona);
     };
-    $scope.rating=$scope.loadLocal('rating') || {};
-    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:true,zero:true,minus:false};
+
     $scope.mtd.rate={};
     $scope.mtd.rate.rating = $scope.rating;
     $scope.mtd.rate.plus=function (letters) {
@@ -94,7 +101,8 @@ controllers.story = function ($scope, StoryService) {
             return $scope.rating[letters].minuses - $scope.rating[letters].pluses
         }
         else return '';
-    };    $scope.mtd.rate.getZeros=function (letters) {
+    };
+    $scope.mtd.rate.getZeros=function (letters) {
         if ($scope.rating[letters]) {return $scope.rating[letters].zeros+$scope.rating[letters].pluses+$scope.rating[letters].minuses}
         else return '';
     };
@@ -104,7 +112,7 @@ controllers.story = function ($scope, StoryService) {
     };
     $scope.mtd.rate.ratingSort = function (phrase) {
         if($scope.rating[phrase.letters]) {
-            return -$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses
+            return (-$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses)*$scope.rating[phrase.letters].zeros;
         };
         return 0;
     };
@@ -208,6 +216,7 @@ function parents (lttrs) {
 
 
 function colorize (lttrs) {
+    if (lttrs) {
     var hue, sat, light, alpha, step, numOfSteps;
     var hsla = function (hue,sat,light,alpha) {
         return 'hsla('+(hue || '0')+','+(sat || '100')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
@@ -234,6 +243,7 @@ function colorize (lttrs) {
     }
     return hsla(hue,sat,light,alpha);
 
+    } else return 'hsla(0,0%,50%,0.5)';
 
 }
 
@@ -320,7 +330,9 @@ fruitStory.directive("letters", function() {
             mtd:'='
         },
         controller: function ($scope) {
+            if ($scope.letter) {
             $scope.lttrs=$scope.letter.split('|');
+            };
 
         }
     };
@@ -514,13 +526,13 @@ fruitStory.service('StoryService', function () {
             "letters": "BO",
             "head": "Лексическая форма",
             "text": "— форма применения слова в контексте языка.",
-            "img": "https://pp.vk.me/c406717/v406717088/4d27/nlPXEooE0fI.jpg"
+            "img": ""
         },
         {
             "letters": "BC",
             "head": "Высказывание",
             "text": "— любая информативная фраза, содержащая упоминание ее автора, а также хотя бы одного адресата или предмета этой фразы.",
-            "img": "https://pp.vk.me/c412618/v412618086/8333/6JOVMpyHTN0.jpg"
+            "img": ""
         },
         {
             "letters": "AP",
@@ -532,7 +544,7 @@ fruitStory.service('StoryService', function () {
             "letters": "BC|T",
             "head": "Личные высказывания",
             "text": "предназначены для получения только их адресатами.",
-            "img": "https://pp.vk.me/c413728/v413728319/64ae/O5rpxOupIAY.jpg"
+            "img": ""
         },
         {
             "letters": "X|O|P",

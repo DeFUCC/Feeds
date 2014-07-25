@@ -33,7 +33,7 @@
     <contents class="contents" tree="tree" mtd="mtd"></contents>
 </section>
 <section id="filterSection">
-<menu sticky id="filters">
+<menu sticky data-ng-show="mtd.persona"  id="filters">
     <menu>
         <input data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}" placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
         <input placeholder="Поиск" id="search" type="text" data-ng-model="search">
@@ -48,7 +48,7 @@
             <li data-ng-click="mtd.toggleRF(1)" class="plus" data-ng-class="{active:ratingMode.plus}">+<div class="indy">{{mtd.rate.totalRated(1)}}</div></li>
             <li data-ng-click="mtd.toggleRF(0)" class="zero" data-ng-class="{active:ratingMode.zero}">&bull; <div class="indy">{{mtd.rate.totalRated(0)}}</div></li>
             <li data-ng-click="mtd.toggleRF(-1)" class="minus" data-ng-class="{active:ratingMode.minus}">- <div class="indy">{{mtd.rate.totalRated(-1)}}</div></li>
-            <li data-ng-click="rating={}" class="reset">Сброс</li>
+            <li data-ng-click="reset()" class="reset">Сброс</li>
     </menu>
 </menu>
 </section>
@@ -60,41 +60,84 @@
 <section data-ng-if="mtd.persona" id="add">
 
     <div class="preview-box">
-        <div class="box box-flex" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
 
 
-            <div data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected); nxt=''"
-                 data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters)), backgroundImage:'url('+phrase.img+')'}"
-                 data-ng-class="{imgHigh:phrase.img}"
-                 class="box-img">
-                <div  class="box-top">
-                    <span data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters))}" class="btn">{{mtd.convertLetters(phrase.letters)}}</span>
+        <div class="card"
+             data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}">
+
+        <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
+        <div class="box" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
+
+
+            <div data-ng-click=" nxt=''"
+                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+                 data-ng-class="{fuller:!phrase.text}"
+                 class="box-head">
+
+                <div data-ng-if="mtd.persona"
+                     letters
+                     class="letters shadow" mtd="mtd" letter="phrase.letters"
+                     class="box-top"> </div>
+
+                <div data-ng-if="mtd.persona" class="box-rate">
+                    <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
+                    <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
+                    <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
+                </div>
+
+                <div class="box-icon"
+                     data-ng-if="phrase.icon"
+                     data-ng-click="imgClick()"
+                        >
+                    <img class="intense"
+                         data-image="{{phrase.icon}}"
+                         data-title="{{phrase.head}}"
+                         data-caption="{{phrase.text}}"
+                         data-ng-src="{{phrase.icon}}">
                 </div>
 
 
-                <h3 data-ng-if="phrase.head">{{phrase.head}}</h3>
+                <div class="box-heading"
+                     data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
+                     data-ng-if="phrase.head">
+                    <h3>
+                        {{phrase.head}}
+                    </h3>
+                </div>
+
+
+
             </div>
 
-            <div class="box-text">
 
-                <div data-ng-if="phrase.text" marked="phrase.text"></div>
+
+            <div  class="box-text" data-ng-if="phrase.text || phrase.next">
+
+                <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+                    <img data-ng-src="{{phrase.img}}">
+                </div>
+
+                <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
                 <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
-                    <div data-ng-click="$parent.$parent.nxt=next"
-                         data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
-                         class="box-preview" data-ng-repeat="next in phrase.next">
-                        |{{next.letter}}|
+                    <div data-ng-click="$parent.$parent.$parent.nxt=next"
+                         data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
+                         class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
+                        {{next.letter}}
                     </div>
                 </div>
 
             </div>
-            <div data-ng-if="phrase.next" data-ng-show="selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
-
-                <cards mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
+            <div data-ng-if="phrase.next" data-ng-show="$parent.selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
+                <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
+                <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
+                <cards search="search" rf="rf" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
 
             </div>
+
         </div>
 
+    </div>
     </div>
 
     <div  class="add-form">
@@ -186,15 +229,19 @@
                  data-ng-class="{fuller:!phrase.text}"
                  class="box-head">
 
-                <div data-ng-if="mtd.persona"
-                     letters
-                     class="letters shadow" mtd="mtd" letter="phrase.letters"
-                     class="box-top"> </div>
+                <div class="box-bar">
 
-                <div data-ng-if="mtd.persona" class="box-rate">
-                    <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
-                    <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
-                    <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
+                    <div data-ng-if="mtd.persona"
+                         letters
+                         class="letters shadow" mtd="mtd" letter="phrase.letters"
+                         class="box-top"> </div>
+
+                    <div data-ng-if="mtd.persona" class="box-rate">
+                        <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
+                        <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
+                        <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
+                    </div>
+
                 </div>
 
                 <div class="box-icon"
@@ -256,11 +303,9 @@
 <div class="second-card" >
     <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
     <div data-ng-if="nxt" class="box" data-ng-class="{sel:selected, lower:over.next}">
-        <div  class="box-top-x">
-            <span data-ng-click="close()"  class="btn close round">&times;</span>
-        </div>
 
-        <div data-ng-click="over.next='';selected=!selected"
+
+        <div data-ng-click="close()"  data-ng-click="over.next='';selected=!selected"
              data-ng-style="{backgroundColor:mtd.colorize(nxt.letters), backgroundImage:'url('+nxt.img+')'}"
              class="box-head">
 
