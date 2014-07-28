@@ -1,0 +1,42 @@
+<div class="second-card" >
+    <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
+    <div data-ng-if="nxt" class="card" data-ng-class="{'sel':selected, 'lower':over.next}">
+
+
+        <div data-ng-click="close();over.next='';selected=!selected"
+             data-ng-style="{backgroundColor:mtd.colorize(nxt.letters), backgroundImage:'url('+nxt.img+')'}"
+             class="box-head">
+
+            <div data-ng-if="mtd.persona"
+                 letters
+                 class="letters shadow"
+                 mtd="mtd"
+                 letter="nxt.letters"
+                 data-ng-click="over.next='';selected=!selected"
+                 class="box-top"></div>
+
+
+
+
+            <div class="box-heading"
+                 data-ng-if="nxt.head">
+                <h3>
+                    {{nxt.head}}
+                </h3>
+            </div>
+
+        </div>
+
+        <div  class="box-text">
+
+            <div class="text-flow"  data-ng-if="nxt.text" marked="nxt.text"></div>
+
+            <div data-ng-if="nxt.next" class="box-bottom">
+                <div data-ng-click="over.next=next"
+                     data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
+                     class="box-preview" data-ng-repeat="next in nxt.next">
+                    {{next.letter}}</div>
+            </div>
+        </div>
+    </div>
+</div>
