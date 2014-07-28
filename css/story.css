@@ -50,7 +50,7 @@ li:before {
     font-size: 16px;
 }
 #first{
-    background:#444;
+    background:#f8f8f8;
 }
 #test{
     display: none;
@@ -324,7 +324,7 @@ li:before {
     padding:4px;
 }
 .box-roll {
-    background:#444;
+    background:#fff;
     width: 100%;
     border-left: solid 6px;
     border-right:solid 6px;
@@ -338,7 +338,8 @@ li:before {
     top:0;
     left:0;
     background-attachment: fixed;
-    opacity: 0.2;
+    opacity: 0.05;
+    box-shadow:
 }
 
 .box-holder{
@@ -362,9 +363,11 @@ li:before {
 }
 .box-wider {
     transition:all 200ms linear;
-    box-shadow:0px 12px 24px rgba(0, 0, 30, 0.3);
+    box-shadow:0px 2px 12px rgba(0, 0, 30, 0.2);
+    transform:translateY(-1px);
     z-index: 12000;
 }
+
 
 .box-wider > .box-text {
     flex: 1 1 100%;
@@ -428,10 +431,13 @@ li:before {
 .box:hover{
     background-color:#fff;
     -webkit-filter: grayscale(0%);
+    box-shadow:0px 2px 12px rgba(0, 0, 30, 0.2);
+    transform:translateY(-1px);
 }
 .second-card {
     z-index:1000;
     position:absolute;
+    transition:all 200ms linear;
     top:20px;
     left:5px;
     width:95%;
