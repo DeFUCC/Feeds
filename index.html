@@ -13,7 +13,7 @@
     <script type="application/javascript" src="js/marked.js"></script>
     <script type="application/javascript" src="js/angular-marked.js"></script>
     <script type="application/javascript" src="js/prefixfree.min.js"></script>
-
+    <script type="application/javascript" src="js/ngStorage.js"></script>
     <script type="application/javascript" src="js/story-app.js"></script>
     <script type="application/javascript" src="js/discourse.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
@@ -28,7 +28,7 @@
 <body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 
-    <input placeholder="Представься" data-ng-model="mtd.persona" data-ng-change="mtd.savePersona()">
+    <input placeholder="Представься" data-ng-model="mtd.persona">
 </section>
 
 <section data-ng-if="contents" id="contents">

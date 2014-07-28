@@ -1,32 +1,36 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky', 'ngStorage']);
 var controllers = {};
 fruitStory.controller(controllers);
 
-controllers.story = function ($scope, Discourse) {
-    $scope.loadLocal = function (where, what) {
-        if (localStorage[where]) {
-            if (what) {what=JSON.parse(localStorage[where]);}
-            return JSON.parse(localStorage[where]);
-        } else return false;
+controllers.story = function ($scope, Discourse, $localStorage) {
 
-    };
-    $scope.saveLocal = function (where, what) {
-        localStorage[where] = JSON.stringify(what);
-    };
+    $scope.$storage=$localStorage.$default(
+        {
+            discourse:false,
+            ratingMode:{news:true,plus:true,zero:true,minus:false},
+            rating:{},
+            persona:'FRUKT'
+        }
+    );
 
-    $scope.story = Discourse.discourse ;
+
+    $scope.$storage.discourse=$scope.$storage.discourse || Discourse.discourse;
+    $scope.story = $scope.$storage.discourse;
     $scope.tree=convertStory($scope.story);
-    $scope.rating=$scope.loadLocal('rating') || {}  && $scope.saveLocal('rating', $scope.rating);
-    $scope.ratingMode=$scope.loadLocal('ratingMode') || {news:true,plus:true,zero:true,minus:false} && $scope.saveLocal('ratingMode', $scope.ratingMode);
+    $scope.rating= $scope.$storage.rating;
+    $scope.ratingMode=$scope.$storage.ratingMode;
+    $scope.persona=$scope.$storage.persona;
 
     $scope.reset = function () {
-        $scope.story =Discourse.story;
+        $scope.story =Discourse.discourse;
         $scope.tree=convertStory($scope.story);
         $scope.rating={};
         $scope.ratingMode={news:true,plus:true,zero:true,minus:false};
+        localStorage.clear();
+        console.log('what');
     };
 
     $scope.phrase = {letters:''};
@@ -66,10 +70,8 @@ controllers.story = function ($scope, Discourse) {
     };
 
 
-    $scope.mtd.persona=$scope.loadLocal('persona') || '';
-    $scope.mtd.savePersona = function () {
-        $scope.saveLocal('persona',this.persona);
-    };
+    $scope.mtd.persona=$scope.persona;
+
 
     $scope.mtd.rate={};
     $scope.mtd.rate.rating = $scope.rating;
@@ -77,19 +79,16 @@ controllers.story = function ($scope, Discourse) {
         if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].pluses++;
-        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.minus=function (letters) {
         if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].minuses++;
-        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.zero=function (letters) {
         if (angular.isObject(letters)) {letters=letters.letters;}
         $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
         $scope.rating[letters].zeros++;
-        $scope.saveLocal('rating', $scope.rating);
     };
     $scope.mtd.rate.getPluses=function (letters) {
         if ($scope.rating[letters] && $scope.rating[letters].pluses>$scope.rating[letters].minuses) {
@@ -112,7 +111,7 @@ controllers.story = function ($scope, Discourse) {
     };
     $scope.mtd.rate.ratingSort = function (phrase) {
         if($scope.rating[phrase.letters]) {
-            return (-$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses)*$scope.rating[phrase.letters].zeros;
+            return (-$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses);
         };
         return 0;
     };
@@ -142,7 +141,6 @@ controllers.story = function ($scope, Discourse) {
         } else {
             $scope.ratingMode.zero=!$scope.ratingMode.zero
         }
-        $scope.saveLocal('ratingMode', $scope.ratingMode);
     };
     $scope.ratingFilter = function (phrase) {
         var result=true;
