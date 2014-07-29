@@ -12,7 +12,7 @@ controllers.story = function ($scope, Discourse, $localStorage) {
             discourse:false,
             ratingMode:{news:true,plus:true,zero:true,minus:false},
             rating:{},
-            persona:'FRUKT'
+            persona:''
         }
     );
 
@@ -112,6 +112,12 @@ controllers.story = function ($scope, Discourse, $localStorage) {
     $scope.mtd.rate.ratingSort = function (phrase) {
         if($scope.rating[phrase.letters]) {
             return (-$scope.rating[phrase.letters].pluses+$scope.rating[phrase.letters].minuses);
+        };
+        return 0;
+    };
+    $scope.mtd.rate.seenSort = function (phrase) {
+        if($scope.rating[phrase.letters]) {
+            return ($scope.rating[phrase.letters].zeros);
         };
         return 0;
     };
