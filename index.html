@@ -5,19 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-    <script src="js/angular.min.js"></script>
-  <!--  <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
-    <script src="https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js"></script>
-   -->
-    <script type="application/javascript" src="js/marked.js"></script>
-    <script type="application/javascript" src="js/angular-marked.js"></script>
-    <script type="application/javascript" src="js/prefixfree.min.js"></script>
-    <script type="application/javascript" src="js/ngStorage.js"></script>
-    <script type="application/javascript" src="js/story-app.js"></script>
+    <script src="js/side/angular.min.js"></script>
+    <!--  <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+      <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
+      <script src="https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js"></script>
+     -->
+    <script type="application/javascript" src="js/side/marked.js"></script>
+    <script type="application/javascript" src="js/side/angular-marked.js"></script>
+    <script type="application/javascript" src="js/side/prefixfree.min.js"></script>
+    <script type="application/javascript" src="js/side/ngStorage.js"></script>
+    <script type="application/javascript" src="js/discourse-app.js"></script>
+    <script type="application/javascript" src="js/directives.js"></script>
     <script type="application/javascript" src="js/discourse.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
-    <script type="application/javascript" src="js/intense.min.js"></script>
+    <script type="application/javascript" src="js/side/intense.min.js"></script>
 
 
     <link href="css/story.css" rel="stylesheet">
@@ -25,7 +26,7 @@
     <link href="css/gridforms.css" rel="stylesheet">
 
 </head>
-<body data-ng-app="fruitStory" data-ng-controller="story" data-ng-cloak>
+<body data-ng-app="fruitStory" data-ng-controller="discourse" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 
     <input placeholder="Представься" data-ng-model="mtd.persona">
@@ -34,159 +35,26 @@
 <section data-ng-if="contents" id="contents">
     <contents class="contents" tree="tree" mtd="mtd"></contents>
 </section>
-<section id="filterSection">
-<menu sticky data-ng-show="mtd.persona"  id="filters">
-    <menu>
-        <input data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}" placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
-        <input placeholder="Поиск" id="search" type="text" data-ng-model="search">
-    </menu>
-    <menu>
-        <li class="tree" data-ng-click="source=tree" data-ng-class="{active:source==tree}">Дерево</li>
-        <li class="story" data-ng-click="source=story" data-ng-class="{active:source==story}">Лента</li>
-    </menu>
 
-    <menu>
-            <li data-ng-click="mtd.toggleRF('news')" class="news" data-ng-class="{active:ratingMode.news}">Новые <div class="indy">{{countNew()}}</div></li>
-            <li data-ng-click="mtd.toggleRF(1)" class="plus" data-ng-class="{active:ratingMode.plus}">+<div class="indy">{{mtd.rate.totalRated(1)}}</div></li>
-            <li data-ng-click="mtd.toggleRF(0)" class="zero" data-ng-class="{active:ratingMode.zero}">&bull; <div class="indy">{{mtd.rate.totalRated(0)}}</div></li>
-            <li data-ng-click="mtd.toggleRF(-1)" class="minus" data-ng-class="{active:ratingMode.minus}">- <div class="indy">{{mtd.rate.totalRated(-1)}}</div></li>
-            <li data-ng-click="reset()" class="reset">Сброс</li>
+<section id="filterSection">
+
+    <menu sticky filters data-ng-show="mtd.persona" id="filters">
+
     </menu>
-</menu>
 </section>
+
 <section id="first">
 
-    <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected" class="container"></cards>
+    <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected"
+           class="container"></cards>
 
 </section>
+
 <section data-ng-if="mtd.persona" id="add">
 
-    <div class="preview-box">
+    <div previewbox></div>
 
-
-        <div class="card"
-             data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}">
-
-        <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
-        <div class="box" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
-
-
-            <div data-ng-click=" nxt=''"
-                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
-                 data-ng-class="{fuller:!phrase.text}"
-                 class="box-head">
-
-                <div data-ng-if="mtd.persona"
-                     letters
-                     class="letters shadow" mtd="mtd" letter="phrase.letters"
-                     class="box-top"> </div>
-
-                <div data-ng-if="mtd.persona" class="box-rate">
-                    <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
-                    <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
-                    <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
-                </div>
-
-                <div class="box-icon"
-                     data-ng-if="phrase.icon"
-                     data-ng-click="imgClick()"
-                        >
-                    <img class="intense"
-                         data-image="{{phrase.icon}}"
-                         data-title="{{phrase.head}}"
-                         data-caption="{{phrase.text}}"
-                         data-ng-src="{{phrase.icon}}">
-                </div>
-
-
-                <div class="box-heading"
-                     data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
-                     data-ng-if="phrase.head">
-                    <h3>
-                        {{phrase.head}}
-                    </h3>
-                </div>
-
-
-
-            </div>
-
-
-
-            <div  class="box-text" data-ng-if="phrase.text || phrase.next">
-
-                <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
-                    <img data-ng-src="{{phrase.img}}">
-                </div>
-
-                <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
-
-                <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
-                    <div data-ng-click="$parent.$parent.$parent.nxt=next"
-                         data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
-                         class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
-                        {{next.letter}}
-                    </div>
-                </div>
-
-            </div>
-            <div data-ng-if="phrase.next" data-ng-show="$parent.selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
-                <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
-                <div class="roll-back" data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters)}"></div>
-                <cards search="search" rf="rf" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container"></cards>
-
-            </div>
-
-        </div>
-
-    </div>
-    </div>
-
-    <div  class="add-form">
-        <form class="grid-form">
-
-            <fieldset>
-                <legend>Добавить высказывание: </legend>
-
-                <div data-row-span="1">
-                    <div data-field-span="1">
-                        <label>Набор букв</label>
-                        <input  data-ng-model="phrase.letters"
-                                data-ng-model-instant
-                                pattern="[ABCEHKMOPTXY]*|*"
-                                type="text"
-                                placeholder="A|B|C|E|H|K|M|O|P|T|X|Y">
-                    </div>
-                </div>
-
-                <div data-row-span="1">
-                    <div data-field-span="1">
-                        <label>Название</label>
-                        <input  data-ng-model="phrase.head"
-                                data-ng-model-instant type="text">
-                    </div>
-                </div>
-                <div data-row-span="1">
-                    <div data-field-span="1">
-                        <label>URL картинки</label>
-                        <input data-ng-model="phrase.img"
-                               data-ng-model-instant type="text">
-                    </div>
-                </div>
-                <div data-row-span="1">
-                    <div data-field-span="1">
-                        <label>Текст (с разметкой <b><a href="http://ru.wikipedia.org/wiki/Markdown" target="_blank" title="markdown">MARKDOWN</a></b>)</label>
-                        <textarea class="texter" data-ng-model="phrase.text"
-                                  data-ng-model-instant></textarea>
-                    </div>
-                </div>
-            </fieldset>
-            <button class="say-button"
-                    data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters))}"
-                    data-ng-click="mtd.updateStory(phrase)">+</button>
-        </form>
-    </div>
-
+    <div addform phrase="phrase" mtd="mtd"></div>
 
 
 </section>
@@ -194,26 +62,6 @@
 <section id="test">
     <textarea class="output" data-ng-model="JSON"></textarea>
 </section>
-
-<script type="text/ng-template" id="content.html">
-    <div class="inner-content"
-         data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}"
-         data-ng-repeat="branch in next"><div class="letter">{{branch.letter}}</div><content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content></div>
-</script>
-
-<script type="text/ng-template" id="contents.html">
-    <div class="content"
-         data-ng-repeat="branch in tree"
-         data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}">
-        <div class="letter">{{branch.letters}}</div>
-
-            <content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content>
-
-    </div>
-</script>
-
-
-
 
 
 </body>

@@ -5,7 +5,7 @@ var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky', 'ngStorage'
 var controllers = {};
 fruitStory.controller(controllers);
 
-controllers.story = function ($scope, Discourse, $localStorage) {
+controllers.discourse = function ($scope, Discourse, $localStorage) {
 
     $scope.$storage=$localStorage.$default(
         {
@@ -33,7 +33,6 @@ controllers.story = function ($scope, Discourse, $localStorage) {
         console.log('what');
     };
 
-    $scope.phrase = {letters:''};
 
 
 
@@ -291,138 +290,7 @@ function convertLetters (letters) {
     return letters;
 }
 
-fruitStory.directive("contents", function($compile) {
-    return {
-        restrict: "E",
-        templateUrl: 'contents.html',
-        scope: {
-            tree: '=',
-            mtd:'='
-        }
-    };
-});
 
-fruitStory.directive("content", function($compile) {
-    return {
-        restrict: "E",
-        templateUrl: 'content.html',
-        scope: {
-            next: '=',
-            mtd:'='
-        },
-        compile: function(tElement, tAttr) {
-            var contents = tElement.contents().remove();
-            var compiledContents;
-            return function(scope, iElement, iAttr) {
-                if(!compiledContents) {
-                    compiledContents = $compile(contents);
-                }
-                compiledContents(scope, function(clone, scope) {
-                    iElement.append(clone);
-                });
-            };
-        }
-    };
-});
-
-fruitStory.directive("letters", function() {
-    return {
-        restrict: "A",
-        templateUrl: 'partials/letters.html',
-        scope: {
-            letter: '=',
-            mtd:'='
-        },
-        controller: function ($scope) {
-            if ($scope.letter) {
-            $scope.lttrs=$scope.letter.split('|');
-            };
-
-        }
-    };
-});
-
-fruitStory.directive("plus", function() {
-    return {
-        restrict: "A",
-        templateUrl: 'partials/plus.html',
-        controller: function ($scope) {
-            if ($scope.letter) {
-                $scope.lttrs=$scope.letter.split('|');
-            };
-
-        }
-    };
-});
-
-fruitStory.directive("card", function($compile) {
-    return {
-        restrict: "E",
-        templateUrl: 'partials/card.html',
-        scope: {
-            nxt: '=',
-            mtd: '=',
-            close: '&'
-        },
-        controller: function ($scope){
-            $scope.over={};
-            $scope.selected=false;
-        },
-        compile: function(tElement, tAttr) {
-            var contents = tElement.contents().remove();
-            var compiledContents;
-            return function(scope, iElement, iAttr) {
-                if(!compiledContents) {
-                    compiledContents = $compile(contents);
-                }
-                compiledContents(scope, function(clone, scope) {
-                    iElement.append(clone);
-                });
-            };
-        }
-    };
-});
-
-fruitStory.directive("cards", function($compile) {
-    return {
-        restrict: "E",
-        templateUrl: 'partials/cards.html',
-        scope: {
-            next: '=',
-            mtd: '=',
-            selected: '=',
-            fltr:'=',
-            rf:'=', //for rating filtering
-            search:'='
-        },
-        controller: function ($scope){
-            $scope.over={};
-            $scope.selected=false;
-            $scope.pluses=0;
-            $scope.minuses=0;
-            $scope.zeros=0;
-            $scope.imgClick=function () {
-
-                // Intensify all images with the 'intense' classname.
-                var elements = document.querySelectorAll( '.intense' );
-                Intense( elements );
-                $scope.imgClick=function(){};
-            };
-        },
-        compile: function(tElement, tAttr) {
-            var contents = tElement.contents().remove();
-            var compiledContents;
-            return function(scope, iElement, iAttr) {
-                if(!compiledContents) {
-                    compiledContents = $compile(contents);
-                }
-                compiledContents(scope, function(clone, scope) {
-                    iElement.append(clone);
-                });
-            };
-        }
-    };
-});
 
 fruitStory.filter('objectAsArray', function() {
     return function(object) {

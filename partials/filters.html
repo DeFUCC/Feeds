@@ -1,0 +1,16 @@
+<menu>
+    <input data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}" placeholder="Буква" id="filter" type="text" data-ng-model="fltr">
+    <input placeholder="Поиск" id="search" type="text" data-ng-model="search">
+</menu>
+<menu>
+    <li class="tree" data-ng-click="source=tree" data-ng-class="{active:source==tree}">Дерево</li>
+    <li class="story" data-ng-click="source=story" data-ng-class="{active:source==story}">Лента</li>
+</menu>
+
+<menu>
+    <li data-ng-click="mtd.toggleRF('news')" class="news" data-ng-class="{active:ratingMode.news}">Новые <div class="indy">{{countNew()}}</div></li>
+    <li data-ng-click="mtd.toggleRF(1)" class="plus" data-ng-class="{active:ratingMode.plus}">+<div class="indy">{{mtd.rate.totalRated(1)}}</div></li>
+    <li data-ng-click="mtd.toggleRF(0)" class="zero" data-ng-class="{active:ratingMode.zero}">&bull; <div class="indy">{{mtd.rate.totalRated(0)}}</div></li>
+    <li data-ng-click="mtd.toggleRF(-1)" class="minus" data-ng-class="{active:ratingMode.minus}">- <div class="indy">{{mtd.rate.totalRated(-1)}}</div></li>
+    <li data-ng-click="reset()" class="reset">Сброс</li>
+</menu>

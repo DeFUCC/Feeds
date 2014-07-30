@@ -1,0 +1,3 @@
+<div class="inner-content"
+     data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}"
+     data-ng-repeat="branch in next"><div class="letter">{{branch.letter}}</div><content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content></div>

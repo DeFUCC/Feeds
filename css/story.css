@@ -357,8 +357,8 @@ li:before {
 .box-holder{
     flex-grow:1;
     flex-shrink:1;
-    flex-basis: auto;
-    width: min-content;
+    flex-basis: 220px;
+    min-width:220px;
     position:relative;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
@@ -380,7 +380,7 @@ li:before {
     align-items:stretch;
     transition:all 200ms linear;
     transform:translateY(-1px);
-    z-index: 12000;
+    z-index: 120;
     margin: 28px 10px;
 }
 
@@ -440,12 +440,12 @@ li:before {
     align-items:stretch;
     padding:0;
     margin: 4px;
-    background-color:#eee;
     position:relative;
     transition:all 100ms linear;
-
+    background-color: #eee;
     -webkit-filter: grayscale(80%);
 }
+
 .selected{
     background-color:#fff;
     box-shadow:0px 8px 12px rgba(0, 0, 30, 0.3);
@@ -520,9 +520,19 @@ li:before {
 }
 
 .box-icon {
-    flex:1 1 100px;
-    max-width: 120px;
+    flex:1 1 20px;
+    max-width: 80px;
 
+}
+.box-icon img {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.icon-small {
+    max-width: 18px;
+    max-height: 18px;
+    stroke:#fff;
 }
 .intense {
     cursor: url("../img/plus_cursor.png") 25 25, auto;
@@ -672,13 +682,57 @@ li:before {
     justify-content:flex-start;
     align-content:stretch;
 }
+
+.plus-card {
+    z-index: 100;
+    min-width: 80px;
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis: 80px;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:flex-start;
+    align-content:stretch;
+    align-items:stretch;
+    padding:0;
+    margin: 4px;
+    position:relative;
+    transition:all 100ms linear;
+
+    -webkit-filter: grayscale(80%);
+}
+
+.box-plus {
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis: 80px;
+    min-width:80px;
+    position:relative;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:stretch;
+    align-items:stretch;
+    cursor: pointer;
+}
+
+.box-plus polygon {
+    fill:#fff;
+    opacity:0.4;
+    transition:all 200ms linear;
+}
+.box-plus:hover polygon {
+    fill:#000;
+    opacity: 0.2;
+}
 .box-preview{
     word-wrap: normal;
     cursor:pointer;
     flex:1 1 8px;
     float:right;
-    min-width:14px;
-    padding:6px;
+    min-width:18px;
+    min-height:18px;
+    padding:4px;
     font-size:12px;
     font-weight: bold;
     color:#fff;

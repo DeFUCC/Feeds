@@ -4,21 +4,21 @@
 
     <card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></card>
 
-    <div class="card" data-ng-class="{'lower':nxt}">
+    <div class="card"  data-ng-class="{'lower':nxt}">
 
         <div data-ng-click=" nxt=''"
              data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
              data-ng-class="{'fuller':!phrase.text}"
              class="box-head">
 
-            <div class="box-bar">
+            <div  data-ng-if="mtd.persona" class="box-bar">
 
-                <div data-ng-if="mtd.persona"
+                <div
                      letters
                      class="letters shadow" mtd="mtd" letter="phrase.letters"
                      class="box-top"> </div>
 
-                <div data-ng-if="mtd.persona" class="box-rate">
+                <div  class="box-rate">
                     <div class="plus" data-ng-class="{'active':mtd.rate.getPluses(phrase.letters)}" data-ng-click="mtd.rate.plus(phrase)">+{{mtd.rate.getPluses(phrase.letters)}}</div>
                     <div class="zero" data-ng-class="{'active':mtd.rate.getZeros(phrase.letters)}" data-ng-click="mtd.rate.zero(phrase)">{{mtd.rate.getZeros(phrase.letters) || '&bull;'}}</div>
                     <div class="minus" data-ng-class="{'active':mtd.rate.getMinuses(phrase.letters)}" data-ng-click="mtd.rate.minus(phrase)">-{{mtd.rate.getMinuses(phrase.letters)}}</div>
@@ -60,11 +60,14 @@
 
             <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
+
+
             <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
                 <div data-ng-click="$parent.$parent.$parent.nxt=next"
                      data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
                      class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
-                    {{next.letter}}
+                   <img class="icon-small" data-ng-src="{{next.icon}}">
+                    <span data-ng-if="mtd.persona">{{next.letter}}</span>
                 </div>
             </div>
 
@@ -76,7 +79,10 @@
 
         </div>
 
+        <div data-ng-show="$parent.selected==phrase.letters" data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="box-plus" data-ng-if="mtd.persona && !phrase.next" plus></div>
+
+
     </div>
 
 </div>
-<div data-ng-if="mtd.persona" plus></div>
+<div class="box-plus" data-ng-if="mtd.persona" plus></div>

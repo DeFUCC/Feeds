@@ -33,9 +33,11 @@
 
             <div data-ng-if="nxt.next" class="box-bottom">
                 <div data-ng-click="over.next=next"
-                     data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length}"
+                     data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:size(nxt.next)}"
                      class="box-preview" data-ng-repeat="next in nxt.next">
-                    {{next.letter}}</div>
+                    <img class="icon-small" data-ng-src="{{next.icon}}">
+                    <span data-ng-if="mtd.persona">{{next.letter}}</span>
+                </div>
             </div>
         </div>
     </div>
