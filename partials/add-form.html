@@ -1,4 +1,4 @@
-<form class="grid-form">
+<form class="grid-form flex-form">
 
     <fieldset>
         <legend>Добавить высказывание: </legend>
@@ -6,7 +6,13 @@
         <div data-row-span="1">
             <div data-field-span="1">
                 <label>Набор букв</label>
-                <input  data-ng-model="phrase.letters"
+                <div letters
+                     letter="address"
+                     mtd="mtd"
+                     class="letters lefter"></div>
+
+                <input  class="righter"
+                        data-ng-model="letter"
                         data-ng-model-instant
                         pattern="[ABCEHKMOPTXY]*|*"
                         type="text"
@@ -36,7 +42,9 @@
             </div>
         </div>
     </fieldset>
-    <button class="say-button"
-            data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(phrase.letters))}"
+    <button class="form-button add"
+            data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
             data-ng-click="mtd.updateStory(phrase)">+</button>
+    <button class="form-button cancel"
+            data-ng-click="close()">&times;</button>
 </form>

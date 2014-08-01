@@ -306,18 +306,46 @@ li:before {
     flex:1 1 50%;
     min-width: 300px;
 }
-.say-button {
+.lefter {
+    float:left;
+    margin: 0 10px;
+
+}
+.righter {
+    width:auto !important;
+}
+.flex-form {
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:stretch;
+    align-items:stretch;
+}
+.flex-form fieldset {
+    flex:1 1 100%;
+}
+.form-button {
+    flex:1 1 30%;
     font-size: 1.5em;
-    width: 100%;
+    width: 48%;
+    float:left;
     text-align: center;
     margin: 5px;
     padding: 10px;
-    color:#ccc;
-    text-shadow:1px 1px 0px #ffffff;
+    color:#fff;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.6;
     border: none;
+    transition:all 200ms linear;
+}
+.form-button:hover {
+    opacity: 1;
+    transform:translateY(-1px);
+    box-shadow:1px 1px 1px rgba(0, 0, 30, 0.6);
+}
+.cancel {
+    background-color:#bb0000;
 }
 .say-button:hover {
     opacity: 1;
@@ -333,7 +361,7 @@ li:before {
     justify-content:center;
     padding:4px;
 }
-.box-roll {
+.box-add {
     background:#fff;
     width: 100%;
     border-left: solid 6px;
@@ -349,7 +377,7 @@ li:before {
     left:0;
     background-attachment: fixed;
     opacity: 0.05;
-    box-shadow:
+    z-index: 0;
 }
 
 .card-holder {}
@@ -460,7 +488,7 @@ li:before {
     box-shadow:0px 2px 12px rgba(0, 0, 30, 0.2);
     transform:translateY(-1px);
 }
-.second-card {
+.over-card {
     z-index:1000;
     position:absolute;
     transition:all 200ms linear;
@@ -469,7 +497,7 @@ li:before {
     width:95%;
     margin:0;
 }
-.second-card .box {
+.over-card .box {
     box-shadow:0px 4px 8px 4px rgba(0, 0, 0, 0.3);
 }
 .sel {

@@ -33,31 +33,35 @@
 </section>
 
 <section data-ng-if="contents" id="contents">
-    <contents class="contents" tree="tree" mtd="mtd"></contents>
+    <contents
+            class="contents"
+            tree="tree"
+            mtd="mtd"></contents>
 </section>
 
 <section id="filterSection">
 
-    <menu sticky filters data-ng-show="mtd.persona" id="filters">
+    <menu sticky
+          filters
+          data-ng-show="mtd.persona"
+          id="filters">
 
     </menu>
 </section>
 
 <section id="first">
 
-    <cards search="search" rf="ratingFilter" fltr="fltr" mtd="mtd" next="source" selected="selected"
-           class="container"></cards>
+    <div cards
+         search="search"
+         rf="ratingFilter"
+         fltr="fltr"
+         mtd="mtd"
+         next="source"
+         selected="selected"
+         class="container"></div>
 
 </section>
 
-<section data-ng-if="mtd.persona" id="add">
-
-    <div previewbox></div>
-
-    <div addform phrase="phrase" mtd="mtd"></div>
-
-
-</section>
 
 <section id="test">
     <textarea class="output" data-ng-model="JSON"></textarea>

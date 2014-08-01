@@ -52,11 +52,12 @@ controllers.discourse = function ($scope, Discourse, $localStorage) {
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
         var said = angular.copy(saying);
-        saying={};
+        saying='';
         said.letters=convertLetters(said.letters);
         $scope.story.push(said);
         $scope.JSON=JSON.stringify($scope.story, '',4);
         $scope.tree=convertStory($scope.story);
+        $scope.source=$scope.tree;
     };
     $scope.mtd.select = function (letters, select) {
         if (letters==select) {
@@ -218,7 +219,7 @@ function parents (lttrs) {
 
 
 
-function colorize (lttrs) {
+function colorize (lttrs,opacity) {
     if (lttrs) {
     var hue, sat, light, alpha, step, numOfSteps;
     var hsla = function (hue,sat,light,alpha) {
@@ -244,6 +245,7 @@ function colorize (lttrs) {
         step=preset(1).indexOf(residue.shift().toUpperCase());
         alpha=0.3+0.7*(12-step)/12;
     }
+    if (opacity && opacity>=0 && opacity<=1) {alpha=opacity}
     return hsla(hue,sat,light,alpha);
 
     } else return 'hsla(0,0%,50%,0.5)';
@@ -272,7 +274,7 @@ function preset (bit){
 function convertLetters (letters) {
     if (!letters) {return ''}
     letters=letters.toUpperCase();
-    letters=letters.replace(/[\s.,//]/g,'|');
+    letters=letters.replace(/[\s.:;,//]/g,'|');
     letters=letters.replace(/[^ABCEHKMOPTXYАВЕКМНОРСТУХ|]*/g,'');
     letters=letters.replace('А','A');
     letters=letters.replace('В','B');
@@ -286,7 +288,6 @@ function convertLetters (letters) {
     letters=letters.replace('Т','T');
     letters=letters.replace('Х','X');
     letters=letters.replace('У','Y');
-
     return letters;
 }
 

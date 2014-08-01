@@ -1,3 +1,20 @@
+fruitStory.directive("rate", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/rate.html',
+        scope: {
+            letters:'=letter',
+            mtd:'='
+        },
+        controller: function ($scope) {
+
+
+        }
+    };
+});
+
+
+
 fruitStory.directive("contents", function($compile) {
     return {
         restrict: "E",
@@ -49,9 +66,14 @@ fruitStory.directive("letters", function() {
             mtd:'='
         },
         controller: function ($scope) {
-            if ($scope.letter) {
-                $scope.lttrs=$scope.letter.split('|');
-            };
+
+            $scope.$watch('letter',function (letter) {
+                if (angular.isString(letter)) {
+                $scope.letter=$scope.mtd.convertLetters(letter);
+                $scope.lttrs=$scope.letter.split('|') || '';
+                }
+            });
+
 
         }
     };
@@ -70,25 +92,53 @@ fruitStory.directive("plus", function() {
     };
 });
 
-fruitStory.directive("addform", function() {
+fruitStory.directive("previewBox", function() {
     return {
         restrict: "A",
-        templateUrl: 'partials/addform.html',
+        templateUrl: 'partials/preview-box.html',
         scope: {
-            phrase: '=',
-            mtd: '='
+            phrase:'=',
+            mtd:'='
         },
         controller: function ($scope) {
-            $scope.phrase = $scope.phrase || {letters:''};
+
 
         }
     };
 });
 
-fruitStory.directive("card", function($compile) {
+
+
+fruitStory.directive("addForm", function() {
     return {
-        restrict: "E",
-        templateUrl: 'partials/card.html',
+        restrict: "A",
+        templateUrl: 'partials/add-form.html',
+        scope: {
+            phrase: '=',
+            mtd: '=',
+            address: '=',
+            close: '&'
+        },
+        controller: function ($scope) {
+            $scope.phrase = $scope.phrase || {letters:''};
+            $scope.$watch('letter', function (letter) {
+                if (angular.isString(letter)) {
+                    $scope.letter=$scope.mtd.convertLetters(letter);
+                    if ($scope.address) {
+                        $scope.phrase.letters=$scope.address + '|';
+                    } else {$scope.phrase.letters=''}
+                    $scope.phrase.letters+=$scope.letter;
+                }
+            });
+
+        }
+    };
+});
+
+fruitStory.directive("overCard", function($compile) {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/over-card.html',
         scope: {
             nxt: '=',
             mtd: '=',
@@ -123,9 +173,26 @@ fruitStory.directive("card", function($compile) {
     };
 });
 
+fruitStory.directive("card", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/card.html',
+        scope: {
+            phrase:'=',
+            mtd:'=',
+            selected:'=',
+            nxt:'='
+        },
+        controller: function ($scope) {
+
+
+        }
+    };
+});
+
 fruitStory.directive("cards", function($compile) {
     return {
-        restrict: "E",
+        restrict: "AE",
         templateUrl: 'partials/cards.html',
         scope: {
             next: '=',
@@ -133,7 +200,8 @@ fruitStory.directive("cards", function($compile) {
             selected: '=',
             fltr:'=',
             rf:'=', //for rating filtering
-            search:'='
+            search:'=',
+            addr:'=' //higher letters for adding new in place
         },
         controller: function ($scope){
             $scope.over={};

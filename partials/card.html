@@ -1,44 +1,105 @@
-<div class="second-card" >
-    <card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></card>
-    <div data-ng-if="nxt" class="card" data-ng-class="{'sel':selected, 'lower':over.next}">
 
 
-        <div data-ng-click="close();over.next='';selected=!selected"
-             data-ng-style="{backgroundColor:mtd.colorize(nxt.letters), backgroundImage:'url('+nxt.img+')'}"
-             class="box-head">
 
-            <div data-ng-if="mtd.persona"
-                 letters
-                 class="letters shadow"
+
+    <div data-ng-click=" nxt=''"
+         data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+         data-ng-class="{'fuller':!phrase.text}"
+         class="box-head">
+
+        <div  data-ng-if="mtd.persona" class="box-bar">
+
+            <div
+                    letters
+                    class="letters box-top shadow"
+                    mtd="mtd"
+                    letter="phrase.letters"> </div>
+
+            <div rate  class="box-rate"
                  mtd="mtd"
-                 letter="nxt.letters"
-                 data-ng-click="over.next='';selected=!selected"
-                 class="box-top"></div>
-
-
-
-
-            <div class="box-heading"
-                 data-ng-if="nxt.head">
-                <h3>
-                    {{nxt.head}}
-                </h3>
+                 letter="phrase.letters">
             </div>
+
+
 
         </div>
 
-        <div  class="box-text">
-
-            <div class="text-flow"  data-ng-if="nxt.text" marked="nxt.text"></div>
-
-            <div data-ng-if="nxt.next" class="box-bottom">
-                <div data-ng-click="over.next=next"
-                     data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:size(nxt.next)}"
-                     class="box-preview" data-ng-repeat="next in nxt.next">
-                    <img class="icon-small" data-ng-src="{{next.icon}}">
-                    <span data-ng-if="mtd.persona">{{next.letter}}</span>
-                </div>
-            </div>
+        <div class="box-icon"
+             data-ng-if="phrase.icon"
+             data-ng-click="imgClick()"
+                >
+            <img class="intense"
+                 data-image="{{phrase.icon}}"
+                 data-title="{{phrase.head}}"
+                 data-caption="{{phrase.text}}"
+                 data-ng-src="{{phrase.icon}}">
         </div>
+
+
+        <div class="box-heading"
+             data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
+             data-ng-if="phrase.head">
+            <h3>
+                {{phrase.head}}
+            </h3>
+        </div>
+
+
+
     </div>
-</div>
+
+
+
+    <div  class="box-text" data-ng-if="phrase.text || phrase.next">
+
+        <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+            <img data-ng-src="{{phrase.img}}">
+        </div>
+
+        <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
+
+
+
+        <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
+            <div data-ng-click="$parent.$parent.$parent.nxt=next"
+                 data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
+                 class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
+                <img class="icon-small" data-ng-src="{{next.icon}}">
+                <span data-ng-if="mtd.persona">{{next.letter}}</span>
+            </div>
+        </div>
+
+    </div>
+    <div data-ng-if="phrase.next || mtd.persona" data-ng-show="$parent.selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
+
+
+        <div cards
+             search="search"
+             rf="rf"
+             fltr="fltr"
+             mtd="mtd"
+             next="phrase.next"
+             selected="sel"
+             class="container"
+             addr="phrase.letters"
+             data-ng-style="{borderColor:mtd.colorize(phrase.letter),backgroundColor:mtd.colorize(phrase.letters,0.05)}">
+
+        </div>
+
+    </div>
+
+    <!--   <div plus
+            data-ng-show="$parent.selected==phrase.letters"
+            data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+            class="box-plus"
+            data-ng-if="mtd.persona && !phrase.next"
+            data-ng-click="phrase.next={add:{letters:phrase.letters}}"></div>
+
+       <div add-form
+            data-ng-if="mtd.persona && phrase.next.add && !address"
+            phrase="phrase.next.add"
+            addr="phrase.letters"
+            mtd="mtd"></div>
+
+-->
+

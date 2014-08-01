@@ -1,0 +1,68 @@
+<div class="preview-box">
+
+
+    <div class=""
+         data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wide':selected==phrase.letters}">
+
+
+        <div class="box card" data-ng-class="{'box-wider':selected==phrase.letters, lower:nxt}" >
+
+
+            <div data-ng-click=" nxt=''"
+                 data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+                 data-ng-class="{fuller:!phrase.text}"
+                 class="box-head">
+
+                <div
+                     letters
+                     class="letters box-top shadow"
+                     mtd="mtd"
+                     letter="phrase.letters">
+
+                     </div>
+
+
+
+                <div class="box-icon"
+                     data-ng-if="phrase.icon"
+                     data-ng-click="imgClick()"
+                        >
+                    <img class="intense"
+                         data-image="{{phrase.icon}}"
+                         data-title="{{phrase.head}}"
+                         data-caption="{{phrase.text}}"
+                         data-ng-src="{{phrase.icon}}">
+                </div>
+
+
+                <div class="box-heading"
+                     data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
+                     data-ng-if="phrase.head">
+                    <h3>
+                        {{phrase.head}}
+                    </h3>
+                </div>
+
+
+
+            </div>
+
+
+
+            <div  class="box-text" data-ng-if="phrase.text || phrase.next">
+
+                <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+                    <img data-ng-src="{{phrase.img}}">
+                </div>
+
+                <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
