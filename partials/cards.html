@@ -1,0 +1,32 @@
+<div class="card-holder"
+     data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wider':selected==phrase.letters}"
+     data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search | orderBy:[mtd.rate.ratingSort, mtd.rate.seenSort]">
+
+    <div over-card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></div>
+
+    <div card
+         mtd="mtd"
+         phrase="phrase"
+         selected="selected"
+         class="card"
+         nxt="nxt"
+         data-ng-class="{'lower':nxt}"></div>
+
+</div>
+
+<div plus
+     class="box-plus"
+     data-ng-if="mtd.persona && !next"
+     data-ng-click="$parent.next={add:{letters:phrase.letters}}" ></div>
+
+<div plus
+     class="box-plus"
+     data-ng-if="mtd.persona && next && !next.new"
+     data-ng-click="next.new={letters:phrase.letters}" ></div>
+
+<div add-form
+     data-ng-if="mtd.persona && next.new"
+     phrase="next.new"
+     address="addr"
+     close="next.new=''"
+     mtd="mtd"></div>
