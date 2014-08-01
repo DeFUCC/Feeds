@@ -454,6 +454,16 @@ li:before {
     font-size: 180%;
 }
 
+.card-stack {
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis: auto;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:flex-start;
+    align-content:stretch;
+    align-items:stretch;
+}
 
 .card {
     z-index: 100;

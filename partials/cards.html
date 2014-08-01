@@ -2,15 +2,14 @@
      data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wider':selected==phrase.letters}"
      data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search | orderBy:[mtd.rate.ratingSort, mtd.rate.seenSort]">
 
-    <div over-card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></div>
+
 
     <div card
          mtd="mtd"
          phrase="phrase"
          selected="selected"
-         class="card"
-         nxt="nxt"
-         data-ng-class="{'lower':nxt}"></div>
+         class="card-stack"
+         nxt="nxt"></div>
 
 </div>
 
