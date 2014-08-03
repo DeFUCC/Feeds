@@ -680,7 +680,9 @@ li:before {
 .selected .box-head {
     opacity: 1;
 }
-
+.box-roll {
+    flex:1 1 auto;
+}
 
 .parent {
     flex:1 1 10px;
@@ -756,12 +758,12 @@ li:before {
 
 .box-plus polygon {
     fill:#fff;
-    opacity:0.4;
+    opacity:0.8;
     transition:all 200ms linear;
 }
 .box-plus:hover polygon {
     fill:#000;
-    opacity: 0.2;
+    opacity: 0.4;
 }
 .box-preview{
     word-wrap: normal;
