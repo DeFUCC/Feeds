@@ -9,32 +9,47 @@ controllers.discourse = function ($scope, Discourse, $localStorage) {
 
     $scope.$storage=$localStorage.$default(
         {
-            discourse:false,
+            discourse:Discourse.discourse,
             ratingMode:{news:true,plus:true,zero:true,minus:false},
             rating:{},
+            myFeed:[],
+            myRatingMode:{news:true,plus:true,zero:true,minus:false},
+            myRating:{},
             persona:''
         }
     );
 
+    $scope.code=0;
 
-    $scope.$storage.discourse=$scope.$storage.discourse || Discourse.discourse;
-    $scope.story = $scope.$storage.discourse;
-    $scope.tree=convertStory($scope.story);
+    $scope.myFeed=$scope.$storage.myFeed;
+
+    $scope.discourse=$scope.$storage.discourse;
+    $scope.feed = $scope.discourse;
+    $scope.tree=convertStory($scope.feed);
     $scope.rating= $scope.$storage.rating;
     $scope.ratingMode=$scope.$storage.ratingMode;
     $scope.persona=$scope.$storage.persona;
 
+    $scope.changeFeed = function (feed) {
+
+    };
+
     $scope.reset = function () {
-        $scope.story =Discourse.discourse;
-        $scope.tree=convertStory($scope.story);
+        localStorage.clear();
+        $scope.feed =Discourse.discourse;
+        $scope.tree=convertStory($scope.feed);
+        $scope.source=$scope.tree;
         $scope.rating={};
         $scope.ratingMode={news:true,plus:true,zero:true,minus:false};
-        localStorage.clear();
-        console.log('what');
+
     };
 
 
-
+    $scope.$watch('feed', function () {
+        $scope.tree=convertStory($scope.feed);
+        $scope.JSON=JSON.stringify($scope.feed, '',4);
+        $scope.source=$scope.tree;
+    });
 
 
     $scope.mtd = {}; //an object for universal methods
@@ -45,20 +60,28 @@ controllers.discourse = function ($scope, Discourse, $localStorage) {
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
     $scope.mtd.my=$scope.my;
-
+    $scope.mtd.loadFeed=function (json) {
+        if (json) {$scope.JSON=json}
+        $scope.feed=JSON.parse($scope.JSON);
+        console.log($scope.feed);
+        $scope.mtd.updateStory();
+    };
     $scope.source=$scope.tree;
-
-    $scope.JSON=JSON.stringify($scope.story, '',4);
     $scope.selected = 'B';
     $scope.mtd.updateStory = function (saying) {
-        var said = angular.copy(saying);
-        saying='';
-        said.letters=convertLetters(said.letters);
-        $scope.story.push(said);
-        $scope.JSON=JSON.stringify($scope.story, '',4);
-        $scope.tree=convertStory($scope.story);
+        var said;
+        if (saying) {
+            said = angular.copy(saying);
+            saying='';
+            said.letters=convertLetters(said.letters);
+            $scope.feed.push(said);
+        }
+
+        $scope.tree=convertStory($scope.feed);
         $scope.source=$scope.tree;
+        $scope.JSON=JSON.stringify($scope.feed, '',4);
     };
+
     $scope.mtd.select = function (letters, select) {
         if (letters==select) {
             select=false;
@@ -133,8 +156,8 @@ controllers.discourse = function ($scope, Discourse, $localStorage) {
     };
     $scope.countNew = function () {
         var total=0;
-        for (var i=0;i<$scope.story.length; i++) {
-            if (!$scope.rating[$scope.story[i].letters]) {total++}
+        for (var i=0;i<$scope.feed.length; i++) {
+            if (!$scope.rating[$scope.feed[i].letters]) {total++}
         }
         return total;
     };

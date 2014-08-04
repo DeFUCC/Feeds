@@ -29,7 +29,15 @@
 <body data-ng-app="fruitStory" data-ng-controller="discourse" data-ng-cloak>
 <section id="header"><h1>Фруктовый дискурс</h1>
 
-    <input placeholder="Представься" data-ng-model="mtd.persona">
+    <input placeholder="Представься"
+           data-ng-model="mtd.persona">
+    <div class="btn grey-text"
+         ng-class="{active:feed==discourse}"
+         ng-click="feed=discourse">Дискурс</div>
+    <div class="btn grey-text"
+         ng-class="{active:feed==myFeed}"
+         ng-click="feed=myFeed">Моя лента</div>
+    <input ng-model="tester.news">
 </section>
 
 <section data-ng-if="contents" id="contents">
@@ -63,8 +71,15 @@
 </section>
 
 
-<section id="test">
-    <textarea class="output" data-ng-model="JSON"></textarea>
+<section data-ng-if="mtd.persona" id="test">
+    <div class="btn"
+         ng-click="code=!code">Также можете посмотреть и скопировать, </div>
+    <div class="btn"
+         ng-click="mtd.loadFeed()"> вставить и загрузить. (это пока не работает, данные хранятся в браузере)</div>
+
+    <textarea ng-if="code"
+              class="output"
+              data-ng-model="JSON"></textarea>
 </section>
 
 
