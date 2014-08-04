@@ -756,12 +756,12 @@ li:before {
     cursor: pointer;
 }
 
-.box-plus polygon {
+.box-plus path {
     fill:#fff;
     opacity:0.8;
     transition:all 200ms linear;
 }
-.box-plus:hover polygon {
+.box-plus:hover path {
     fill:#000;
     opacity: 0.4;
 }
