@@ -5,33 +5,44 @@ var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky', 'ngStorage'
 var controllers = {};
 fruitStory.controller(controllers);
 
-controllers.discourse = function ($scope, Discourse, $localStorage) {
+controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
 
     $scope.$storage=$localStorage.$default(
         {
             discourse:Discourse.discourse,
-            ratingMode:{news:true,plus:true,zero:true,minus:false},
-            rating:{},
-            myFeed:[],
-            myRatingMode:{news:true,plus:true,zero:true,minus:false},
-            myRating:{},
+            discourseRatingMode:{news:true,plus:true,zero:true,minus:false},
+            discourseRating:{},
+            designs:Designs.designs,
+            designsRatingMode:{news:true,plus:true,zero:true,minus:false},
+            designsRating:{},
             persona:''
         }
     );
 
+    $scope.$watch('feed', function () {
+        $scope.tree=convertStory($scope.feed);
+        $scope.JSON=JSON.stringify($scope.feed, '',4);
+        $scope.source=$scope.tree;
+    });
+
     $scope.code=0;
-
-    $scope.myFeed=$scope.$storage.myFeed;
-
+    $scope.persona=$scope.$storage.persona;
+    $scope.designs=$scope.$storage.designs;
     $scope.discourse=$scope.$storage.discourse;
+
+    //initial feed
+
     $scope.feed = $scope.discourse;
-    $scope.tree=convertStory($scope.feed);
     $scope.rating= $scope.$storage.rating;
     $scope.ratingMode=$scope.$storage.ratingMode;
-    $scope.persona=$scope.$storage.persona;
 
-    $scope.changeFeed = function (feed) {
 
+    $scope.changeFeed = function (feedTitle) {
+        if (feedTitle) {
+            $scope.feed = $scope[feedTitle];
+            $scope.rating = $scope.$storage[feedTitle + 'Rating'];
+            $scope.ratingMode = $scope.$storage[feedTitle + 'RatingMode'];
+        }
     };
 
     $scope.reset = function () {
@@ -45,11 +56,7 @@ controllers.discourse = function ($scope, Discourse, $localStorage) {
     };
 
 
-    $scope.$watch('feed', function () {
-        $scope.tree=convertStory($scope.feed);
-        $scope.JSON=JSON.stringify($scope.feed, '',4);
-        $scope.source=$scope.tree;
-    });
+
 
 
     $scope.mtd = {}; //an object for universal methods

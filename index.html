@@ -17,6 +17,7 @@
     <script type="application/javascript" src="js/discourse-app.js"></script>
     <script type="application/javascript" src="js/directives.js"></script>
     <script type="application/javascript" src="js/discourse.js"></script>
+    <script type="application/javascript" src="js/designs.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
     <script type="application/javascript" src="js/side/intense.min.js"></script>
 
@@ -33,11 +34,10 @@
            data-ng-model="mtd.persona">
     <div class="btn grey-text"
          ng-class="{active:feed==discourse}"
-         ng-click="feed=discourse">Дискурс</div>
+         ng-click="changeFeed('discourse')">Дискурс</div>
     <div class="btn grey-text"
-         ng-class="{active:feed==myFeed}"
-         ng-click="feed=myFeed">Моя лента</div>
-    <input ng-model="tester.news">
+         ng-class="{active:feed==designs}"
+         ng-click="changeFeed('designs')">Затеи</div>
 </section>
 
 <section data-ng-if="contents" id="contents">

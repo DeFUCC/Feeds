@@ -30,7 +30,7 @@
                 >
             <img class="intense"
                  data-image="{{phrase.icon}}"
-                 data-title="{{phrase.head}}"
+                 data-title="{{phrase.title}}"
                  data-caption="{{phrase.text}}"
                  data-ng-src="{{phrase.icon}}">
         </div>
@@ -38,9 +38,9 @@
 
         <div class="box-heading"
              data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
-             data-ng-if="phrase.head">
+             data-ng-if="phrase.title">
             <h3>
-                {{phrase.head}}
+                {{phrase.title}}
             </h3>
         </div>
 
@@ -50,9 +50,9 @@
 
 
 
-    <div  class="box-text" data-ng-if="phrase.text || phrase.next">
+    <div  class="box-text" data-ng-if="phrase.img || phrase.text || phrase.next">
 
-        <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.head}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+        <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.title}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
             <img data-ng-src="{{phrase.img}}">
         </div>
 
@@ -62,7 +62,7 @@
 
         <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
             <div data-ng-click="$parent.$parent.$parent.nxt=next"
-                 data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.head.length+1}"
+                 data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
                  class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
                 <img class="icon-small" data-ng-src="{{next.icon}}">
                 <span data-ng-if="mtd.persona">{{next.letter}}</span>

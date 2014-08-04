@@ -184,7 +184,13 @@ fruitStory.directive("card", function() {
             nxt:'='
         },
         controller: function ($scope) {
+            $scope.imgClick=function () {
 
+                // Intensify all images with the 'intense' classname.
+                var elements = document.querySelectorAll( '.intense' );
+                Intense( elements );
+                $scope.imgClick=function(){};
+            };
 
         }
     };
@@ -209,13 +215,7 @@ fruitStory.directive("cards", function($compile) {
             $scope.pluses=0;
             $scope.minuses=0;
             $scope.zeros=0;
-            $scope.imgClick=function () {
 
-                // Intensify all images with the 'intense' classname.
-                var elements = document.querySelectorAll( '.intense' );
-                Intense( elements );
-                $scope.imgClick=function(){};
-            };
         },
         compile: function(tElement, tAttr) {
             var contents = tElement.contents().remove();

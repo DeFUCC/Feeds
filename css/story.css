@@ -585,8 +585,7 @@ li:before {
     font-weight:normal;
     overflow-wrap:break-word;
     word-wrap: break-word;
-    max-height: 280px;
-    padding: 8px 0 0 0;
+    padding: 0;
 
 }
 
