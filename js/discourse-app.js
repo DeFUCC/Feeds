@@ -88,6 +88,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
             said = angular.copy(saying);
             saying='';
             said.letters=convertLetters(said.letters);
+            said.author=$scope.persona;
             $scope.feed.push(said);
             $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
             $scope.new[$scope.feedTitle].push(said);
