@@ -13,7 +13,6 @@
 
                 <input  class="righter"
                         data-ng-model="letter"
-                        data-ng-model-instant
                         pattern="[ABCEHKMOPTXY]*|*"
                         type="text"
                         placeholder="A|B|C|E|H|K|M|O|P|T|X|Y">
@@ -24,21 +23,21 @@
             <div data-field-span="1">
                 <label>Название</label>
                 <input  data-ng-model="phrase.title"
-                        data-ng-model-instant type="text">
+                        type="text">
             </div>
         </div>
         <div data-row-span="1">
             <div data-field-span="1">
                 <label>URL картинки</label>
                 <input data-ng-model="phrase.img"
-                       data-ng-model-instant type="text">
+                       type="text">
             </div>
         </div>
         <div data-row-span="1">
             <div data-field-span="1">
                 <label>Текст (с разметкой <b><a href="http://ru.wikipedia.org/wiki/Markdown" target="_blank" title="markdown">MARKDOWN</a></b>)</label>
-                <textarea class="texter" data-ng-model="phrase.text"
-                          data-ng-model-instant></textarea>
+                <textarea class="texter"
+                          data-ng-model="phrase.text"></textarea>
             </div>
         </div>
     </fieldset>

@@ -128,9 +128,9 @@ fruitStory.directive("addForm", function() {
                         $scope.phrase.letters=$scope.address + '|';
                     } else {$scope.phrase.letters=''}
                     $scope.phrase.letters+=$scope.letter;
+
                 }
             });
-
         }
     };
 });
