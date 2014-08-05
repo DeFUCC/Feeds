@@ -25,7 +25,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
         $scope.source=$scope.tree;
     });
 
-    $scope.new={};
+    $scope.new={};  //for later difference viewing
 
     $scope.code=0;
     $scope.persona=$scope.$storage.persona;
