@@ -25,6 +25,8 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
         $scope.source=$scope.tree;
     });
 
+    $scope.new={};
+
     $scope.code=0;
     $scope.persona=$scope.$storage.persona;
     $scope.designs=$scope.$storage.designs;
@@ -40,10 +42,13 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
     $scope.changeFeed = function (feedTitle) {
         if (feedTitle) {
             $scope.feed = $scope[feedTitle];
+            $scope.feedTitle=feedTitle;
             $scope.rating = $scope.$storage[feedTitle + 'Rating'];
             $scope.ratingMode = $scope.$storage[feedTitle + 'RatingMode'];
         }
     };
+
+    $scope.changeFeed('designs');
 
     $scope.reset = function () {
         localStorage.clear();
@@ -67,6 +72,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
     $scope.mtd.my=$scope.my;
+    $scope.mtd.new=$scope.new;
     $scope.mtd.loadFeed=function (json) {
         if (json) {$scope.JSON=json}
         $scope.feed=JSON.parse($scope.JSON);
@@ -78,10 +84,13 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
     $scope.mtd.updateStory = function (saying) {
         var said;
         if (saying) {
+
             said = angular.copy(saying);
             saying='';
             said.letters=convertLetters(said.letters);
             $scope.feed.push(said);
+            $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
+            $scope.new[$scope.feedTitle].push(said);
         }
 
         $scope.tree=convertStory($scope.feed);
