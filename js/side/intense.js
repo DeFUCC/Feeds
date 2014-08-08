@@ -147,7 +147,7 @@ var Intense = (function() {
        *  Container
        */
       var containerProperties = {
-        'backgroundColor': 'rgba(0,0,0,0.8)',
+        'backgroundColor': 'rgba(255,255,225,0.8)',
         'width': '100%',
         'height': '100%',
         'position': 'fixed',
@@ -179,7 +179,7 @@ var Intense = (function() {
         'bottom': '0px',
         'left': '0px',
         'padding': '20px',
-        'color': '#fff',
+        'color': '#000',
         'wordSpacing': '0.2px',
         'webkitFontSmoothing': 'antialiased',
         'textShadow': '-1px 0px 1px rgba(0,0,0,0.4)'
@@ -211,7 +211,7 @@ var Intense = (function() {
           'margin': '0px',
           'padding': '0px',
           'fontWeight': 'normal',
-          'fontSize': '20px',
+          'fontSize': '14px',
           'letterSpacing': '0.1px',
           'maxWidth': '500px',
           'textAlign': 'left',

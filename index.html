@@ -15,7 +15,7 @@
     <script type="application/javascript" src="js/discourse.js"></script>
     <script type="application/javascript" src="js/designs.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
-    <script type="application/javascript" src="js/side/intense.min.js"></script>
+    <script type="application/javascript" src="js/side/intense.js"></script>
 
 
     <link href="css/story.css" rel="stylesheet">
@@ -35,14 +35,16 @@
 </section>
 <section id="header"><h1>ФРУКТ</h1>
 
-    <input placeholder="Представься"
+    <input autofocus="autofocus"
+           placeholder="Представься"
            data-ng-model="mtd.persona">
-    <div class="header-button"
+    <button ng-disabled="!mtd.persona"
+         class="header-button"
          ng-class="{active:feed==discourse}"
-         ng-click="changeFeed('discourse')">Дискурс</div>
-    <div class="header-button"
+         ng-click="changeFeed('discourse')">Личное</button>
+    <button class="header-button"
          ng-class="{active:feed==designs}"
-         ng-click="changeFeed('designs')">Затеи</div>
+         ng-click="changeFeed('designs')">Затеи</button>
 </section>
 
 <section data-ng-if="contents" id="contents">
@@ -52,7 +54,8 @@
             mtd="mtd"></contents>
 </section>
 
-
+<textarea ng-if="mtd.out"
+          data-ng-model="mtd.out"></textarea>
 
 <section id="first">
 

@@ -32,6 +32,15 @@ li:before {
     padding-right:4px;
     color: #555;
 }
+button {
+    background-color:transparent;
+    border:none;
+    margin: 0;
+    padding: 0;
+}
+button:disabled {
+    color:#aaa;
+}
 #header{
     background:#fff;
     padding:60px;
@@ -46,28 +55,26 @@ li:before {
 
 }
 #header input {
-    flex:1 1 100px;
+    flex:1 1 400px;
     font-size: 16px;
     border-radius:4px;
+    padding: 15px;
 }
 .header-button {
-    flex:1 1 200px;
+    flex:1 1 40px;
     padding:10px 15px;
-    cursor: pointer;
     border-radius:4px;
+    border: solid 4px rgba(50,50,50,0.3);
     color:#333;
     margin: 10px;
-    opacity: 0.4;
     min-width: 8px;
-    font-size:1.2em;
-    font-weight:bold ;
+    font-size:14px;
     text-align:center;
-    box-shadow:0px 0px 4px rgba(0, 0, 40, 0.4);
     transition:all 100ms linear;
+    cursor: pointer;
 }
-.header-button:hover {
-    opacity: 0.75;
-}
+
+
 .active {
     opacity: 1;
 }
@@ -621,7 +628,7 @@ li:before {
 }
 
 .box-img img {
-    max-width: 100%;
+    max-width: 60%;
     max-height: 60%;
 }
 

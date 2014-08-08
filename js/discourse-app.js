@@ -23,6 +23,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
         $scope.tree=convertStory($scope.feed);
         $scope.JSON=JSON.stringify($scope.feed, '',4);
         $scope.source=$scope.tree;
+
     });
 
     $scope.new={};  //for later difference viewing

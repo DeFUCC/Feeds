@@ -215,6 +215,9 @@ fruitStory.directive("cards", function($compile) {
             $scope.pluses=0;
             $scope.minuses=0;
             $scope.zeros=0;
+            $scope.cancelNew=function(){
+                delete $scope.next.new;
+            };
 
         },
         compile: function(tElement, tAttr) {
