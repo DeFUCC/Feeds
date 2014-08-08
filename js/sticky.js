@@ -34,8 +34,7 @@ angular.module('sticky', [])
 					scrollTop = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
 
 					if ( scrollTop >= stickyLine ){
-						$elem.addClass('sticky');
-                        $elem.css('width','100%');  // DeFUCC small fix for navbar
+						$elem.addClass('sticky'); // DeFUCC small fix for navbar
 					} else {
 						$elem.removeClass('sticky');
 					}

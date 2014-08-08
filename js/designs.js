@@ -15,7 +15,7 @@ fruitStory.service('Designs', function () {
             "letters": "O",
             "title": "Ooley",
             "img": "http://ooley.ru/logos/ooley-square-card-filled.svg",
-            "text": "",
+            "text": "[**Ooley**](http://www.ooley.ru) – система открытых мастерских",
             "icon": "icons/design.svg"
         },
         {
@@ -28,26 +28,21 @@ fruitStory.service('Designs', function () {
             "letters": "P",
             "title": "Форум",
             "img": "http://fondfrukt.ru/images/page2-img3.jpg",
-            "text": "Открытый колонно-купольный зал",
+            "text": "Открытый колонно-купольный зал встреч и собраний. *Демократия без форума немыслима.*",
             "icon": "icons/design.svg"
         },
         {
             "letters": "A",
             "title": "ФРУКТ",
             "img": "http://fondfrukt.ru/images/fruits.svg",
-            "text": "Фонд Развития Универсализации, Кооперации, Творчества",
+            "text": "## Фонд Развития Универсализации, Кооперации, Творчества\nhttp://www.fondfrukt.ru",
             "icon": "icons/design.svg"
-        },
-        {
-            "letters": "A",
-            "title": "ФРУКТ",
-            "img": "http://fondfrukt.ru/images/fruits.svg",
-            "text": "## Фонд Развития Универсализации, Кооперации, Творчества"
         },
         {
             "letters": "K",
             "title": "Открытая здоровая кухня",
-            "img": "http://fondfrukt.ru/images/ozk.svg"
+            "img": "http://fondfrukt.ru/images/ozk.svg",
+            "icon": "icons/design.svg"
         },
         {
             "letters": "O|E",
@@ -110,9 +105,16 @@ fruitStory.service('Designs', function () {
         {
             "letters": "O|P",
             "title": "Ooley в прицепе",
-            "icon":"icons/stage.svg",
+            "icon": "icons/stage.svg",
             "img": "https://pp.vk.me/c408930/v408930086/1b27/qDr0oOnmOJE.jpg",
-            "text": "Прицеп-автодом, оборудованный под разворачиваемую открытую мастерскую.",
+            "text": "Прицеп-автодом, оборудованный под разворачиваемую открытую мастерскую."
+        },
+        {
+            "letters": "Y",
+            "icon": "icons/design.svg",
+            "img": "http://www.ooway.ru/images/ooway-poster.svg",
+            "title": "Ooway",
+            "text": "[**OOWAY**](http://www.ooway.ru) — это видео-журнал о медитации. Мы ставим своей целью донести до человечества понимание того, что созерцательная концентрация и успокоение ума в медитации уже давно перестало быть атрибутом какой-либо религиозной традиции , и для все большего числа людей становится неотъемлемой частью их жизни, позволяющей разобраться с трудностями жизни и лучше понять себя и окружающих."
         }
     ]
 });

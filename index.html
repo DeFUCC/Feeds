@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Фруктовый дискурс</title>
+    <title>ФРУКТ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
@@ -28,14 +28,23 @@
 
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="discourse" data-ng-cloak>
-<section id="header"><h1>Фруктовый дискурс</h1>
+<section id="filterSection">
+
+    <menu sticky
+          filters
+          data-ng-show="mtd.persona"
+          id="filters">
+
+    </menu>
+</section>
+<section id="header"><h1>ФРУКТ</h1>
 
     <input placeholder="Представься"
            data-ng-model="mtd.persona">
-    <div class="btn grey-text"
+    <div class="header-button"
          ng-class="{active:feed==discourse}"
          ng-click="changeFeed('discourse')">Дискурс</div>
-    <div class="btn grey-text"
+    <div class="header-button"
          ng-class="{active:feed==designs}"
          ng-click="changeFeed('designs')">Затеи</div>
 </section>
@@ -47,15 +56,7 @@
             mtd="mtd"></contents>
 </section>
 
-<section id="filterSection">
 
-    <menu sticky
-          filters
-          data-ng-show="mtd.persona"
-          id="filters">
-
-    </menu>
-</section>
 
 <section id="first">
 
