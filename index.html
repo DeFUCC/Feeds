@@ -10,12 +10,13 @@
     <script type="application/javascript" src="js/side/angular-marked.js"></script>
     <script type="application/javascript" src="js/side/prefixfree.min.js"></script>
     <script type="application/javascript" src="js/side/ngStorage.js"></script>
-    <script type="application/javascript" src="js/discourse-app.js"></script>
+    <script type="application/javascript" src="js/fruit-app.js"></script>
     <script type="application/javascript" src="js/directives.js"></script>
-    <script type="application/javascript" src="js/discourse.js"></script>
     <script type="application/javascript" src="js/designs.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
     <script type="application/javascript" src="js/side/intense.js"></script>
+    <script type="application/javascript" src="js/side/firebase.js"></script>
+    <script type="application/javascript" src="js/side/angularfire.min.js"></script>
 
 
     <link href="css/story.css" rel="stylesheet">
@@ -34,17 +35,18 @@
     </menu>
 </section>
 <section id="header"><h1>ФРУКТ</h1>
-
+    <button class="header-button"
+            ng-class="{active:feed==designs}"
+            ng-click="changeFeed('designs')">Затеи</button>
     <input autofocus="autofocus"
            placeholder="Представься"
            data-ng-model="mtd.persona">
+
     <button ng-disabled="!mtd.persona"
          class="header-button"
          ng-class="{active:feed==discourse}"
-         ng-click="changeFeed('discourse')">Личное</button>
-    <button class="header-button"
-         ng-class="{active:feed==designs}"
-         ng-click="changeFeed('designs')">Затеи</button>
+         ng-click="changeFeed('discourse')">Личное ({{discourse.length}})</button>
+
 </section>
 
 <section data-ng-if="contents" id="contents">

@@ -1,15 +1,19 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'sticky', 'ngStorage']);
+var fruitStory = angular.module('fruitStory',['hc.marked','firebase', 'sticky', 'ngStorage']);
 var controllers = {};
 fruitStory.controller(controllers);
 
-controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
+
+controllers.discourse = function ($scope, Designs, $localStorage, $firebase) {
+
+    $scope.mtd = {}; //an object for universal methods
+
 
     $scope.$storage=$localStorage.$default(
         {
-            discourse:Discourse.discourse,
+            discourse:[],
             discourseRatingMode:{news:true,plus:true,zero:true,minus:false},
             discourseRating:{},
             designs:Designs.designs,
@@ -29,7 +33,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
     $scope.new={};  //for later difference viewing
 
     $scope.code=0;
-    $scope.persona=$scope.$storage.persona;
+    $scope.mtd.persona=$scope.$storage.persona;
     $scope.designs=$scope.$storage.designs;
     $scope.discourse=$scope.$storage.discourse;
 
@@ -53,7 +57,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
 
     $scope.reset = function () {
         localStorage.clear();
-        $scope.feed =Discourse.discourse;
+        $scope.feed =Designs.designs;
         $scope.tree=convertStory($scope.feed);
         $scope.source=$scope.tree;
         $scope.rating={};
@@ -65,7 +69,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
 
 
 
-    $scope.mtd = {}; //an object for universal methods
+
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
     $scope.mtd.colorize = colorize;
@@ -77,11 +81,11 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
     $scope.mtd.loadFeed=function (json) {
         if (json) {$scope.JSON=json}
         $scope.feed=JSON.parse($scope.JSON);
-        console.log($scope.feed);
         $scope.mtd.updateStory();
     };
     $scope.source=$scope.tree;
     $scope.selected = 'B';
+
     $scope.mtd.updateStory = function (saying) {
         var said;
         if (saying) {
@@ -89,7 +93,7 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
             said = angular.copy(saying);
             saying='';
             said.letters=convertLetters(said.letters);
-            if ($scope.persona) {said.author=$scope.persona}
+            said.author=$scope.mtd.persona;
             $scope.feed.push(said);
             $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
             $scope.new[$scope.feedTitle].push(said);
@@ -110,8 +114,8 @@ controllers.discourse = function ($scope, Discourse, Designs, $localStorage) {
         }
     };
 
+    $scope.mtd.self=$scope.self;
 
-    $scope.mtd.persona=$scope.persona;
 
 
     $scope.mtd.rate={};
