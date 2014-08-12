@@ -6,7 +6,7 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 
-controllers.discourse = function ($scope, Designs, $localStorage, $firebase) {
+controllers.discourse = function ($scope, Designs, Types, $localStorage, $firebase) {
 
     $scope.mtd = {}; //an object for universal methods
 
@@ -65,10 +65,24 @@ controllers.discourse = function ($scope, Designs, $localStorage, $firebase) {
 
     };
 
+    $scope.mtd.types=Types.types;
 
-
-
-
+    $scope.mtd.getTypes=function (phrase, user) {
+        var types=[];
+        console.log(phrase);
+        if (phrase.type) {
+            if ($scope.mtd.types.hasOwnProperty(phrase.type)) {
+                types.push($scope.mtd.types[phrase.type].open);
+                if ($scope.mtd.persona==user) {
+                    types.push($scope.mtd.types[phrase.type].closed);
+                }
+            }
+        }
+        if (!phrase.type) {
+            types.push('design');
+        }
+        return types;
+    };
 
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
