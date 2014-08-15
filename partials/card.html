@@ -24,15 +24,15 @@
 
         </div>
 
-        <div class="box-icon"
-             data-ng-if="phrase.icon"
+        <div icon
+             icon-type="phrase.type"
+             icon-title="phrase.title"
+             icon-text="phrase.text"
+             class="box-icon"
+             data-ng-if="phrase.type"
              data-ng-click="imgClick()"
                 >
-            <img class="intense"
-                 data-image="{{phrase.icon}}"
-                 data-title="{{phrase.title}}"
-                 data-caption="{{phrase.text}}"
-                 data-ng-src="{{phrase.icon}}">
+
         </div>
 
 
@@ -51,26 +51,40 @@
 
 
 
-    <div  class="box-text" data-ng-if="phrase.img || phrase.text || phrase.next">
+    <div  class="box-text" data-ng-if="phrase.img || phrase.text">
 
         <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.title}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
             <img data-ng-src="{{phrase.img}}">
         </div>
 
         <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
+        <div class="time-card" data-ng-if="phrase.time && mtd.persona"> {{phrase.author}} :: {{time.toLocaleString()}} ::</div>
 
 
 
-        <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
-            <div data-ng-click="$parent.$parent.$parent.nxt=next"
-                 data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
-                 class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
-                <img class="icon-small" data-ng-src="{{next.icon}}">
-                <span data-ng-if="mtd.persona">{{next.letter}}</span>
-            </div>
-        </div>
+
 
     </div>
+
+    <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
+        <div data-ng-click="$parent.$parent.$parent.nxt=next"
+             data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
+             class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
+
+
+
+            <div icon
+                 icon-type="next.type"
+                 icon-title="next.title"
+                 icon-text="next.text"
+                 class="box-icon"
+                 data-ng-if="next.type"
+                    ></div>
+
+            <span data-ng-if="mtd.persona">{{next.letter}}</span>
+        </div>
+    </div>
+
     <div data-ng-if="phrase.next || mtd.persona" data-ng-show="$parent.selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
 
 

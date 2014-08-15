@@ -26,19 +26,16 @@
 
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="discourse" data-ng-cloak>
-<section id="filterSection">
 
-    <menu sticky
-          filters
-          data-ng-show="mtd.persona"
-          id="filters">
+<section id="header"><h1>Ленты</h1>
 
-    </menu>
-</section>
-<section id="header"><h1>ФРУКТ</h1>
-    <button class="header-button"
+    <button
+            class="header-button"
             ng-class="{active:feed==designs}"
-            ng-click="changeFeed('designs')">Затеи</button>
+            ng-click="changeFeed('designs')">
+               Публиные
+            </button>
+
     <input autofocus="autofocus"
            placeholder="Представься"
            data-ng-model="mtd.persona">
@@ -46,10 +43,31 @@
     <button ng-disabled="!mtd.persona"
          class="header-button"
          ng-class="{active:feed==discourse}"
-         ng-click="changeFeed('discourse')">Личное ({{discourse.length}})</button>
+         ng-click="changeFeed('discourse')">Личные ({{discourse.length}})</button>
 
 </section>
+<section id="filterSection">
 
+    <menu
+            filters
+            id="filters">
+
+    </menu>
+</section>
+<section ng-if="mtd.viewType" id="types">
+    <button ng-repeat="type in mtd.types | objectAsArray"
+            icon
+            icon-title="type.title"
+            icon-text="type.text"
+            icon-type="type.type"
+            icon-color="type.color"
+            ng-style="{borderColor:mtd.viewType==type.type && type.color}"
+            class="header-button button-icon"
+            ng-class="{active:mtd.viewType==type.type}"
+            ng-click="mtd.viewType=type.type">
+
+    </button>
+</section>
 <section data-ng-if="contents" id="contents">
     <contents
             class="contents"

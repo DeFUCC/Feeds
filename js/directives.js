@@ -92,6 +92,24 @@ fruitStory.directive("plus", function() {
     };
 });
 
+fruitStory.directive("icon", function() {
+    return {
+        restrict: "AE",
+        scope: {
+            iconType:'=',
+            iconTitle:'=',
+            iconText:'='
+        },
+        templateUrl: 'partials/icon.html',
+        controller: function ($scope) {
+
+                $scope.iconURL = 'icons/' + $scope.iconType + '.svg';
+
+
+        }
+    };
+});
+
 fruitStory.directive("previewBox", function() {
     return {
         restrict: "A",
@@ -184,6 +202,7 @@ fruitStory.directive("card", function() {
             nxt:'='
         },
         controller: function ($scope) {
+            $scope.time=new Date($scope.phrase.time);
             $scope.imgClick=function () {
 
                 // Intensify all images with the 'intense' classname.

@@ -15,11 +15,18 @@
                  data-ng-click="over.next='';selected=!selected"
                  class="box-top"></div>
 
-
+            <div icon
+                 icon-type="nxt.type"
+                 icon-title="nxt.title"
+                 icon-text="nxt.text"
+                 class="box-icon"
+                 data-ng-if="nxt.type"
+                    ></div>
 
 
             <div class="box-heading"
                  data-ng-if="nxt.title">
+
                 <h3>
                     {{nxt.title}}
                 </h3>

@@ -67,6 +67,8 @@ controllers.discourse = function ($scope, Designs, Types, $localStorage, $fireba
 
     $scope.mtd.types=Types.types;
 
+    $scope.mtd.viewType='';
+
     $scope.mtd.getTypes=function (phrase, user) {
         var types=[];
         console.log(phrase);
@@ -108,6 +110,7 @@ controllers.discourse = function ($scope, Designs, Types, $localStorage, $fireba
             saying='';
             said.letters=convertLetters(said.letters);
             said.author=$scope.mtd.persona;
+            said.time=Date.now();
             $scope.feed.push(said);
             $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
             $scope.new[$scope.feedTitle].push(said);

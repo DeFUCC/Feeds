@@ -23,15 +23,15 @@
 
 
 
-                <div class="box-icon"
-                     data-ng-if="phrase.icon"
+                <div icon
+                     type="phrase.type"
+                     title="phrase.title"
+                     text="phrase.text"
+                     class="box-icon"
+                     data-ng-if="phrase.type"
                      data-ng-click="imgClick()"
                         >
-                    <img class="intense"
-                         data-image="{{phrase.icon}}"
-                         data-title="{{phrase.title}}"
-                         data-caption="{{phrase.text}}"
-                         data-ng-src="{{phrase.icon}}">
+
                 </div>
 
 
