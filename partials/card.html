@@ -1,6 +1,6 @@
 <div over-card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></div>
 
-<div class="card"  data-ng-class="{'lower':nxt}">
+<div class="card"  data-ng-class="{'lower':nxt}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
 
     <div data-ng-click=" nxt=''"
          data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
@@ -24,6 +24,11 @@
 
         </div>
 
+
+        <div class="box-img intense" data-ng-style="{backgroundImage:phrase.img}"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.title}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+            <img data-ng-src="{{phrase.img}}">
+        </div>
+
         <div icon
              icon-type="phrase.type"
              icon-title="phrase.title"
@@ -34,7 +39,6 @@
                 >
 
         </div>
-
 
         <div class="box-heading"
              data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
@@ -53,9 +57,7 @@
 
     <div  class="box-text" data-ng-if="phrase.img || phrase.text">
 
-        <div class="box-img intense"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.title}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
-            <img data-ng-src="{{phrase.img}}">
-        </div>
+
 
         <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
         <div class="time-card" data-ng-if="phrase.time && mtd.persona"> {{phrase.author}} :: {{time.toLocaleString()}} ::</div>
