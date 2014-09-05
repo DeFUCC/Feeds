@@ -6,7 +6,7 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 
-controllers.discourse = function ($scope, Designs, Types, $localStorage, $firebase) {
+controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) {
 
     $scope.mtd = {}; //an object for universal methods
 

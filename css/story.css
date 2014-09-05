@@ -196,6 +196,7 @@ button:disabled {
     margin:1px 0 0 0;
     color:#fff;
     text-align: left;
+    cursor: pointer;
 }
 .letter {
     padding: 4px;
@@ -511,7 +512,7 @@ button:disabled {
 
 .box-wider > .card-stack > .card > .box-head .box-heading {
     font-size: 110%;
-    cursor: n-resize;
+    cursor: pointer;
 }
 
 .card-stack {
@@ -666,8 +667,8 @@ button:disabled {
     display:block;
     height: auto;
     max-width: 100%;
-    max-height: 60%;
-    width:100%;
+    max-height: 100%;
+    min-width:100%;
 }
 
 .box-heading {
@@ -680,7 +681,7 @@ button:disabled {
     text-shadow:0px 2px 4px rgba(0, 0, 60, 0.5);
     overflow-wrap:break-word;
     word-wrap: break-word;
-    cursor: s-resize;
+    cursor: pointer;
     text-align:center;
 }
 .box-heading h3 {
@@ -906,4 +907,28 @@ button:disabled {
 .output {
     width: 98%;
     height:400px;
+}
+
+
+.fixedsticky {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+}
+/* When position: sticky is supported but native behavior is ignored */
+.fixedsticky-withoutfixedfixed .fixedsticky-off,
+.fixed-supported .fixedsticky-off {
+    position: static;
+}
+.fixedsticky-withoutfixedfixed .fixedsticky-on,
+.fixed-supported .fixedsticky-on {
+    position: fixed;
+}
+.fixedsticky-dummy {
+    display: none;
+}
+.fixedsticky-on + .fixedsticky-dummy {
+    display: block;
 }

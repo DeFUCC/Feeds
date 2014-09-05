@@ -15,7 +15,6 @@
     <script type="application/javascript" src="js/designs.js"></script>
     <script type="application/javascript" src="js/sticky.js"></script>
     <script type="application/javascript" src="js/types.js"></script>
-    <script type="application/javascript" src="js/side/intense.js"></script>
     <script type="application/javascript" src="js/side/firebase.js"></script>
     <script type="application/javascript" src="js/side/angularfire.min.js"></script>
 
@@ -25,7 +24,7 @@
     <link href="css/gridforms.css" rel="stylesheet">
 
 </head>
-<body data-ng-app="fruitStory" data-ng-controller="discourse" data-ng-cloak>
+<body data-ng-app="fruitStory" data-ng-controller="feeds" data-ng-cloak>
 
 <section id="header"><h1>Ленты</h1>
 
@@ -75,9 +74,6 @@
             mtd="mtd"></contents>
 </section>
 
-<textarea ng-if="mtd.out"
-          data-ng-model="mtd.out"></textarea>
-
 <section id="first">
 
     <div cards
@@ -103,7 +99,6 @@
               data-ng-model="JSON"></textarea>
 
 </section>
-
 
 </body>
 </html>

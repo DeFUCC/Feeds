@@ -1,0 +1,54 @@
+<section id="filterSection">
+
+    <menu
+            filters
+            id="filters">
+
+    </menu>
+</section>
+<section ng-if="mtd.viewType" id="types">
+    <button ng-repeat="type in mtd.types | objectAsArray"
+            icon
+            icon-title="type.title"
+            icon-text="type.text"
+            icon-type="type.type"
+            icon-color="type.color"
+            ng-style="{borderColor:mtd.viewType==type.type && type.color}"
+            class="header-button button-icon"
+            ng-class="{active:mtd.viewType==type.type}"
+            ng-click="mtd.viewType=type.type">
+
+    </button>
+</section>
+<section data-ng-if="contents" id="contents">
+    <contents
+            class="contents"
+            tree="tree"
+            mtd="mtd"></contents>
+</section>
+
+<section id="first">
+
+    <div cards
+         search="search"
+         rf="ratingFilter"
+         fltr="fltr"
+         mtd="mtd"
+         next="source"
+         selected="selected"
+         class="container"></div>
+
+</section>
+
+
+<section data-ng-if="mtd.persona" id="test">
+    <div class="btn"
+         ng-click="code=!code">Также можете посмотреть и скопировать, </div>
+    <div class="btn"
+         ng-click="mtd.loadFeed()"> вставить и загрузить. (это пока не работает, данные хранятся в браузере)</div>
+
+    <textarea ng-if="code"
+              class="output"
+              data-ng-model="JSON"></textarea>
+
+</section>

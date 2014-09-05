@@ -12,8 +12,9 @@
             <div
                     letters
                     class="letters box-top"
-                    mtd="mtd"
-                    letter="phrase.letters"> </div>
+                    data-mtd="mtd"
+                    data-letter="phrase.letters"
+                    data-select="$parent.selected=mtd.select(phrase.letters, $parent.selected)"> </div>
 
             <div rate  class="box-rate"
                  mtd="mtd"
@@ -25,7 +26,7 @@
         </div>
 
 
-        <div class="box-img intense" data-ng-style="{backgroundImage:phrase.img}"  data-ng-click="imgClick()" data-image="{{phrase.img}}" data-title="{{phrase.title}}" data-caption="{{phrase.text}}"  data-ng-if="phrase.img">
+        <div class="box-img" data-ng-if="phrase.img">
             <img data-ng-src="{{phrase.img}}">
         </div>
 
@@ -60,9 +61,9 @@
 
 
         <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
+
+
         <div class="time-card" data-ng-if="phrase.time && mtd.persona"> {{phrase.author}} :: {{time.toLocaleString()}} ::</div>
-
-
 
 
 

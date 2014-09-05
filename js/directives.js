@@ -1,3 +1,23 @@
+fruitStory.directive("feed", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/feed.html',
+        scope: {
+            feed:'=',
+            mtd:'=',
+            feedTitle:'=',
+            rating:'=',
+            options:'='
+        },
+        controller: function ($scope) {
+
+
+        }
+    };
+});
+
+
+
 fruitStory.directive("rate", function() {
     return {
         restrict: "A",
@@ -15,7 +35,7 @@ fruitStory.directive("rate", function() {
 
 
 
-fruitStory.directive("contents", function($compile) {
+fruitStory.directive("contents", function() {
     return {
         restrict: "E",
         templateUrl: 'partials/contents.html',
@@ -27,7 +47,7 @@ fruitStory.directive("contents", function($compile) {
 });
 
 
-fruitStory.directive("filters", function($compile) {
+fruitStory.directive("filters", function() {
     return {
         restrict: "A",
         templateUrl: 'partials/filters.html'
@@ -63,7 +83,8 @@ fruitStory.directive("letters", function() {
         templateUrl: 'partials/letters.html',
         scope: {
             letter: '=',
-            mtd:'='
+            mtd:'=',
+            select:'&'
         },
         controller: function ($scope) {
 
@@ -103,7 +124,10 @@ fruitStory.directive("icon", function() {
         templateUrl: 'partials/icon.html',
         controller: function ($scope) {
 
-                $scope.iconURL = 'icons/' + $scope.iconType + '.svg';
+            if ($scope.iconType=='design') {$scope.iconName="Затея"}
+            if ($scope.iconType=='event') {$scope.iconName="Событие"}
+
+            $scope.iconURL = 'icons/' + $scope.iconType + '.svg';
 
 
         }
