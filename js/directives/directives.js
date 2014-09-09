@@ -1,30 +1,14 @@
-fruitStory.directive("feed", function() {
+
+
+
+
+fruitStory.directive("rating", function() {
     return {
         restrict: "A",
-        templateUrl: 'partials/feed.html',
-        scope: {
-            feed:'=',
-            mtd:'=',
-            feedTitle:'=',
-            rating:'=',
-            options:'='
-        },
-        controller: function ($scope) {
-
-
-        }
-    };
-});
-
-
-
-fruitStory.directive("rate", function() {
-    return {
-        restrict: "A",
-        templateUrl: 'partials/rate.html',
+        templateUrl: 'partials/rating.html',
         scope: {
             letters:'=letter',
-            mtd:'='
+            rate:'='
         },
         controller: function ($scope) {
 
@@ -50,7 +34,15 @@ fruitStory.directive("contents", function() {
 fruitStory.directive("filters", function() {
     return {
         restrict: "A",
-        templateUrl: 'partials/filters.html'
+        templateUrl: 'partials/filters.html',
+        controller: function($scope) {
+            $scope.$watch('fltr', function (fltr) {
+                if (angular.isString(fltr)) {
+                    $scope.fltr=$scope.mtd.convertLetters(fltr);
+
+                }
+            });
+        }
     };
 });
 
@@ -222,6 +214,7 @@ fruitStory.directive("card", function() {
         scope: {
             phrase:'=',
             mtd:'=',
+            rate:'=',
             selected:'=',
             nxt:'='
         },
@@ -246,6 +239,7 @@ fruitStory.directive("cards", function($compile) {
         scope: {
             next: '=', //source
             mtd: '=',
+            rate:'=',
             selected: '=',
             fltr:'=',
             rf:'=', //for rating filtering

@@ -1,0 +1,14 @@
+<div class="plus"
+     data-ng-class="{'active':rate.getPluses(letters)}"
+     data-ng-click="rate.plus(letters)">
+    +{{rate.getPluses(letters)}}</div>
+
+<div class="zero"
+     data-ng-class="{'active':rate.getZeros(letters)}"
+     data-ng-click="rate.zero(letters)">
+    {{rate.getZeros(letters) || '&bull;'}}</div>
+
+<div class="minus"
+     data-ng-class="{'active':rate.getMinuses(letters)}"
+     data-ng-click="rate.minus(letters)">
+    -{{rate.getMinuses(letters)}}</div>

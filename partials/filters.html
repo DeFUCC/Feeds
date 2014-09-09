@@ -17,30 +17,29 @@
         data-ng-click="source=feed"
         data-ng-class="{active:source==feed}">Лента</li>
 </menu>
-
 <menu data-ng-show="mtd.persona">
-    <li data-ng-click="mtd.toggleRF('news')"
+    <li data-ng-click="rate.toggleRF('news')"
         class="news"
         data-ng-class="{active:ratingMode.news}">
         Новые
-        <div class="indy">{{countNew()}}</div>
+        <div class="indy">{{rate.countNew()}}</div>
     </li>
-    <li data-ng-click="mtd.toggleRF(1)"
+    <li data-ng-click="rate.toggleRF(1)"
         class="plus"
         data-ng-class="{active:ratingMode.plus}">
         +
-        <div class="indy">{{mtd.rate.totalRated(1)}}</div>
+        <div class="indy">{{rate.totalRated(1)}}</div>
     </li>
-    <li data-ng-click="mtd.toggleRF(0)"
+    <li data-ng-click="rate.toggleRF(0)"
         class="zero"
         data-ng-class="{active:ratingMode.zero}">
         &bull;
-        <div class="indy">{{mtd.rate.totalRated(0)}}</div>
+        <div class="indy">{{rate.totalRated(0)}}</div>
     </li>
-    <li data-ng-click="mtd.toggleRF(-1)"
+    <li data-ng-click="rate.toggleRF(-1)"
         class="minus"
         data-ng-class="{active:ratingMode.minus}">-
-        <div class="indy">{{mtd.rate.totalRated(-1)}}</div>
+        <div class="indy">{{rate.totalRated(-1)}}</div>
     </li>
     <li
             data-ng-click="reset()"
