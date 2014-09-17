@@ -2,8 +2,6 @@
      data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wider':selected==phrase.letters}"
      data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search | orderBy:[rate.ratingSort, rate.seenSort]">
 
-
-
     <div card
          mtd="mtd"
          phrase="phrase"

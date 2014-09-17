@@ -5,7 +5,8 @@
     <div data-ng-click=" nxt=''"
          data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
          data-ng-class="{'fuller':!phrase.text}"
-         class="box-head">
+         class="box-head"
+         id="{{phrase.letters}}">
 
         <div  data-ng-if="mtd.persona" class="box-bar">
 
@@ -94,6 +95,7 @@
         <div cards
              search="search"
              rf="rf"
+             rate="rate"
              fltr="fltr"
              mtd="mtd"
              next="phrase.next"
