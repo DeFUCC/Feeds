@@ -196,6 +196,26 @@ button:disabled {
 .inner-content:hover {
     opacity: 1;
 }
+
+#selects {
+    position: fixed;
+    top:5px;
+    right:10px;
+    z-index:300;
+    background-color: rgba(255,255,255,0.3);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.letter-block {
+    display: inline-block;
+    margin: 2px 6px;
+}
+
+.letter-block a {
+    text-decoration: none;
+}
+
 .letters {
     flex:1 1 auto;
     margin:1px 0 0 0;
@@ -204,6 +224,7 @@ button:disabled {
     cursor: pointer;
 }
 .letter {
+    min-width: 10px;
     padding: 4px;
     font-size: 10px;
     font-weight: bold;

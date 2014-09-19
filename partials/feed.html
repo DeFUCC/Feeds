@@ -26,7 +26,18 @@
             tree="tree"
             mtd="mtd"></contents>
 </section>
-
+<section data-ng-if="mtd.selected.length>0" id="selects">
+    Открыты:
+    <div class="letter-block"
+         data-ng-repeat="letters in mtd.selected">
+            <a data-scroll href="#{{letters}}">
+                <div    letters
+                        class="letters box-top"
+                        data-mtd="mtd"
+                        data-letter="letters"> </div>
+            </a>
+         </div>
+</section>
 <section id="first">
 
     <div cards

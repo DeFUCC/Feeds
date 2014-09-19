@@ -6,7 +6,7 @@
          data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
          data-ng-class="{'fuller':!phrase.text}"
          class="box-head"
-         id="{{phrase.letters}}">
+         >
 
         <div  data-ng-if="mtd.persona" class="box-bar">
 
@@ -15,7 +15,7 @@
                     class="letters box-top"
                     data-mtd="mtd"
                     data-letter="phrase.letters"
-                    data-select="$parent.selected=mtd.select(phrase.letters, $parent.selected)"> </div>
+                    data-select="mtd.selector(phrase.letters)"> </div>
 
             <div rating  class="box-rate"
                  rate="rate"
@@ -42,8 +42,9 @@
 
         </div>
 
-        <div class="box-heading"
-             data-ng-click="$parent.selected=mtd.select(phrase.letters, $parent.selected)"
+        <div id="{{phrase.letters}}"
+             class="box-heading"
+             data-ng-click="mtd.selector(phrase.letters)"
              data-ng-if="phrase.title">
 
             <h3>
@@ -57,7 +58,7 @@
 
 
 
-    <div  class="box-text" data-ng-if="phrase.img || phrase.text">
+    <div  class="box-text" data-ng-if="phrase.text">
 
 
 
@@ -70,7 +71,7 @@
 
     </div>
 
-    <div data-ng-hide="selected==phrase.letters" data-ng-if="phrase.next" class="box-bottom">
+    <div data-ng-hide="mtd.isSelected(phrase.letters)" data-ng-if="phrase.next" class="box-bottom">
         <div data-ng-click="$parent.$parent.$parent.nxt=next"
              data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
              class="box-preview" data-ng-repeat="next in phrase.next | objectAsArray | filter: rf | filter: {letters: mtd.convertLetters(fltr)} | filter:search">
@@ -89,7 +90,7 @@
         </div>
     </div>
 
-    <div data-ng-if="phrase.next || mtd.persona" data-ng-show="$parent.selected==phrase.letters" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
+    <div data-ng-if="phrase.next || mtd.persona" data-ng-show="mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
 
 
         <div cards

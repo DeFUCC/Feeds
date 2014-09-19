@@ -228,6 +228,8 @@ fruitStory.directive("card", function() {
                 $scope.imgClick=function(){};
             };
 
+
+
         }
     };
 });

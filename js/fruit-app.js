@@ -19,13 +19,15 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
                     title:'Публичные',
                     feed:Designs.designs,
                     rating:{},
-                    ratingMode:{news:true,plus:true,zero:true,minus:false}
+                    ratingMode:{news:true,plus:true,zero:true,minus:false},
+                    selected:[]
                 },
                 personal:{
                     title:'Личные',
                     feed:[],
                     rating:{},
-                    ratingMode:{news:true,plus:true,zero:true,minus:false}
+                    ratingMode:{news:true,plus:true,zero:true,minus:false},
+                    selected:[]
                 }
             },
             persona:''
@@ -36,6 +38,12 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
     $scope.code=0;
     $scope.mtd.persona=$scope.$storage.persona;
+    $scope.mtd.isLogged = function () {
+        if ($scope.mtd.persona) {
+            return true
+        }
+        return false;
+    };
 
     //initial feed
 
@@ -47,6 +55,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
             $scope.feedTitle=$scope.feeds[feedTitle].title;
             $scope.rating = $scope.feeds[feedTitle].rating;
             $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
+            $scope.selected = $scope.feeds[feedTitle].selected;
         }
     };
 
@@ -87,7 +96,28 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         $scope.mtd.updateStory();
     };
 
+    $scope.mtd.selected=$scope.selected;
+    $scope.mtd.selector = function (letters) {
+        var found=false;
+        for (var i=0;i<$scope.mtd.selected.length;i++) {
+            if ($scope.mtd.selected[i] == letters) {
+                found = true;
+                $scope.mtd.selected.splice(i, 1);
+            }
+        }
+        if (!found) {
+            $scope.mtd.selected.push(letters);
+        }
+    };
 
+    $scope.mtd.isSelected = function (letters) {
+        for (var i=0;i<$scope.mtd.selected.length;i++) {
+            if ($scope.mtd.selected[i]==letters) {
+                return true
+            }
+        }
+        return false;
+    };
 
     $scope.mtd.select = function (letters, select) {
         if (letters==select) {
@@ -98,13 +128,6 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
             return letters;
         }
     };
-
-    $scope.mtd.self=$scope.self;
-
-
-
-
-
 
 };
 
