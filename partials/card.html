@@ -37,7 +37,6 @@
              icon-text="phrase.text"
              class="box-icon"
              data-ng-if="phrase.type"
-             data-ng-click="imgClick()"
                 >
 
         </div>
@@ -45,7 +44,7 @@
         <div id="{{phrase.letters}}"
              class="box-heading"
              data-ng-click="mtd.selector(phrase.letters)"
-             data-ng-if="phrase.title">
+             data-ng-if="phrase.title"  >
 
             <h3>
                 {{phrase.title}}

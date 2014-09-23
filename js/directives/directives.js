@@ -233,13 +233,9 @@ fruitStory.directive("card", function() {
         },
         controller: function ($scope) {
             $scope.time=new Date($scope.phrase.time);
-            $scope.imgClick=function () {
 
-                // Intensify all images with the 'intense' classname.
-                var elements = document.querySelectorAll( '.intense' );
-                Intense( elements );
-                $scope.imgClick=function(){};
-            };
+            var nodes = document.querySelectorAll('[data-fitter-happier-text]');
+            fitterHappierText(nodes);
 
 
 

@@ -1,7 +1,8 @@
 
-    <div class="letter-block">
-        <div class="nav-to-top"><a data-scroll href="#header">&uparrow;</a></div>
+<a class="no-underline" data-scroll href="#header"> <div class="letter-block">
+        <div class="nav-to-top">&uparrow;</div>
     </div>
+</a>
     <div class="letter-block"
          data-ng-repeat="letters in mtd.selected">
         <a data-scroll href="#{{letters}}">
@@ -9,11 +10,11 @@
                  <span
                          data-ng-repeat="lttr in cleanLetters(letters) track by $index"
                          data-ng-style="{backgroundColor:mtd.colorize(lttr)}"
-                         class="letter"
+                         class="letter nav-letter"
                          data-ng-click="select()">
                     <span ng-if="mtd.isLogged()">{{lttr}}</span>
                  </span>
-
+                {{}}
                 <span class="nav-close" data-ng-click="mtd.selector(letters)">&times;</span>
             </div>
         </a>
