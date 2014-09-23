@@ -128,11 +128,10 @@ fruitStory.directive("icon", function() {
         },
         templateUrl: 'partials/icon.html',
         controller: function ($scope) {
+            $scope.$watch('iconType', function (type) {
+                $scope.iconURL = 'icons/' + type + '.svg';
+            });
 
-            if ($scope.iconType=='design') {$scope.iconName="Затея"}
-            if ($scope.iconType=='event') {$scope.iconName="Событие"}
-
-            $scope.iconURL = 'icons/' + $scope.iconType + '.svg';
 
 
         }
@@ -229,13 +228,11 @@ fruitStory.directive("card", function() {
             mtd:'=',
             rate:'=',
             selected:'=',
-            nxt:'='
+            nxt:'=',
+            rf:'='
         },
         controller: function ($scope) {
             $scope.time=new Date($scope.phrase.time);
-
-            var nodes = document.querySelectorAll('[data-fitter-happier-text]');
-            fitterHappierText(nodes);
 
 
 

@@ -10,8 +10,6 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
     $scope.mtd = {}; //an object for universal methods
 
-
-
     $scope.$storage=$localStorage.$default(
         {
             feeds:{

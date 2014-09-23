@@ -1,49 +1,112 @@
 fruitStory.service('Types', function () {
-    this.types = {
+    var types = {
         design:{
             type:'design',
             title:"Затея",
             text: "Затея — план создания объектов или организации событий",
-            color:"#f05a28",
-            discourse:'H'
+            color:"#f05a28"
         },
         stage:{
-            type:'stage'
+            type:'stage',
+            title:'Ступень'
+        },
+        object:{
+            type:'object',
+            title:'Объект'
         },
         event:{
             type:'event',
             title:"Событие",
             text: "Событие — ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками.",
-            color:"#ffca00",
-            discourse:'C|C'
+            color:"#ffca00"
         },
         thing:{
             type:'thing',
             title:"Штука",
             text: "Штука — материальная сушность",
-            color:"#ffca00",
-            discourse:'A'
+            color:"#ffca00"
         },
         persona:{
-            type:'persona'
+            type:'persona',
+            title:'Личность'
         },
         face:{
-            type:'face'
+            type:'face',
+            title:'Лицо'
         },
         designFace:{
-            type:'design-face'
+            type:'designFace',
+            title:'Лицо затеи'
         },
         donation:{
-            type:'donation'
+            type:'donation',
+            title:'Дар'
         },
         skill:{
-            type:'skill'
+            type:'skill',
+            title:'Навык'
         },
         task:{
-            type:'task'
+            type:'task',
+            title:'Задача'
         },
         demand:{
-            type:'demand'
+            type:'demand',
+            title:'Поставка'
+        },
+        idea:{
+            type:'idea',
+            title:'Идея'
+        },
+        intent:{
+            type:'intent',
+            title:'Цель'
+        },
+        gist:{
+            type:'gist',
+            title:'Суть'
+        },
+        place:{
+            type:'place',
+            title:'Место'
+        },
+        time:{
+            type:'time',
+            title:'Время'
+        },
+        chance:{
+            type:'chance',
+            title:'Возможность'
+        },
+        tool:{
+            type:'tool',
+            title:'Инструмент'
+        },
+        material:{
+            type:'material',
+            title:'Материал'
+        },
+        result:{
+            type:'result',
+            title:'Результат'
+        },
+        present:{
+            type:'present',
+            title:'Подарок'
+        },
+        question:{
+            type:'question',
+            title:'Вопрос'
+        },
+        statement:{
+            type:'statement',
+            title:'Утверждение'
         }
     };
+    types.design.canHave = [
+        types.stage,
+        types.event,
+        types.object
+    ];
+    this.types=types;
 });

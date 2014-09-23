@@ -5,8 +5,7 @@
 	 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
 <g id="Layer_2">
 </g>
-<g id="Layer_3">
-	<path fill="none" stroke="#DA1C5C" stroke-width="9" stroke-linecap="round" stroke-miterlimit="10" d="M20,20c0,0,30,60,10,60
-		S20,20,55,20c40,0,20,60,20,60h9.167"/>
-</g>
+<path fill="none" stroke="#08A05B" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M37.759,9.441
+	c0.721-3.934-3.517,81.25,8.75,81.25c21.25,0,43.207-21.914,17.038-34.83c-19.25-9.5-38.788-8.795-38.788,3.33
+	c0,13.168,45.25-6,45.25-22c0-14.285-26-12-47.25-4.25"/>
 </svg>

@@ -18,7 +18,16 @@
                         placeholder="A|B|C|E|H|K|M|O|P|T|X|Y">
             </div>
         </div>
-
+        <div data-row-span="1">
+            <div data-field-span="1">
+                <label>Тип</label>
+                <select
+                    ng-model="phrase.type"
+                    name="Тип"
+                    required="1"
+                    ng-options="type.type as type.title for (typeName, type) in mtd.types"></select>
+            </div>
+        </div>
 
         <div data-row-span="1">
             <div data-field-span="1">

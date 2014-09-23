@@ -6,7 +6,8 @@
 <g id="Layer_2">
 </g>
 <g id="Layer_3">
-	<path fill="none" stroke="#DA1C5C" stroke-width="9" stroke-linecap="round" stroke-miterlimit="10" d="M20,20c0,0,30,60,10,60
-		S20,20,55,20c40,0,20,60,20,60h9.167"/>
+	<path fill="none" stroke="#CAD807" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M80,41
+		c-6.5-29-59.951-32.25-60,9.5c-0.05,42.568,54,38.5,60,10"/>
+	<path fill="none" stroke="#CAD807" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M20.049,15"/>
 </g>
 </svg>

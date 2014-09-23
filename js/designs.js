@@ -155,7 +155,7 @@ fruitStory.service('Designs', function () {
             {
                 "letters": "C|E|P",
                 "title": "Лицо затеи",
-                "type": "design-face",
+                "type": "designFace",
                 "text": "— конечный адресат всех вопросов, связанных с этой затеей. Глаза, уши, нос и рот затеи."
             },
             {
