@@ -20,23 +20,16 @@
 
     </button>
 </section>
-<section data-ng-if="contents" id="contents">
+<section ng-if="contents" id="contents">
     <contents
             class="contents"
             tree="tree"
             mtd="mtd"></contents>
 </section>
-<section data-ng-if="mtd.selected.length>0" id="selects">
-    Открыты:
-    <div class="letter-block"
-         data-ng-repeat="letters in mtd.selected">
-            <a data-scroll href="#{{letters}}">
-                <div    letters
-                        class="letters box-top"
-                        data-mtd="mtd"
-                        data-letter="letters"> </div>
-            </a>
-         </div>
+<section navigator
+         data-ng-if="mtd.selected.length>0"
+         id="selects">
+
 </section>
 <section id="first">
 

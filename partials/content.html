@@ -1,3 +1,6 @@
 <div class="inner-content"
      data-ng-style="{backgroundColor:mtd.colorize(branch.letters)}"
-     data-ng-repeat="branch in next"><div class="letter">{{branch.letter}}</div><content data-ng-if="branch.next" class="inner" next="branch.next" mtd="mtd"></content></div>
+     data-ng-repeat="branch in next">
+    <div ng-if="mtd.persona" class="content-name">{{branch.title}}</div>
+    <content data-ng-if="branch.next && mtd.isSelected(branch.letters)" class="inner" next="branch.next" mtd="mtd"></content>
+</div>

@@ -1,5 +1,18 @@
 
+fruitStory.directive("navigator", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/navigator.html',
+        controller: function ($scope) {
 
+            $scope.cleanLetters = function (letters) {
+                return letters.split('|') || '';
+            }
+
+
+        }
+    };
+});
 
 
 fruitStory.directive("rating", function() {
