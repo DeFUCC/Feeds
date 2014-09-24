@@ -1,0 +1,10 @@
+<div class="letter-cell"
+     data-ng-repeat="letter in grid"
+     data-ng-style="{backgroundColor:mtd.colorize(letter)}"
+     data-ng-click="choose(letter)"
+     data-ng-class="{chosen:letter==result}"
+     data-ng-show="letter==result || !result"
+        >
+    <span data-ng-if="mtd.persona"
+            > {{letter}}</span>
+</div>

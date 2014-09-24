@@ -12,11 +12,10 @@
          nxt="nxt"></div>
 
 </div>
-
 <div plus
      class="box-plus"
      data-ng-if="mtd.persona && !next"
-     data-ng-click="$parent.next={add:{letters:phrase.letters}}" ></div>
+     data-ng-click="$parent.next={new:{letters:phrase.letters}}" ></div>
 
 <div plus
      class="box-plus"
@@ -28,4 +27,5 @@
      phrase="next.new"
      address="addr"
      close="cancelNew()"
+     used="used"
      mtd="mtd"></div>

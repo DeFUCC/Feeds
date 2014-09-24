@@ -31,6 +31,76 @@ fruitStory.directive("rating", function() {
 });
 
 
+fruitStory.directive("letterGrid", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/letter-grid.html',
+        scope: {
+            used: '=',
+            mtd:'=',
+            result: '='
+        },
+        controller: function ($scope) {
+            $scope.bit=1;
+
+
+            $scope.$watch('used', function (used) {
+                if (angular.isArray(used)) {
+                    $scope.grid=exclude(used);
+                }
+            });
+
+            $scope.choose=function (letter) {
+                if ($scope.result==letter) {
+                    $scope.result=''
+                } else $scope.result=letter;
+            };
+
+
+            $scope.baseLetters = ["M","E","P","C","X","B","H","T","O","A","Y","K"];
+
+            function getBit (count) {
+                var power=1;
+                do {
+                    count=count-Math.pow(12,power++);
+                } while(count>=0);
+                return --power;
+            }
+            function exclude (arr) {
+                var bit=getBit(arr.length);
+                var full=preset(bit);
+                for (var i=0;i<arr.length;i++) {
+                    for (var j=0;j<full.length;j++) {
+                        if (arr[i]==full[j]) {
+                            full.splice(j,1);
+                        }
+                    }
+                }
+                return full;
+            }
+
+            function preset (bit){
+                var baseLetters = ['K', 'Y', 'A', 'O', 'T', 'H', 'B', 'X', 'C', 'P', 'E', 'M'];
+                var current, count, result = baseLetters.concat(), order;
+                if (typeof bit == "number" && bit>0 && bit<=12) {
+                    count=bit-1;
+                    for (var b = 0; b < count; b++) {
+                        current = result.slice(0);
+                        order = 0;
+                        for (var i = 0; i < current.length; i++) {
+
+                            for (var j = 0; j < 12; j++) {
+
+                                result[order++] = current[i] + baseLetters[j];
+                            }
+                        }
+                    }
+                };
+                return result;
+            }
+        }
+    };
+});
 
 fruitStory.directive("contents", function() {
     return {
@@ -161,6 +231,7 @@ fruitStory.directive("addForm", function() {
         templateUrl: 'partials/add-form.html',
         scope: {
             phrase: '=',
+            used:'=',
             mtd: '=',
             address: '=',
             close: '&'
@@ -264,6 +335,29 @@ fruitStory.directive("cards", function($compile) {
                 delete $scope.next.new;
             };
 
+            $scope.$watch('next', function (next) {
+                $scope.used=getUsed(next);
+            });
+
+            function getUsed (source) {
+                var result=[];
+                var letters;
+                for (var phrase in source) {
+                    if (source[phrase].letters) {
+                        letters=source[phrase].letters.replace($scope.addr+'|', '');
+                        if (letters.indexOf('|') == -1) {
+                            result[result.length] = source[phrase].letter
+                        }
+                    }
+                }
+                return result;
+            }
+
+            function child (lttrs) {
+                var letters;
+                letters=lttrs.split('|');
+                return letters.pop();
+            }
         },
         compile: function(tElement, tAttr) {
             var contents = tElement.contents().remove();

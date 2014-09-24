@@ -81,7 +81,7 @@ button:disabled {
     text-align:center;
     transition:all 100ms linear;
     cursor: pointer;
-    border: solid 4px rgba(50,50,50,0.05);
+    opacity: 0.7;
 }
 
 .button-icon {
@@ -90,7 +90,7 @@ button:disabled {
     padding:4px;
 }
 .button-icon:hover, .button-icon.active, .header-button.active, .header-button:focus {
-    border: solid 4px rgba(50,50,50,0.3);
+  opacity: 1;
 }
 .button-icon img {
     width: 100%;
@@ -119,82 +119,13 @@ button:disabled {
     padding:20px;
     position: relative;
 }
+
+
 #feed {
 
 }
-#contents {
-    background-color: #aaa;
-    padding: 15px;
-    display: flex;
-    flex-direction:column;     flex-wrap:wrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-}
-.contents {
-    z-index: 400;
-    max-height: 100%;
-    max-width: 12%;
-    position: fixed;
-    overflow: hidden;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction:column;     flex-wrap:nowrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-}
-.content {
-    display: flex;
-    flex:1 1 auto;
-    transition:all 100ms linear;
-    padding: 4px 0 4px 4px;
-    font-size: .6em;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    margin: 6px;
-    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
-    flex-direction:column;     flex-wrap:nowrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-    opacity: .5;
-    cursor: pointer;
-    min-height: 22px;
-}
-.content:hover {
-    opacity: 1;
-}
-.content-name {
-    flex:1 1 10px;
-    margin: 2px 6px;
-}
-.content .inner, inner-content .inner  {
-    flex:1 1 auto;
-    display: flex;
-    flex-direction:column;     flex-wrap:wrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-}
-.inner-content {
-    flex:1 1 auto;
-    box-shadow:1px 2px 1px rgba(0,0,0,0.4) inset;
-    display: flex;
-    flex-direction:column;     flex-wrap:wrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-    opacity: .5;
-    cursor: pointer;
-    min-height: 12px;
-    padding: 4px 0 4px 4px;
-}
-.inner-content:hover {
-    opacity: 1;
-}
+
+
 
 #selects {
     position: fixed;
@@ -598,7 +529,19 @@ button:disabled {
     transition:all 50ms linear;
     -webkit-filter: grayscale(75%);
 }
-
+.header-scroll-link {
+    text-decoration: none;
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:row;     flex-wrap:nowrap;
+    justify-content:flex-start;
+    align-content:space-between;
+    align-items:center;
+}
+.header-scroll-link .box-icon {
+    min-width: 32px;
+    margin:16px;
+}
 .selected{
     background-color:#fff;
     box-shadow:0px 8px 12px rgba(0, 0, 30, 0.3);
@@ -651,6 +594,8 @@ button:disabled {
     color:#fff;
     text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
 }
+
+
 .box-head {
     position: relative;
     min-height: 8px;
@@ -727,7 +672,7 @@ button:disabled {
 }
 
 .box-heading {
-    flex:1 1 auto;
+    flex:1 1 75%;
     background:rgba(0,0,0,0.1);
     margin:0;
     padding:10px 10px;
@@ -821,6 +766,7 @@ button:disabled {
 }
 .box-text{
     flex:1 1 100px;
+    min-width: 100px;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
@@ -964,6 +910,132 @@ button:disabled {
     height:400px;
 }
 
+
+/*------------------------------------*\
+    #Letter grid
+\*------------------------------------*/
+
+.letter-grid {
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:space-between;
+    align-content:center;
+
+}
+.letter-cell{
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis: 6%;
+    padding: 10px;
+    color:#fff;
+    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin: 1px;
+    transition:all 150ms linear;
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 10px;
+}
+
+.letter-cell:hover {
+    font-weight: bold;
+    opacity: 0.85;
+}
+
+.letter-cell:active {
+    box-shadow:inset 0px 1px 5px rgba(0, 0, 40, 0.1);
+    opacity: 1;
+}
+
+.letter-grid .chosen {
+    opacity: 1;
+    font-weight: bold;
+}
+
+/*------------------------------------*\
+    #Contents
+\*------------------------------------*/
+
+#contents {
+    background-color: #aaa;
+    padding: 15px;
+    display: flex;
+    flex-direction:column;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+}
+.contents {
+    z-index: 400;
+    max-height: 100%;
+    max-width: 12%;
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction:column;     flex-wrap:nowrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+}
+.content {
+    display: flex;
+    flex:1 1 auto;
+    transition:all 100ms linear;
+    padding: 4px 0 4px 4px;
+    font-size: .6em;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    margin: 6px;
+    text-shadow:0px 0px 4px rgba(0, 0, 0, 0.6);
+    flex-direction:column;     flex-wrap:nowrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+    opacity: .5;
+    cursor: pointer;
+    min-height: 22px;
+}
+.content:hover {
+    opacity: 1;
+}
+.content-name {
+    flex:1 1 10px;
+    margin: 2px 6px;
+}
+.content .inner, inner-content .inner  {
+    flex:1 1 auto;
+    display: flex;
+    flex-direction:column;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+}
+.inner-content {
+    flex:1 1 auto;
+    box-shadow:1px 2px 1px rgba(0,0,0,0.4) inset;
+    display: flex;
+    flex-direction:column;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+    opacity: .5;
+    cursor: pointer;
+    min-height: 12px;
+    padding: 4px 0 4px 4px;
+}
+.inner-content:hover {
+    opacity: 1;
+}
+
+
+
+
+/*------------------------------------*\
+    #Fixed-sticky residue
+\*------------------------------------*/
 
 .fixedsticky {
     position: -webkit-sticky;

@@ -63,7 +63,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
     $scope.mtd.types=Types.types;
 
-    $scope.mtd.viewType='';
+    $scope.mtd.viewType='1';
 
     $scope.mtd.getTypes=function (phrase, user) {
         var types=[];
@@ -85,7 +85,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
     $scope.mtd.colorize = colorize;
-    $scope.mtd.parents = parents;
+    $scope.mtd.parent = parent;
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
     $scope.mtd.loadFeed=function (json) {
@@ -176,11 +176,10 @@ function convertStory (story) {
     return tree;
 }
 
-function parents (lttrs) {
+function parent (lttrs) {
     var letters;
     letters=lttrs.split('|');
-    letters.pop();
-    return letters;
+    return letters.shift();
 }
 
 
