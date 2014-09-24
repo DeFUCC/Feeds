@@ -844,6 +844,7 @@ button:disabled {
 }
 #filter {
     max-width: 60px;
+    color:#fff;
 }
 #filters li.plus {
     min-width: 32px;

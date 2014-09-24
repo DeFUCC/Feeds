@@ -213,7 +213,7 @@ function colorize (lttrs,opacity) {
     if (opacity && opacity>=0 && opacity<=1) {alpha=opacity}
     return hsla(hue,sat,light,alpha);
 
-    } else return 'hsla(0,0%,50%,0.5)';
+    } else return '#fff'; // hsla(0,0%,50%,0.5)
 
 }
 
