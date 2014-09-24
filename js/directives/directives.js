@@ -57,7 +57,7 @@ fruitStory.directive("letterGrid", function() {
             };
 
 
-            $scope.baseLetters = ["M","E","P","C","X","B","H","T","O","A","Y","K"];
+
 
             function getBit (count) {
                 var power=1;
@@ -68,7 +68,7 @@ fruitStory.directive("letterGrid", function() {
             }
             function exclude (arr) {
                 var bit=getBit(arr.length);
-                var full=preset(bit);
+                var full=preset(bit).reverse();
                 for (var i=0;i<arr.length;i++) {
                     for (var j=0;j<full.length;j++) {
                         if (arr[i]==full[j]) {

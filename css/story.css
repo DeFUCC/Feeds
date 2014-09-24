@@ -125,7 +125,16 @@ button:disabled {
 
 }
 
+.sticky {
+    position: fixed;
+    width: 100%;
+}
 
+@media (max-width: 800px) {
+    .sticky {
+        position:relative;
+    }
+}
 
 #selects {
     position: fixed;
@@ -188,152 +197,7 @@ button:disabled {
     font-weight: bold;
 }
 
-#filterSection {
-    min-height: 72px;
-}
 
-.sticky {
-    position: fixed;
-    width: 100%;
-}
-
-@media (max-width: 800px) {
-    .sticky {
-        position:relative;
-    }
-}
-
-#filters {
-    background-color: rgba(170,170,175,0.5);
-    list-style: none outside none;
-    display: flex;
-    flex-direction:row;     flex-wrap:wrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-    margin: 0;
-    padding: 15px 0;
-    z-index: 600;
-}
-#filters menu {
-    flex:1 1 auto;
-    display: flex;
-    flex-direction:row;     flex-wrap:no-wrap;
-    justify-content:center;
-    align-content:space-around;
-    align-items:stretch;
-    margin: 0 20px;
-    padding: 0;
-}
-#filters li {
-    border-radius: 8px;
-    list-style: none outside none;
-    text-indent: 0;
-    text-align: center;
-    background-color: #888;
-    color: #fff;
-    margin: 5px;
-    padding: 12px;
-    display: block;
-    flex:1 1 auto;
-    opacity: 0.6;
-    cursor: pointer;
-    position: relative;
-}
-#filters li.active {
-    opacity: 1;
-    background-color: #606065;
-    box-shadow: 0 1px 2px lawngreen;
-}
-#filters li.active:hover {
-    opacity: 1;
-}
-#filters li:hover {
-    opacity: .8;
-}
-#filters li:before {
-    content:none;
-}
-#filters input[type=text] {
-    flex:1 1 auto;
-    border:0;
-    border-radius: 8px;
-    padding:12px;
-    margin: 4px;
-    font-size: 14px;
-    opacity: 0.6;
-}
-#filters input[type=text]:hover {
-    opacity: 0.8;
-}
-#filters input[type=text]:focus {
-    outline: none;
-    opacity: 1;
-}
-#filter {
-    max-width: 60px;
-}
-#filters li.plus {
-    min-width: 32px;
-    max-width: 60px;
-    background-color: #fff;
-    color:#555 !important;
-    font-weight: bold;
-    margin-right:0;
-    border-radius: 8px 0 0 8px;
-}
-#filters li.zero {
-    min-width: 32px;
-    max-width: 60px;
-    border-radius: 0;
-    font-weight: bold;
-    background-color: #888;
-    margin-left:0;
-    margin-right: 0;
-}
-#filters li.minus {
-    min-width: 32px;
-    max-width: 60px;
-    font-weight: bold;
-    background-color: #000;
-    margin-left:0;
-    border-radius: 0 8px 8px 0;
-}
-#filters .news {
-    min-width: 80px;
-    flex-basis:100px;
-}
-#filters .reset {
-    background-color: darkred;
-    min-width: 80px;
-    flex-basis:100px;
-    max-width: 100px;
-}
-#filters .tree {
-    margin-right: 0;
-    border-radius: 8px 0 0 8px;
-}
-#filters .story {
-    margin-left: 0;
-    border-radius: 0 8px 8px 0;
-}
-.indy {
-    position:absolute;
-    z-index: 300;
-    left:6px;
-    top:6px;
-    padding:2px 4px;
-    font-size: 10px;
-    font-weight: bold;
-    border-radius: 4px;
-    border: 1px #333;
-    background-color: rgba(150,150,150,0.4);
-}
-.active .indy {
-    background-color: rgb(150,190,150);
-    border: 1px #ccc;
-    box-shadow:0px 0px 4px lawngreen;
-}
 
 .texter {height: 120px}
 .add-form {
@@ -911,8 +775,163 @@ button:disabled {
 }
 
 
+
 /*------------------------------------*\
-    #Letter grid
+    # Filter section
+\*------------------------------------*/
+
+
+
+#filterSection {
+    min-height: 72px;
+}
+
+
+
+#filters {
+    background-color: rgba(170,170,175,0.5);
+    list-style: none outside none;
+    display: flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+    margin: 0;
+    padding: 15px 0;
+    z-index: 600;
+}
+#filters menu {
+    flex:1 1 auto;
+    display: flex;
+    flex-direction:row;     flex-wrap:nowrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:stretch;
+    margin: 0 20px;
+    padding: 0;
+}
+#filters li {
+    border-radius: 8px;
+    list-style: none outside none;
+    text-indent: 0;
+    text-align: center;
+    background-color: #888;
+    color: #fff;
+    margin: 5px;
+    padding: 12px;
+    display: block;
+    flex:1 1 auto;
+    opacity: 0.6;
+    cursor: pointer;
+    position: relative;
+}
+#filters li.active {
+    opacity: 1;
+    background-color: #606065;
+    box-shadow: 0 1px 2px lawngreen;
+}
+#filters li.active:hover {
+    opacity: 1;
+}
+#filters li:hover {
+    opacity: .8;
+}
+#filters li:before {
+    content:none;
+}
+#filters input[type=text] {
+    flex:1 1 auto;
+    border:0;
+    border-radius: 8px;
+    padding:12px;
+    margin: 4px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+#filters input[type=text]:hover {
+    opacity: 0.8;
+}
+#filters input[type=text]:focus {
+    outline: none;
+    opacity: 1;
+}
+#filter {
+    max-width: 60px;
+}
+#filters li.plus {
+    min-width: 32px;
+    max-width: 60px;
+    background-color: #fff;
+    color:#555 !important;
+    font-weight: bold;
+    margin-right:0;
+    border-radius: 8px 0 0 8px;
+}
+#filters li.zero {
+    min-width: 32px;
+    max-width: 60px;
+    border-radius: 0;
+    font-weight: bold;
+    background-color: #888;
+    margin-left:0;
+    margin-right: 0;
+}
+#filters li.minus {
+    min-width: 32px;
+    max-width: 60px;
+    font-weight: bold;
+    background-color: #000;
+    margin-left:0;
+    border-radius: 0 8px 8px 0;
+}
+#filters .show-letters {
+    flex-basis: 10px;
+    max-width: 50px;
+}
+#filters .news {
+    min-width: 80px;
+    flex-basis:100px;
+}
+#filters .reset {
+    background-color: darkred;
+    min-width: 80px;
+    flex-basis:100px;
+    max-width: 100px;
+}
+#filters .tree {
+    margin-right: 0;
+    border-radius: 8px 0 0 8px;
+}
+#filters .story {
+    margin-left: 0;
+    border-radius: 0 8px 8px 0;
+}
+.indy {
+    position:absolute;
+    z-index: 300;
+    left:6px;
+    top:6px;
+    padding:2px 4px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px #333;
+    background-color: rgba(150,150,150,0.4);
+}
+.active .indy {
+    background-color: rgb(150,190,150);
+    border: 1px #ccc;
+    box-shadow:0px 0px 4px lawngreen;
+}
+
+
+
+
+
+
+
+/*------------------------------------*\
+    # Letter grid
 \*------------------------------------*/
 
 .letter-grid {

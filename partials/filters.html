@@ -1,4 +1,10 @@
 <menu>
+    <li data-ng-click="mtd.showLetters=!mtd.showLetters"
+        data-ng-class="{active:mtd.showLetters}"
+        class="show-letters"
+            >
+        Буквы
+        </li>
     <input data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}"
            placeholder="Буква"
            id="filter"

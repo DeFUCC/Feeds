@@ -81,7 +81,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         }
         return types;
     };
-
+    $scope.mtd.showLetters=false;
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
     $scope.mtd.colorize = colorize;
