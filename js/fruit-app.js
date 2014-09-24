@@ -63,7 +63,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
     $scope.mtd.types=Types.types;
 
-    $scope.mtd.viewType='1';
+    $scope.mtd.viewType='';
 
     $scope.mtd.getTypes=function (phrase, user) {
         var types=[];

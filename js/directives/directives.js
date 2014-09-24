@@ -57,15 +57,6 @@ fruitStory.directive("letterGrid", function() {
             };
 
 
-
-
-            function getBit (count) {
-                var power=1;
-                do {
-                    count=count-Math.pow(12,power++);
-                } while(count>=0);
-                return --power;
-            }
             function exclude (arr) {
                 var bit=getBit(arr.length);
                 var full=preset(bit).reverse();
@@ -77,6 +68,14 @@ fruitStory.directive("letterGrid", function() {
                     }
                 }
                 return full;
+            }
+
+            function getBit (count) {
+                var power=1;
+                do {
+                    count=count-Math.pow(12,power++);
+                } while(count>=0);
+                return --power;
             }
 
             function preset (bit){
@@ -234,10 +233,14 @@ fruitStory.directive("addForm", function() {
             used:'=',
             mtd: '=',
             address: '=',
+            type:'=',
             close: '&'
         },
         controller: function ($scope) {
             $scope.phrase = $scope.phrase || {letters:''};
+            $scope.type=$scope.type || 'statement';
+            $scope.phrase.type=$scope.mtd.types[$scope.type].canHave[0].type;
+            console.log($scope.type);
             $scope.$watch('letter', function (letter) {
                 if (angular.isString(letter)) {
                     $scope.letter=$scope.mtd.convertLetters(letter);
@@ -323,6 +326,7 @@ fruitStory.directive("cards", function($compile) {
             fltr:'=',
             rf:'=', //for rating filtering
             search:'=',
+            type:'=',
             addr:'=' //higher letters for adding new in place
         },
         controller: function ($scope){

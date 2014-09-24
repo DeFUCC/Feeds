@@ -136,66 +136,8 @@ button:disabled {
     }
 }
 
-#selects {
-    position: fixed;
-    top:30%;
-    left:0;
-    z-index:300;
-    background-color: rgba(255,255,255,0.6);
-    opacity: 0.4;
-    padding: 5px 5px 5px 0;
-    transition:all 100ms linear;
-}
 
-#selects:hover {
-    opacity: 1;
-}
 
-.nav-to-top {
-    background-color: #fff;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius:10px;
-    margin:4px 4px 4px 8px;
-}
-
-.nav-close {
-    margin-left:10px;
-    color:rgba(0,0,0,0.5);
-    opacity: 0.5;
-}
-.no-underline {
-    text-decoration: none;
-}
-.nav-close:hover {
-    opacity: 1;
-}
-.nav-letter {
-    margin:0 1px;
-}
-.letter-block {
-    display: block;
-    margin:12px 0;
-}
-
-.letter-block a {
-    text-decoration: none;
-}
-
-.letters {
-    flex:1 1 auto;
-    margin:1px 0 0 0;
-    color:#fff;
-    text-align: left;
-    cursor: pointer;
-}
-.letter {
-    min-width: 16px;
-    padding:4px;
-    font-size: 10px;
-    font-weight: bold;
-}
 
 
 
@@ -776,6 +718,51 @@ button:disabled {
 
 
 
+
+/*------------------------------------*\
+    # Navigator
+\*------------------------------------*/
+
+#navigator {
+    position: fixed;
+    top:30%;
+    left:0;
+    z-index:300;
+    background-color: rgba(255,255,255,0.6);
+    opacity: 0.4;
+    padding: 5px 5px 5px 0;
+    transition:all 100ms linear;
+}
+
+#navigator:hover {
+    opacity: 1;
+}
+
+.nav-to-top {
+    background-color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius:10px;
+    margin:4px 4px 4px 8px;
+    min-width: 24px;
+}
+
+.nav-close {
+    margin-left:10px;
+    color:rgba(0,0,0,0.5);
+    opacity: 0.5;
+}
+.no-underline {
+    text-decoration: none;
+}
+.nav-close:hover {
+    opacity: 1;
+}
+.nav-letter {
+    margin:0 1px;
+}
+
 /*------------------------------------*\
     # Filter section
 \*------------------------------------*/
@@ -926,6 +913,33 @@ button:disabled {
 
 
 
+/*------------------------------------*\
+    # Letters
+\*------------------------------------*/
+
+
+.letter-block {
+    display: block;
+    margin:12px 0;
+}
+
+.letter-block a {
+    text-decoration: none;
+}
+
+.letters {
+    flex:1 1 auto;
+    margin:1px 0 0 0;
+    color:#fff;
+    text-align: left;
+    cursor: pointer;
+}
+.letter {
+    min-width: 16px;
+    padding:4px;
+    font-size: 10px;
+    font-weight: bold;
+}
 
 
 

@@ -33,7 +33,7 @@
                     ng-model="phrase.type"
                     name="Тип"
                     required="1"
-                    ng-options="type.type as type.title for (typeName, type) in mtd.types"></select>
+                    ng-options="type.type as type.title for (typeName, type) in mtd.types[type].canHave"></select>
             </div>
         </div>
 
