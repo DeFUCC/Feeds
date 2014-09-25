@@ -22,12 +22,30 @@
     <li class="story"
         data-ng-click="source=feed"
         data-ng-class="{active:source==feed}">Лента</li>
+    <li class=""
+        data-ng-click="mtd.showRating=!mtd.showRating"
+        data-ng-class="{active:mtd.showRating}"
+            >Рейтинг</li>
 </menu>
-<menu data-ng-show="mtd.persona">
+<menu class="rating" data-ng-if="mtd.persona" data-ng-show="mtd.showRating">
+    <li class="heading">Рейтинг:</li>
+
+    <li class="tree"
+        data-ng-if="mtd.firebase && mtd.ratingView!='personal'"
+        data-ng-class="{active:mtd.ratingView=='global'}"
+        data-ng-click="mtd.switchRate('global')"
+        >Глобальный</li>
+    <li class="story"
+        data-ng-if="mtd.ratingView!='personal'"
+        data-ng-class="{active:mtd.ratingView=='local'}"
+        data-ng-click="mtd.switchRate('local')"
+            >
+        Локальный
+    </li>
     <li data-ng-click="rate.toggleRF('news')"
         class="news"
         data-ng-class="{active:ratingMode.news}">
-        Новые
+        Без оценки
         <div class="indy">{{rate.countNew()}}</div>
     </li>
     <li data-ng-click="rate.toggleRF(1)"
@@ -47,11 +65,7 @@
         data-ng-class="{active:ratingMode.minus}">-
         <div class="indy">{{rate.totalRated(-1)}}</div>
     </li>
-    <li
-            data-ng-click="reset()"
+    <li     data-ng-if="mtd.ratingView!='global'"
+            data-ng-click="rate.reset()"
             class="reset">Сброс</li>
 </menu>
-
-        <div class="updated"
-             ng-if="mtd.new.length>0"
-             >Есть новые высказывания</div>

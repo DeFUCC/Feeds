@@ -1,4 +1,4 @@
-<form class="grid-form flex-form">
+<form action="" class="grid-form flex-form">
 
     <fieldset>
         <legend>Добавить высказывание: </legend>
@@ -40,7 +40,10 @@
         <div data-row-span="1">
             <div data-field-span="1">
                 <label>Название</label>
-                <input  data-ng-model="phrase.title"
+                <input  name="title"
+                        required="1"
+                        autofocus="1"
+                        data-ng-model="phrase.title"
                         type="text">
             </div>
         </div>
@@ -59,7 +62,9 @@
             </div>
         </div>
     </fieldset>
-    <button class="form-button add"
+    <button type="submit"
+            value="+"
+            class="form-button add"
             data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
             data-ng-click="mtd.addToFeed(phrase)">+</button>
     <button class="form-button cancel"

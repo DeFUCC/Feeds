@@ -26,16 +26,101 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
                     rating:{},
                     ratingMode:{news:true,plus:true,zero:true,minus:false},
                     selected:[]
+                },
+                fireFeed:{
+                    title:'Онлайн',
+                    ratingMode:{news:true,plus:true,zero:true,minus:false},
+                    selected:[]
                 }
             },
-            persona:''
+            localRating:{}
         }
     );
 
+    $scope.localReset = function () {
+        $localStorage.$reset();
+    };
+
     $scope.feeds=$scope.$storage.feeds;
+
+    $scope.loaded=false;
+    $scope.online=false;
+
+    var connectedRef = new Firebase("https://frktfeeds.firebaseio.com/.info/connected");
+    connectedRef.on("value", function(snap) {
+        if (snap.val() === true) {
+            $scope.online=true;
+        } else {
+            $scope.online=false;
+        }
+    });
+
+    var rateRef = new Firebase('https://frktfeeds.firebaseio.com/rating');
+    var rateSync = $firebase(rateRef);
+
+    $scope.fireRating=rateSync.$asObject();
+
+    var feedRef = new Firebase('https://frktfeeds.firebaseio.com/feed');
+    var feedSync = $firebase(feedRef);
+    $scope.fireFeed=feedSync.$asArray();
+    $scope.fireFeed.$loaded().then(function () {
+        $scope.loaded=true;
+        $scope.mtd.switchToPublic();
+    });
+
+    $scope.mtd.switchRate = function (type) {
+        if (type=='global') {
+            $scope.mtd.fireRate = rateSync.$asObject().$bindTo($scope,'rating');
+            $scope.mtd.ratingView='global';
+        }
+        if (type=='local') {
+            if ($scope.mtd.fireRate) {
+                $scope.mtd.fireRate.then(function(unbind) {unbind()})
+            }
+            $scope.rating=$scope.$storage.localRating;
+            $scope.mtd.ratingView='local';
+        }
+        if (type=='personal') {
+            if ($scope.mtd.fireRate) {
+                $scope.mtd.fireRate.then(function(unbind) {unbind()})
+            }
+            $scope.rating=$scope.$storage.feeds.personal.rating;
+            $scope.mtd.ratingView='personal';
+        }
+
+    };
+
+    $scope.mtd.switchToPublic = function () {
+        var feedTitle = 'fireFeed';
+        $scope.feed =feedSync.$asArray();
+        $scope.feed.$watch(function () {
+            $scope.mtd.updateTree();
+        });
+        $scope.feedTitle='Публичные';
+        $scope.mtd.switchRate('global');
+        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
+        $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+        $scope.mtd.firebase=true;
+    };
+
+
+    $scope.mtd.showRating=false;
 
     $scope.code=0;
     $scope.mtd.persona=$scope.$storage.persona;
+
+    $scope.mtd.persona = $localStorage.persona || '';
+
+    $scope.$watch('mtd.persona', function() {
+        $localStorage.persona = $scope.mtd.persona;
+    });
+
+    $scope.$watch(function() {
+        return angular.toJson($localStorage.persona);
+    }, function() {
+        $scope.mtd.persona = $localStorage.persona;
+    });
+
     $scope.mtd.isLogged = function () {
         if ($scope.mtd.persona) {
             return true
@@ -51,13 +136,15 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         if (feedTitle) {
             $scope.feed = $scope.feeds[feedTitle].feed;
             $scope.feedTitle=$scope.feeds[feedTitle].title;
-            $scope.rating = $scope.feeds[feedTitle].rating;
+            $scope.mtd.switchRate(feedTitle);
             $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
-            $scope.selected = $scope.feeds[feedTitle].selected;
+            $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+            $scope.mtd.firebase=false;
         }
     };
 
-    $scope.changeFeed('designs');
+    $scope.changeFeed('personal');
+
 
 
 
@@ -94,7 +181,6 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         $scope.mtd.updateStory();
     };
 
-    $scope.mtd.selected=$scope.selected;
     $scope.mtd.selector = function (letters) {
         var found=false;
         for (var i=0;i<$scope.mtd.selected.length;i++) {
@@ -151,7 +237,6 @@ function checkAndAdd (add, arr) {
 
 function convertStory (story) {
     var tree = {};
-
     for(var i = 0; i < story.length; i++) {
         var saying = story[i];
         var letters = saying.letters.split('|');

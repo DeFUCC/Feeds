@@ -30,18 +30,20 @@
 
 <section id="header"><h1>Ленты</h1>
 
-    <button
+    <button ng-disabled="!loaded"
             class="header-button"
-            ng-class="{active:feedTitle==feeds.designs.title}"
-            ng-click="changeFeed('designs')">
-               Публичные
-            </button>
+            ng-class="{active:mtd.firebase}"
+            ng-click="mtd.switchToPublic()">
+        <span ng-if="loaded && online">Публичные</span>
+        <span ng-if="!online && !loaded">Подключение...</span>
+        <span ng-if="online && !loaded">Загрузка...</span>
+        <span ng-if="loaded && !online">Публичные (оффлайн)</span>
+    </button>
 
     <input autofocus="autofocus"
            placeholder="Представься"
            data-ng-model="mtd.persona">
-
-    <button ng-disabled="!mtd.persona"
+    <button
          class="header-button"
          ng-class="{active:feedTitle==feeds.personal.title}"
          ng-click="changeFeed('personal')">Личные ({{feeds.personal.feed.length}})</button>

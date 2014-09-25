@@ -16,7 +16,7 @@ fruitStory.directive("feed", function() {
 
             $scope.mtd.addToFeed = function (saying) {
                 var said;
-                if (saying) {
+                if (saying && saying.title && saying.type && saying.letters) {
 
                     said = angular.copy(saying);
                     saying.text='';
@@ -26,11 +26,19 @@ fruitStory.directive("feed", function() {
                     said.letters=convertLetters(said.letters);
                     said.author=$scope.mtd.persona;
                     said.time=Date.now();
-                    $scope.feed.push(said);
+                    if ($scope.mtd.firebase) {
+
+                        $scope.feed.$add(said);
+
+                    } else {
+
+                        console.log('push');
+                        $scope.feed.push(said);
+                    }
                     // may be a container for NEW sayings
                     //  $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
                     //  $scope.new[$scope.feedTitle].push(said);
-                }
+                } else {console.log('a phrase without title, type, or color/letters')}
 
                 $scope.updateTree();
             };
@@ -41,18 +49,19 @@ fruitStory.directive("feed", function() {
                 $scope.source=$scope.tree;
             };
 
+            $scope.mtd.updateTree=$scope.updateTree;
+
             $scope.$watch('feed', function () {
                 $scope.updateTree();
             });
 
-            $scope.reset = function () {
-                localStorage.clear();
-                $scope.rating={};
-                $scope.ratingMode={news:true,plus:true,zero:true,minus:false};
-            };
+
 
             $scope.rate={};
             $scope.rate.rating = $scope.rating;
+            $scope.rate.reset = function () {
+                $scope.rating={};
+            };
             $scope.rate.plus=function (letters) {
                 if (angular.isObject(letters)) {letters=letters.letters;}
                 $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
@@ -103,9 +112,12 @@ fruitStory.directive("feed", function() {
             $scope.rate.totalRated = function (rate) {
                 var total=0;
                 for (var a in $scope.rating) {
-                    if (rate>0 && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
-                    if (rate===0 && $scope.rating[a].pluses== $scope.rating[a].minuses) {total++}
-                    if (rate<0 && $scope.rating[a].pluses < $scope.rating[a].minuses) {total++}
+                    if (rate>0 && $scope.rating[a] && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
+                    if (rate===0 && $scope.rating[a] && $scope.rating[a].zeros>0 && $scope.rating[a].pluses === $scope.rating[a].minuses) {
+
+                        total++
+                    }
+                    if (rate<0 && $scope.rating[a] && $scope.rating[a].pluses < $scope.rating[a].minuses) {total++}
                 }
                 return total;
             };

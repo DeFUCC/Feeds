@@ -8,7 +8,7 @@
          class="box-head"
          >
 
-        <div  data-ng-if="mtd.showLetters || mtd.persona" class="box-bar">
+        <div  data-ng-if="mtd.showLetters || mtd.showRating" class="box-bar">
 
             <div
                     letters
@@ -18,9 +18,10 @@
                     data-select="mtd.selector(phrase.letters)"> </div>
 
             <div rating
-                 data-ng-if="mtd.persona"
+                 data-ng-if="mtd.showRating"
                  class="box-rate"
                  rate="rate"
+                 mtd="mtd"
                  letter="phrase.letters">
             </div>
 

@@ -21,9 +21,11 @@ fruitStory.directive("rating", function() {
         templateUrl: 'partials/rating.html',
         scope: {
             letters:'=letter',
-            rate:'='
+            rate:'=',
+            mtd:'='
         },
         controller: function ($scope) {
+
 
 
         }
@@ -240,7 +242,7 @@ fruitStory.directive("addForm", function() {
             $scope.phrase = $scope.phrase || {letters:''};
             $scope.type=$scope.type || 'statement';
             $scope.phrase.type=$scope.mtd.types[$scope.type].canHave[0].type;
-            console.log($scope.type);
+
             $scope.$watch('letter', function (letter) {
                 if (angular.isString(letter)) {
                     $scope.letter=$scope.mtd.convertLetters(letter);
