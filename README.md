@@ -1,4 +1,4 @@
-Fruit-story
+Feeds
 ===========
 
-Angular.js app for viewing the Fruit Story book.
+Based on Angular.js framework for structuring of design process.
