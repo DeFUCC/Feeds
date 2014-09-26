@@ -62,20 +62,68 @@ fruitStory.directive("feed", function() {
             $scope.rate.reset = function () {
                 $scope.rating={};
             };
+
+            $scope.rate.cancel = function (letters) {
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona]) {
+                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='+1' && $scope.rating[letters].pluses>0) {
+                        $scope.rating[letters].pluses--;
+                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                    }
+                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='-1' && $scope.rating[letters].minuses>0) {
+                        $scope.rating[letters].minuses--;
+                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                    }
+                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='-' && $scope.rating[letters].zeros>0) {
+                        $scope.rating[letters].zeros--;
+                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                    }
+
+                }
+
+            };
             $scope.rate.plus=function (letters) {
-                if (angular.isObject(letters)) {letters=letters.letters;}
-                $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
-                $scope.rating[letters].pluses++;
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
+                    $scope.mtd.rated[$scope.mtd.persona]={};
+
+                }
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].pluses++;
+                    $scope.mtd.rated[$scope.mtd.persona][letters]='+1';
+                } else {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].pluses++;
+                }
+
             };
             $scope.rate.minus=function (letters) {
-                if (angular.isObject(letters)) {letters=letters.letters;}
-                $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
-                $scope.rating[letters].minuses++;
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
+                    $scope.mtd.rated[$scope.mtd.persona]={};
+
+                }
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].minuses++;
+                    $scope.mtd.rated[$scope.mtd.persona][letters]='-1';
+                } else {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].minuses++;
+                }
+
             };
             $scope.rate.zero=function (letters) {
-                if (angular.isObject(letters)) {letters=letters.letters;}
-                $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
-                $scope.rating[letters].zeros++;
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
+                    $scope.mtd.rated[$scope.mtd.persona]={};
+
+                }
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].zeros++;
+                    $scope.mtd.rated[$scope.mtd.persona][letters]='-';
+                } else {
+                    $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
+                    $scope.rating[letters].zeros++;
+                }
             };
             $scope.rate.getPluses=function (letters) {
                 if ($scope.rating[letters] && $scope.rating[letters].pluses>$scope.rating[letters].minuses) {
@@ -104,7 +152,7 @@ fruitStory.directive("feed", function() {
             };
             $scope.rate.seenSort = function (phrase) {
                 if($scope.rating[phrase.letters]) {
-                    return ($scope.rating[phrase.letters].zeros);
+                    return ($scope.rating[phrase.letters].zeros + $scope.rating[phrase.letters].pluses + $scope.rating[phrase.letters].minuses);
                 };
                 return 0;
             };
@@ -113,7 +161,7 @@ fruitStory.directive("feed", function() {
                 var total=0;
                 for (var a in $scope.rating) {
                     if (rate>0 && $scope.rating[a] && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
-                    if (rate===0 && $scope.rating[a] && $scope.rating[a].zeros>0 && $scope.rating[a].pluses === $scope.rating[a].minuses) {
+                    if (rate===0 && $scope.rating[a] && $scope.rating[a].pluses === $scope.rating[a].minuses) {
 
                         total++
                     }

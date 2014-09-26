@@ -1,12 +1,12 @@
 
-<a class="no-underline" data-scroll href="#header"> <div class="letter-block">
+<a class="no-underline" data-scroll href="#header">
         <div class="nav-to-top">&uparrow;</div>
-    </div>
+
 </a>
-    <div class="letter-block"
+    <div class="nav-block"
          data-ng-repeat="letters in mtd.selected">
-        <a data-scroll href="#{{letters}}">
-            <div class="letters box-top">
+        <a class="no-underline" data-scroll href="#{{letters}}">
+            <div class="letters">
                  <span
                          data-ng-repeat="lttr in cleanLetters(letters) track by $index"
                          data-ng-style="{backgroundColor:mtd.colorize(lttr)}"

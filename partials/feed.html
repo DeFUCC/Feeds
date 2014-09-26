@@ -46,15 +46,3 @@
 
 </section>
 
-
-<section data-ng-if="mtd.persona" id="test">
-    <div class="btn"
-         ng-click="code=!code">Также можете посмотреть и скопировать, </div>
-    <div class="btn"
-         ng-click="mtd.loadFeed()"> вставить и загрузить. (это пока не работает, данные хранятся в браузере)</div>
-
-    <textarea ng-if="code"
-              class="output"
-              data-ng-model="JSON"></textarea>
-
-</section>

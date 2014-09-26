@@ -561,6 +561,38 @@ button:disabled {
     background-color: #000;
     margin-left:0;
 }
+.box-rate div.plused {
+    background-color: #fff;
+    color:#555 !important;
+    margin-right:0;
+    padding:4px;
+    font-size: 12px;
+    cursor: default;
+}
+.box-rate div.zeroed {
+    background-color: #888;
+    margin-left:0;
+    margin-right: 0;
+    padding:4px;
+    font-size: 12px;
+    cursor: default;
+}
+.box-rate div.minused {
+    background-color: #000;
+    margin-left:0;
+    padding:4px;
+    font-size: 12px;
+    cursor: default;
+}
+.box-rate div.cancel {
+    background-color: rgba(200,0,0,1);
+    margin-left:0;
+    padding:4px;
+    font-size: 12px;
+
+}
+
+
 .box-wider > .box-rate {
     flex:1 1 100%;
     max-width: 100%;
@@ -744,13 +776,24 @@ button:disabled {
     opacity: 0.4;
     padding: 5px 5px 5px 0;
     transition:all 100ms linear;
+    display:flex;
+    flex-direction:column;     flex-wrap:nowrap;
+    justify-content:center;
+    align-content:stretch;
+    align-items:stretch;
 }
 
 #navigator:hover {
     opacity: 1;
 }
 
+
+.nav-block {
+    margin:10px 0;
+}
+
 .nav-to-top {
+    flex:1 1 50%;
     background-color: #fff;
     text-align: center;
     font-weight: bold;
@@ -761,9 +804,14 @@ button:disabled {
 }
 
 .nav-close {
+    flex:1 1 50%;
     margin-left:10px;
     color:rgba(0,0,0,0.5);
     opacity: 0.5;
+    padding:4px 8px;
+    border-radius: 16px;
+    background-color: rgba(255,255,255,1);
+    min-width: 16px;
 }
 .no-underline {
     text-decoration: none;

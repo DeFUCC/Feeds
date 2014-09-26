@@ -1,7 +1,7 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked','firebase', 'sticky', 'ngStorage']);
+var fruitStory = angular.module('fruitStory',['hc.marked','firebase', 'ngStorage']);
 var controllers = {};
 fruitStory.controller(controllers);
 
@@ -67,6 +67,11 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         $scope.loaded=true;
         $scope.mtd.switchToPublic();
     });
+
+    var ratedRef = new Firebase('https://frktfeeds.firebaseio.com/rated');
+    var ratedSync = $firebase(ratedRef);
+    var rated=ratedSync.$asObject().$bindTo($scope, 'mtd.rated');
+
 
     $scope.mtd.switchRate = function (type) {
         if (type=='global') {
