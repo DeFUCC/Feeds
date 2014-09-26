@@ -49,20 +49,19 @@ button:disabled {
 }
 #header{
     background:#fff;
-    padding:60px;
+    padding:60px 20px;
     display: flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:center;
-    align-content:space-around;
+    align-content:space-between;
     align-items:stretch;
 }
-#header h1 {
+#header .logo {
     flex:1 1 100px;
+    max-height: 70px;
 
 }
-#header img {
-    max-height: 70px;
-}
+
 #header input {
     flex:1 1 400px;
     font-size: 16px;
