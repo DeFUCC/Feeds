@@ -163,6 +163,7 @@ fruitStory.service('Types', function () {
         types.quality,
         types.quantity,
         types.question,
+        types.result,
         types.statement
     ];
     types.skill.canHave=[
@@ -202,15 +203,17 @@ fruitStory.service('Types', function () {
         types.time,
         types.question,
         types.statement,
+        types.result,
         types.face
     ];
-    types.task.canHave = [
+    types.demand.canHave = [
         types.tool,
         types.material,
         types.place,
         types.time,
         types.question,
         types.statement,
+        types.result,
         types.face
     ];
     types.donation.canHave=[
@@ -223,6 +226,7 @@ fruitStory.service('Types', function () {
         types.quality,
         types.quantity,
         types.question,
+        types.result,
         types.statement
     ];
     types.idea.canHave=[
