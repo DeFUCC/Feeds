@@ -6,7 +6,7 @@ var controllers = {};
 fruitStory.controller(controllers);
 
 
-controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) {
+controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase, $firebaseSimpleLogin) {
 
     $scope.mtd = {}; //an object for universal methods
 
@@ -43,6 +43,37 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
     $scope.feeds=$scope.$storage.feeds;
 
+
+    //LOGIN EMULATION
+
+    $scope.mtd.persona=$scope.$storage.persona;
+
+    $scope.mtd.persona = $localStorage.persona || '';
+
+    $scope.$watch('mtd.persona', function() {
+        $localStorage.persona = $scope.mtd.persona;
+    });
+
+    $scope.$watch(function() {
+        return angular.toJson($localStorage.persona);
+    }, function() {
+        $scope.mtd.persona = $localStorage.persona;
+    });
+
+    $scope.mtd.isLogged = function () {
+        if ($scope.mtd.persona) {
+            return true
+        }
+        return false;
+    };
+
+
+
+
+
+
+    //FIREBASE CONNECTIONS
+
     $scope.loaded=false;
     $scope.online=false;
 
@@ -72,6 +103,8 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
     var ratedSync = $firebase(ratedRef);
     var rated=ratedSync.$asObject().$bindTo($scope, 'mtd.rated');
 
+    var authRef = new Firebase('https://frktfeeds.firebaseio.com/');
+    $scope.auth=$firebaseSimpleLogin(authRef);
 
     $scope.mtd.switchRate = function (type) {
         if (type=='global') {
@@ -109,29 +142,15 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
     };
 
 
+
+
+    //View options
+
+
+    $scope.mtd.showLetters=false;
     $scope.mtd.showRating=false;
 
-    $scope.code=0;
-    $scope.mtd.persona=$scope.$storage.persona;
 
-    $scope.mtd.persona = $localStorage.persona || '';
-
-    $scope.$watch('mtd.persona', function() {
-        $localStorage.persona = $scope.mtd.persona;
-    });
-
-    $scope.$watch(function() {
-        return angular.toJson($localStorage.persona);
-    }, function() {
-        $scope.mtd.persona = $localStorage.persona;
-    });
-
-    $scope.mtd.isLogged = function () {
-        if ($scope.mtd.persona) {
-            return true
-        }
-        return false;
-    };
 
     //initial feed
 
@@ -153,38 +172,16 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
 
 
 
-    $scope.mtd.types=Types.types;
+    $scope.mtd.types=Types.types;  //types of phrases
 
-    $scope.mtd.viewType='';
 
-    $scope.mtd.getTypes=function (phrase, user) {
-        var types=[];
-        console.log(phrase);
-        if (phrase.type) {
-            if ($scope.mtd.types.hasOwnProperty(phrase.type)) {
-                types.push($scope.mtd.types[phrase.type].open);
-                if ($scope.mtd.persona==user) {
-                    types.push($scope.mtd.types[phrase.type].closed);
-                }
-            }
-        }
-        if (!phrase.type) {
-            types.push('design');
-        }
-        return types;
-    };
-    $scope.mtd.showLetters=false;
     $scope.mtd.preset = preset;
     $scope.mtd.shuffle = shuffle;
     $scope.mtd.colorize = colorize;
     $scope.mtd.parent = parent;
     $scope.mtd.convertLetters = convertLetters;
     $scope.mtd.convertStory=convertStory;
-    $scope.mtd.loadFeed=function (json) {
-        if (json) {$scope.JSON=json}
-        $scope.feed=JSON.parse($scope.JSON);
-        $scope.mtd.updateStory();
-    };
+
 
     $scope.mtd.selector = function (letters) {
         var found=false;
@@ -208,15 +205,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase) 
         return false;
     };
 
-    $scope.mtd.select = function (letters, select) {
-        if (letters==select) {
-            select=false;
-            return false;
-        } else {
-            select=letters;
-            return letters;
-        }
-    };
+
 
 };
 
