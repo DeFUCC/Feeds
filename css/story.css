@@ -62,11 +62,16 @@ button:disabled {
 
 }
 
-#header input {
+#header .auth {
     flex:1 1 400px;
+}
+
+#header .auth input {
     font-size: 16px;
-    border-radius:4px;
+    border-radius:12px;
     padding: 15px;
+    margin: 8px;
+    float: right;
 }
 .header-button {
     flex:1 1 70px;
@@ -769,7 +774,7 @@ button:disabled {
 
 #navigator {
     position: fixed;
-    top:30%;
+    top:15%;
     left:0;
     z-index:300;
     background-color: rgba(255,255,255,0.6);

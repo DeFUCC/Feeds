@@ -14,6 +14,22 @@ fruitStory.directive("navigator", function() {
     };
 });
 
+fruitStory.directive("auth", function() {
+    return {
+        restrict: "A",
+        templateUrl: 'partials/auth.html',
+        scope: {
+            auth:'=',
+            mtd:'='
+        },
+        controller: function ($scope) {
+
+
+
+        }
+    };
+});
+
 
 fruitStory.directive("rating", function() {
     return {

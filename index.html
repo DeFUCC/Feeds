@@ -17,9 +17,9 @@
     <script type="application/javascript" src="js/services/types.js"></script>
     <script type="application/javascript" src="js/side/firebase.js"></script>
     <script type="application/javascript" src="js/side/angularfire.min.js"></script>
-
-    <script src="js/side/bind-polyfill.js"></script>
-    <script src="js/side/smooth-scroll.js"></script>
+    <script type="application/javascript" src="js/side/firebase-simple-login.js"></script>
+    <script type="application/javascript" src="js/side/bind-polyfill.js"></script>
+    <script type="application/javascript" src="js/side/smooth-scroll.js"></script>
     <link href="css/story.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/gridforms.css" rel="stylesheet">
@@ -28,6 +28,12 @@
 <body data-ng-app="fruitStory" data-ng-controller="feeds" data-ng-cloak>
 
 <section id="header"><img class="logo" src="icons/feeds-logo.svg">
+
+    <button
+            class="header-button"
+            ng-class="{active:feedTitle==feeds.personal.title}"
+            ng-click="changeFeed('personal')">Личные ({{feeds.personal.feed.length}})</button>
+
 
     <button ng-disabled="!loaded"
             class="header-button"
@@ -39,13 +45,7 @@
         <span ng-if="loaded && !online">Публичные (оффлайн)</span>
     </button>
 
-    <input autofocus="autofocus"
-           placeholder="Представься"
-           data-ng-model="mtd.persona">
-    <button
-         class="header-button"
-         ng-class="{active:feedTitle==feeds.personal.title}"
-         ng-click="changeFeed('personal')">Личные ({{feeds.personal.feed.length}})</button>
+    <div data-auth class="auth" mtd="mtd"></div>
 
 </section>
 
