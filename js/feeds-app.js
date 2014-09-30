@@ -1,14 +1,21 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked','firebase', 'ngStorage']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'smoothScroll','firebase', 'ngStorage', 'cfp.loadingBar', 'fireUser','ui.router']);
 var controllers = {};
+
+angular.module('fireUser').value('FireUserConfig', {
+    url:'https://frktfeeds.firebaseio.com/'
+});
+
 fruitStory.controller(controllers);
 
 
-controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase, $firebaseSimpleLogin) {
+controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage, $firebase, $firebaseSimpleLogin, cfpLoadingBar) {
 
     $scope.mtd = {}; //an object for universal methods
+
+    cfpLoadingBar.start();
 
     $scope.$storage=$localStorage.$default(
         {
@@ -36,6 +43,10 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase, 
             localRating:{}
         }
     );
+
+    $scope.$on('fireuser:login_error', function (data) {
+        $scope.error='Не удалось войти.'
+    });
 
     $scope.localReset = function () {
         $localStorage.$reset();
@@ -74,6 +85,8 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase, 
 
     //FIREBASE CONNECTIONS
 
+
+
     $scope.loaded=false;
     $scope.online=false;
 
@@ -97,6 +110,7 @@ controllers.feeds = function ($scope, Designs, Types, $localStorage, $firebase, 
     $scope.fireFeed.$loaded().then(function () {
         $scope.loaded=true;
         $scope.mtd.switchToPublic();
+        cfpLoadingBar.complete();
     });
 
     var ratedRef = new Firebase('https://frktfeeds.firebaseio.com/rated');
