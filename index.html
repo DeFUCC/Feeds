@@ -6,6 +6,8 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
     <script src="js/side/angular.min.js"></script>
+    <script type="application/javascript" src="js/side/angular-ui-router.js"></script>
+    <script type="application/javascript" src="js/side/FireUser.js"></script>
     <script type="application/javascript" src="js/side/marked.js"></script>
     <script type="application/javascript" src="js/side/angular-marked.js"></script>
     <script type="application/javascript" src="js/side/prefixfree.min.js"></script>
@@ -19,10 +21,14 @@
     <script type="application/javascript" src="js/side/angularfire.min.js"></script>
     <script type="application/javascript" src="js/side/firebase-simple-login.js"></script>
     <script type="application/javascript" src="js/side/bind-polyfill.js"></script>
-    <script type="application/javascript" src="js/side/smooth-scroll.js"></script>
+    <script type="application/javascript" src="js/side/angular-smooth-scroll.js"></script>
+    <script type="application/javascript" src="js/side/loading-bar.js"></script>
+
+
     <link href="css/story.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/gridforms.css" rel="stylesheet">
+    <link href="css/loading-bar.css" rel="stylesheet">
 
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="feeds" data-ng-cloak>
@@ -45,7 +51,15 @@
         <span ng-if="loaded && !online">Публичные (оффлайн)</span>
     </button>
 
-    <div data-auth class="auth" mtd="mtd"></div>
+    <div fuLoginForm
+         data-ng-if="!data.userLoggedIn"></div>
+
+    <div fuLogOut
+         data-ng-if="data.userLoggedIn"></div>
+
+    <div fuSignUpForm data-ng-if="!data.userLoggedIn"></div>
+    {{data}}
+
 
 </section>
 
@@ -59,8 +73,6 @@
         >
 
 </section>
-<script>
-    smoothScroll.init();
-</script>
+
 </body>
 </html>
