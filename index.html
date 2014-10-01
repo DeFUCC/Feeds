@@ -26,14 +26,13 @@
 
 
     <link href="css/story.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
     <link href="css/gridforms.css" rel="stylesheet">
     <link href="css/loading-bar.css" rel="stylesheet">
 
 </head>
 <body data-ng-app="fruitStory" data-ng-controller="feeds" data-ng-cloak>
 
-<section id="header"><img class="logo" src="icons/feeds-logo.svg">
+<section id="header">
 
     <button
             class="header-button"
@@ -51,18 +50,34 @@
         <span ng-if="loaded && !online">Публичные (оффлайн)</span>
     </button>
 
+    <img class="logo" src="icons/feeds-logo.svg">
+
+    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
+            class="header-button"
+            ng-click="mtd.logging=1">Войти {{logging}}</button>
+    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
+            class="header-button"
+            ng-click="mtd.creating=1">Представиться</button>
+
+
     <div fuLoginForm
-         data-ng-if="!data.userLoggedIn"></div>
+         mtd="mtd"
+         class="auth"
+         data-ng-if="!data.userLoggedIn && mtd.logging"></div>
+
 
     <div fuLogOut
+         class="header-button"
          data-ng-if="data.userLoggedIn"></div>
 
-    <div fuSignUpForm data-ng-if="!data.userLoggedIn"></div>
-    {{data}}
+    <div fuSignUpForm
+         mtd="mtd"
+         class="auth"
+         data-ng-if="!data.userLoggedIn && mtd.creating"></div>
+
 
 
 </section>
-
 <section id="feed"
         feed
         data-persona="persona"

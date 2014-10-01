@@ -44,9 +44,7 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
         }
     );
 
-    $scope.$on('fireuser:login_error', function (data) {
-        $scope.error='Не удалось войти.'
-    });
+
 
     $scope.localReset = function () {
         $localStorage.$reset();
@@ -55,28 +53,22 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
     $scope.feeds=$scope.$storage.feeds;
 
 
-    //LOGIN EMULATION
+    //LOGIN
 
-    $scope.mtd.persona=$scope.$storage.persona;
-
-    $scope.mtd.persona = $localStorage.persona || '';
-
-    $scope.$watch('mtd.persona', function() {
-        $localStorage.persona = $scope.mtd.persona;
+    $scope.$on('fireuser:login_error', function (data) {
+        $scope.error='Не удалось войти.'
     });
 
-    $scope.$watch(function() {
-        return angular.toJson($localStorage.persona);
-    }, function() {
-        $scope.mtd.persona = $localStorage.persona;
+    $scope.$on('fireuser:login', function (data) {
+
+        $scope.mtd.persona=$scope.data.userInfo.email;
     });
 
-    $scope.mtd.isLogged = function () {
-        if ($scope.mtd.persona) {
-            return true
-        }
-        return false;
-    };
+    $scope.$on('fireuser:logout', function (data) {
+
+        $scope.mtd.persona=false;
+    });
+
 
 
 
@@ -145,7 +137,7 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
     $scope.mtd.switchToPublic = function () {
         var feedTitle = 'fireFeed';
         $scope.feed =feedSync.$asArray();
-        $scope.feed.$watch(function () {
+        $scope.mtd.unwatch = $scope.feed.$watch(function () {
             $scope.mtd.updateTree();
         });
         $scope.feedTitle='Публичные';
@@ -172,6 +164,7 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
 
     $scope.changeFeed = function (feedTitle) {
         if (feedTitle) {
+            if ($scope.mtd.unwatch) {$scope.mtd.unwatch()};
             $scope.feed = $scope.feeds[feedTitle].feed;
             $scope.feedTitle=$scope.feeds[feedTitle].title;
             $scope.mtd.switchRate(feedTitle);

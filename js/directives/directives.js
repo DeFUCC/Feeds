@@ -368,7 +368,7 @@ fruitStory.directive("cards", function($compile) {
                     if (source[phrase].letters) {
                         letters=source[phrase].letters.replace($scope.addr+'|', '');
                         if (letters.indexOf('|') == -1) {
-                            result[result.length] = source[phrase].letter
+                            result.push( source[phrase].letter);
                         }
                     }
                 }

@@ -121,9 +121,9 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
           $rootScope.$broadcast(self.USER_CREATED_EVENT,user);
           $log.info('User created - User Id: ' + user.id + ', Email: ' + user.email);
         }
-      })
+      });
       return createUser;
-    }
+    };
 
     this.login = function(type,user) {
       if(type === 'password'){
@@ -208,7 +208,7 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
         type:'@'
       },
       replace: true,
-      template: '<div ng-click="logout()">Logout</div>',
+      template: '<button ng-click="logout()">Выйти</button>',
       controller:'fireuserlogoutCtrl',
       restrict: 'AE'
     };
@@ -221,7 +221,9 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
     }])
 .directive('fuloginform', ['$compile', 'FireUserValues', function ($compile,FireUserValues) {
   return {
-    scope:{},
+    scope:{
+        mtd:'='
+    },
     restrict:'AE',
     controller:'fireuserloginformCtrl',
     link:function ($scope,element,attr,ctrl) {
@@ -235,7 +237,8 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
           '</formgroup>'+
           '<br />'+
           '<button id="submitBtn" class="btn btn-primary pull-right" type="submit">Log in</button>'+
-        '</form>'
+        '</form>' +
+            '<button class="nav-close" ng-click="mtd.logging=false">&times;</button>'
       );
       $compile(element.contents())($scope);
     }
@@ -250,7 +253,9 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
 }])
 .directive('fusignupform', ['$compile', 'FireUserValues', function ($compile,FireUserValues) {
   return {
-    scope:{},
+    scope:{
+        mtd:'='
+    },
     restrict:'AE',
     controller:'fireusersignupformCtrl',
     link:function ($scope,element,attr,ctrl) {
@@ -265,7 +270,8 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
         '  <br />'+
         '  <button type="submit" class="btn btn-primary pull-right" value="creatUser">Sign Up</button>'+
         '  <span class="error" ng-show="error">{{error}}</span>'+
-        '</form>'
+        '</form>' +
+            '<button class="nav-close" ng-click="mtd.creating=false">&times;</button>'
       );
       $compile(element.contents())($scope);
     }

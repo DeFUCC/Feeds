@@ -35,9 +35,7 @@ fruitStory.directive("feed", function() {
                         console.log('push');
                         $scope.feed.push(said);
                     }
-                    // may be a container for NEW sayings
-                    //  $scope.new[$scope.feedTitle]=$scope.new[$scope.feedTitle] || [];
-                    //  $scope.new[$scope.feedTitle].push(said);
+
                 } else {console.log('a phrase without title, type, or color/letters')}
 
                 $scope.updateTree();
@@ -45,7 +43,6 @@ fruitStory.directive("feed", function() {
 
             $scope.updateTree=function () {
                 $scope.tree=convertStory($scope.feed);
-                $scope.JSON=JSON.stringify($scope.feed, '',4);
                 $scope.source=$scope.tree;
             };
 
