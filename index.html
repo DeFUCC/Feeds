@@ -15,7 +15,6 @@
     <script type="application/javascript" src="js/feeds-app.js"></script>
     <script type="application/javascript" src="js/directives/feed.js"></script>
     <script type="application/javascript" src="js/directives/directives.js"></script>
-    <script type="application/javascript" src="js/services/designs.js"></script>
     <script type="application/javascript" src="js/services/types.js"></script>
     <script type="application/javascript" src="js/side/firebase.js"></script>
     <script type="application/javascript" src="js/side/angularfire.min.js"></script>
@@ -34,6 +33,10 @@
 
 <section id="header">
 
+
+
+    <img class="logo" src="icons/feeds-logo.svg">
+
     <button
             class="header-button"
             ng-class="{active:feedTitle==feeds.personal.title}"
@@ -50,8 +53,6 @@
         <span ng-if="loaded && !online">Публичные (оффлайн)</span>
     </button>
 
-    <img class="logo" src="icons/feeds-logo.svg">
-
     <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.logging=1">Войти {{logging}}</button>
@@ -59,6 +60,12 @@
             class="header-button"
             ng-click="mtd.creating=1">Представиться</button>
 
+
+
+    <div class="auth auth-name"
+         ng-if="data.userLoggedIn">
+        {{mtd.users[data.userInfo.md5_hash].name}}
+         </div>
 
     <div fuLoginForm
          mtd="mtd"

@@ -43,6 +43,7 @@ button {
     margin: 0;
     padding: 0;
     cursor: pointer;
+    outline: none;
 }
 button:disabled {
     color:#aaa;
@@ -63,20 +64,57 @@ button:disabled {
 
 }
 
-#header .auth {
-    flex:1 1 400px;
+#header .auth, .auth form {
+    flex:1 1 auto;
+    display: flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-between;
+    align-items:center;
 }
 
-#header .auth input {
+.auth-name {
+    font-weight: bold;
     font-size: 16px;
-    border-radius:12px;
-    padding: 15px;
-    margin: 8px;
-    float: right;
 }
+
+
+.auth input {
+    flex:1 1 auto;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.4);
+    padding: 5px;
+    border-top:none;
+    border-left:none;
+    border-right: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    margin: 0 4px;
+}
+.auth-button {
+    flex:.1 1 16px;
+    padding:8px 8px;
+    color:#333;
+    margin: 0;
+    min-width: 8px;
+    font-size:14px;
+    text-align:center;
+    transition:all 100ms linear;
+    cursor: pointer;
+    opacity: 0.7;
+    border:none;
+}
+.auth-button:hover, .auth-button:active, .auth-button:focus {
+    font-weight: bold;
+}
+
+.auth input:active, .auth input:focus {
+    opacity: 1;
+    border-bottom: solid 2px rgba(100,100,100,1);
+}
+
 .header-button {
-    flex:1 1 70px;
-    display:block;
+    flex:.1 1 auto;
     padding:8px 8px;
     color:#333;
     margin: 0 10px;
@@ -85,11 +123,16 @@ button:disabled {
     text-align:center;
     transition:all 100ms linear;
     cursor: pointer;
-    opacity: 0.7;
-    border-bottom:solid 0px rgba(100,100,100,.1);;
+    opacity: 0.4;
 }
-.header-button:hover {
-    border-bottom: solid 6px rgba(100,100,100,1);
+.header-button:hover, .auth input:hover {
+    text-shadow: 0 3px #eee;
+    opacity: .9;
+}
+
+.header-button.active, .header-button:focus {
+    text-shadow: 0 1px #eee;
+    opacity: 1;
 }
 
 .type-button {
@@ -113,7 +156,7 @@ button:disabled {
     max-height: 60px;
     padding:4px;
 }
-.button-icon:hover, .button-icon.active, .header-button.active, .header-button:focus {
+.button-icon:hover, .button-icon.active {
   opacity: 1;
 }
 .button-icon img {
@@ -855,12 +898,14 @@ button:disabled {
 
 #filterSection {
     min-height: 72px;
+
+    background-attachment: fixed;
+    background-image: url('../background.svg');
 }
 
 
 
 #filters {
-    background-color: rgba(170,170,175,0.5);
     list-style: none outside none;
     display: flex;
     flex-direction:row;     flex-wrap:wrap;

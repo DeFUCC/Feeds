@@ -112,15 +112,11 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
     });
 
     this.createUser = function createUser(user){
-      var createUser  = auth.$createUser(user.email, user.password,false)
-      createUser.then(function (error,user) {
-        if(error){
-          $log.error(error);
-          $rootScope.$broadcast(self.USER_CREATION_ERROR_EVENT,error);
-        }else{
+      var createUser  = auth.$createUser(user.email, user.password,false);
+      createUser.then(function (user) {
           $rootScope.$broadcast(self.USER_CREATED_EVENT,user);
           $log.info('User created - User Id: ' + user.id + ', Email: ' + user.email);
-        }
+
       });
       return createUser;
     };
@@ -134,7 +130,7 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
            console.log('Logged in as: ', user.uid);
       }, function(error) {
            console.error('Login failed: ', error);
-        });;
+        });
       } else {
         auth.$login(type);
       }
@@ -229,16 +225,14 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
     link:function ($scope,element,attr,ctrl) {
       element.html(
         '<form id="loginForm" name="loginForm" ng-submit="login()">'+
-          '<formgroup>'+
-            'Email <input class="form-control" type="email" name="email" ng-model="email" required/>'+
-          '</formgroup>'+
-          '<formgroup>'+
-            'Password <input class="form-control" type="password" name="password" ng-model="password" required/>'+
-          '</formgroup>'+
-          '<br />'+
-          '<button id="submitBtn" class="btn btn-primary pull-right" type="submit">Log in</button>'+
-        '</form>' +
-            '<button class="nav-close" ng-click="mtd.logging=false">&times;</button>'
+
+            '<input class="form-control" placeholder="e-mail" type="email" name="email" ng-model="email" required/>'+
+
+            '<input class="form-control" placeholder="пароль" type="password" name="password" ng-model="password" required/>'+
+
+          '<button id="submitBtn" class="auth-button" type="submit">&raquo;</button>'+
+          '<button class="auth-button" ng-click="mtd.logging=false">&times;</button>'+
+        '</form>'
       );
       $compile(element.contents())($scope);
     }
@@ -261,17 +255,16 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
     link:function ($scope,element,attr,ctrl) {
       element.html(
         '<form name="signupForm" ng-submit="createUser()">'+
-          '<formgroup>'+
-            'Email <input class="form-control" type="email" name="email" ng-model="email" required/>'+
-          '</formgroup>'+
-          '<formgroup>'+
-            'Password <input class="form-control" type="text" name="password" ng-model="password" required/>'+
-          '</formgroup>'+
-        '  <br />'+
-        '  <button type="submit" class="btn btn-primary pull-right" value="creatUser">Sign Up</button>'+
-        '  <span class="error" ng-show="error">{{error}}</span>'+
-        '</form>' +
-            '<button class="nav-close" ng-click="mtd.creating=false">&times;</button>'
+
+            '<input class="form-control" placeholder="Представься" type="name" name="name" ng-model="mtd.userName" required/>'+
+            '<input class="form-control" placeholder="e-mail" type="email" name="email" ng-model="email" required/>'+
+
+            '<input class="form-control" type="text" placeholder="пароль" name="password" ng-model="password" required/>'+
+
+        '  <button type="submit" class="auth-button" value="creatUser">&raquo;</button>'+
+        '  <span class="error" ng-show="error">{{error}}</span>' +
+        '<button class="auth-button" ng-click="mtd.creating=false">&times;</button>' +
+        '</form>'
       );
       $compile(element.contents())($scope);
     }

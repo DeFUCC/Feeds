@@ -61,32 +61,32 @@ fruitStory.directive("feed", function() {
             };
 
             $scope.rate.cancel = function (letters) {
-                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona]) {
-                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='+1' && $scope.rating[letters].pluses>0) {
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rates[$scope.mtd.persona]) {
+                    if ($scope.mtd.rates[$scope.mtd.persona][letters]=='+1' && $scope.rating[letters].pluses>0) {
                         $scope.rating[letters].pluses--;
-                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                        delete $scope.mtd.rates[$scope.mtd.persona][letters];
                     }
-                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='-1' && $scope.rating[letters].minuses>0) {
+                    if ($scope.mtd.rates[$scope.mtd.persona][letters]=='-1' && $scope.rating[letters].minuses>0) {
                         $scope.rating[letters].minuses--;
-                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                        delete $scope.mtd.rates[$scope.mtd.persona][letters];
                     }
-                    if ($scope.mtd.rated[$scope.mtd.persona][letters]=='-' && $scope.rating[letters].zeros>0) {
+                    if ($scope.mtd.rates[$scope.mtd.persona][letters]=='-' && $scope.rating[letters].zeros>0) {
                         $scope.rating[letters].zeros--;
-                        delete $scope.mtd.rated[$scope.mtd.persona][letters];
+                        delete $scope.mtd.rates[$scope.mtd.persona][letters];
                     }
 
                 }
 
             };
             $scope.rate.plus=function (letters) {
-                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
-                    $scope.mtd.rated[$scope.mtd.persona]={};
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rates[$scope.mtd.persona]) {
+                    $scope.mtd.rates[$scope.mtd.persona]={};
 
                 }
-                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rates[$scope.mtd.persona] && !$scope.mtd.rates[$scope.mtd.persona][letters]) {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].pluses++;
-                    $scope.mtd.rated[$scope.mtd.persona][letters]='+1';
+                    $scope.mtd.rates[$scope.mtd.persona][letters]='+1';
                 } else {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].pluses++;
@@ -94,14 +94,14 @@ fruitStory.directive("feed", function() {
 
             };
             $scope.rate.minus=function (letters) {
-                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
-                    $scope.mtd.rated[$scope.mtd.persona]={};
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rates[$scope.mtd.persona]) {
+                    $scope.mtd.rates[$scope.mtd.persona]={};
 
                 }
-                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rates[$scope.mtd.persona] && !$scope.mtd.rates[$scope.mtd.persona][letters]) {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].minuses++;
-                    $scope.mtd.rated[$scope.mtd.persona][letters]='-1';
+                    $scope.mtd.rates[$scope.mtd.persona][letters]='-1';
                 } else {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].minuses++;
@@ -109,14 +109,14 @@ fruitStory.directive("feed", function() {
 
             };
             $scope.rate.zero=function (letters) {
-                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rated[$scope.mtd.persona]) {
-                    $scope.mtd.rated[$scope.mtd.persona]={};
+                if ($scope.mtd.ratingView=='global' && !$scope.mtd.rates[$scope.mtd.persona]) {
+                    $scope.mtd.rates[$scope.mtd.persona]={};
 
                 }
-                if ($scope.mtd.ratingView=='global' && $scope.mtd.rated[$scope.mtd.persona] && !$scope.mtd.rated[$scope.mtd.persona][letters]) {
+                if ($scope.mtd.ratingView=='global' && $scope.mtd.rates[$scope.mtd.persona] && !$scope.mtd.rates[$scope.mtd.persona][letters]) {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].zeros++;
-                    $scope.mtd.rated[$scope.mtd.persona][letters]='-';
+                    $scope.mtd.rates[$scope.mtd.persona][letters]='-';
                 } else {
                     $scope.rating[letters] = $scope.rating[letters] || {pluses:0,zeros:0,minuses:0};
                     $scope.rating[letters].zeros++;
@@ -158,7 +158,7 @@ fruitStory.directive("feed", function() {
                 var total=0;
                 for (var a in $scope.rating) {
                     if (rate>0 && $scope.rating[a] && $scope.rating[a].pluses > $scope.rating[a].minuses) {total++}
-                    if (rate===0 && $scope.rating[a] && $scope.rating[a].pluses === $scope.rating[a].minuses) {
+                    if (rate===0 && $scope.rating[a] && $scope.rating[a].pluses === $scope.rating[a].minuses && ($scope.rating[a].zeros>0 || $scope.rating[a].pluses>0)) {
 
                         total++
                     }
@@ -191,7 +191,8 @@ fruitStory.directive("feed", function() {
                     (
                         (($scope.rating[phrase.letters].pluses > $scope.rating[phrase.letters].minuses) && $scope.ratingMode.plus) ||
                         (($scope.rating[phrase.letters].minuses > $scope.rating[phrase.letters].pluses) && $scope.ratingMode.minus) ||
-                        (($scope.rating[phrase.letters].pluses == $scope.rating[phrase.letters].minuses) && $scope.ratingMode.zero)
+                        (($scope.rating[phrase.letters].pluses == $scope.rating[phrase.letters].minuses)
+                            && $scope.ratingMode.zero)
                         );
             };
 

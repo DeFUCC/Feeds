@@ -11,7 +11,7 @@ angular.module('fireUser').value('FireUserConfig', {
 fruitStory.controller(controllers);
 
 
-controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage, $firebase, $firebaseSimpleLogin, cfpLoadingBar) {
+controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebase, $firebaseSimpleLogin, cfpLoadingBar) {
 
     $scope.mtd = {}; //an object for universal methods
 
@@ -20,13 +20,6 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
     $scope.$storage=$localStorage.$default(
         {
             feeds:{
-                designs:{
-                    title:'Публичные',
-                    feed:Designs.designs,
-                    rating:{},
-                    ratingMode:{news:true,plus:true,zero:true,minus:false},
-                    selected:[]
-                },
                 personal:{
                     title:'Личные',
                     feed:[],
@@ -34,8 +27,8 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
                     ratingMode:{news:true,plus:true,zero:true,minus:false},
                     selected:[]
                 },
-                fireFeed:{
-                    title:'Онлайн',
+                publicFeed:{
+                    title:'Публичные',
                     ratingMode:{news:true,plus:true,zero:true,minus:false},
                     selected:[]
                 }
@@ -53,21 +46,34 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
     $scope.feeds=$scope.$storage.feeds;
 
 
+
+
+
     //LOGIN
 
     $scope.$on('fireuser:login_error', function (data) {
         $scope.error='Не удалось войти.'
     });
 
-    $scope.$on('fireuser:login', function (data) {
+    $scope.$on('fireuser:login', function (data, user) {
 
-        $scope.mtd.persona=$scope.data.userInfo.email;
+        $scope.mtd.persona=user.md5_hash;
     });
+
 
     $scope.$on('fireuser:logout', function (data) {
 
         $scope.mtd.persona=false;
     });
+
+
+    $scope.$on('fireuser:user_created', function (data, user) {
+        $scope.mtd.users[user.md5_hash]={};
+        $scope.mtd.users[user.md5_hash].name=$scope.mtd.userName;
+        $scope.mtd.creating=0;
+    });
+
+
 
 
 
@@ -82,6 +88,8 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
     $scope.loaded=false;
     $scope.online=false;
 
+    // Connection status
+
     var connectedRef = new Firebase("https://frktfeeds.firebaseio.com/.info/connected");
     connectedRef.on("value", function(snap) {
         if (snap.val() === true) {
@@ -91,30 +99,71 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
         }
     });
 
-    var rateRef = new Firebase('https://frktfeeds.firebaseio.com/rating');
-    var rateSync = $firebase(rateRef);
+    // public ratings
 
-    $scope.fireRating=rateSync.$asObject();
+    var ratingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rating'));
+    $scope.fireRating=ratingSync.$asObject();
 
-    var feedRef = new Firebase('https://frktfeeds.firebaseio.com/feed');
-    var feedSync = $firebase(feedRef);
-    $scope.fireFeed=feedSync.$asArray();
-    $scope.fireFeed.$loaded().then(function () {
+    //public feed
+
+    $scope.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed')).$asArray();
+    $scope.publicFeed.$loaded().then(function () {
         $scope.loaded=true;
         $scope.mtd.switchToPublic();
         cfpLoadingBar.complete();
     });
 
-    var ratedRef = new Firebase('https://frktfeeds.firebaseio.com/rated');
-    var ratedSync = $firebase(ratedRef);
-    var rated=ratedSync.$asObject().$bindTo($scope, 'mtd.rated');
+    //public rates
 
-    var authRef = new Firebase('https://frktfeeds.firebaseio.com/');
-    $scope.auth=$firebaseSimpleLogin(authRef);
+    $scope.mtd.rates={};
+    var ratesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rates'));
+    var rates=ratesSync.$asObject().$bindTo($scope, 'mtd.rates');
+
+    // users
+
+    var usersSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/users'));
+    var users=usersSync.$asObject().$bindTo($scope, 'mtd.users');
+
+    // authentication connection
+
+    $scope.auth=$firebaseSimpleLogin(new Firebase('https://frktfeeds.firebaseio.com/'));
+
+    //open public feed
+
+    $scope.mtd.switchToPublic = function () {
+        var feedTitle = 'publicFeed';
+        $scope.feed =$scope.publicFeed;
+        $scope.mtd.unwatch = $scope.feed.$watch(function () {
+            $scope.mtd.updateTree();
+        });
+        $scope.feedTitle='Публичные';
+        $scope.mtd.switchRate('global');
+        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
+        $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+        $scope.mtd.firebase=true;
+    };
+
+    // personal ratings
+
+    var personalRatingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rating'));
+
+
+    //personal feed
+
+    $scope.personalFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asArray();
+
+
+    //personal rates
+
+    $scope.mtd.personalRates={};
+    var personalRatesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rates'));
+    var personalRates=personalRatesSync.$asObject().$bindTo($scope, 'mtd.personalRates');
+
+
 
     $scope.mtd.switchRate = function (type) {
         if (type=='global') {
-            $scope.mtd.fireRate = rateSync.$asObject().$bindTo($scope,'rating');
+            $scope.mtd.fireRate = ratingSync.$asObject().$bindTo($scope,'rating');
             $scope.mtd.ratingView='global';
         }
         if (type=='local') {
@@ -134,18 +183,7 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
 
     };
 
-    $scope.mtd.switchToPublic = function () {
-        var feedTitle = 'fireFeed';
-        $scope.feed =feedSync.$asArray();
-        $scope.mtd.unwatch = $scope.feed.$watch(function () {
-            $scope.mtd.updateTree();
-        });
-        $scope.feedTitle='Публичные';
-        $scope.mtd.switchRate('global');
-        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
-        $scope.mtd.selected = $scope.feeds[feedTitle].selected;
-        $scope.mtd.firebase=true;
-    };
+
 
 
 
@@ -164,7 +202,7 @@ controllers.feeds = function ($rootScope, $scope, Designs, Types, $localStorage,
 
     $scope.changeFeed = function (feedTitle) {
         if (feedTitle) {
-            if ($scope.mtd.unwatch) {$scope.mtd.unwatch()};
+            if ($scope.mtd.unwatch) {$scope.mtd.unwatch()}
             $scope.feed = $scope.feeds[feedTitle].feed;
             $scope.feedTitle=$scope.feeds[feedTitle].title;
             $scope.mtd.switchRate(feedTitle);

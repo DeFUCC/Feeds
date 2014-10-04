@@ -1,19 +1,19 @@
 <div class="plus"
-     data-ng-if="!mtd.ratingView=='global' || !mtd.rated[mtd.persona][letters]"
+     data-ng-if="!mtd.ratingView=='global' || !mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getPluses(letters)}"
      data-ng-click="rate.plus(letters)">
     +{{rate.getPluses(letters)}}
 </div>
 
 <div class="zero"
-     data-ng-if="!mtd.ratingView=='global' || !mtd.rated[mtd.persona][letters]"
+     data-ng-if="!mtd.ratingView=='global' || !mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getZeros(letters)}"
      data-ng-click="rate.zero(letters)">
     {{rate.getZeros(letters) || '&bull;'}}
 </div>
 
 <div class="minus"
-     data-ng-if="!mtd.ratingView=='global' || !mtd.rated[mtd.persona][letters]"
+     data-ng-if="!mtd.ratingView=='global' || !mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getMinuses(letters)}"
      data-ng-click="rate.minus(letters)">
     -{{rate.getMinuses(letters)}}
@@ -21,25 +21,25 @@
 
 
 <div class="plused"
-     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)>0 && mtd.rated[mtd.persona][letters]"
+     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)>0 && mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getPluses(letters)}">
     +{{rate.getRating(letters)}}
 </div>
 
 <div class="zeroed"
-     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)==0 && mtd.rated[mtd.persona][letters]"
+     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)==0 && mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getZeros(letters)}">
     {{rate.getZeros(letters) || '&bull;'}}
 </div>
 
 <div class="minused"
-     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)<0 && mtd.rated[mtd.persona][letters]"
+     data-ng-if="mtd.ratingView=='global' && rate.getRating(letters)<0 && mtd.rates[mtd.persona][letters]"
      data-ng-class="{'active':rate.getMinuses(letters)}">
     {{rate.getRating(letters)}}
 </div>
 
 
 <div class="cancel"
-     data-ng-if="mtd.ratingView=='global' && mtd.rated[mtd.persona] && mtd.rated[mtd.persona][letters]"
+     data-ng-if="mtd.ratingView=='global' && mtd.rates[mtd.persona] && mtd.rates[mtd.persona][letters]"
      data-ng-click="rate.cancel(letters)"
-        > {{mtd.rated[mtd.persona][letters]}} &times;</div>
+        > {{mtd.rates[mtd.persona][letters]}} &times;</div>
