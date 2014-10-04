@@ -138,8 +138,15 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         });
         $scope.feedTitle='Публичные';
         $scope.mtd.switchRate('global');
-        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
-        $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+        if ($scope.feeds[feedTitle]) {
+            $scope.feeds[feedTitle]={
+                ratingMode:{},
+                selected:[]
+            }
+        }
+            $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
+            $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+
         $scope.mtd.firebase=true;
     };
 
