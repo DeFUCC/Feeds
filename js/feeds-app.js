@@ -138,7 +138,7 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         });
         $scope.feedTitle='Публичные';
         $scope.mtd.switchRate('global');
-        if ($scope.feeds[feedTitle]) {
+        if (!$scope.feeds[feedTitle]) {
             $scope.feeds[feedTitle]={
                 ratingMode:{},
                 selected:[]
