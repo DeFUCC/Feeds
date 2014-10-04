@@ -138,14 +138,9 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         });
         $scope.feedTitle='Публичные';
         $scope.mtd.switchRate('global');
-        if (!$scope.feeds[feedTitle]) {
-            $scope.feeds[feedTitle]={
-                ratingMode:{},
-                selected:[]
-            }
-        }
-            $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
-            $scope.mtd.selected = $scope.feeds[feedTitle].selected;
+
+            $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
+            $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
 
         $scope.mtd.firebase=true;
     };
