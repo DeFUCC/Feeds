@@ -34,10 +34,8 @@ fruitStory.directive("feed", function() {
                     });
                     if ($scope.mtd.firebase) {
                         if (found) {
-                            console.log(said);
                             $scope.feed[found]=said;
                             $scope.feed.$save(found);
-                            console.log($scope.feed[found]);
                         } else $scope.feed.$add(said);
 
                     } else {
