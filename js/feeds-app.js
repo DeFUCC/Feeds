@@ -1,8 +1,12 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'smoothScroll','firebase', 'ngStorage', 'cfp.loadingBar', 'fireUser','ui.router']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'smoothScroll','firebase', 'ngStorage', 'cfp.loadingBar', 'fireUser','ui.router', 'videosharing-embed', 'angularMoment']);
 var controllers = {};
+
+fruitStory.run(function(amMoment){
+    amMoment.changeLocale('ru');
+});
 
 angular.module('fireUser').value('FireUserConfig', {
     url:'https://frktfeeds.firebaseio.com/'
@@ -138,17 +142,15 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         });
         $scope.feedTitle='Публичные';
         $scope.mtd.switchRate('global');
-
-            $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
-            $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
-
+        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
+        $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
         $scope.mtd.firebase=true;
     };
 
     // personal ratings
 
     var personalRatingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rating'));
-
+    $scope.personalRating=personalRatingSync.$asObject();
 
     //personal feed
 

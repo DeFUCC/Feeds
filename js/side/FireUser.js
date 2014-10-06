@@ -33,7 +33,7 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
               $state.go(FireUserValues.routeRedirect)
 
           }else{
-            checked = toState.name
+            checked = toState.name;
             $state.go(toState.name,toParams)
           };  
         });        

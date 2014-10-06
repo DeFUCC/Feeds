@@ -321,10 +321,10 @@ fruitStory.directive("card", function() {
             rate:'=',
             selected:'=',
             nxt:'=',
-            rf:'='
+            rf:'=',
+            edit:'='
         },
         controller: function ($scope) {
-            $scope.time=new Date($scope.phrase.time);
 
 
 
@@ -346,6 +346,7 @@ fruitStory.directive("cards", function($compile) {
             search:'=',
             type:'=',
             addr:'=' //higher letters for adding new in place
+
         },
         controller: function ($scope){
             $scope.over={};
