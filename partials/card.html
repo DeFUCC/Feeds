@@ -8,7 +8,7 @@
          class="box-head"
          >
 
-        <div  data-ng-if="mtd.showLetters || mtd.showRating" class="box-bar">
+        <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar">
 
             <div
                     letters
@@ -16,6 +16,8 @@
                     data-mtd="mtd"
                     data-letter="phrase.letters"
                     data-select="mtd.selector(phrase.letters)"> </div>
+
+
 
             <div rating
                  data-ng-if="mtd.showRating"
@@ -58,16 +60,24 @@
 
     </div>
 
+    <embed-video ng-if="phrase.video" href="{{phrase.video}}" width="320px" height="240px"></embed-video>
 
 
-    <div  class="box-text" data-ng-if="phrase.text">
+
+    <div  class="box-text" data-ng-if="phrase.text || mtd.persona==phrase.author">
 
 
 
         <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
 
-        <div class="time-card" data-ng-if="phrase.time && mtd.persona"> {{phrase.author}} :: {{time.toLocaleString()}} ::</div>
+        <div class="time-card" data-ng-if="phrase.author">
+
+            {{mtd.users[phrase.author].name}} <span am-time-ago="phrase.time"></span>
+
+            <button ng-if="mtd.persona==phrase.author"
+                    ng-click="edit.new=phrase">Изменить</button>
+        </div>
 
 
 
@@ -88,9 +98,11 @@
                  data-ng-if="next.type"
                     ></div>
 
-            <span data-ng-if="mtd.showLetters">{{next.letter}}</span>
+            <div class="preview-letter" data-ng-if="mtd.showLetters">{{next.letter}}</div>
         </div>
     </div>
+
+
 
     <div data-ng-if="phrase.next || mtd.persona" data-ng-show="mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
 
