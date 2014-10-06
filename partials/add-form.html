@@ -51,26 +51,26 @@
         <div data-row-span="1">
             <div data-field-span="1">
                 <label>Чем наполним?</label>
-                <button class="btn" ng-class="{active:addImg}" ng-click="addImg=!addImg">Картинка</button>
-                <button class="btn" ng-class="{active:addVideo}" ng-click="addVideo=!addVideo">Видео</button>
-                <button class="btn" ng-class="{active:addText}" ng-click="addText=!addText">Текст</button>
+                <button class="btn" ng-class="{active:addImg || phrase.img}" ng-click="addImg=!addImg">Картинка</button>
+                <button class="btn" ng-class="{active:addVideo || phrase.video}" ng-click="addVideo=!addVideo">Видео</button>
+                <button class="btn" ng-class="{active:addText || phrase.text}" ng-click="addText=!addText">Текст</button>
             </div>
         </div>
-        <div ng-if="addImg" data-row-span="1">
+        <div ng-if="addImg || phrase.img" data-row-span="1">
             <div data-field-span="1">
                 <label>URL картинки</label>
                 <input data-ng-model="phrase.img"
                        type="text">
             </div>
         </div>
-        <div ng-if="addVideo" data-row-span="1">
+        <div ng-if="addVideo || phrase.video" data-row-span="1">
             <div data-field-span="1">
                 <label>URL видео на Youtube.com, Vimeo.com</label>
                 <input data-ng-model="phrase.video"
                        type="text">
             </div>
         </div>
-        <div ng-if="addText" data-row-span="1">
+        <div ng-if="addText  || phrase.text" data-row-span="1">
             <div data-field-span="1">
                 <label>Текст (с разметкой <b><a href="http://ru.wikipedia.org/wiki/Markdown" target="_blank" title="markdown">MARKDOWN</a></b>)</label>
                 <textarea class="texter"

@@ -38,12 +38,20 @@
 
             <div class="text-flow"  data-ng-if="nxt.text" marked="nxt.text"></div>
 
+            <embed-video ng-if="phrase.video" href="{{phrase.video}}" width="320px" height="240px"></embed-video>
+
             <div data-ng-if="nxt.next" class="box-bottom">
                 <div data-ng-click="over.next=next"
                      data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:size(nxt.next)}"
                      class="box-preview" data-ng-repeat="next in nxt.next">
-                    <img class="icon-small" data-ng-src="{{next.icon}}">
-                    <span data-ng-if="mtd.persona">{{next.letter}}</span>
+                    <div icon
+                         icon-type="next.type"
+                         icon-title="next.title"
+                         icon-text="next.text"
+                         class="box-icon"
+                         data-ng-if="next.type"
+                            ></div>
+                    <div class="preview-letter" data-ng-if="mtd.showLetters">{{next.letter}}</div>
                 </div>
             </div>
         </div>

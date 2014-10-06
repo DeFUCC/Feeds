@@ -73,9 +73,10 @@
 
         <div class="time-card" data-ng-if="phrase.author">
 
-            {{mtd.users[phrase.author].name}} <span am-time-ago="phrase.time"></span>
+           <b> {{mtd.users[phrase.author].name || phrase.author}} </b> <span am-time-ago="phrase.time"></span>
 
-            <button ng-if="mtd.persona==phrase.author"
+            <button class="btn"
+                    ng-if="mtd.persona==phrase.author"
                     ng-click="edit.new=phrase">Изменить</button>
         </div>
 

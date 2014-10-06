@@ -16,6 +16,7 @@ fruitStory.directive("feed", function() {
 
             $scope.mtd.addToFeed = function (saying) {
                 var said;
+                var found=false;
                 if (saying && saying.title && saying.type && saying.letters) {
 
                     said = angular.copy(saying);
@@ -26,14 +27,25 @@ fruitStory.directive("feed", function() {
                     said.letters=convertLetters(said.letters);
                     said.author=$scope.mtd.persona;
                     said.time=Date.now();
+                    angular.forEach($scope.feed, function (val, key) {
+                        if (val.letters && val.letters==said.letters) {
+                            found = key;
+                        }
+                    });
                     if ($scope.mtd.firebase) {
-
-                        $scope.feed.$add(said);
+                        if (found) {
+                            console.log(said);
+                            $scope.feed[found]=said;
+                            $scope.feed.$save(found);
+                            console.log($scope.feed[found]);
+                        } else $scope.feed.$add(said);
 
                     } else {
-
-                        console.log('push');
-                        $scope.feed.push(said);
+                        if (found) {
+                            $scope.feed[found]=said;
+                        } else {
+                            $scope.feed.push(said);
+                        }
                     }
 
                 } else {console.log('a phrase without title, type, or color/letters')}
