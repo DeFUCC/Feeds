@@ -1,48 +1,69 @@
+
+
+
 <menu>
+
+    <input placeholder="Буква"
+           autofocus="autofocus"
+           id="filter"
+           data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}"
+           type="text"
+           data-ng-model="fltr">
+
+
+
+    <input data-ng-if="mtd.firebase"
+           placeholder="Поиск"
+           id="search"
+           type="text"
+           data-ng-model="$parent.search">
+</menu>
+
+       <span data-ng-if="!mtd.firebase" class="loading">
+           Введите букву затеи или дождитесь загрузки всех лент.
+       </span>
+
+<menu data-ng-if="mtd.firebase">
+
+    <li class="tree"
+        data-ng-click="$parent.source=$parent.tree"
+        data-ng-class="{active:$parent.source==$parent.tree}">Дерево</li>
+
+    <li class="story"
+        data-ng-click="$parent.source=$parent.feed"
+        data-ng-class="{active:$parent.source==$parent.feed}">Поток</li>
+
     <li data-ng-click="mtd.showLetters=!mtd.showLetters"
         data-ng-class="{active:mtd.showLetters}"
         class="show-letters"
             >
         Буквы
-        </li>
-    <input placeholder="Буква"
-           id="filter"
-           data-ng-style="{backgroundColor:mtd.colorize(mtd.convertLetters(fltr))}"
-           type="text"
-           data-ng-model="fltr">
-    <input placeholder="Поиск"
-           id="search"
-           type="text"
-           data-ng-model="search">
-</menu>
-<menu>
-    <li class="tree"
-        data-ng-click="source=tree"
-        data-ng-class="{active:source==tree}">Дерево</li>
-    <li class="story"
-        data-ng-click="source=feed"
-        data-ng-class="{active:source==feed}">Лента</li>
+    </li>
     <li data-ng-if="mtd.persona"
         class=""
         data-ng-click="mtd.showRating=!mtd.showRating"
         data-ng-class="{active:mtd.showRating}"
             >Рейтинг</li>
+
 </menu>
 <menu class="rating" data-ng-if="mtd.persona" data-ng-show="mtd.showRating">
     <li class="heading">Рейтинг:</li>
-
-    <li class="tree"
-        data-ng-if="mtd.firebase && mtd.ratingView!='personal'"
+<!--
+    <li
+            class="tree"
+        data-ng-if="mtd.firebase"
         data-ng-class="{active:mtd.ratingView=='global'}"
         data-ng-click="mtd.switchRate('global')"
         >Глобальный</li>
     <li class="story"
-        data-ng-if="mtd.ratingView!='personal'"
         data-ng-class="{active:mtd.ratingView=='local'}"
         data-ng-click="mtd.switchRate('local')"
             >
         Локальный
     </li>
+
+    -->
+
     <li data-ng-click="rate.toggleRF('news')"
         class="news"
         data-ng-class="{active:ratingMode.news}">

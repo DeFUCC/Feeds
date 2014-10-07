@@ -30,7 +30,7 @@
          id="navigator">
 
 </section>
-<section id="first">
+<section ng-if="status.publicLoaded" id="first">
 
     <div cards
          search="search"
@@ -41,7 +41,7 @@
          next="source"
          selected="selected"
          class="container"
-         type="'feed'"
+         type="feedTitle"
             ></div>
 
 </section>

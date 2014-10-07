@@ -71,17 +71,18 @@
         <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
 
-        <div class="time-card" data-ng-if="phrase.author">
-
-           <b> {{mtd.users[phrase.author].name || phrase.author}} </b> <span am-time-ago="phrase.time"></span>
-
-            <button class="btn"
-                    ng-if="mtd.persona==phrase.author"
-                    ng-click="edit.new=phrase">Изменить</button>
-        </div>
 
 
 
+
+    </div>
+    <div class="time-card" data-ng-if="phrase.author">
+
+        <b> {{mtd.users[phrase.author].name || phrase.author}} </b> опубликовал <span am-time-ago="phrase.time"></span>
+
+        <button class="btn"
+                ng-if="mtd.persona==phrase.author"
+                ng-click="edit.new=phrase">Изменить</button>
     </div>
 
     <div data-ng-hide="mtd.isSelected(phrase.letters)" data-ng-if="phrase.next" class="box-bottom">

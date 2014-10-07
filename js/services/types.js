@@ -111,24 +111,33 @@ fruitStory.service('Types', function () {
             title:'Количество'
         }
     };
-    types.feed={
+    types.publicFeed={
         canHave: [
             types.design
         ]
     };
+    types.personal={
+        canHave: [
+            types.persona,
+            types.face,
+            types.designFace
+        ]
+    };
     types.persona.canHave=[
-        types.time,
+
         types.donation,
         types.place,
         types.question,
+        types.time,
         types.statement
     ];
     types.designFace.canHave=[
-        types.time,
+
         types.donation,
         types.present,
         types.skill,
         types.place,
+        types.time,
         types.result,
         types.tool,
         types.material,
@@ -136,11 +145,12 @@ fruitStory.service('Types', function () {
         types.statement
     ];
     types.face.canHave=[
-        types.time,
+
         types.donation,
         types.skill,
         types.result,
         types.place,
+        types.time,
         types.tool,
         types.material,
         types.question,

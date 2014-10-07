@@ -78,7 +78,8 @@
             </div>
         </div>
     </fieldset>
-    <button type="submit"
+    <button ng-disabled="!phrase.letters && !phrase.type"
+            type="submit"
             value="+"
             class="form-button add"
             data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
