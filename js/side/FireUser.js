@@ -240,6 +240,21 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
 }])
 .controller('fireusersignupformCtrl',['$scope', '$fireUser', function ($scope, $fireUser) {
 
+      $scope.used=$scope.mtd.getPersonalUsed();
+
+        $scope.genders=[
+            {
+                title:'M',
+                gender:'male'
+            },
+            {
+                title:'Ж',
+                gender:'female'
+            }
+        ];
+
+      $scope.mtd.userGender='male';
+
       $scope.createUser = function () {
         $fireUser.createUser({ email: $scope.email, password: $scope.password });
       };
@@ -252,21 +267,17 @@ function($rootScope, $location, $fireUser, $state, FireUserValues,waitForAuth) {
     },
     restrict:'AE',
     controller:'fireusersignupformCtrl',
-    link:function ($scope,element,attr,ctrl) {
-      element.html(
-        '<form name="signupForm" ng-submit="createUser()">'+
+    template:'<label ng-if="!mtd.userLetters" class="choose-color">Выберите <span ng-if="!mtd.showLetters">цвет</span><span ng-if="mtd.showLetters">буквы</span>: </label>' +
+        '<div letter-grid used="used" mtd="mtd" result="mtd.userLetters" class="letter-grid"></div>'+
+        '<form name="signupForm" ng-submit="createUser()">' +
+    '<input class="form-control" placeholder="Представься" type="name" name="name" ng-model="mtd.userName" required/>' +
+        '<select class="form-control" ng-model="mtd.userGender" name="пол" required ng-options="gender.gender as gender.title for gender in genders"></select>'+
+    '<input class="form-control" placeholder="e-mail" type="email" name="email" ng-model="email" required/>'+
+    '<input class="form-control" type="password" placeholder="пароль" name="password" ng-model="password" required/>'+
+    '  <button ng-if="mtd.userName && mtd.userLetters && email && password" type="submit" class="auth-button" value="creatUser">&raquo;</button>'+
+    '  <span class="error" ng-show="error">{{error}}</span>' +
+    '<button class="auth-button" ng-click="mtd.creating=false">&times;</button>' +
+    '</form>'
 
-            '<input class="form-control" placeholder="Представься" type="name" name="name" ng-model="mtd.userName" required/>'+
-            '<input class="form-control" placeholder="e-mail" type="email" name="email" ng-model="email" required/>'+
-
-            '<input class="form-control" type="text" placeholder="пароль" name="password" ng-model="password" required/>'+
-
-        '  <button type="submit" class="auth-button" value="creatUser">&raquo;</button>'+
-        '  <span class="error" ng-show="error">{{error}}</span>' +
-        '<button class="auth-button" ng-click="mtd.creating=false">&times;</button>' +
-        '</form>'
-      );
-      $compile(element.contents())($scope);
-    }
   };
 }])

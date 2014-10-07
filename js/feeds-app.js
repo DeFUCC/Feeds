@@ -73,13 +73,27 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
     });
 
 
+    $scope.mtd.personae=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asObject();
+
     $scope.$on('fireuser:user_created', function (data, user) {
-        $scope.mtd.users[user.md5_hash]={};
-        $scope.mtd.users[user.md5_hash].name=$scope.mtd.userName;
+        $scope.mtd.personae[user.md5_hash] = {
+            type:'persona',
+            title:$scope.mtd.userName,
+            gender:$scope.mtd.userGender,
+            letters:$scope.mtd.userLetters,
+            letter:$scope.mtd.userLetters,
+            time:Date.now(),
+            author:user.md5_hash,
+            md5_hash: user.md5_hash
+        };
+        $scope.mtd.personae.$save();
+        $scope.mtd.userLetters=null;
+        $scope.mtd.userName=null;
+        if($scope.feedTitle!='personal') {
+            $scope.mtd.switchToPersonal();
+        }
         $scope.mtd.creating=0;
     });
-
-
 
 
 
@@ -238,28 +252,26 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
     $scope.mtd.showRating=false;
 
 
+    //Find free letters for registering new users
 
-    //initial feed
+    $scope.mtd.getPersonalUsed = function () {
+            var result=[];
+            var letters;
+            for (var phrase in $scope.personalFeed) {
+                if ($scope.personalFeed[phrase].letters) {
+                    letters=$scope.personalFeed[phrase].letters;
+                    if (letters.indexOf('|') == -1) {
+                        result.push($scope.personalFeed[phrase].letters);
+                    }
+                }
+            }
+            return result;
 
-
-
-    $scope.changeFeed = function (feedTitle) {
-        if (feedTitle) {
-            if ($scope.mtd.unwatch) {$scope.mtd.unwatch()}
-            $scope.feed = $scope.feeds[feedTitle].feed;
-            $scope.feedTitle=$scope.feeds[feedTitle].title;
-            $scope.mtd.switchRate(feedTitle);
-            $scope.ratingMode = $scope.feeds[feedTitle].ratingMode;
-            $scope.mtd.selected = $scope.feeds[feedTitle].selected;
-            $scope.mtd.firebase=false;
-        }
     };
 
 
-
-
-
     $scope.mtd.types=Types.types;  //types of phrases
+
 
 
     $scope.mtd.preset = preset;

@@ -55,13 +55,18 @@ button:disabled {
     display: flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:center;
-    align-content:space-between;
+    align-content:flex-start;
     align-items:stretch;
 }
 #header .logo {
     flex:0.8 1 100px;
-    max-height: 70px;
+    height:70px;
     align-self: flex-start;
+    background-image: url('../icons/feeds-logo.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: left;
+
 }
 
 #header .auth, .auth form {
@@ -71,6 +76,11 @@ button:disabled {
     justify-content:center;
     align-content:space-between;
     align-items:center;
+}
+
+#header .sign-up {
+    flex:100 1 100%;
+    padding: 40px;
 }
 
 .auth-name {
@@ -711,7 +721,7 @@ button:disabled {
     max-width: 100%;
 }
 .time-card {
-    flex:.1 1 300px;
+    flex:.1 1 100%;
     font-size: 10px;
     min-width: 120px;
     color:#666;
@@ -1159,7 +1169,13 @@ button:disabled {
     # Letter grid
 \*------------------------------------*/
 
+.choose-color {
+    margin: 5px;
+    color:#444;
+}
+
 .letter-grid {
+    flex:1 1 auto;
     display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:space-between;

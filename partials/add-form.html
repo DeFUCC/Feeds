@@ -33,7 +33,7 @@
                 <select
                     ng-model="phrase.type"
                     name="Тип"
-                    required="1"
+                    required
                     ng-options="type.type as type.title for (typeName, type) in mtd.types[type].canHave"></select>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div data-field-span="1">
                 <label>Название</label>
                 <input  name="title"
-                        required="1"
+                        required
                         autofocus="1"
                         data-ng-model="phrase.title"
                         type="text">

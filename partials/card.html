@@ -78,7 +78,7 @@
     </div>
     <div class="time-card" data-ng-if="phrase.author">
 
-        <b> {{mtd.users[phrase.author].name || phrase.author}} </b> опубликовал <span am-time-ago="phrase.time"></span>
+        <b> {{mtd.personae[phrase.author].title || phrase.author}} </b> <span ng-if="mtd.personae[phrase.author].gender=='female'">опубликовала</span> <span ng-if="mtd.personae[phrase.author].gender=='male'">опубликовал</span> это <span am-time-ago="phrase.time"></span>
 
         <button class="btn"
                 ng-if="mtd.persona==phrase.author"

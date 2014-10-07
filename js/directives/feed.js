@@ -16,7 +16,7 @@ fruitStory.directive("feed", function() {
         },
         controller: function ($scope, cfpLoadingBar) {
 
-            
+
 
             $scope.mtd.addToFeed = function (saying) {
                 var said;

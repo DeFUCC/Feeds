@@ -35,8 +35,7 @@
 
 <section id="header">
 
-    <div    id="status"
-            >
+    <div id="status">
         <div class="status-connecting"
              title="Отправлен запрос серверу"
              ng-if="!status.publicLoaded && !status.online">Подключение...</div>
@@ -52,7 +51,7 @@
              ng-if="status.publicLoaded && !status.online">&bull;</div>
             </div>
 
-    <img class="logo" src="icons/feeds-logo.svg">
+    <div class="logo"></div>
 
     <button ng-disabled="!status.online"
             class="header-button"
@@ -67,10 +66,10 @@
             ng-class="{active:feedTitle==feeds.personal.title}"
             ng-click="mtd.switchToPersonal()">Личные</button>
 
-    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
+    <button ng-if="status.personalLoaded && !mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.logging=1">Войти {{logging}}</button>
-    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
+    <button ng-if="status.personalLoaded &&  !mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.creating=1">Представиться</button>
 
@@ -78,7 +77,7 @@
 
     <div class="auth auth-name"
          ng-if="data.userLoggedIn">
-        {{mtd.users[data.userInfo.md5_hash].name}}
+        {{mtd.personae[data.userInfo.md5_hash].title}}
          </div>
 
     <div fuLoginForm
@@ -93,7 +92,7 @@
 
     <div fuSignUpForm
          mtd="mtd"
-         class="auth"
+         class="auth sign-up"
          data-ng-if="!data.userLoggedIn && mtd.creating"></div>
 
 
