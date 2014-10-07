@@ -59,9 +59,9 @@ button:disabled {
     align-items:stretch;
 }
 #header .logo {
-    flex:1 1 100px;
+    flex:0.8 1 100px;
     max-height: 70px;
-
+    align-self: flex-start;
 }
 
 #header .auth, .auth form {
@@ -711,8 +711,9 @@ button:disabled {
     max-width: 100%;
 }
 .time-card {
-    flex:1 1 300px;
+    flex:.1 1 300px;
     font-size: 10px;
+    min-width: 120px;
     color:#666;
     text-align: right;
 }
@@ -822,6 +823,10 @@ button:disabled {
     box-shadow:0px 1px 4px rgba(0, 0, 40, 0.6);
     transform:translateY(-1px);
 }
+.btn:focus {
+    box-shadow:0px 1px 2px rgba(0, 0, 40, 0.4);
+    transform:translateY(-1px);
+}
 .btn:active, .btn.active {
     box-shadow:inset 0px 1px 4px rgba(0, 0, 40, 0.4);
     transform:translateY(1px);
@@ -839,6 +844,46 @@ button:disabled {
 
 
 
+/*------------------------------------*\
+    # Status
+\*------------------------------------*/
+
+#status {
+    position: fixed;
+    left:5px;
+    top:28px;
+    height: 22px;
+    font-size: 10px;
+    z-index:2000;
+}
+
+#status div {
+    cursor: default;
+}
+
+.status-online {
+    color:green;
+    line-height: 16px;
+    font-size: 34px;
+}
+
+.status-offline {
+    color:red;
+    line-height: 16px;
+    font-size: 34px;
+}
+.status-loading {
+    color:grey;
+}
+
+.status-connecting {
+    color:lightgray;
+}
+
+
+
+
+
 
 /*------------------------------------*\
     # Navigator
@@ -846,7 +891,7 @@ button:disabled {
 
 #navigator {
     position: fixed;
-    top:15%;
+    top:150px;
     left:0;
     z-index:300;
     background-color: rgba(255,255,255,0.6);
@@ -920,7 +965,7 @@ button:disabled {
     display: flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:center;
-    align-content:space-around;
+    align-content:flex-start;
     align-items:stretch;
     margin: 0;
     padding: 15px 0;
@@ -1053,6 +1098,12 @@ button:disabled {
     margin-left: 0;
     border-radius: 0 8px 8px 0;
 }
+
+#filters .loading {
+    margin:20px 0px;
+    flex:100 1 70%;
+}
+
 .indy {
     position:absolute;
     z-index: 300;

@@ -35,25 +35,37 @@
 
 <section id="header">
 
+    <div    id="status"
+            >
+        <div class="status-connecting"
+             title="Отправлен запрос серверу"
+             ng-if="!status.publicLoaded && !status.online">Подключение...</div>
+        <div class="status-loading"
+             title="Скачивание данных"
+             ng-if="!status.ready && status.online">Загрузка...</div>
+        <div class="status-online"
+             title="Онлайн"
+             ng-if="status.ready && status.online">&bull;</div>
 
+        <div class="status-offline"
+             title="Оффлайн"
+             ng-if="status.publicLoaded && !status.online">&bull;</div>
+            </div>
 
     <img class="logo" src="icons/feeds-logo.svg">
 
-    <button
+    <button ng-disabled="!status.online"
+            class="header-button"
+            ng-class="{active:feedTitle==feeds.publicFeed.title}"
+            ng-click="mtd.switchToPublic()">
+        <span>Публичные</span>
+
+    </button>
+
+    <button ng-disabled="!status.online"
             class="header-button"
             ng-class="{active:feedTitle==feeds.personal.title}"
-            ng-click="changeFeed('personal')">Личные ({{feeds.personal.feed.length}})</button>
-
-
-    <button ng-disabled="!loaded"
-            class="header-button"
-            ng-class="{active:mtd.firebase}"
-            ng-click="mtd.switchToPublic()">
-        <span ng-if="loaded && online">Публичные</span>
-        <span ng-if="!online && !loaded">Подключение...</span>
-        <span ng-if="online && !loaded">Загрузка...</span>
-        <span ng-if="loaded && !online">Публичные (оффлайн)</span>
-    </button>
+            ng-click="mtd.switchToPersonal()">Личные</button>
 
     <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
@@ -76,7 +88,7 @@
 
 
     <div fuLogOut
-         class="header-button"
+         class="header-button auth"
          data-ng-if="data.userLoggedIn"></div>
 
     <div fuSignUpForm
@@ -89,8 +101,10 @@
 </section>
 <section id="feed"
         feed
+        data-status="status"
         data-persona="persona"
         data-mtd="mtd"
+        data-feed-title="feedTitle"
         data-feed-source="feed"
         data-feed-rating="rating"
         data-feed-rating-mode="ratingMode"

@@ -138,7 +138,13 @@ fruitStory.directive("filters", function() {
         controller: function($scope) {
             $scope.$watch('fltr', function (fltr) {
                 if (angular.isString(fltr)) {
-                    $scope.fltr=$scope.mtd.convertLetters(fltr);
+                    $scope.fltr=$scope.mtd.fltr=$scope.mtd.convertLetters(fltr);
+
+                }
+            });
+            $scope.$watch('mtd.fltr', function (fltr) {
+                if (angular.isString(fltr)) {
+                    $scope.fltr=$scope.mtd.fltr=$scope.mtd.convertLetters(fltr);
 
                 }
             });
@@ -357,6 +363,15 @@ fruitStory.directive("cards", function($compile) {
             $scope.cancelNew=function(){
                 delete $scope.next.new;
             };
+
+            $scope.lettersFilter = function (phrase) {
+                if ($scope.mtd.fltr) {var isChild=$scope.mtd.fltr==phrase.letters.substring(0,$scope.mtd.fltr.length);}
+                if (phrase.letters==$scope.mtd.fltr || !$scope.mtd.fltr || isChild) {
+                    return true;
+                }
+                return false;
+            };
+
 
             $scope.$watch('next', function (next) {
                 $scope.used=getUsed(next);

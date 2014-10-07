@@ -7,12 +7,16 @@ fruitStory.directive("feed", function() {
         templateUrl: 'partials/feed.html',
         scope: {
             mtd:'=',
+            status:'=',
+            feedTitle:'=',
             feed:'=feedSource',
             rating:'=feedRating',
             ratingMode:'=feedRatingMode',
             persona:'='
         },
-        controller: function ($scope) {
+        controller: function ($scope, cfpLoadingBar) {
+
+            
 
             $scope.mtd.addToFeed = function (saying) {
                 var said;
@@ -58,8 +62,14 @@ fruitStory.directive("feed", function() {
 
             $scope.mtd.updateTree=$scope.updateTree;
 
-            $scope.$watch('feed', function () {
-                $scope.updateTree();
+            $scope.$watch('feed', function (feed) {
+                if (feed) {$scope.updateTree();}
+
+                if($scope.status.publicLoaded && cfpLoadingBar.status()<1) {
+                    cfpLoadingBar.complete();
+                    $scope.status.ready=true;
+                }
+
             });
 
 

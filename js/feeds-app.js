@@ -25,19 +25,21 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         {
             feeds:{
                 personal:{
-                    title:'Личные',
+                    title:'personal',
                     feed:[],
                     rating:{},
                     ratingMode:{news:true,plus:true,zero:true,minus:false},
-                    selected:[]
+                    selected:[],
+                    filter:''
                 },
                 publicFeed:{
-                    title:'Публичные',
+                    title:'publicFeed',
                     ratingMode:{news:true,plus:true,zero:true,minus:false},
-                    selected:[]
+                    selected:[],
+                    rating:[],
+                    filter:''
                 }
-            },
-            localRating:{}
+            }
         }
     );
 
@@ -88,18 +90,20 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
     //FIREBASE CONNECTIONS
 
 
-
-    $scope.loaded=false;
-    $scope.online=false;
-
     // Connection status
+
+    $scope.status={};
+    $scope.status.loaded=false;
+
+    $scope.status.online=false;
+
 
     var connectedRef = new Firebase("https://frktfeeds.firebaseio.com/.info/connected");
     connectedRef.on("value", function(snap) {
         if (snap.val() === true) {
-            $scope.online=true;
+            $scope.status.online=true;
         } else {
-            $scope.online=false;
+            $scope.status.online=false;
         }
     });
 
@@ -112,16 +116,16 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
 
     $scope.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed')).$asArray();
     $scope.publicFeed.$loaded().then(function () {
-        $scope.loaded=true;
+
         $scope.mtd.switchToPublic();
-        cfpLoadingBar.complete();
+        $scope.status.publicLoaded=true;
     });
 
     //public rates
 
     $scope.mtd.rates={};
     var ratesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rates'));
-    var rates=ratesSync.$asObject().$bindTo($scope, 'mtd.rates');
+
 
     // users
 
@@ -140,49 +144,84 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         $scope.mtd.unwatch = $scope.feed.$watch(function () {
             $scope.mtd.updateTree();
         });
-        $scope.feedTitle='Публичные';
+        $scope.feedTitle=feedTitle;
         $scope.mtd.switchRate('global');
         $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
         $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
         $scope.mtd.firebase=true;
     };
 
+
     // personal ratings
 
     var personalRatingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rating'));
-    $scope.personalRating=personalRatingSync.$asObject();
+
 
     //personal feed
 
     $scope.personalFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asArray();
+    $scope.personalFeed.$loaded().then(function () {
+        $scope.status.personalLoaded=true;
 
+    });
 
     //personal rates
 
     $scope.mtd.personalRates={};
     var personalRatesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rates'));
-    var personalRates=personalRatesSync.$asObject().$bindTo($scope, 'mtd.personalRates');
+
+
+
+    $scope.mtd.switchToPersonal = function () {
+        var feedTitle = 'personal';
+        $scope.feed =$scope.personalFeed;
+        $scope.mtd.unwatch = $scope.feed.$watch(function () {
+            $scope.mtd.updateTree();
+        });
+        $scope.feedTitle=feedTitle;
+        $scope.mtd.switchRate('personal');
+        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
+        $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
+        $scope.mtd.firebase=true;
+    };
 
 
 
     $scope.mtd.switchRate = function (type) {
         if (type=='global') {
-            $scope.mtd.fireRate = ratingSync.$asObject().$bindTo($scope,'rating');
+            if ($scope.mtd.personalRating) {
+                $scope.mtd.personalRating.then(function(unbind) {unbind()});
+                $scope.mtd.personalRates.then(function(unbind) {unbind()});
+
+            }
+            $scope.mtd.publicRating = ratingSync.$asObject().$bindTo($scope,'rating');
+            $scope.mtd.publicRates=ratesSync.$asObject().$bindTo($scope, 'mtd.rates');
             $scope.mtd.ratingView='global';
         }
         if (type=='local') {
-            if ($scope.mtd.fireRate) {
-                $scope.mtd.fireRate.then(function(unbind) {unbind()})
+            if ($scope.mtd.personalRating) {
+                $scope.mtd.personalRating.then(function(unbind) {unbind()});
+                $scope.mtd.personalRates.then(function(unbind) {unbind()});
+                $scope.rating=$scope.feeds.personal.rating;
+
             }
-            $scope.rating=$scope.$storage.localRating;
+            if ($scope.mtd.publicRating) {
+                $scope.mtd.publicRating.then(function(unbind) {unbind()});
+                $scope.mtd.publicRates.then(function(unbind) {unbind()});
+                $scope.rating=$scope.feeds.publicFeed.rating;
+
+            }
             $scope.mtd.ratingView='local';
         }
         if (type=='personal') {
-            if ($scope.mtd.fireRate) {
-                $scope.mtd.fireRate.then(function(unbind) {unbind()})
+            if ($scope.mtd.publicRating) {
+                $scope.mtd.publicRating.then(function(unbind) {unbind()});
+                $scope.mtd.publicRates.then(function(unbind) {unbind()});
+
             }
-            $scope.rating=$scope.$storage.feeds.personal.rating;
-            $scope.mtd.ratingView='personal';
+            $scope.mtd.personalRating = personalRatingSync.$asObject().$bindTo($scope,'rating');
+            $scope.mtd.personalRates=personalRatesSync.$asObject().$bindTo($scope, 'mtd.rates');
+            $scope.mtd.ratingView='global';
         }
 
     };
@@ -216,7 +255,6 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         }
     };
 
-    $scope.changeFeed('personal');
 
 
 
