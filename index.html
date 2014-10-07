@@ -53,6 +53,8 @@
 
     <div class="logo"></div>
 
+    
+
     <button ng-disabled="!status.online"
             class="header-button"
             ng-class="{active:feedTitle==feeds.publicFeed.title}"
@@ -61,10 +63,14 @@
 
     </button>
 
+
+
     <button ng-disabled="!status.online"
             class="header-button"
             ng-class="{active:feedTitle==feeds.personal.title}"
             ng-click="mtd.switchToPersonal()">Личные</button>
+
+    <div class="auth">
 
     <button ng-if="status.personalLoaded && !mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
@@ -95,6 +101,7 @@
          class="auth sign-up"
          data-ng-if="!data.userLoggedIn && mtd.creating"></div>
 
+</div>
 
 
 </section>

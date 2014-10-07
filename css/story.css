@@ -59,8 +59,9 @@ button:disabled {
     align-items:stretch;
 }
 #header .logo {
-    flex:0.8 1 100px;
+    flex:0.8 1 300px;
     height:70px;
+    min-width: 300px;
     align-self: flex-start;
     background-image: url('../icons/feeds-logo.svg');
     background-repeat: no-repeat;
