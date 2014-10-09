@@ -514,9 +514,7 @@ button:disabled {
 .box-head:hover {
     opacity: 1;
 }
-.over-card .box-head {
-    height:300px;
-}
+
 
 .box-bar {
     flex:1 1 100%;
@@ -534,6 +532,10 @@ button:disabled {
 .box-icon img {
     width: 100%;
     max-width: 32px;
+}
+
+.icon svg g path {
+    stroke:#fff;
 }
 
 .icon-small {
@@ -580,7 +582,7 @@ button:disabled {
 }
 
 .box-heading {
-    flex:1 1 75%;
+    flex:1 1 70%;
     background:rgba(0,0,0,0.1);
     margin:0;
     padding:10px 10px;

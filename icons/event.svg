@@ -3,10 +3,9 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"
 	 height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-<g id="Layer_2">
-</g>
+
 <g id="Layer_3">
-	<path fill="none" stroke="#ED1C24" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M20.049,15
+	<path fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M20.049,15
 		C20.049,40.818,80,50,80,32.5s-60-24.568-60,18c0,42.569,60,34.5,60,17S20.25,59.182,20.25,85"/>
 </g>
 </svg>

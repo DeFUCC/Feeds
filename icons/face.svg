@@ -3,14 +3,10 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"
 	 height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-<g id="Layer_2">
-</g>
-<g id="Layer_4">
-</g>
 <g id="Layer_3">
-	<path fill="none" stroke="#8DC63F" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,54.193
+	<path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,54.193
 		C25,54.193,25,65,35.625,65c14.428,0,35.711-50,14.286-50c-21.432,0,0.261,50,14.286,50C75,65,75,54.193,75,54.193"/>
-	<path fill="none" stroke="#8DC63F" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,76.667
+	<path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,76.667
 		c0,0,8.333,8.333,25,8.333s25-8.333,25-8.333"/>
 </g>
 </svg>

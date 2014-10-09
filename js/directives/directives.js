@@ -66,7 +66,6 @@ fruitStory.directive("letterGrid", function() {
                 if (angular.isArray(used)) {
                     $scope.grid=exclude(used);
                 }
-                console.log(used);
             });
 
             $scope.choose=function (letter) {
@@ -376,6 +375,8 @@ fruitStory.directive("cards", function($compile) {
 
             $scope.$watch('next', function (next) {
                 $scope.used=$scope.mtd.getUsed(next);
+
+
             });
 
             $scope.mtd.getUsed = function (source) {
