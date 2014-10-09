@@ -351,6 +351,14 @@ button:disabled {
     flex-shrink:1;
     flex-basis: 100%;
 }
+.box-wider > .card-stack > .card > .box-text > .long-text {
+    column-count: 3;
+    column-gap: 3em;
+    column-rule: 1px solid rgba(100, 100, 100, 0.5);
+    max-height: none;
+    overflow: hidden;
+    margin:16px 8px;
+}
 .box-wider > .box-head {
     max-width: 100%;
     background-attachment: fixed;
@@ -505,6 +513,9 @@ button:disabled {
 }
 .box-head:hover {
     opacity: 1;
+}
+.over-card .box-head {
+    height:300px;
 }
 
 .box-bar {
@@ -718,6 +729,25 @@ button:disabled {
     flex:1 1 240px;
     padding:0 8px;
 }
+
+.long-text {
+        max-height: 400px;
+        overflow: scroll;
+        column-count:1;
+    }
+
+@media (max-width:640px) {
+    .box-wider > .card-stack > .card > .box-text > .long-text {
+        column-count:1 !important;
+    }
+}
+
+@media (max-width:900px) and (min-width: 641px) {
+    .box-wider > .card-stack > .card > .box-text > .long-text {
+        column-count:2 !important;
+    }
+}
+
 .text-flow img {
     max-width: 100%;
 }

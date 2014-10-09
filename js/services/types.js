@@ -302,5 +302,11 @@ fruitStory.service('Types', function () {
         types.present,
         types.designFace
     ];
+    types.statement.canHave = [
+        types.statement
+    ];
+    types.question.canHave = [
+        types.statement
+    ];
     this.types=types;
 });

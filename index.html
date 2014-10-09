@@ -53,9 +53,9 @@
 
     <div class="logo"></div>
 
-    
 
-    <button ng-disabled="!status.online"
+
+    <button ng-disabled="!status.publicLoaded"
             class="header-button"
             ng-class="{active:feedTitle==feeds.publicFeed.title}"
             ng-click="mtd.switchToPublic()">
@@ -64,8 +64,7 @@
     </button>
 
 
-
-    <button ng-disabled="!status.online"
+    <button ng-disabled="!status.personalLoaded"
             class="header-button"
             ng-class="{active:feedTitle==feeds.personal.title}"
             ng-click="mtd.switchToPersonal()">Личные</button>

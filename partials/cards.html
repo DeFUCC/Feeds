@@ -1,7 +1,7 @@
 
 <div class="card-holder"
      data-ng-class="{'box-holder':selected!=phrase.letters, 'box-wider':mtd.isSelected(phrase.letters)}"
-     data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort]">
+     data-ng-repeat="phrase in next | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, phrase.time]">
 
     <div card
          mtd="mtd"

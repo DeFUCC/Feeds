@@ -38,7 +38,7 @@
         <a class="header-scroll-link" href="#" duration="10" scroll-to="{{phrase.letters}}">
         <div icon
              icon-type="phrase.type"
-             icon-title="phrase.title"
+             icon-title="mtd.types[phrase.type].title"
              icon-text="phrase.text"
              class="box-icon"
              data-ng-if="phrase.type"
@@ -68,7 +68,7 @@
 
 
 
-        <div class="text-flow"  data-ng-if="phrase.text" marked="phrase.text"></div>
+        <div class="text-flow" ng-class="{'long-text':phrase.text.length>300}"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
 
 
@@ -76,9 +76,12 @@
 
 
     </div>
-    <div class="time-card" data-ng-if="phrase.author">
+    <div class="time-card" data-ng-if="phrase.author && mtd.persona">
 
-        <b> {{mtd.personae[phrase.author].title || phrase.author}} </b> <span ng-if="mtd.personae[phrase.author].gender=='female'">опубликовала</span> <span ng-if="mtd.personae[phrase.author].gender=='male'">опубликовал</span> это <span am-time-ago="phrase.time"></span>
+        <b> {{mtd.personae[phrase.author].title || phrase.author}} </b>
+        <span ng-if="mtd.personae[phrase.author].gender=='female'">опубликовала</span>
+        <span ng-if="mtd.personae[phrase.author].gender!='female'">опубликовал</span>
+        это <span am-time-ago="phrase.time"></span>
 
         <button class="btn"
                 ng-if="mtd.persona==phrase.author"

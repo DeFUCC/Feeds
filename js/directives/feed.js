@@ -174,6 +174,7 @@ fruitStory.directive("feed", function() {
                 return 0;
             };
 
+
             $scope.rate.totalRated = function (rate) {
                 var total=0;
                 for (var a in $scope.rating) {
