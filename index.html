@@ -81,6 +81,7 @@
 
 
     <div class="auth auth-name"
+         ng-style="{color:mtd.colorize(mtd.personae[data.userInfo.md5_hash].letters)}"
          ng-if="data.userLoggedIn">
         {{mtd.personae[data.userInfo.md5_hash].title}}
          </div>

@@ -87,6 +87,8 @@ button:disabled {
 .auth-name {
     font-weight: bold;
     font-size: 16px;
+    letter-spacing: 2px;
+    font-family: "Helvetica Neue Cyr", Helvetica, sans-serif;
 }
 
 
@@ -467,10 +469,12 @@ button:disabled {
     width:95%;
     margin:0;
 }
+.higher {
+    height: 320px;
+}
 .over-card .card {
 
     background: #fff;
-
 }
 .sel {
     transform:scale(1.02,1.02);
