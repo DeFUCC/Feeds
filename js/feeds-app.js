@@ -79,7 +79,7 @@ fruitStory.config(
                 })
 
                 .state("public.feed", {
-                    url: "/:id",
+                    url: ":id",
                     templateUrl:"partials/feed.html",
                     controller:"feed"
                 })
