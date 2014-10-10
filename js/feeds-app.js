@@ -26,7 +26,173 @@ angular.module('fireUser').value('FireUserConfig', {
     url:'https://frktfeeds.firebaseio.com/'
 });
 
+fruitStory.config(
+    [          '$stateProvider', '$urlRouterProvider', '$locationProvider',
+        function ($stateProvider,   $urlRouterProvider, $locationProvider) {
+
+            /////////////////////////////
+            // Redirects and Otherwise //
+            /////////////////////////////
+
+            $locationProvider.html5Mode(false);
+
+            // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
+            $urlRouterProvider
+
+                // The `when` method says if the url is ever the 1st param, then redirect to the 2nd param
+                // Here we are just setting up some convenience urls.
+                     // .when('/c?id', '/contacts/:id')
+                   // .when('/user/:id', '/contacts/:id')
+
+                // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
+                .otherwise('/');
+
+            $stateProvider
+
+
+                .state("personal", {
+
+                    // Use a url of "/" to set a states as the "index".
+                    url: "/personal",
+
+
+                    template: '<div ui-view></div>',
+                    controller: 'personal'
+
+                })
+
+                .state("personal.feed", {
+                    url: "/:id",
+                    templateUrl:"partials/feed.html",
+                    controller:"feed"
+                })
+
+                .state("public", {
+
+                    // Use a url of "/" to set a states as the "index".
+                    url: "/",
+
+                    // ui-view within index.html.
+                    template: '<div ui-view></div>',
+                    controller: 'public'
+
+                })
+
+                .state("public.feed", {
+                    url: "/:id",
+                    templateUrl:"partials/feed.html",
+                    controller:"feed"
+                })
+        }
+    ]
+);
+
+
 fruitStory.controller(controllers);
+
+
+
+
+
+
+
+controllers.personal = function ($scope, $localStorage, $firebase, cfpLoadingBar, $stateParams, $state) {
+
+    var feedTitle = 'personal';
+    $scope.feedTitle=feedTitle;
+    $scope.ratingMode = {news:true,plus:true,zero:true,minus:false};
+    $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
+
+    //personal feed
+
+    $scope.personalFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asArray();
+    $scope.personalFeed.$loaded().then(function () {
+        $scope.status.personalLoaded=true;
+
+    });
+    $scope.feed = $scope.personalFeed;
+    var unwatch = $scope.feed.$watch(function () {
+        $scope.mtd.updateTree();
+    });
+
+    // personal ratings
+
+    personalRatingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rating'));
+
+    //personal rates
+
+    $scope.mtd.personalRates={};
+    var personalRatesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rates'));
+
+
+    if ($scope.mtd.publicRating) {
+        $scope.mtd.publicRating.then(function(unbind) {unbind()});
+        $scope.mtd.publicRates.then(function(unbind) {unbind()});
+
+    }
+    $scope.mtd.personalRating = personalRatingSync.$asObject().$bindTo($scope,'rating');
+    $scope.mtd.personalRates=personalRatesSync.$asObject().$bindTo($scope, 'mtd.rates');
+    $scope.mtd.ratingView='global';
+
+    $scope.mtd.firebase=true;
+    cfpLoadingBar.complete();
+    $scope.status.ready=true;
+    $state.go('personal.feed');
+
+
+};
+
+
+
+
+controllers.public = function ($scope, $localStorage, $firebase, cfpLoadingBar, $stateParams, $state) {
+
+    var feedTitle = 'publicFeed';
+    $scope.feedTitle=feedTitle;
+    $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
+    $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
+
+    // public ratings
+
+    var ratingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rating'));
+    $scope.fireRating=ratingSync.$asObject();
+
+    //public feed
+
+    $scope.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed')).$asArray();
+    $scope.publicFeed.$loaded().then(function () {
+        //  $scope.mtd.switchToPublic();
+        $scope.status.publicLoaded=true;
+        $scope.feed = $scope.publicFeed;
+    });
+
+
+    //public rates
+
+    $scope.mtd.publicRates={};
+    var ratesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rates'));
+
+
+    if ($scope.mtd.personalRating) {
+        $scope.mtd.personalRating.then(function(unbind) {unbind()});
+        $scope.mtd.personalRates.then(function(unbind) {unbind()});
+
+    }
+    $scope.mtd.publicRating = ratingSync.$asObject().$bindTo($scope,'rating');
+    $scope.mtd.publicRates=ratesSync.$asObject().$bindTo($scope, 'mtd.rates');
+    $scope.mtd.ratingView='global';
+
+    $scope.mtd.firebase=true;
+    cfpLoadingBar.complete();
+    $scope.status.ready=true;
+    $state.go('public.feed');
+
+};
+
+
+
+
+
 
 
 controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebase, $firebaseSimpleLogin, cfpLoadingBar) {
@@ -87,10 +253,10 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
     });
 
 
-    $scope.mtd.personae=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asObject();
+    $scope.mtd.personae=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personae')).$asObject();
 
     $scope.$on('fireuser:user_created', function (data, user) {
-        $scope.mtd.personae[user.md5_hash] = {
+        var persona = {
             type:'persona',
             title:$scope.mtd.userName,
             gender:$scope.mtd.userGender,
@@ -100,7 +266,10 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
             author:user.md5_hash,
             md5_hash: user.md5_hash
         };
+
+        $scope.mtd.personae[user.md5_hash] = persona;
         $scope.mtd.personae.$save();
+        $scope.personalFeed.$add(persona);
         $scope.mtd.userLetters=null;
         $scope.mtd.userName=null;
         if($scope.feedTitle!='personal') {
@@ -131,30 +300,6 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         }
     });
 
-    // public ratings
-
-    var ratingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rating'));
-    $scope.fireRating=ratingSync.$asObject();
-
-    //public feed
-
-    $scope.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed')).$asArray();
-    $scope.publicFeed.$loaded().then(function () {
-
-        $scope.mtd.switchToPublic();
-        $scope.status.publicLoaded=true;
-    });
-
-    //public rates
-
-    $scope.mtd.rates={};
-    var ratesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/public/rates'));
-
-
-    // users
-
-    var usersSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/users'));
-    var users=usersSync.$asObject().$bindTo($scope, 'mtd.users');
 
     // authentication connection
 
@@ -162,52 +307,17 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
 
     //open public feed
 
-    $scope.mtd.switchToPublic = function () {
-        var feedTitle = 'publicFeed';
-        $scope.feed =$scope.publicFeed;
-        $scope.mtd.unwatch = $scope.feed.$watch(function () {
-            $scope.mtd.updateTree();
-        });
-        $scope.feedTitle=feedTitle;
-        $scope.mtd.switchRate('global');
-        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
-        $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
-        $scope.mtd.firebase=true;
-    };
-
-
-    // personal ratings
-
-    var personalRatingSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rating'));
-
-
-    //personal feed
-
-    $scope.personalFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/feed')).$asArray();
-    $scope.personalFeed.$loaded().then(function () {
-        $scope.status.personalLoaded=true;
-
-    });
-
-    //personal rates
-
-    $scope.mtd.personalRates={};
-    var personalRatesSync = $firebase(new Firebase('https://frktfeeds.firebaseio.com/personal/rates'));
 
 
 
-    $scope.mtd.switchToPersonal = function () {
-        var feedTitle = 'personal';
-        $scope.feed =$scope.personalFeed;
-        $scope.mtd.unwatch = $scope.feed.$watch(function () {
-            $scope.mtd.updateTree();
-        });
-        $scope.feedTitle=feedTitle;
-        $scope.mtd.switchRate('personal');
-        $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
-        $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
-        $scope.mtd.firebase=true;
-    };
+
+
+
+
+
+
+
+
 
 
 

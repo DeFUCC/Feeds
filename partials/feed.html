@@ -6,6 +6,7 @@
 
     </menu>
 </section>
+
 <section ng-if="mtd.viewType" id="types">
     <button ng-repeat="type in mtd.types | objectAsArray"
             icon
@@ -30,9 +31,10 @@
          id="navigator">
 
 </section>
-<section ng-if="status.publicLoaded" id="first">
+<section  id="first">
 
     <div cards
+         ng-if="source"
          search="search"
          rf="rate.ratingFilter"
          fltr="fltr"

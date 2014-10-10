@@ -6,6 +6,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
     <script src="js/side/angular.min.js"></script>
+    <script type="application/javascript" src="js/helpers.js"></script>
     <script type="application/javascript" src="js/side/angular-ui-router.js"></script>
     <script type="application/javascript" src="js/side/FireUser.js"></script>
     <script type="application/javascript" src="js/side/marked.js"></script>
@@ -51,29 +52,29 @@
              ng-if="status.publicLoaded && !status.online">&bull;</div>
             </div>
 
-    <div class="logo"></div>
+    <a ui-sref="feed"> <div class="logo"></div></a>
 
 
 
-    <button ng-disabled="!status.publicLoaded"
+    <button
             class="header-button"
-            ng-class="{active:feedTitle==feeds.publicFeed.title}"
-            ng-click="mtd.switchToPublic()">
-        <span>Публичные</span>
+            ng-class="{active:$state.includes('public')}"
+            >
+        <a ui-sref="public.feed">Публичные</a>
 
     </button>
 
 
-    <button ng-disabled="!status.personalLoaded"
+    <button
             class="header-button"
-            ng-class="{active:feedTitle==feeds.personal.title}"
-            ng-click="mtd.switchToPersonal()">Личные</button>
+            ng-class="{active:$state.includes('personal')}"
+            ><a ui-sref="personal">Личные</a></button>
 
     <div class="auth">
 
     <button ng-if="status.personalLoaded && !mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
-            ng-click="mtd.logging=1">Войти {{logging}}</button>
+            ng-click="mtd.logging=1">Войти</button>
     <button ng-if="status.personalLoaded &&  !mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.creating=1">Представиться</button>
@@ -105,16 +106,7 @@
 
 
 </section>
-<section id="feed"
-        feed
-        data-status="status"
-        data-persona="persona"
-        data-mtd="mtd"
-        data-feed-title="feedTitle"
-        data-feed-source="feed"
-        data-feed-rating="rating"
-        data-feed-rating-mode="ratingMode"
-        >
+<section ui-view></section>
 
 </section>
 
