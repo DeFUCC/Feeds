@@ -305,60 +305,10 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
 
     $scope.auth=$firebaseSimpleLogin(new Firebase('https://frktfeeds.firebaseio.com/'));
 
-    //open public feed
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    $scope.mtd.switchRate = function (type) {
-        if (type=='global') {
-            if ($scope.mtd.personalRating) {
-                $scope.mtd.personalRating.then(function(unbind) {unbind()});
-                $scope.mtd.personalRates.then(function(unbind) {unbind()});
-
-            }
-            $scope.mtd.publicRating = ratingSync.$asObject().$bindTo($scope,'rating');
-            $scope.mtd.publicRates=ratesSync.$asObject().$bindTo($scope, 'mtd.rates');
-            $scope.mtd.ratingView='global';
-        }
-        if (type=='local') {
-            if ($scope.mtd.personalRating) {
-                $scope.mtd.personalRating.then(function(unbind) {unbind()});
-                $scope.mtd.personalRates.then(function(unbind) {unbind()});
-                $scope.rating=$scope.feeds.personal.rating;
-
-            }
-            if ($scope.mtd.publicRating) {
-                $scope.mtd.publicRating.then(function(unbind) {unbind()});
-                $scope.mtd.publicRates.then(function(unbind) {unbind()});
-                $scope.rating=$scope.feeds.publicFeed.rating;
-
-            }
-            $scope.mtd.ratingView='local';
-        }
-        if (type=='personal') {
-            if ($scope.mtd.publicRating) {
-                $scope.mtd.publicRating.then(function(unbind) {unbind()});
-                $scope.mtd.publicRates.then(function(unbind) {unbind()});
-
-            }
-            $scope.mtd.personalRating = personalRatingSync.$asObject().$bindTo($scope,'rating');
-            $scope.mtd.personalRates=personalRatesSync.$asObject().$bindTo($scope, 'mtd.rates');
-            $scope.mtd.ratingView='global';
-        }
-
-    };
 
 };
 

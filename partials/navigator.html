@@ -5,7 +5,7 @@
 </a>
     <div class="nav-block"
          data-ng-repeat="letters in mtd.selected">
-        <a class="no-underline" href="#" duration="50"  scroll-to="{{letters}}">
+        <a class="no-underline" duration="50"  scroll-to="{{letters}}">
             <div class="letters">
                  <span
                          data-ng-repeat="lttr in cleanLetters(letters) track by $index"
@@ -14,7 +14,7 @@
                          data-ng-click="select()">
                     <span ng-if="mtd.showLetters">{{lttr}}</span>
                  </span>
-                {{}}
+                {{mtd.selector}}
                 <span class="nav-close" data-ng-click="mtd.selector(letters)">&times;</span>
             </div>
         </a>

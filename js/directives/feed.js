@@ -55,6 +55,10 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types)
         if (!found) {
             $scope.mtd.selected.push(letters);
         }
+        if (letters.indexOf('|')==-1) {
+            if (found) {$scope.mtd.fltr=''}
+            if (!found) {$scope.mtd.fltr=letters;$stateParams.id=letters}
+        }
     };
 
     $scope.mtd.isSelected = function (letters) {
