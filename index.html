@@ -60,7 +60,7 @@
             class="header-button"
             ng-class="{active:$state.includes('public')}"
             >
-        <a ui-sref="public.feed">Публичные</a>
+        <a ui-sref="public">Публичные</a>
 
     </button>
 
@@ -72,10 +72,10 @@
 
     <div class="auth">
 
-    <button ng-if="status.personalLoaded && !mtd.logging && !mtd.creating && !data.userLoggedIn"
+    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.logging=1">Войти</button>
-    <button ng-if="status.personalLoaded &&  !mtd.logging && !mtd.creating && !data.userLoggedIn"
+    <button ng-if="!mtd.logging && !mtd.creating && !data.userLoggedIn"
             class="header-button"
             ng-click="mtd.creating=1">Представиться</button>
 

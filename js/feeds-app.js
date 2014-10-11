@@ -70,7 +70,7 @@ fruitStory.config(
                 .state("public", {
 
                     // Use a url of "/" to set a states as the "index".
-                    url: "/",
+                    url: "",
 
                     // ui-view within index.html.
                     template: '<div ui-view></div>',
@@ -79,7 +79,7 @@ fruitStory.config(
                 })
 
                 .state("public.feed", {
-                    url: ":id",
+                    url: "/:id",
                     templateUrl:"partials/feed.html",
                     controller:"feed"
                 })
@@ -250,6 +250,14 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
     $scope.$on('fireuser:logout', function (data) {
 
         $scope.mtd.persona=false;
+    });
+
+    $scope.$on('$stateChangeStart', function () {
+        cfpLoadingBar.start();
+    });
+
+    $scope.$on('$stateChangeSuccess', function () {
+        cfpLoadingBar.complete();
     });
 
 
