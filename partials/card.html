@@ -56,6 +56,18 @@
             </h3>
         </div>
 
+            <div class="time-card" data-ng-if="phrase.author && mtd.persona">
+
+                <b> {{mtd.personae[phrase.author].title || phrase.author}} </b>
+                <span ng-if="mtd.personae[phrase.author].gender=='female'">опубликовала</span>
+                <span ng-if="mtd.personae[phrase.author].gender!='female'">опубликовал</span>
+                это <span am-time-ago="phrase.time"></span>
+
+                <button class="btn"
+                        ng-if="mtd.persona==phrase.author"
+                        ng-click="edit.new=phrase">Изменить</button>
+            </div>
+
 </a>
 
     </div>
@@ -64,7 +76,7 @@
 
 
 
-    <div  class="box-text" data-ng-if="phrase.text || mtd.persona==phrase.author">
+    <div  class="box-text" data-ng-if="phrase.text">
 
 
 
@@ -76,17 +88,7 @@
 
 
     </div>
-    <div class="time-card" data-ng-if="phrase.author && mtd.persona">
 
-        <b> {{mtd.personae[phrase.author].title || phrase.author}} </b>
-        <span ng-if="mtd.personae[phrase.author].gender=='female'">опубликовала</span>
-        <span ng-if="mtd.personae[phrase.author].gender!='female'">опубликовал</span>
-        это <span am-time-ago="phrase.time"></span>
-
-        <button class="btn"
-                ng-if="mtd.persona==phrase.author"
-                ng-click="edit.new=phrase">Изменить</button>
-    </div>
 
     <div data-ng-hide="mtd.isSelected(phrase.letters)" data-ng-if="phrase.next" class="box-bottom">
         <div data-ng-click="$parent.$parent.$parent.nxt=next"

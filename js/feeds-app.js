@@ -139,6 +139,14 @@ controllers.personal = function ($scope, $localStorage, $firebase, cfpLoadingBar
     $scope.status.ready=true;
     $state.go('personal.feed');
 
+    if ($scope.unwatch) {
+        $scope.unwatch();
+        delete $scope.unwatch;
+    }
+
+    $scope.unwatch = $scope.personalFeed.$watch(function () {
+        $scope.mtd.updateTree();
+    })
 
 };
 
@@ -186,6 +194,15 @@ controllers.public = function ($scope, $localStorage, $firebase, cfpLoadingBar, 
     cfpLoadingBar.complete();
     $scope.status.ready=true;
     $state.go('public.feed');
+
+    if ($scope.unwatch) {
+        $scope.unwatch();
+        delete $scope.unwatch;
+    }
+
+    $scope.unwatch = $scope.publicFeed.$watch(function () {
+        $scope.mtd.updateTree();
+    })
 
 };
 

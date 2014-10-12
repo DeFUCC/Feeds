@@ -20,28 +20,32 @@ function checkAndAdd (add, arr) {
 
 function convertStory (story) {
     var tree = {};
-    for(var i = 0; i < story.length; i++) {
-        var saying = story[i];
-        var letters = saying.letters.split('|');
+    if (story) {
+        for(var i = 0; i < story.length; i++) {
+            var saying = story[i];
+            var letters = saying.letters.split('|');
 
-        var search = tree;
-        for(var j = 0; j < letters.length; j++) {
-            var letter = letters[j];
+            var search = tree;
+            for(var j = 0; j < letters.length; j++) {
+                var letter = letters[j];
 
-            var obj = letter in search ? search[letter] : search[letter] = {};
+                var obj = letter in search ? search[letter] : search[letter] = {};
 
-            // Endpoint, assign letter and values to obj
-            if(j == letters.length - 1) {
-                obj.letter = letter;
-                for(var key in saying) {
-                    obj[key] = saying[key];
+                // Endpoint, assign letter and values to obj
+                if(j == letters.length - 1) {
+                    obj.letter = letter;
+                    for(var key in saying) {
+                        obj[key] = saying[key];
+                    }
+                } else { // Create nested object and update search object
+                    search = 'next' in obj ? obj.next : obj.next = {};
                 }
-            } else { // Create nested object and update search object
-                search = 'next' in obj ? obj.next : obj.next = {};
             }
         }
-    }
+
     return tree;
+
+    }
 }
 
 function parent (lttrs) {
