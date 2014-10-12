@@ -100,7 +100,7 @@ controllers.personal = function ($scope, $localStorage, $firebase, cfpLoadingBar
 
     var feedTitle = 'personal';
     $scope.feedTitle=feedTitle;
-    $scope.ratingMode = {news:true,plus:true,zero:true,minus:false};
+    $scope.ratingMode =  {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
 
     //personal feed
@@ -157,7 +157,7 @@ controllers.public = function ($scope, $localStorage, $firebase, cfpLoadingBar, 
 
     var feedTitle = 'publicFeed';
     $scope.feedTitle=feedTitle;
-    $scope.ratingMode = $scope.feeds[feedTitle].ratingMode || {news:true,plus:true,zero:true,minus:false};
+    $scope.ratingMode =  {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
 
     // public ratings
@@ -293,6 +293,7 @@ controllers.feeds = function ($rootScope, $scope, Types, $localStorage, $firebas
         };
 
         $scope.mtd.personae[user.md5_hash] = persona;
+        $scope.mtd.personae[user.md5_hash].ratingMode={news:true,plus:true,zero:true,minus:false};
         $scope.mtd.personae.$save();
         $scope.personalFeed.$add(persona);
         $scope.mtd.userLetters=null;
