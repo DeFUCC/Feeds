@@ -64,7 +64,7 @@
                 это <span am-time-ago="phrase.time"></span>
 
                 <button class="btn"
-                        ng-if="mtd.persona==phrase.author"
+                        ng-if="mtd.persona==phrase.author && !mtd.isRated(phrase.letters)"
                         ng-click="edit.new=phrase">Изменить</button>
             </div>
 

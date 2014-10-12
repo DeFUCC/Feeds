@@ -121,6 +121,11 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types)
     });
 
 
+    $scope.mtd.isRated = function (letters) {
+        if($scope.rating[letters]) {return $scope.rating[letters].pluses+$scope.rating[letters].minuses+$scope.rating[letters].zeros}
+        return 0;
+    };
+
 
     $scope.rate={};
     $scope.rate.rating = $scope.rating;

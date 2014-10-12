@@ -263,7 +263,7 @@ fruitStory.directive("addForm", function() {
         controller: function ($scope) {
             $scope.phrase = $scope.phrase || {letters:''};
             $scope.type=$scope.type || 'statement';
-            $scope.phrase.type=$scope.mtd.types[$scope.type].canHave[0].type;
+            $scope.phrase.type=$scope.phrase.type || $scope.mtd.types[$scope.type].canHave[0].type;
 
             $scope.$watch('letter', function (letter) {
                 if (angular.isString(letter)) {
