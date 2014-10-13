@@ -286,7 +286,9 @@ fruitStory.service('Types', function () {
         types.chance,
         types.donation,
         types.present,
-        types.designFace
+        types.designFace,
+        types.idea,
+        types.intent
     ];
     types.event.canHave = [
         types.gist,
@@ -300,7 +302,9 @@ fruitStory.service('Types', function () {
         types.chance,
         types.donation,
         types.present,
-        types.designFace
+        types.designFace,
+        types.idea,
+        types.intent
     ];
     types.statement.canHave = [
         types.statement

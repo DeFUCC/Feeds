@@ -759,7 +759,10 @@ button:disabled {
         column-count:2 !important;
     }
 }
-
+.google-maps {
+    width: 100%;
+    min-height: 300px;
+}
 .text-flow img {
     max-width: 100%;
 }

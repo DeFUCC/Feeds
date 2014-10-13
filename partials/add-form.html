@@ -56,6 +56,20 @@
                 <button class="btn" ng-class="{active:addText || phrase.text}" ng-click="addText=!addText">Текст</button>
             </div>
         </div>
+        <div ng-if="phrase.type=='place' || phrase.place && phrase.place.address" data-row-span="4">
+            <div data-field-span="3">
+                <label>Адрес</label>
+                <input data-ng-model="phrase.place.address"
+                       type="text">
+
+            </div>
+            <div data-field-span="1">
+
+                <label>Приближение</label>
+                <input data-ng-model="phrase.place.zoom"
+                       type="number">
+            </div>
+        </div>
         <div ng-if="addImg || phrase.img" data-row-span="1">
             <div data-field-span="1">
                 <label>URL картинки</label>
@@ -83,7 +97,7 @@
             value="+"
             class="form-button add"
             data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
-            data-ng-click="mtd.addToFeed(phrase)">+</button>
+            data-ng-click="mtd.addToFeed(phrase);close()">+</button>
     <button class="form-button cancel"
             data-ng-click="close()">&times;</button>
 </form>

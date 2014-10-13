@@ -262,6 +262,8 @@ fruitStory.directive("addForm", function() {
         },
         controller: function ($scope) {
             $scope.phrase = $scope.phrase || {letters:''};
+            $scope.phrase.place=$scope.phrase.place || {};
+            $scope.phrase.place.zoom = $scope.phrase.place.zoom || 12;
             $scope.type=$scope.type || 'statement';
             $scope.phrase.type=$scope.phrase.type || $scope.mtd.types[$scope.type].canHave[0].type;
 
@@ -333,6 +335,22 @@ fruitStory.directive("card", function() {
         controller: function ($scope) {
 
 
+
+        $scope.$watch('phrase.place.address', function () {
+            if ($scope.phrase.type=="place" && $scope.phrase.place) {
+                $scope.map = {
+                    sensor:false,
+                    size:'640x320',
+                    zoom: $scope.phrase.place.zoom || 12,
+                    center: $scope.phrase.place.address,
+                    markers:[$scope.phrase.place.address],
+                    mapevents: {
+                        redirect:false,
+                        loadmap:true
+                    }
+                }
+            }
+        });
 
         }
     };

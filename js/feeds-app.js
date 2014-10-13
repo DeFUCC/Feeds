@@ -1,7 +1,7 @@
 /**
  * Created by starov on 01.04.14.
  */
-var fruitStory = angular.module('fruitStory',['hc.marked', 'smoothScroll','firebase', 'ngStorage', 'cfp.loadingBar', 'fireUser','ui.router', 'videosharing-embed', 'angularMoment']);
+var fruitStory = angular.module('fruitStory',['hc.marked', 'smoothScroll','firebase', 'ngStorage', 'cfp.loadingBar', 'fireUser','ui.router', 'videosharing-embed', 'angularMoment', 'adaptive.googlemaps']);
 var controllers = {};
 
 fruitStory.run(function(amMoment){
