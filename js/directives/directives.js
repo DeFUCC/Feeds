@@ -265,7 +265,7 @@ fruitStory.directive("addForm", function() {
             $scope.add={};
             if ($scope.phrase.date) {
                 $scope.add.dateTime=moment($scope.phrase.date).format('YYYY-MM-DDTHH:mm');
-                console.log($scope.add.dateTime);
+
             }
 
             $scope.phrase = $scope.phrase || {letters:''};
@@ -288,7 +288,6 @@ fruitStory.directive("addForm", function() {
             });
 
             $scope.add.refreshDate = function () {
-                console.log($scope.add.dateTime);
                 $scope.phrase.date=moment($scope.add.dateTime).valueOf();
             };
 
