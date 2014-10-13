@@ -261,11 +261,41 @@ fruitStory.directive("addForm", function() {
             close: '&'
         },
         controller: function ($scope) {
+
+            $scope.add={};
+            if ($scope.phrase.date) {
+                $scope.add.dateTime=moment($scope.phrase.date).format('YYYY-MM-DDTHH:mm');
+                console.log($scope.add.dateTime);
+            }
+
             $scope.phrase = $scope.phrase || {letters:''};
-            $scope.phrase.place=$scope.phrase.place || {};
-            $scope.phrase.place.zoom = $scope.phrase.place.zoom || 12;
             $scope.type=$scope.type || 'statement';
             $scope.phrase.type=$scope.phrase.type || $scope.mtd.types[$scope.type].canHave[0].type;
+
+
+
+            $scope.$watch('phrase.type', function (type) {
+                if($scope.phrase.type=="place") {
+                    $scope.phrase.place=$scope.phrase.place || {};
+                    $scope.phrase.place.zoom = $scope.phrase.place.zoom || 12;
+                } else {
+                    $scope.phrase.place=null;
+                }
+                if (type!='time' && $scope.phrase.date) {
+                    $scope.phrase.date=null;
+                    $scope.phrase.dateTime ? $scope.phrase.dateTime=null : null;
+                }
+            });
+
+            $scope.add.refreshDate = function () {
+                console.log($scope.add.dateTime);
+                $scope.phrase.date=moment($scope.add.dateTime).valueOf();
+            };
+
+
+
+
+
 
             $scope.$watch('letter', function (letter) {
                 if (angular.isString(letter)) {
@@ -291,6 +321,23 @@ fruitStory.directive("overCard", function($compile) {
             close: '&'
         },
         controller: function ($scope){
+
+            $scope.$watch('nxt.place.address', function () {
+                if ($scope.nxt && $scope.nxt.type=="place" && $scope.nxt.place) {
+                    $scope.map = {
+                        sensor:false,
+                        size:'640x320',
+                        zoom: $scope.nxt.place.zoom || 12,
+                        center: $scope.nxt.place.address,
+                        markers:[$scope.nxt.place.address],
+                        mapevents: {
+                            redirect:false,
+                            loadmap:true
+                        }
+                    }
+                }
+            });
+
             $scope.over={};
             $scope.selected=false;
             $scope.size = function(obj) {

@@ -70,6 +70,14 @@
                        type="number">
             </div>
         </div>
+        <div ng-if="phrase.type=='time' || phrase.date" data-row-span="1">
+            <div data-field-span="1">
+                <label>Время</label>
+                <input type="dateTime-Local" ng-model="add.dateTime" ng-change="add.refreshDate()">
+            </div>
+
+
+        </div>
         <div ng-if="addImg || phrase.img" data-row-span="1">
             <div data-field-span="1">
                 <label>URL картинки</label>

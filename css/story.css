@@ -716,6 +716,16 @@ button:disabled {
     border-top-left-radius:8px;
     border-bottom-left-radius:8px;
 }
+.box-date {
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 14px;
+    margin:5px;
+    color:#555;
+}
+
 .box-text{
     flex:1 1 100px;
     min-width: 100px;
@@ -855,8 +865,9 @@ button:disabled {
 .btn{
     display:inline-block;
     padding:4px 6px;
+    margin:4px;
     cursor: pointer;
-    color:#333;
+    color:inherit;
     min-width: 8px;
     font-size:0.7em;
     font-weight:bold ;

@@ -76,7 +76,7 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types)
         if (saying && saying.title && saying.type && saying.letters) {
 
             said = angular.copy(saying);
-            console.log('works');
+            if (said.next) {delete said.next}
             saying.text='';
             saying.title='';
             saying.letters='';
