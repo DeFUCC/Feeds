@@ -268,6 +268,7 @@ fruitStory.directive("addForm", function() {
 
             }
 
+
             $scope.phrase = $scope.phrase || {letters:''};
             $scope.type=$scope.type || 'statement';
             $scope.phrase.type=$scope.phrase.type || $scope.mtd.types[$scope.type].canHave[0].type;
