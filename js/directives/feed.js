@@ -64,7 +64,7 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
                 $scope.mtd.selected.push(letters);
             }
             if (letters.indexOf('|') == -1) {
-                if (found && !addOnly) {
+                if (found && letters==$scope.mtd.fltr && !addOnly) {
                     $scope.mtd.fltr = ''
                 }
                 if (!found || addOnly) {
