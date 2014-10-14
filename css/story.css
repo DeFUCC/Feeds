@@ -789,6 +789,7 @@ button:disabled {
     flex:.1 1 100%;
     font-size: 10px;
     min-width: 120px;
+    margin:4px 8px;
     color:#888;
     text-align: right;
 }
@@ -874,7 +875,7 @@ button:disabled {
 .btn{
     display:inline-block;
     padding:4px 6px;
-    margin:4px;
+    margin:0 4px;
     cursor: pointer;
     color:inherit;
     min-width: 8px;
