@@ -92,8 +92,9 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
         },4000);
 
     };
-
-    $scope.mtd.parseParams($stateParams.id);
+    if ($stateParams.id) {
+        $scope.mtd.parseParams($stateParams.id);
+    } else $scope.mtd.fltr='';
 
     $scope.mtd.isSelected = function (letters) {
         for (var i=0;i<$scope.mtd.selected.length;i++) {

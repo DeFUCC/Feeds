@@ -74,7 +74,8 @@
 
             <div class="time-card card-link">
                 Ссылка на это высказывание:
-            <a href="#{{phrase.letters}}">feeds.frkt.ru/#{{phrase.letters}}</a>
+            <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}">feeds.frkt.ru/#{{phrase.letters}}</a>
+            <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}">feeds.frkt.ru/#personal/{{phrase.letters}}</a>
             </div>
 
 

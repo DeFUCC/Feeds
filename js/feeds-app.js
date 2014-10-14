@@ -99,7 +99,7 @@ fruitStory.controller(controllers);
 controllers.personal = function ($scope, $localStorage, $firebase, cfpLoadingBar, $stateParams, $state) {
 
     var feedTitle = 'personal';
-    $scope.feedTitle=feedTitle;
+    $scope.mtd.feedTitle=$scope.feedTitle=feedTitle;
     $scope.ratingMode =  {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
 
@@ -156,7 +156,7 @@ controllers.personal = function ($scope, $localStorage, $firebase, cfpLoadingBar
 controllers.public = function ($scope, $localStorage, $firebase, cfpLoadingBar, $stateParams, $state) {
 
     var feedTitle = 'publicFeed';
-    $scope.feedTitle=feedTitle;
+    $scope.mtd.feedTitle=$scope.feedTitle=feedTitle;
     $scope.ratingMode =  {news:true,plus:true,zero:true,minus:false};
     $scope.mtd.selected = $scope.feeds[feedTitle].selected || [];
 
