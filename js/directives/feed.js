@@ -3,10 +3,14 @@
  */
 
 
-controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types) {
+controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types, smoothScroll, $timeout) {
 
-    $scope.mtd.fltr = $stateParams.id;
+
     //View options
+
+
+
+
 
 
     $scope.mtd.showLetters=false;
@@ -44,22 +48,51 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types)
     $scope.mtd.convertStory=convertStory;
 
 
-    $scope.mtd.selector = function (letters) {
-        var found=false;
-        for (var i=0;i<$scope.mtd.selected.length;i++) {
-            if ($scope.mtd.selected[i] == letters) {
-                found = true;
-                $scope.mtd.selected.splice(i, 1);
+    $scope.mtd.selector = function (letters,addOnly) {
+        if (letters) {
+            var found = false;
+            for (var i = 0; i < $scope.mtd.selected.length; i++) {
+                if ($scope.mtd.selected[i] == letters) {
+                    found = true;
+                    if (!addOnly) {
+                        $scope.mtd.selected.splice(i, 1);
+                    }
+                }
+            }
+            if (!found) {
+                $scope.mtd.selected.push(letters);
+            }
+            if (letters.indexOf('|') == -1) {
+                if (found && !addOnly) {
+                    $scope.mtd.fltr = ''
+                }
+                if (!found || addOnly) {
+                    $scope.mtd.fltr = letters;
+                }
             }
         }
-        if (!found) {
-            $scope.mtd.selected.push(letters);
-        }
-        if (letters.indexOf('|')==-1) {
-            if (found) {$scope.mtd.fltr=''}
-            if (!found) {$scope.mtd.fltr=letters;$stateParams.id=letters}
-        }
     };
+
+    $scope.mtd.parseParams = function (id) {
+        id=convertLetters(id);
+        if(id) {
+            var parts=id.split('|'), i=0;
+            console.log(parts, parts.length);
+            for (var j=parts.length;j>0;j--) {
+
+                console.log(parts, j);
+                $scope.mtd.selector(parts.join('|'),true);
+                parts.pop();
+            }
+        }
+        $timeout(function () {
+            var element = document.getElementById(id);
+            smoothScroll(element, {duration:80});
+        },4000);
+
+    };
+
+    $scope.mtd.parseParams($stateParams.id);
 
     $scope.mtd.isSelected = function (letters) {
         for (var i=0;i<$scope.mtd.selected.length;i++) {

@@ -725,7 +725,11 @@ button:disabled {
     margin:5px;
     color:#555;
 }
-
+.address {
+    font-size: 12px;
+    margin:4px;
+    color:#444;
+}
 .box-text{
     flex:1 1 100px;
     min-width: 100px;
@@ -1019,7 +1023,7 @@ button:disabled {
 
 #filterSection {
     min-height: 72px;
-
+    background-size:cover;
     background-attachment: fixed;
     background-image: url('../background.svg');
 }

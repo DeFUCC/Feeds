@@ -198,12 +198,13 @@ fruitStory.service('Types', function () {
         types.statement
     ];
     types.time.canHave=[
-        types.question,
-        types.statement
+        types.statement,
+        types.question
     ];
     types.place.canHave=[
-        types.question,
-        types.statement
+        types.statement,
+        types.question
+
     ];
     types.task.canHave = [
         types.skill,
@@ -240,16 +241,16 @@ fruitStory.service('Types', function () {
         types.statement
     ];
     types.idea.canHave=[
-        types.question,
-        types.statement
+        types.statement,
+        types.question
     ];
     types.intent.canHave=[
-        types.question,
-        types.statement
+        types.statement,
+        types.question
     ];
     types.gist.canHave=[
-        types.question,
-        types.statement
+        types.statement,
+        types.question
     ];
     types.design.canHave = [
         types.stage,

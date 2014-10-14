@@ -36,13 +36,16 @@
         </div>
         <div class="box-date" ng-if="nxt.type=='time' && nxt.date"><span am-time-ago="nxt.date"></span></div>
 
+        <googlemaps ng-if="nxt.place && nxt.place.address" class="google-maps" options="map"></googlemaps>
+
         <div  class="box-text">
+            <span class="address">{{nxt.place.address}}</span>
 
             <div class="text-flow" ng-class="{'long-text':nxt.text.length>300}"  data-ng-if="nxt.text" marked="nxt.text"></div>
 
             <embed-video ng-if="nxt.video" href="{{nxt.video}}" width="320px" height="240px"></embed-video>
 
-            <googlemaps ng-if="nxt.place && nxt.place.address" class="google-maps" options="map"></googlemaps>
+
 
             <div data-ng-if="nxt.next" class="box-bottom">
                 <div data-ng-click="over.next=next"
