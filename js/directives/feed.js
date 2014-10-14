@@ -50,6 +50,7 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
 
     $scope.mtd.selector = function (letters,addOnly) {
         if (letters) {
+            letters=convertLetters(letters);
             var found = false;
             for (var i = 0; i < $scope.mtd.selected.length; i++) {
                 if ($scope.mtd.selected[i] == letters) {
@@ -76,12 +77,12 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
     $scope.mtd.parseParams = function (id) {
         id=convertLetters(id);
         if(id) {
-            var parts=id.split('|'), i=0;
-            console.log(parts, parts.length);
+            var parts=id.split('|');
             for (var j=parts.length;j>0;j--) {
 
-                console.log(parts, j);
-                $scope.mtd.selector(parts.join('|'),true);
+                if(parts[j-1]) {
+                    $scope.mtd.selector(parts.join('|'), true);
+                }
                 parts.pop();
             }
         }

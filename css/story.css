@@ -352,7 +352,12 @@ button:disabled {
     z-index: 120;
     margin: 28px -8px;
 }
-
+.card-link {
+    display: none;
+}
+.box-wider > .card-stack > .card > .box-head > .card-link {
+    display: block;
+}
 
 .box-wider > .box-text {
     flex-grow:1;

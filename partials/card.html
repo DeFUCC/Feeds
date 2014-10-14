@@ -56,6 +56,8 @@
             </h3>
         </div>
 
+        </a>
+
             <div class="time-card" data-ng-if="phrase.author && mtd.persona">
 
                 <b> {{mtd.personae[phrase.author].title || phrase.author}} </b>
@@ -70,7 +72,11 @@
                         ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
             </div>
 
-</a>
+            <div class="time-card card-link">
+                Ссылка на это высказывание:
+            <a href="#{{phrase.letters}}">feeds.frkt.ru/#{{phrase.letters}}</a>
+            </div>
+
 
     </div>
     <div class="box-date" ng-if="phrase.type=='time' && phrase.date">{{phrase.date | amDateFormat:'dddd, Do MMMM YYYY, HH:mm'}}</div>
