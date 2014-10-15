@@ -121,7 +121,7 @@
 
 
 
-    <div data-ng-if="phrase.next || mtd.persona" data-ng-show="mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
+    <div data-ng-if="phrase.next && mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
 
 
         <div cards
