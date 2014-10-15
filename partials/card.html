@@ -100,7 +100,7 @@
     </div>
 
 
-    <div data-ng-hide="mtd.isSelected(phrase.letters)" data-ng-if="phrase.next" class="box-bottom">
+    <div data-ng-if="phrase.next && !mtd.isSelected(phrase.letters)"  class="box-bottom">
         <div data-ng-click="$parent.$parent.$parent.nxt=next"
              data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
              class="box-preview" data-ng-repeat="next in phrase.next  | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, rate.timeSort]">

@@ -519,7 +519,7 @@ button:disabled {
     justify-content:flex-start;
     align-content:space-around;
     align-items:center;
-    transition:all 100ms linear;
+    transition:all 50ms linear;
     text-align:center;
     background-size:cover;
     background-repeat:no-repeat;
