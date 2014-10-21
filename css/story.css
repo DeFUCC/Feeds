@@ -365,9 +365,7 @@ button:disabled {
     flex-basis: 100%;
 }
 .box-wider > .card-stack > .card > .box-text > .long-text {
-    column-count: 3;
-    column-gap: 3em;
-    column-rule: 1px solid rgba(100, 100, 100, 0.5);
+    max-width: 600px;
     max-height: none;
     overflow: hidden;
     margin:16px 8px;
@@ -594,7 +592,9 @@ button:disabled {
     display:block;
     height: auto;
     max-width: 100%;
-    min-width:100%;
+    max-height:100%;
+    max-zoom:initial;
+    zoom:1;
 }
 
 .box-heading {
@@ -765,18 +765,17 @@ button:disabled {
 .long-text {
         max-height: 400px;
         overflow: scroll;
-        column-count:1;
     }
 
 @media (max-width:640px) {
     .box-wider > .card-stack > .card > .box-text > .long-text {
-        column-count:1 !important;
+
     }
 }
 
 @media (max-width:900px) and (min-width: 641px) {
     .box-wider > .card-stack > .card > .box-text > .long-text {
-        column-count:2 !important;
+
     }
 }
 .google-maps {
