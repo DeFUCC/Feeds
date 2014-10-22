@@ -31,11 +31,11 @@
 
         </div>
 
-
+        <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
         <div class="box-img" data-ng-if="phrase.img">
             <img data-ng-src="{{phrase.img}}">
         </div>
-        <a class="header-scroll-link" duration="10" scroll-to="{{phrase.letters}}">
+
         <div icon
              icon-type="phrase.type"
              icon-title="mtd.types[phrase.type].title"
@@ -48,7 +48,7 @@
 
         <div id="{{phrase.letters}}"
              class="box-heading"
-             data-ng-click="mtd.selector(phrase.letters)"
+
              data-ng-if="phrase.title"  >
 
             <h3>
