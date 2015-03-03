@@ -50,6 +50,9 @@ button:disabled {
     cursor: not-allowed;
 }
 
+p {
+    line-height: 130%;
+}
 
 #header{
     background:#fff;
