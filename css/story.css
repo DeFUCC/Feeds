@@ -444,7 +444,7 @@ p {
     padding:0;
     position:relative;
     transition:all 50ms linear;
-    -webkit-filter: grayscale(75%);
+    -webkit-filter: grayscale(50%);
 }
 .header-scroll-link {
     text-decoration: none;
