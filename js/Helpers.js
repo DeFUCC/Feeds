@@ -60,7 +60,7 @@ function colorize (lttrs,opacity) {
     if (lttrs) {
         var hue, sat, light, alpha, step, numOfSteps;
         var hsla = function (hue,sat,light,alpha) {
-            return 'hsla('+(hue || '0')+','+(sat || '100')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
+            return 'hsla('+(hue || '0')+','+(sat || '70')+'%,'+(light || '50')+'%,'+(alpha || 1)+')';
         };
         var lastLetters=lttrs.lastIndexOf('|');
         var lettersFull=lttrs.slice(lastLetters+1);

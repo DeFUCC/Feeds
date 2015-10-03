@@ -11,7 +11,7 @@
              data-ng-class="{higher:nxt.img}"
              class="box-head">
 
-            <div data-ng-if="mtd.persona"
+            <div data-ng-if="mtd.showLetters"
                  letters
                  class="letters shadow"
                  mtd="mtd"
@@ -45,9 +45,9 @@
         <div class="box-date" ng-if="nxt.type=='time' && nxt.date"><span am-time-ago="nxt.date"></span></div>
 
         <googlemaps ng-if="nxt.place && nxt.place.address" class="google-maps" options="map"></googlemaps>
-
+<span ng-if="nxt.place && nxt.place.address" class="address">{{nxt.place.address}}</span>
         <div  class="box-text">
-            <span class="address">{{nxt.place.address}}</span>
+
 
             <div class="text-flow" ng-class="{'long-text':nxt.text.length>300}"  data-ng-if="nxt.text" marked="nxt.text"></div>
 

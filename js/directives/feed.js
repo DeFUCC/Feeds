@@ -105,6 +105,7 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
         return false;
     };
 
+    
     $scope.mtd.addToFeed = function (saying) {
         var said;
         var found=false;
@@ -128,13 +129,19 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
                 if (found) {
                     $scope.feed[found]=said;
                     $scope.feed.$save(found);
-                } else $scope.feed.$add(said);
+                    console.log('card edited in database');
+                } else {
+                  $scope.feed.$add(said);
+                  console.log('card added to database');
+              }
 
             } else {
                 if (found) {
                     $scope.feed[found]=said;
+                    console.log('card edited locally');
                 } else {
                     $scope.feed.push(said);
+                    console.log('card added locally');
                 }
             }
 
@@ -310,6 +317,3 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
     };
 
 };
-
-
-

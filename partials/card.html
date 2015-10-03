@@ -12,6 +12,7 @@
 
 
          <div
+         data-ng-if="mtd.showLetters"
            letters
            class="letters box-top"
            data-mtd="mtd"
@@ -45,13 +46,6 @@
                   > </div>
 
 
-
-
-
-
-
-
-
         <div id="{{phrase.letters}}"
 
              class="box-heading"
@@ -62,7 +56,7 @@
                 {{phrase.title}}
             </h3>
         </div>
-        
+
             <div class="card-link">
             <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
             <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
@@ -81,8 +75,9 @@
                 это <span am-time-ago="phrase.time"></span>
 
                 <button class="btn"
-                        ng-if="mtd.persona==phrase.author && !mtd.isRated(phrase.letters)"
+                        ng-if="mtd.persona==phrase.author"
                         ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
+        
             </div>
 
 
@@ -94,7 +89,7 @@
     <embed-video ng-if="phrase.video" href="{{phrase.video}}" width="320px" height="240px"></embed-video>
 
     <googlemaps ng-if="phrase.place && phrase.place.address" class="google-maps" options="map"></googlemaps>
-
+<span ng-if="phrase.place && phrase.place.address" class="address">{{phrase.place.address}}</span>
     <div  class="box-text" data-ng-if="phrase.text">
 
 

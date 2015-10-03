@@ -349,4 +349,3 @@ fruitStory.filter('objectAsArray', function() {
         return array;
     }
 });
-
