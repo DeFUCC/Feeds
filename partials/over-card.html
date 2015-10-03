@@ -1,10 +1,13 @@
 <div class="over-card" >
     <div over-card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></div>
-    <div data-ng-if="nxt" class="card" data-ng-class="{'sel':selected, 'lower':over.next}">
+    <div data-ng-if="nxt"
+    class="card"
+    data-ng-class="{'sel':selected, 'lower':over.next}"
+    data-ng-style="{borderColor:mtd.colorize(nxt.letters)}">
 
 
         <div data-ng-click="close();over.next='';selected=!selected"
-             data-ng-style="{backgroundColor:mtd.colorize(nxt.letters), backgroundImage:'url('+nxt.img+')'}"
+
              data-ng-class="{higher:nxt.img}"
              class="box-head">
 
@@ -16,9 +19,14 @@
                  data-ng-click="over.next='';selected=!selected"
                  class="box-top"></div>
 
+                 <div class="box-img" data-ng-if="nxt.img">
+                     <img data-ng-src="{{nxt.img}}">
+                 </div>
+
             <div icon
+            data-ng-style="{backgroundColor:mtd.colorize(nxt.letters)}"
                  icon-type="nxt.type"
-                 icon-title="nxt.title"
+                 icon-title="mtd.types[nxt.type].title"
                  icon-text="nxt.text"
                  class="box-icon"
                  data-ng-if="nxt.type"
@@ -53,7 +61,6 @@
                      class="box-preview" data-ng-repeat="next in nxt.next">
                     <div icon
                          icon-type="next.type"
-                         icon-title="next.title"
                          icon-text="next.text"
                          class="box-icon"
                          data-ng-if="next.type"

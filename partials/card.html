@@ -3,50 +3,57 @@
 <div class="card"  data-ng-class="{'lower':nxt}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
 
     <div data-ng-click=" nxt=''"
-         data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+
          data-ng-class="{'fuller':!phrase.text}"
          class="box-head"
          >
 
-        <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar">
-
-            <div
-                    letters
-                    class="letters box-top"
-                    data-mtd="mtd"
-                    data-letter="phrase.letters"
-                    data-select="mtd.selector(phrase.letters)"> </div>
+         <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar">
 
 
-
-            <div rating
-                 data-ng-if="mtd.showRating"
-                 class="box-rate"
-                 rate="rate"
-                 mtd="mtd"
-                 letter="phrase.letters">
-            </div>
+         <div
+           letters
+           class="letters box-top"
+           data-mtd="mtd"
+           data-letter="phrase.letters"
+           data-select="mtd.selector(phrase.letters)"> </div>
 
 
 
-        </div>
+         <div rating
+         data-ng-if="mtd.showRating"
+         class="box-rate"
+         rate="rate"
+         mtd="mtd"
+         letter="phrase.letters">
+             </div>
+         </div>
 
         <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
         <div class="box-img" data-ng-if="phrase.img">
             <img data-ng-src="{{phrase.img}}">
         </div>
 
-        <div icon
-             icon-type="phrase.type"
-             icon-title="mtd.types[phrase.type].title"
-             icon-text="phrase.text"
-             class="box-icon"
-             data-ng-if="phrase.type"
-                >
 
-        </div>
+          <div icon
+               icon-type="phrase.type"
+               icon-title="mtd.types[phrase.type].title"
+               icon-text="phrase.text"
+               class="box-icon"
+               data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+               data-ng-if="phrase.type"
+                  > </div>
+
+
+
+
+
+
+
+
 
         <div id="{{phrase.letters}}"
+
              class="box-heading"
 
              data-ng-if="phrase.title"  >
@@ -55,6 +62,12 @@
                 {{phrase.title}}
             </h3>
         </div>
+        
+            <div class="card-link">
+            <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
+            <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
+            </div>
+
 
         </a>
 
@@ -72,11 +85,7 @@
                         ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
             </div>
 
-            <div class="time-card card-link">
-                Ссылка на это высказывание:
-            <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}">feeds.frkt.ru/#{{phrase.letters}}</a>
-            <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}">feeds.frkt.ru/#personal/{{phrase.letters}}</a>
-            </div>
+
 
 
     </div>
@@ -88,7 +97,7 @@
 
     <div  class="box-text" data-ng-if="phrase.text">
 
-        <span class="address">{{phrase.place.address}}</span>
+
 
         <div class="text-flow" ng-class="{'long-text':phrase.text.length>300}"  data-ng-if="phrase.text" marked="phrase.text"></div>
 
@@ -109,7 +118,6 @@
 
             <div icon
                  icon-type="next.type"
-                 icon-title="next.title"
                  icon-text="next.text"
                  class="box-icon"
                  data-ng-if="next.type"
