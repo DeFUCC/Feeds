@@ -167,7 +167,8 @@ controllers.public = function ($scope, $localStorage, $firebase, cfpLoadingBar, 
 
     //public feed
 
-    $scope.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed')).$asArray();
+    $scope.mtd.publicFeed=$firebase(new Firebase('https://frktfeeds.firebaseio.com/public/feed'));
+    $scope.publicFeed=$scope.mtd.publicFeed.$asArray();
     $scope.publicFeed.$loaded().then(function () {
         //  $scope.mtd.switchToPublic();
         $scope.status.publicLoaded=true;

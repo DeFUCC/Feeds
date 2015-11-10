@@ -105,7 +105,7 @@ controllers.feed = function ($scope, cfpLoadingBar, $stateParams, $state, Types,
         return false;
     };
 
-    
+
     $scope.mtd.addToFeed = function (saying) {
         var said;
         var found=false;
