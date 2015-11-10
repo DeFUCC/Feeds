@@ -537,7 +537,7 @@ p {
     position: relative;
     min-height: 8px;
     flex:1 1;
-    display:flex;
+  /*  display:flex; */
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
     align-content:space-around;
