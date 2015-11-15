@@ -8,7 +8,7 @@ fruitStory.service('Types', function () {
         },
         stage:{
             type:'stage',
-            title:'Ступень'
+            title:'Проект'
         },
         object:{
             type:'object',
