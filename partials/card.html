@@ -1,6 +1,6 @@
 <div over-card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></div>
 
-<div class="card"  data-ng-class="{'lower':nxt}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
+<div class="card"  data-ng-class="{'lower':nxt, 'letters-on':mtd.showLetters}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
 
     <div data-ng-click=" nxt=''"
 
@@ -8,7 +8,7 @@
          class="box-head"
          >
 
-         <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar">
+         <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar" ng-class="{picabs:phrase.img}">
 
 
          <div
@@ -75,7 +75,7 @@
 
                 <button class="btn"
                         ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
-    
+
 
             </div>
 
