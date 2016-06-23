@@ -6,6 +6,7 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak{
     display:none !important;
 }
+
 body{
     padding:0;
     margin:0;
@@ -59,6 +60,10 @@ button:disabled {
 p {
     line-height: 130%;
 }
+
+/*------------------------------------*\
+    SECTIONS
+\*------------------------------------*/
 
 #header{
     background:#fff;
@@ -290,6 +295,11 @@ p {
     flex:1 1 50%;
     min-width: 300px;
 }
+
+/*------------------------------------*\
+    #CARDS
+\*------------------------------------*/
+
 .container{
     display:flex;
     flex-direction:row;
@@ -372,6 +382,49 @@ p {
     width: 32px;
     height: 32px;
 }
+
+.box-text{
+    flex:1;
+    min-width: 100px;
+    display:none;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:flex-start;
+    align-content:space-between;
+    margin:0;
+    padding: 0;
+    max-height: 100%;
+    overflow:hidden;
+    opacity: 0.9;
+    overflow-wrap:break-word;
+    word-wrap: break-word;
+}
+
+@media (min-width: 1025px) {
+  .box-text {
+    display:flex !important;
+  }
+}
+
+.over-card .box-text {
+  display: flex !important;
+}
+
+.box:hover .box-text {
+    opacity: 1;
+}
+.selected .box-text {
+    opacity: 1;
+}
+.text-flow {
+    flex:1 1 400px;
+    margin:0 14px 14px 14px;
+}
+
+.long-text {
+        max-height: 400px;
+        overflow: scroll;
+}
+
 .box-wider > .card-stack > .card > .box-head > .card-link {
     display: block;
 }
@@ -381,6 +434,11 @@ p {
     flex-shrink:1;
     flex-basis: 100%;
 }
+
+.box-wider > .card-stack > .card > .box-text {
+    display: flex;
+}
+
 .box-wider > .card-stack > .card > .box-text > .long-text {
 
     max-height: none;
@@ -432,6 +490,13 @@ p {
 .box-wider > .card-stack > .card > .box-head .box-heading {
     font-size: 110%;
     cursor: pointer;
+}
+
+.selected .box-head {
+    opacity: 1;
+}
+.box-roll {
+    flex:1 1 auto;
 }
 
 .card-stack {
@@ -661,6 +726,11 @@ p {
     opacity: 1;
     transition:all 100ms linear;
 }
+
+/*------------------------------------*\
+    RATINGS
+\*------------------------------------*/
+
 .box-rate {
     flex:1 1 auto;
     color:#fff;
@@ -747,12 +817,7 @@ p {
     justify-content:center;
     align-content:center;
 }
-.selected .box-head {
-    opacity: 1;
-}
-.box-roll {
-    flex:1 1 auto;
-}
+
 
 .parent {
     flex:1 1 10px;
