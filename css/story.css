@@ -775,36 +775,7 @@ p {
     margin:4px;
     color:#444;
 }
-.box-text{
-    flex:1;
-    min-width: 100px;
-    display:flex;
-    flex-direction:row;     flex-wrap:wrap;
-    justify-content:flex-start;
-    align-content:space-between;
-    margin:0;
-    padding: 0;
-    max-height: 100%;
-    overflow:hidden;
-    opacity: 0.9;
-    overflow-wrap:break-word;
-    word-wrap: break-word;
-}
-.box:hover .box-text {
-    opacity: 1;
-}
-.selected .box-text {
-    opacity: 1;
-}
-.text-flow {
-    flex:1 1 400px;
-    margin:0 14px 14px 14px;
-}
 
-.long-text {
-        max-height: 400px;
-        overflow: scroll;
-    }
 
 @media (max-width:640px) {
     .box-wider > .card-stack > .card > .box-text > .long-text {
