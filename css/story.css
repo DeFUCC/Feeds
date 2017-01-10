@@ -386,7 +386,7 @@ p {
 .box-text{
     flex:1;
     min-width: 100px;
-    display:none;
+    display:flex;
     flex-direction:row;     flex-wrap:wrap;
     justify-content:flex-start;
     align-content:space-between;
@@ -399,11 +399,6 @@ p {
     word-wrap: break-word;
 }
 
-@media (min-width: 1025px) {
-  .box-text {
-    display:flex !important;
-  }
-}
 
 .over-card .box-text {
   display: flex !important;
