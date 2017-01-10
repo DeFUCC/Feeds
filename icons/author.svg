@@ -18,6 +18,9 @@
 	<g id="doer">
 	</g>
 	<g id="author">
+		<path style="fill:none;stroke:#FFFFFF;stroke-width:6.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+			M68.757,65.195C49.318,80.878,59.101,9.416,42.52,9.416c-18.032,0-6.606,71.011-25.668,55.927
+			C-8.236,45.493,91.891,46.531,68.757,65.195z"/>
 	</g>
 	<g id="designer">
 	</g>
@@ -60,10 +63,6 @@
 	<g id="present">
 	</g>
 	<g id="Design_2">
-		<path style="fill:none;stroke:#FFFFFF;stroke-width:6.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
-			M59.351,59.312c-14.95,2.412-45.537-7.45-45.409,1.859c0.156,11.356,48.001,10.053,48.001-8.812
-			c0-14.155-48.213-19.331-48.213-10.278c0,11.352,48.213,7.399,48.213-11.61c0-16.67-48.147-15.616-48.116-6.564
-			c0.051,13.086,31.268-3.016,45.66,0.7C72.855,28.06,75.554,37.32,75.554,42.4C75.554,48.044,73.776,56.985,59.351,59.312z"/>
 	</g>
 </g>
 <g id="Layer_2">

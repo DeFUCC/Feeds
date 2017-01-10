@@ -1,12 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"
-	 height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-<g id="Layer_3">
-	<path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,54.193
-		C25,54.193,25,65,35.625,65c14.428,0,35.711-50,14.286-50c-21.432,0,0.261,50,14.286,50C75,65,75,54.193,75,54.193"/>
-	<path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-miterlimit="10" d="M25,76.667
-		c0,0,8.333,8.333,25,8.333s25-8.333,25-8.333"/>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 85.039 85.042" style="enable-background:new 0 0 85.039 85.042;" xml:space="preserve">
+<g id="Layer_1">
+	<g id="able">
+	</g>
+	<g id="project">
+	</g>
+	<g id="object">
+	</g>
+	<g id="event">
+	</g>
+	<g id="persona">
+	</g>
+	<g id="face">
+		<path style="fill:none;stroke:#FFFFFF;stroke-width:6.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+			M68.166,46.069C60.239,47.022,64.34,56.56,56.114,56.56c-13.193,0-33.602-47.035-13.438-47.035
+			c20.152,0,0.134,47.035-13.439,47.035c-7.446,0-6.452-9.341-11.927-10.082C6.413,45.004,7.359,71.276,42.475,71.247
+			C78.427,71.218,77.743,44.917,68.166,46.069z"/>
+	</g>
+	<g id="doer">
+	</g>
+	<g id="author">
+	</g>
+	<g id="designer">
+	</g>
+	<g id="idea">
+	</g>
+	<g id="aim">
+	</g>
+	<g id="gist">
+	</g>
+	<g id="time">
+	</g>
+	<g id="place">
+	</g>
+	<g id="gift">
+	</g>
+	<g id="thing">
+	</g>
+	<g id="result">
+	</g>
+	<g id="purchase">
+	</g>
+	<g id="task">
+	</g>
+	<g id="tool">
+	</g>
+	<g id="class">
+	</g>
+	<g id="course">
+	</g>
+	<g id="question">
+	</g>
+	<g id="statement">
+	</g>
+	<g id="material">
+	</g>
+	<g id="skill">
+	</g>
+	<g id="competence">
+	</g>
+	<g id="present">
+	</g>
+	<g id="Design_2">
+	</g>
+</g>
+<g id="Layer_2">
 </g>
 </svg>
