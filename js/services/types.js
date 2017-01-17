@@ -313,7 +313,12 @@ fruitStory.service('Types', function () {
         types.author
     ];
     types.statement.canHave = [
-        types.statement
+        types.statement,
+        types.question
+    ];
+    types.author.canHave = [
+        types.statement,
+        types.question
     ];
     types.question.canHave = [
         types.statement
