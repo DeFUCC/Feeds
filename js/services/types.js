@@ -3,8 +3,7 @@ fruitStory.service('Types', function () {
         design:{
             type:'design',
             title:"Затея",
-            text: "Затея — план создания объектов или организации событий",
-            color:"#f05a28"
+            text: "Затея — план создания объектов или организации событий"
         },
         stage:{
             type:'stage',
@@ -17,14 +16,17 @@ fruitStory.service('Types', function () {
         event:{
             type:'event',
             title:"Событие",
-            text: "Событие — ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками.",
-            color:"#ffca00"
+            text: "Событие — ограниченная по времени совместная деятельность или информация о ней, подтвержденная участниками."
+        },
+        author: {
+          type:'author',
+          title:"Автор",
+          text: "Автор — первый опубликовавший затею или проект."
         },
         thing:{
             type:'thing',
             title:"Штука",
-            text: "Штука — материальная сушность",
-            color:"#ffca00"
+            text: "Штука — материальная сушность"
         },
         persona:{
             type:'persona',
@@ -262,7 +264,8 @@ fruitStory.service('Types', function () {
         types.chance,
         types.donation,
         types.present,
-        types.designFace
+        types.designFace,
+        types.author
     ];
     types.stage.canHave = [
         types.object,
@@ -289,7 +292,8 @@ fruitStory.service('Types', function () {
         types.present,
         types.designFace,
         types.idea,
-        types.intent
+        types.intent,
+        types.author
     ];
     types.event.canHave = [
         types.gist,
@@ -305,7 +309,8 @@ fruitStory.service('Types', function () {
         types.present,
         types.designFace,
         types.idea,
-        types.intent
+        types.intent,
+        types.author
     ];
     types.statement.canHave = [
         types.statement
