@@ -31,31 +31,35 @@
          </div>
 
         <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
-        <div class="box-img" data-ng-if="phrase.img">
-            <img data-ng-src="{{phrase.img}}">
-        </div>
 
 
-          <div icon
-               icon-type="phrase.type"
-               icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 " 
-               icon-text="phrase.text"
-               mtd="mtd"
-               class="box-icon"
-               data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
-               data-ng-if="phrase.type"
-                  > </div>
+
+
 
 
         <div id="{{phrase.letters}}"
-
+             ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
              class="box-heading"
 
-             data-ng-if="phrase.title"  >
+               >
 
-            <h3 ng-style="{color:mtd.colorize(phrase.letters)}">
+             <div icon
+                  icon-type="phrase.type"
+                  icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 "
+                  icon-text="phrase.text"
+                  mtd="mtd"
+                  class="box-icon"
+                  data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
+                  data-ng-if="phrase.type"
+                     > </div>
+
+            <h3 data-ng-if="phrase.title">
                 {{phrase.title}}
             </h3>
+        </div>
+
+        <div class="box-img" data-ng-if="phrase.img">
+            <img data-ng-src="{{phrase.img}}">
         </div>
 
             <div class="card-link">

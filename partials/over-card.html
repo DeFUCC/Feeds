@@ -23,19 +23,20 @@
                      <img data-ng-src="{{nxt.img}}">
                  </div>
 
-            <div icon
-            data-ng-style="{backgroundColor:mtd.colorize(nxt.letters)}"
-                 icon-type="nxt.type"
-                 icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 "
-                 icon-text="nxt.text"
-                 class="box-icon"
-                 data-ng-if="nxt.type"
-                    ></div>
+
 
 
             <div class="box-heading"
+            data-ng-style="{backgroundColor:mtd.colorize(nxt.letters)}"
                  data-ng-if="nxt.title">
+                 <div icon
 
+                      icon-type="nxt.type"
+                      icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 "
+                      icon-text="nxt.text"
+                      class="box-icon"
+                      data-ng-if="nxt.type"
+                         ></div>
                 <h3>
                     {{nxt.title}}
                 </h3>

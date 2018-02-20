@@ -204,7 +204,7 @@ p {
     align-items:stretch;
 }
 #first{
-    background:#f8f8f8;
+    background:#ddd;
 }
 #test{
     color:#eee;
@@ -627,8 +627,9 @@ p {
   border:2px solid;
 }
 
+
 .box-icon {
-    flex:1 1 16px;
+    flex:1 1 32px;
     border-radius: 2px;
     padding:8px;
 
@@ -698,6 +699,11 @@ p {
 
 .box-heading {
     flex:1 1 70%;
+    display:flex;
+    flex-direction:row;     flex-wrap:wrap;
+    justify-content:center;
+    align-content:space-around;
+    align-items:center;
     margin:0;
     padding:10px 10px;
     font-weight:normal;
@@ -711,6 +717,8 @@ p {
     font-size: 24px;
     font-weight: normal;
     line-height: 24px;
+    color:#fff;
+    flex:5 1 80%;
 }
 
 .fuller {
