@@ -408,6 +408,7 @@ fruitStory.directive("cards", function($compile) {
         restrict: "AE",
         templateUrl: 'partials/cards.html',
         scope: {
+            phrase: '=',
             next: '=', //source
             mtd: '=',
             rate:'=',

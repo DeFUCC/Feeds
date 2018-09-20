@@ -1,154 +1,81 @@
-<div over-card close="nxt=''" nxt="nxt" mtd="mtd"  data-ng-show="nxt"></div>
+<div over-card close="nxt=''" nxt="nxt" mtd="mtd" data-ng-show="nxt"></div>
 
-<div class="card"  data-ng-class="{'lower':nxt, 'letters-on':mtd.showLetters}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
+<div class="card" data-ng-class="{'lower':nxt, 'letters-on':mtd.showLetters}" data-ng-style="{borderColor:mtd.colorize(phrase.letters)}">
 
-    <div data-ng-click=" nxt=''"
+  <div data-ng-click=" nxt=''" data-ng-class="{'fuller':!phrase.text}" class="box-head">
 
-         data-ng-class="{'fuller':!phrase.text}"
-         class="box-head"
-         >
+    <div data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar" ng-class="{picabs:phrase.img}">
 
-         <div  data-ng-if="mtd.showLetters || mtd.showRating || mtd.persona==phrase.author" class="box-bar" ng-class="{picabs:phrase.img}">
+      <div data-ng-if="mtd.showLetters" letters class="letters box-top" data-mtd="mtd" data-letter="phrase.letters" data-select="mtd.selector(phrase.letters)"> </div>
 
+      <div rating data-ng-if="mtd.showRating" class="box-rate" rate="rate" mtd="mtd" letter="phrase.letters">
+      </div>
+    </div>
 
-         <div
-         data-ng-if="mtd.showLetters"
-           letters
-           class="letters box-top"
-           data-mtd="mtd"
-           data-letter="phrase.letters"
-           data-select="mtd.selector(phrase.letters)"> </div>
+    <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
 
+      <div id="{{phrase.letters}}" ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="box-heading">
 
+        <div icon icon-type="phrase.type" icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 " icon-text="phrase.text" mtd="mtd" class="box-icon" data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" data-ng-if="phrase.type"> </div>
 
-         <div rating
-         data-ng-if="mtd.showRating"
-         class="box-rate"
-         rate="rate"
-         mtd="mtd"
-         letter="phrase.letters">
-             </div>
-         </div>
-
-        <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
-
-
-
-
-
-
-        <div id="{{phrase.letters}}"
-             ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
-             class="box-heading"
-
-               >
-
-             <div icon
-                  icon-type="phrase.type"
-                  icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 "
-                  icon-text="phrase.text"
-                  mtd="mtd"
-                  class="box-icon"
-                  data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
-                  data-ng-if="phrase.type"
-                     > </div>
-
-            <h3 data-ng-if="phrase.title">
+        <h3 data-ng-if="phrase.title">
                 {{phrase.title}}
             </h3>
-        </div>
+      </div>
 
-        <div class="box-img" data-ng-if="phrase.img">
-            <img data-ng-src="{{phrase.img}}">
-        </div>
+      <div class="card-link">
+        <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
+        <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
+      </div>
 
-            <div class="card-link">
-            <a ng-if="mtd.feedTitle=='publicFeed'" href="#{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
-            <a ng-if="mtd.feedTitle=='personal'" href="#personal/{{phrase.letters}}"><img src="icons/link.svg" class="link-icon"></a>
-            </div>
+      <div data-ng-click="mtd.selector(phrase.letters)" data-ng-if="!mtd.isSelected(phrase.letters) && phrase.img" class="box-img">
+        <img data-ng-src="{{phrase.img}}">
+      </div>
 
+    </a>
 
-        </a>
+    <div  data-ng-if="!mtd.isSelected(phrase.letters) && mtd.persona" class="time-card">
+      <b> {{mtd.personae[phrase.author].title || phrase.author || "Кто-то"}} </b>
+      <span ng-if="mtd.personae[phrase.author].gender=='female' && !phrase.edit">опубликовала</span>
+      <span ng-if="mtd.personae[phrase.author].gender!='female' && !phrase.edit">опубликовал</span>
+      <span ng-if="mtd.personae[phrase.author].gender=='female' && phrase.edit">отредактировала</span>
+      <span ng-if="mtd.personae[phrase.author].gender!='female' && phrase.edit">отредактировал</span> это <span ng-if="!phrase.time">когда-то</span> <span ng-if="phrase.time" am-time-ago="phrase.time"></span>
 
-            <div class="time-card" data-ng-if="mtd.persona">
-                <b> {{mtd.personae[phrase.author].title || phrase.author || "Кто-то"}} </b>
-                <span ng-if="mtd.personae[phrase.author].gender=='female' && !phrase.edit">опубликовала</span>
-                <span ng-if="mtd.personae[phrase.author].gender!='female' && !phrase.edit">опубликовал</span>
-                <span ng-if="mtd.personae[phrase.author].gender=='female' && phrase.edit">отредактировала</span>
-                <span ng-if="mtd.personae[phrase.author].gender!='female' && phrase.edit">отредактировал</span>
-                это <span ng-if="!phrase.time">когда-то</span> <span ng-if="phrase.time" am-time-ago="phrase.time"></span>
-
-                <button class="btn"
-                        ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
-
-
-            </div>
-
-
-
-
-    </div>
-    <div class="box-date" ng-if="phrase.date">{{phrase.date | amDateFormat:'dddd, Do MMMM YYYY, HH:mm'}}</div>
-
-    <embed-video ng-if="phrase.video" href="{{phrase.video}}" width="320px" height="240px"></embed-video>
-
-    <googlemaps ng-if="phrase.place && phrase.place.address" class="google-maps" options="map"></googlemaps>
-<span ng-if="phrase.place && phrase.place.address" class="address">{{phrase.place.address}}</span>
-    <div  class="box-text" data-ng-if="phrase.text">
-
-
-
-        <div class="text-flow" ng-class="{'long-text':phrase.text.length>300}"  data-ng-if="phrase.text" marked="phrase.text"></div>
-
-
-
-
-
+      <button class="btn" ng-click="edit.new=phrase; edit.new.edit=true">Изменить</button>
 
     </div>
 
 
-    <div data-ng-if="phrase.next && !mtd.isSelected(phrase.letters)"  class="box-bottom">
-        <div data-ng-click="$parent.$parent.$parent.nxt=next"
-             data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:next.title.length+1}"
-             class="box-preview" data-ng-repeat="next in phrase.next  | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, rate.timeSort]">
+  </div>
+  <div  data-ng-if="!mtd.isSelected(phrase.letters) && phrase.date" class="box-date">{{phrase.date | amDateFormat:'dddd, Do MMMM YYYY, HH:mm'}}</div>
+
+  <embed-video  ng-if="phrase.video && !mtd.isSelected(phrase.letters)" href="{{phrase.video}}" width="320px" height="240px"></embed-video>
+
+  <googlemaps ng-if="phrase.place && phrase.place.address && !mtd.isSelected(phrase.letters)" class="google-maps" options="map"></googlemaps>
+  <span ng-if="phrase.place && phrase.place.address && !mtd.isSelected(phrase.letters)" class="address">{{phrase.place.address}}</span>
+  <div data-ng-if="!mtd.isSelected(phrase.letters)"  class="box-text" data-ng-if="phrase.text">
+    <div class="text-flow" ng-class="{'long-text':phrase.text.length>300}" data-ng-if="phrase.text" marked="phrase.text"></div>
+  </div>
 
 
+  <div  data-ng-if="phrase.next && !mtd.isSelected(phrase.letters)" class="box-bottom">
+    <div data-ng-style="{backgroundColor:mtd.colorize(next.letters)}" data-ng-click="$parent.$parent.$parent.nxt=next" class="box-preview" data-ng-repeat="next in phrase.next  | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, rate.timeSort]">
 
-            <div icon
-                 icon-type="next.type"
-                 icon-text="next.text"
-                 class="box-icon"
-                 data-ng-if="next.type"
-                    ></div>
+      <div icon icon-type="next.type" icon-text="next.text" class="box-icon" data-ng-if="next.type"></div>
 
-            <div class="preview-letter" data-ng-if="mtd.showLetters">{{next.letter}}</div>
-        </div>
+      <div class="preview-letter" data-ng-if="mtd.showLetters">{{next.letter}}</div>
     </div>
+  </div>
 
+  <div data-ng-if=" mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
 
-
-    <div data-ng-if=" mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}" >
-
-
-        <div cards
-             search="search"
-             rf="rf"
-             rate="rate"
-             fltr="fltr"
-             mtd="mtd"
-             next="phrase.next"
-             selected="sel"
-             class="container"
-             type="phrase.type"
-             addr="phrase.letters"
-             data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
-
-        </div>
+    <div cards phrase="phrase" search="search" rf="rf" rate="rate" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container" type="phrase.type" addr="phrase.letters" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
 
     </div>
 
-    <!--   <div plus
+  </div>
+
+  <!--   <div plus
             data-ng-show="$parent.selected==phrase.letters"
             data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}"
             class="box-plus"
