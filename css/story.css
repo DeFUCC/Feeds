@@ -628,9 +628,9 @@ p {
 }
 
 .box-icon {
-    flex:1 1 24px;
-    border-radius: 2px;
-    padding: 8px;
+    width: 29px;
+    border-radius: 30px;
+    padding: 6px 4px 0px 4px;
 
 }
 .box-icon img {
@@ -704,7 +704,7 @@ p {
     align-content:stretch;
     align-items:center;
     margin:0;
-    padding:0;
+    padding:12px;
     font-weight:normal;
     overflow-wrap:break-word;
     word-wrap: break-word;
@@ -717,7 +717,6 @@ p {
     font-size: 18px;
     font-weight: bold;
     line-height: 22px;
-    color:#fff;
     flex:5 1 80%;
 }
 
@@ -873,6 +872,7 @@ p {
 }
 .box-bottom{
     flex-grow:0;
+    padding:6px;
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
@@ -928,10 +928,9 @@ p {
 .box-preview{
     word-wrap: normal;
     cursor:pointer;
-    flex:1 1 22px;
-    min-width:22px;
+    flex:0 1 22px;
     min-height:18px;
-    padding:4px;
+    padding:2px;
     font-size:12px;
     font-weight: bold;
     color:#fff;

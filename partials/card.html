@@ -14,7 +14,7 @@
 
     <a class="header-scroll-link" duration="10" data-ng-click="mtd.selector(phrase.letters)" scroll-to="{{phrase.letters}}">
 
-      <div id="{{phrase.letters}}" ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" class="box-heading">
+      <div id="{{phrase.letters}}" class="box-heading">
 
         <div icon icon-type="phrase.type" icon-title="mtd.showLetters ? mtd.types[phrase.type].title : 0 " icon-text="phrase.text" mtd="mtd" class="box-icon" data-ng-style="{backgroundColor:mtd.colorize(phrase.letters)}" data-ng-if="phrase.type"> </div>
 
@@ -53,21 +53,21 @@
 
   <googlemaps ng-if="phrase.place && phrase.place.address && !mtd.isSelected(phrase.letters)" class="google-maps" options="map"></googlemaps>
   <span ng-if="phrase.place && phrase.place.address && !mtd.isSelected(phrase.letters)" class="address">{{phrase.place.address}}</span>
-  <div data-ng-if="!mtd.isSelected(phrase.letters)"  class="box-text" data-ng-if="phrase.text">
+  <div data-ng-if="!mtd.isSelected(phrase.letters) && phrase.text"  class="box-text">
     <div class="text-flow" ng-class="{'long-text':phrase.text.length>300}" data-ng-if="phrase.text" marked="phrase.text"></div>
   </div>
 
 
   <div  data-ng-if="phrase.next && !mtd.isSelected(phrase.letters)" class="box-bottom">
-    <div data-ng-style="{backgroundColor:mtd.colorize(next.letters)}" data-ng-click="$parent.$parent.$parent.nxt=next" class="box-preview" data-ng-repeat="next in phrase.next  | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, rate.timeSort]">
+    <div data-ng-click="$parent.$parent.$parent.nxt=next" class="box-preview" data-ng-repeat="next in phrase.next  | objectAsArray | filter: rf | filter: lettersFilter | filter:search | orderBy:[rate.ratingSort, rate.seenSort, rate.timeSort]">
 
-      <div icon icon-type="next.type" icon-text="next.text" class="box-icon" data-ng-if="next.type"></div>
+      <div data-ng-style="{backgroundColor:mtd.colorize(next.letters)}" icon icon-type="next.type" icon-text="next.text" class="box-icon"></div>
 
       <div class="preview-letter" data-ng-if="mtd.showLetters">{{next.letter}}</div>
     </div>
   </div>
 
-  <div data-ng-if=" mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
+  <div data-ng-if="mtd.isSelected(phrase.letters)" class="box-roll" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
 
     <div cards phrase="phrase" search="search" rf="rf" rate="rate" fltr="fltr" mtd="mtd" next="phrase.next" selected="sel" class="container" type="phrase.type" addr="phrase.letters" data-ng-style="{borderColor:mtd.colorize(phrase.letter)}">
 
