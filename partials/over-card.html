@@ -1,33 +1,31 @@
 <div class="over-card" >
-    <div over-card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></div>
+   
     <div data-ng-if="nxt"
     class="card"
-    data-ng-class="{'sel':selected, 'lower':over.next}"
+    data-ng-class="{'sel':selected, 'lower':over.next.title}"
     data-ng-style="{borderColor:mtd.colorize(nxt.letters)}">
 
 
         <div data-ng-click="close();over.next='';selected=!selected"
 
-             data-ng-class="{higher:nxt.img}"
+             
              class="box-head">
 
             <div data-ng-if="mtd.showLetters"
                  letters
-                 class="letters shadow"
+                 class="letters shadow box-top"
                  mtd="mtd"
                  letter="nxt.letters"
-                 data-ng-click="over.next='';selected=!selected"
-                 class="box-top"></div>
+                 data-ng-click="over.next='';selected=!selected"></div>
 
                  <div class="box-img" data-ng-if="nxt.img">
                      <img data-ng-src="{{nxt.img}}">
                  </div>
 
-
-
-
+       </div>
+      
             <div class="box-heading"
-            
+                 data-ng-click="close();over.next='';selected=!selected"
                  data-ng-if="nxt.title">
                  <div icon
                       data-ng-style="{backgroundColor:mtd.colorize(nxt.letters)}"
@@ -42,7 +40,10 @@
                 </h3>
             </div>
 
-        </div>
+       
+      
+      
+      
         <div class="box-date" ng-if="nxt.type=='time' && nxt.date"><span am-time-ago="nxt.date"></span></div>
 
         <googlemaps ng-if="nxt.place && nxt.place.address" class="google-maps" options="map"></googlemaps>
@@ -50,7 +51,7 @@
         <div  class="box-text">
 
 
-            <div class="text-flow" ng-class="{'long-text':nxt.text.length>300}"  data-ng-if="nxt.text" marked="nxt.text"></div>
+            <div class="text-flow" ng-class="{'long-text':nxt.text.length>300}"  data-ng-if="nxt.text && !over.next" marked="nxt.text"></div>
 
             <embed-video ng-if="nxt.video" href="{{nxt.video}}" width="320px" height="240px"></embed-video>
 
@@ -58,11 +59,13 @@
 
             <div data-ng-if="nxt.next" class="box-bottom">
                 <div data-ng-click="over.next=next"
-                     data-ng-style="{backgroundColor:mtd.colorize(next.letters),flexGrow:size(nxt.next)}"
+                     data-ng-style="{flexGrow:size(nxt.next)}"
                      class="box-preview" data-ng-repeat="next in nxt.next">
                     <div icon
+                         data-ng-style="{backgroundColor:mtd.colorize(next.letters)}"
                          icon-type="next.type"
-                         icon-text="next.text"
+                         icon-text="next.text"   
+                         data-ng-class="{'icon-active': true}"
                          class="box-icon"
                          data-ng-if="next.type"
                             ></div>
@@ -71,4 +74,5 @@
             </div>
         </div>
     </div>
+   <div over-card close="over.next=''" nxt="over.next" mtd="mtd" data-ng-if="over.next"></div>
 </div>

@@ -479,3 +479,4 @@ fruitStory.directive("cards", function($compile) {
         }
     };
 });
+
